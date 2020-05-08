@@ -1,6 +1,6 @@
-import 'package:ecommerce_int2/app_properties.dart';
-import 'package:ecommerce_int2/models/product.dart';
-import 'package:ecommerce_int2/screens/product/product_page.dart';
+import 'package:shinro_int2/app_properties.dart';
+import 'package:shinro_int2/models/product.dart';
+import 'package:shinro_int2/screens/product/product_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 

@@ -1,8 +1,8 @@
-import 'package:ecommerce_int2/app_properties.dart';
-import 'package:ecommerce_int2/models/product.dart';
-import 'package:ecommerce_int2/screens/product/components/color_list.dart';
-import 'package:ecommerce_int2/screens/product/components/shop_product.dart';
-import 'package:ecommerce_int2/screens/shop/check_out_page.dart';
+import 'package:shinro_int2/app_properties.dart';
+import 'package:shinro_int2/models/product.dart';
+import 'package:shinro_int2/screens/product/components/color_list.dart';
+import 'package:shinro_int2/screens/product/components/shop_product.dart';
+import 'package:shinro_int2/screens/shop/check_out_page.dart';
 import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
 

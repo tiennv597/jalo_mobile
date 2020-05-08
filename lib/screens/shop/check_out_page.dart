@@ -1,7 +1,7 @@
-import 'package:ecommerce_int2/app_properties.dart';
-import 'package:ecommerce_int2/models/product.dart';
-import 'package:ecommerce_int2/screens/address/add_address_page.dart';
-import 'package:ecommerce_int2/screens/payment/unpaid_page.dart';
+import 'package:shinro_int2/app_properties.dart';
+import 'package:shinro_int2/models/product.dart';
+import 'package:shinro_int2/screens/address/add_address_page.dart';
+import 'package:shinro_int2/screens/payment/unpaid_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 

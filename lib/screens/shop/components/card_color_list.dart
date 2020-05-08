@@ -1,5 +1,5 @@
-import 'package:ecommerce_int2/app_properties.dart';
-import 'package:ecommerce_int2/screens/product/components/color_list.dart';
+import 'package:shinro_int2/app_properties.dart';
+import 'package:shinro_int2/screens/product/components/color_list.dart';
 import 'package:flutter/material.dart';
 
 class CardColorList extends StatefulWidget {

@@ -1,6 +1,6 @@
-import 'package:ecommerce_int2/api_service.dart';
-import 'package:ecommerce_int2/models/user.dart';
-import 'package:ecommerce_int2/screens/send_money/quick_send_amount_page.dart';
+import 'package:shinro_int2/api_service.dart';
+import 'package:shinro_int2/models/user.dart';
+import 'package:shinro_int2/screens/send_money/quick_send_amount_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';

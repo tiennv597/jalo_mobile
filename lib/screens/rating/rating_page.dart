@@ -1,8 +1,8 @@
-import 'package:ecommerce_int2/app_properties.dart';
+import 'package:shinro_int2/app_properties.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-import 'package:ecommerce_int2/screens/rating/rating_dialog.dart';
+import 'package:shinro_int2/screens/rating/rating_dialog.dart';
 
 class RatingPage extends StatefulWidget {
   @override

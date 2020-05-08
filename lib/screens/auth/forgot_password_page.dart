@@ -1,5 +1,5 @@
 
-import 'package:ecommerce_int2/app_properties.dart';
+import 'package:shinro_int2/app_properties.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:country_code_picker/country_code_picker.dart';

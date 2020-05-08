@@ -1,6 +1,5 @@
-
-import 'package:ecommerce_int2/app_properties.dart';
-import 'package:ecommerce_int2/screens/intro_page.dart';
+import 'package:shinro_int2/app_properties.dart';
+import 'package:shinro_int2/screens/intro_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pin_code_text_field/pin_code_text_field.dart';
@@ -172,17 +171,11 @@ class _ConfirmOtpPageState extends State<ConfirmOtpPage> {
                       subTitle,
                       Spacer(flex: 2),
                       Padding(
-                        padding: const EdgeInsets.only(right:28.0),
+                        padding: const EdgeInsets.only(right: 28.0),
                         child: Center(
                           child: PinCodeTextField(
                             controller: new TextEditingController(),
                             highlightColor: Colors.white,
-                            pinBoxDecoration: (color) {
-                              return BoxDecoration(
-                                  color: Color.fromRGBO(255, 255, 255, 0.8),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(5)));
-                            },
                             maxLength: 6,
                             pinBoxHeight: 40,
                             pinBoxWidth: 40,
@@ -192,7 +185,7 @@ class _ConfirmOtpPageState extends State<ConfirmOtpPage> {
                       Spacer(),
 //                      otpCode,
                       Padding(
-                        padding: const EdgeInsets.only(right:28.0),
+                        padding: const EdgeInsets.only(right: 28.0),
                         child: verifyButton,
                       ),
                       Spacer(flex: 2),
