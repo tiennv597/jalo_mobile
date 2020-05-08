@@ -1,4 +1,4 @@
-import 'package:shinro_int2/app_properties.dart';
+import 'package:shinro_int2/constant/app_properties.dart';
 import 'package:shinro_int2/models/category.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';

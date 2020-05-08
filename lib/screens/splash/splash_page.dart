@@ -1,4 +1,4 @@
-import 'package:shinro_int2/app_properties.dart';
+import 'package:shinro_int2/constant/app_properties.dart';
 import 'package:shinro_int2/screens/intro_page.dart';
 import 'package:flutter/material.dart';
 
@@ -61,7 +61,7 @@ class _SplashScreenState extends State<SplashScreen>
                         children: [
                           TextSpan(text: 'Powered by '),
                           TextSpan(
-                              text: 'int2.io',
+                              text: 'shinroTeam',
                               style: TextStyle(fontWeight: FontWeight.bold))
                         ]),
                   ),

@@ -1,4 +1,4 @@
-import 'package:shinro_int2/app_properties.dart';
+import 'package:shinro_int2/constant/app_properties.dart';
 import 'package:shinro_int2/screens/address/address_form.dart';
 import 'package:shinro_int2/screens/select_card_page.dart';
 import 'package:flutter/material.dart';

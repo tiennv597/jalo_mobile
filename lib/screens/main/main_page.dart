@@ -1,5 +1,5 @@
-import 'package:shinro_int2/app_properties.dart';
-import 'package:shinro_int2/custom_background.dart';
+import 'package:shinro_int2/constant/app_properties.dart';
+import 'package:shinro_int2/utils/custom_background.dart';
 import 'package:shinro_int2/models/product.dart';
 import 'package:shinro_int2/screens/category/category_list_page.dart';
 import 'package:shinro_int2/screens/notifications_page.dart';

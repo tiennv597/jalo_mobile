@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-import 'models/user.dart';
+import '../models/user.dart';
 
 class ApiService {
   static String url(int nrResults) {
@@ -11,13 +11,13 @@ class ApiService {
 
   static Future<List<User>> getUsers({int nrUsers = 1}) async {
     try {
-      var response =
-          await http.get(url(nrUsers), headers: {"Content-Type": "application/json"});
+      var response = await http
+          .get(url(nrUsers), headers: {"Content-Type": "application/json"});
 
-      if(response.statusCode == 200){
+      if (response.statusCode == 200) {
         Map data = json.decode(response.body);
         Iterable list = data["results"];
-        List<User> users = list.map((l)=>User.fromJson(l)).toList();
+        List<User> users = list.map((l) => User.fromJson(l)).toList();
         return users;
       } else {
         print(response.body);

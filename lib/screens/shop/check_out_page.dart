@@ -1,4 +1,4 @@
-import 'package:shinro_int2/app_properties.dart';
+import 'package:shinro_int2/constant/app_properties.dart';
 import 'package:shinro_int2/models/product.dart';
 import 'package:shinro_int2/screens/address/add_address_page.dart';
 import 'package:shinro_int2/screens/payment/unpaid_page.dart';

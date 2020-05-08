@@ -4,7 +4,7 @@ import 'package:shinro_int2/screens/search_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../app_properties.dart';
+import '../../constant/app_properties.dart';
 import 'components/color_list.dart';
 import 'components/more_products.dart';
 import 'components/product_options.dart';

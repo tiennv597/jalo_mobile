@@ -1,4 +1,4 @@
-import 'package:shinro_int2/screens/splash_page.dart';
+import 'package:shinro_int2/screens/splash/splash_page.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -8,7 +8,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'eCommerce int2',
+      title: 'Shinro int2',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         brightness: Brightness.light,

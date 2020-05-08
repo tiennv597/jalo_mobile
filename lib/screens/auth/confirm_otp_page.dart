@@ -1,4 +1,4 @@
-import 'package:shinro_int2/app_properties.dart';
+import 'package:shinro_int2/constant/app_properties.dart';
 import 'package:shinro_int2/screens/intro_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

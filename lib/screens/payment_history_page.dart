@@ -1,4 +1,4 @@
-import 'package:shinro_int2/api_service.dart';
+import 'package:shinro_int2/resources/api_service.dart';
 import 'package:shinro_int2/models/user.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
