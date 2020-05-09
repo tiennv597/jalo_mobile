@@ -1,6 +1,8 @@
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shinro_int2/constant/app_properties.dart';
 import 'package:shinro_int2/screens/intro_page.dart';
 import 'package:flutter/material.dart';
+import 'package:shinro_int2/screens/main/main_page.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -11,6 +13,7 @@ class _SplashScreenState extends State<SplashScreen>
     with SingleTickerProviderStateMixin {
   Animation<double> opacity;
   AnimationController controller;
+  bool firstLaunch = false;
 
   @override
   void initState() {
@@ -32,9 +35,21 @@ class _SplashScreenState extends State<SplashScreen>
     super.dispose();
   }
 
-  void navigationPage() {
-    Navigator.of(context)
-        .pushReplacement(MaterialPageRoute(builder: (_) => IntroPage()));
+  void navigationPage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    //Return bool
+    bool checkValue = prefs.containsKey('firstLaunch');
+    if (checkValue) {
+      firstLaunch = prefs.getBool('firstLaunch');
+    }
+    if (firstLaunch) {
+      Navigator.of(context)
+          .pushReplacement(MaterialPageRoute(builder: (_) => MainPage()));
+    } else {
+      Navigator.of(context)
+          .pushReplacement(MaterialPageRoute(builder: (_) => IntroPage()));
+      prefs.setBool('firstLaunch', true);
+    }
   }
 
   Widget build(BuildContext context) {
