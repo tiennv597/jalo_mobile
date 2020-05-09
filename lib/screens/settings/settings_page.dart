@@ -1,6 +1,6 @@
 import 'package:shinro_int2/constant/app_properties.dart';
+import 'package:shinro_int2/screens/auth/login_page.dart';
 import 'package:shinro_int2/utils/custom_background.dart';
-import 'package:shinro_int2/screens/auth/welcome_back_page.dart';
 import 'package:shinro_int2/screens/settings/change_country.dart';
 import 'package:shinro_int2/screens/settings/change_password_page.dart';
 import 'package:shinro_int2/screens/settings/legal_about_page.dart';
@@ -97,7 +97,7 @@ class SettingsPage extends StatelessWidget {
                     title: Text('Sign out'),
                       leading: Image.asset('assets/icons/sign_out.png'),
                     onTap: () => Navigator.of(context).push(
-                        MaterialPageRoute(builder: (_) => WelcomeBackPage())),
+                        MaterialPageRoute(builder: (_) => LoginPage())),
                   ),
                   
                 ],

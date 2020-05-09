@@ -2,13 +2,14 @@ import 'package:shinro_int2/constant/app_properties.dart';
 import 'package:shinro_int2/screens/intro_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_buttons/flutter_auth_buttons.dart';
+import 'package:shinro_int2/screens/settings/settings_page.dart';
 
-class WelcomeBackPage extends StatefulWidget {
+class LoginPage extends StatefulWidget {
   @override
-  _WelcomeBackPageState createState() => _WelcomeBackPageState();
+  _LoginPageState createState() => _LoginPageState();
 }
 
-class _WelcomeBackPageState extends State<WelcomeBackPage> {
+class _LoginPageState extends State<LoginPage> {
   TextEditingController email =
       TextEditingController(text: 'example@email.com');
 
@@ -16,7 +17,7 @@ class _WelcomeBackPageState extends State<WelcomeBackPage> {
 
   @override
   Widget build(BuildContext context) {
-    Widget welcomeBack = Text(
+    Widget Login = Text(
       'Welcome Back Roberto,',
       style: TextStyle(
           color: Colors.white,
@@ -47,7 +48,7 @@ class _WelcomeBackPageState extends State<WelcomeBackPage> {
       child: InkWell(
         onTap: () {
           Navigator.of(context)
-              .push(MaterialPageRoute(builder: (_) => IntroPage()));
+              .push(MaterialPageRoute(builder: (_) => ProfilePage()));
         },
         child: Container(
           width: MediaQuery.of(context).size.width / 2,
@@ -186,7 +187,7 @@ class _WelcomeBackPageState extends State<WelcomeBackPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Spacer(flex: 3),
-                welcomeBack,
+                Login,
                 Spacer(),
                 subTitle,
                 Spacer(flex: 2),

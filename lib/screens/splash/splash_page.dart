@@ -48,7 +48,7 @@ class _SplashScreenState extends State<SplashScreen>
     } else {
       Navigator.of(context)
           .pushReplacement(MaterialPageRoute(builder: (_) => IntroPage()));
-      prefs.setBool('firstLaunch', true);
+      prefs.setBool('firstLaunch', false);//set true login one time
     }
   }
 

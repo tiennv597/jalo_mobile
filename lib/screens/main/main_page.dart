@@ -1,16 +1,15 @@
 import 'package:shinro_int2/constant/app_properties.dart';
+import 'package:shinro_int2/screens/profile/profile_page.dart';
 import 'package:shinro_int2/utils/custom_background.dart';
 import 'package:shinro_int2/models/product.dart';
 import 'package:shinro_int2/screens/category/category_list_page.dart';
 import 'package:shinro_int2/screens/notifications_page.dart';
-import 'package:shinro_int2/screens/profile_page.dart';
 import 'package:shinro_int2/screens/search_page.dart';
 import 'package:shinro_int2/screens/shop/check_out_page.dart';
 import 'package:shinro_int2/screens/tracking_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-
 import 'components/custom_bottom_bar.dart';
 import 'components/product_list.dart';
 import 'components/tab_view.dart';

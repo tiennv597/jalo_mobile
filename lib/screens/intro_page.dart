@@ -140,7 +140,7 @@ class _IntroPageState extends State<IntroPage> {
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               border: Border.all(color: Colors.black, width: 2),
-                              color: pageIndex == 0 ? yellow : Colors.white),
+                              color: pageIndex == 0 ? blueTypeOne : Colors.white),
                         ),
                         Container(
                           margin: EdgeInsets.all(8.0),
@@ -149,7 +149,7 @@ class _IntroPageState extends State<IntroPage> {
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               border: Border.all(color: Colors.black, width: 2),
-                              color: pageIndex == 1 ? yellow : Colors.white),
+                              color: pageIndex == 1 ? blueTypeOne : Colors.white),
                         ),
                         Container(
                           margin: EdgeInsets.all(8.0),
@@ -158,7 +158,7 @@ class _IntroPageState extends State<IntroPage> {
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               border: Border.all(color: Colors.black, width: 2),
-                              color: pageIndex == 2 ? yellow : Colors.white),
+                              color: pageIndex == 2 ? blueTypeOne : Colors.white),
                         )
                       ],
                     ),

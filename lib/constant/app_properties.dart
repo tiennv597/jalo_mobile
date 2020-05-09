@@ -6,10 +6,14 @@ const Color darkYellow = Color(0xffE99E22);
 const Color transparentYellow = Color.fromRGBO(253, 184, 70, 0.7);
 const Color darkGrey = Color(0xff202020);
 
+const Color blueTypeOne = Color(0xff009966);
+const Color blueTypeTwo = Color(0xff669966);
+const Color blueTypeThree = Color(0xff339966);
+
 const LinearGradient mainButton = LinearGradient(colors: [
-  Color.fromRGBO(236, 60, 3, 1),
-  Color.fromRGBO(234, 60, 3, 1),
-  Color.fromRGBO(216, 78, 16, 1),
+  Color.fromRGBO(60, 150, 90, 1),
+  Color.fromRGBO(60, 150, 90, 1),
+  Color.fromRGBO(60, 205, 170, 1),
 ], begin: FractionalOffset.topCenter, end: FractionalOffset.bottomCenter);
 
 const List<BoxShadow> shadow = [
