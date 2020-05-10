@@ -2,6 +2,7 @@ import 'package:shinro_int2/constant/app_properties.dart';
 import 'package:shinro_int2/screens/intro_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_buttons/flutter_auth_buttons.dart';
+import 'package:shinro_int2/screens/profile/profile_page.dart';
 import 'package:shinro_int2/screens/settings/settings_page.dart';
 
 class LoginPage extends StatefulWidget {
