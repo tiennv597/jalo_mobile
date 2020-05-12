@@ -1,5 +1,5 @@
 import 'package:shinro_int2/constant/app_properties.dart';
-import 'package:shinro_int2/screens/auth/login_page.dart';
+import 'package:shinro_int2/screens/auth/login/login_page.dart';
 import 'package:shinro_int2/utils/custom_background.dart';
 import 'package:shinro_int2/screens/settings/change_country.dart';
 import 'package:shinro_int2/screens/settings/change_password_page.dart';

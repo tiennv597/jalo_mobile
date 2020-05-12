@@ -1,5 +1,9 @@
+import 'package:provider/provider.dart';
+import 'package:shinro_int2/screens/my_home.dart';
 import 'package:shinro_int2/screens/splash/splash_page.dart';
 import 'package:flutter/material.dart';
+
+import 'network/api_service.dart';
 
 void main() => runApp(MyApp());
 
@@ -7,16 +11,20 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Shinro int2',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        brightness: Brightness.light,
-        canvasColor: Colors.transparent,
-        primarySwatch: Colors.blue,
-        fontFamily: "Montserrat",
+    return Provider<ApiService>(
+      create: (context) => ApiService.create(),
+      child: MaterialApp(
+        title: 'Shinro int2',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          brightness: Brightness.light,
+          canvasColor: Colors.transparent,
+          primarySwatch: Colors.blue,
+          fontFamily: "Montserrat",
+        ),
+        //home: SplashScreen(),
+        home: MyHome(),
       ),
-      home: SplashScreen(),
     );
   }
 }

@@ -1,10 +1,11 @@
 import 'package:shinro_int2/constant/app_properties.dart';
-import 'package:shinro_int2/screens/auth/login_page.dart';
+import 'package:shinro_int2/screens/auth/login/login_page.dart';
 import 'package:shinro_int2/screens/faq_page.dart';
 import 'package:shinro_int2/screens/payment/payment_page.dart';
 import 'package:shinro_int2/screens/settings/settings_page.dart';
 import 'package:shinro_int2/screens/tracking_page.dart';
 import 'package:shinro_int2/screens/wallet/wallet_page.dart';
+import 'package:shinro_int2/screens/my_home.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -183,6 +184,6 @@ class _ProfilePageState extends State<ProfilePage> {
 
   void goToLoginPage() {
     Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (_) => LoginPage()));
+                      .push(MaterialPageRoute(builder: (_) => MyHome()));
   }
 }
