@@ -1,4 +1,5 @@
 import 'package:shinro_int2/constant/app_properties.dart';
+import 'package:shinro_int2/screens/my_home.dart';
 import 'package:shinro_int2/screens/profile/profile_page.dart';
 import 'package:shinro_int2/utils/custom_background.dart';
 import 'package:shinro_int2/models/product.dart';
@@ -227,7 +228,8 @@ class _MainPageState extends State<MainPage>
                 ),
               ),
             ),
-            CategoryListPage(),
+            //CategoryListPage(),
+            MyHome(),
             CheckOutPage(),
             ProfilePage()
           ],

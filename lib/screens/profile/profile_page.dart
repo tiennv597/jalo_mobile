@@ -184,6 +184,6 @@ class _ProfilePageState extends State<ProfilePage> {
 
   void goToLoginPage() {
     Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (_) => MyHome()));
+                      .push(MaterialPageRoute(builder: (_) => LoginPage()));
   }
 }
