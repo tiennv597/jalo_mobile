@@ -1,5 +1,4 @@
 import 'package:provider/provider.dart';
-import 'package:shinro_int2/screens/my_home.dart';
 import 'package:shinro_int2/screens/splash/splash_page.dart';
 import 'package:flutter/material.dart';
 

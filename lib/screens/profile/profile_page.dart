@@ -5,7 +5,6 @@ import 'package:shinro_int2/screens/payment/payment_page.dart';
 import 'package:shinro_int2/screens/settings/settings_page.dart';
 import 'package:shinro_int2/screens/tracking_page.dart';
 import 'package:shinro_int2/screens/wallet/wallet_page.dart';
-import 'package:shinro_int2/screens/my_home.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatefulWidget {

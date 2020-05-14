@@ -3,14 +3,10 @@ import 'package:shinro_int2/network/model/task_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class MyHome extends StatelessWidget {
+class GrammarPageTest extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("API TEST"),
-      ),
-      body: _listFutureTasks(context),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           final api = Provider.of<ApiService>(context, listen: false);
