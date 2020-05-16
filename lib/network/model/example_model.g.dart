@@ -8,8 +8,8 @@ part of 'example_model.dart';
 
 Example _$ExampleFromJson(Map<String, dynamic> json) {
   return Example(
-    sId: json['sId'] as String,
-    exampleId: json['exampleId'] as String,
+    sId: json['_id'] as String,
+    exampleId: json['example_id'] as String,
     sentence: json['sentence'] as String,
     vi: json['vi'] as String,
     furigana: json['furigana'] as String,
@@ -21,8 +21,8 @@ Example _$ExampleFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$ExampleToJson(Example instance) => <String, dynamic>{
-      'sId': instance.sId,
-      'exampleId': instance.exampleId,
+      '_id': instance.sId,
+      'example_id': instance.exampleId,
       'sentence': instance.sentence,
       'vi': instance.vi,
       'furigana': instance.furigana,

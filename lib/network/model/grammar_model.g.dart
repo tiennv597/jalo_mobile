@@ -8,7 +8,7 @@ part of 'grammar_model.dart';
 
 Grammar _$GrammarFromJson(Map<String, dynamic> json) {
   return Grammar(
-    grammarId: json['grammarId'] as String,
+    grammarId: json['grammar_id'] as String,
     level: json['level'] as String,
     content: json['content'] as String,
     mean: json['mean'] as String,

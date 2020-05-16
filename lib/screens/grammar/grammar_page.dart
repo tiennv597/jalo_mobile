@@ -33,25 +33,27 @@ class _GrammarPageState extends State<GrammarPage> {
     final api = Provider.of<ApiService>(context, listen: false);
     api.getExample(text).then((it) {
         it.forEach((f) {
-          print("dâyy"+f.furigana);
+          print("dâyy"+f.sId);
         });
-      //   return posts;
+          examples=it;
+
+      //return it;
       }).catchError((onError) {
         print("Looiiiii"+onError.toString());
     //    for (int i = 0; i < 10; i++) {
     //   posts
     //       .add(Post(it[i].id.toString(), it[i].url.toString()));
     // }
-      return examples;
-    });
 
-   return examples;
+
+    });
+   //return examples;
     // var random = new Random();
     // for (int i = 0; i < 10; i++) {
     //   posts
     //       .add(Post("$text $i", "body random number : ${random.nextInt(100)}"));
     // }
-    
+    return examples;
   }
 
   @override
