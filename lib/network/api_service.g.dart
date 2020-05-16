@@ -9,7 +9,7 @@ part of 'api_service.dart';
 class _ApiService implements ApiService {
   _ApiService(this._dio, {this.baseUrl}) {
     ArgumentError.checkNotNull(_dio, '_dio');
-    this.baseUrl ??= 'https://jsonplaceholder.typicode.com/';
+    this.baseUrl ??= 'http://192.168.1.28:3000/';
   }
 
   final Dio _dio;
@@ -17,11 +17,12 @@ class _ApiService implements ApiService {
   String baseUrl;
 
   @override
-  getTasks() async {
+  getExample(keySearch) async {
+    ArgumentError.checkNotNull(keySearch, 'keySearch');
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'key_search': keySearch};
     final _data = <String, dynamic>{};
-    final Response<List<dynamic>> _result = await _dio.request('photos',
+    final Response<List<dynamic>> _result = await _dio.request('search',
         queryParameters: queryParameters,
         options: RequestOptions(
             method: 'GET',
@@ -30,7 +31,7 @@ class _ApiService implements ApiService {
             baseUrl: baseUrl),
         data: _data);
     var value = _result.data
-        .map((dynamic i) => TaskModel.fromJson(i as Map<String, dynamic>))
+        .map((dynamic i) => Example.fromJson(i as Map<String, dynamic>))
         .toList();
     return Future.value(value);
   }

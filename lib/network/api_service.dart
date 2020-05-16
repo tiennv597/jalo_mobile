@@ -1,11 +1,11 @@
-import 'package:shinro_int2/network/model/task_model.dart';
+import 'package:shinro_int2/network/model/example_model.dart';
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'api_service.g.dart';
 
-@RestApi(baseUrl: "https://jsonplaceholder.typicode.com/")
+@RestApi(baseUrl: "http://192.168.1.28:3000/")
 abstract class ApiService {
   factory ApiService(Dio dio, {String baseUrl}) = _ApiService;
 
@@ -15,7 +15,9 @@ abstract class ApiService {
     return ApiService(dio);
   }
 
-  @GET("photos")
-  Future<List<TaskModel>> getTasks();
+  @GET("search")
+  Future<List<Example>> getExample(
+     @Query("key_search") String keySearch
+  );
 
 }
