@@ -1,5 +1,5 @@
 import 'package:shinro_int2/constant/app_properties.dart';
-import 'package:shinro_int2/screens/grammar/grammar_page.dart';
+import 'package:shinro_int2/screens/grammar/example_page.dart';
 import 'package:shinro_int2/screens/profile/profile_page.dart';
 import 'package:shinro_int2/utils/custom_background.dart';
 import 'package:shinro_int2/models/product.dart';
@@ -229,7 +229,7 @@ class _MainPageState extends State<MainPage>
               ),
             ),
             //CategoryListPage(),
-            GrammarPage(),
+            ExamplePage(),
             CheckOutPage(),
             ProfilePage()
           ],
