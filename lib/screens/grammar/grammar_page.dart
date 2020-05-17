@@ -19,7 +19,8 @@ class GrammarPage extends StatefulWidget {
 }
 
 class _GrammarPageState extends State<GrammarPage> {
-  final SearchBarController<Example> _searchBarController = SearchBarController();
+  final SearchBarController<Example> _searchBarController =
+      SearchBarController();
   bool isReplay = false;
 
   Future<List<Example>> _getExample(String text) async {
@@ -28,32 +29,30 @@ class _GrammarPageState extends State<GrammarPage> {
     //if (isReplay) return [Post("Replaying !", "Replaying body")];
     //if (text.length == 5) throw Error();
     //if (text.length == 6) return [];
-    List<Example> examples = [];
+    List<Example> examples = new List<Example>();
     //posts.add(Post("value", "rrr"));
     final api = Provider.of<ApiService>(context, listen: false);
     api.getExample(text).then((it) {
-        it.forEach((f) {
-          print("dâyy"+f.sId);
-        });
-          examples=it;
+      it.forEach((f) {
+        print("dâyy" + f.sId);
+      });
+      examples = it;
 
-      //return it;
-      }).catchError((onError) {
-        print("Looiiiii"+onError.toString());
-    //    for (int i = 0; i < 10; i++) {
-    //   posts
-    //       .add(Post(it[i].id.toString(), it[i].url.toString()));
-    // }
-
-
+      return examples;
+    }).catchError((onError) {
+      print("Looiiiii" + onError.toString());
+      //    for (int i = 0; i < 10; i++) {
+      //   posts
+      //       .add(Post(it[i].id.toString(), it[i].url.toString()));
+      // }
     });
-   //return examples;
+    //return examples;
     // var random = new Random();
     // for (int i = 0; i < 10; i++) {
     //   posts
     //       .add(Post("$text $i", "body random number : ${random.nextInt(100)}"));
     // }
-    return examples;
+    return api.getExample(text);
   }
 
   @override
@@ -68,6 +67,7 @@ class _GrammarPageState extends State<GrammarPage> {
             listPadding: EdgeInsets.symmetric(horizontal: 8),
             onSearch: _getExample,
             searchBarController: _searchBarController,
+            minimumChars: 1, //Minimum number of chars to start querying
             placeHolder: Text("placeholder"),
             cancellationWidget: Text("Cancel"),
             emptyWidget: Text("empty"),
@@ -103,10 +103,10 @@ class _GrammarPageState extends State<GrammarPage> {
             },
             mainAxisSpacing: 10,
             crossAxisSpacing: 10,
-            crossAxisCount: 2,
+            // crossAxisCount: 2,
             onItemFound: (Example example, int index) {
               return ListTile(
-                title: Text(example.furigana),
+                title: Text(example.sId),
                 isThreeLine: true,
                 subtitle: Text(example.sentence),
                 onTap: () {
