@@ -147,7 +147,7 @@ class _DetailPageState extends State<DetailPage> {
         brightness: Brightness.light,
         backgroundColor: Colors.transparent,
         title: Text(
-          'Settings',
+          'Example',
           style: TextStyle(color: darkGrey),
         ),
         elevation: 0,

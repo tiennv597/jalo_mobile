@@ -1,11 +1,9 @@
 import 'package:flutter/services.dart';
 import 'package:shinro_int2/constant/app_properties.dart';
 import 'package:shinro_int2/constant/constant.dart';
-import 'package:shinro_int2/screens/intro_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_auth_buttons/flutter_auth_buttons.dart';
-import 'package:shinro_int2/screens/profile/profile_page.dart';
-import 'package:shinro_int2/screens/settings/settings_page.dart';
+
+import '../register_page.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -220,7 +218,10 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _buildSignupBtn() {
     return GestureDetector(
-      onTap: () => print('Sign Up Button Pressed'),
+      onTap: () {
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => RegisterPage()));
+      },
       child: RichText(
         text: TextSpan(
           children: [
@@ -249,6 +250,18 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Colors.black,
+        ),
+        brightness: Brightness.light,
+        backgroundColor: Colors.transparent,
+        title: Text(
+          'Sign in',
+          style: TextStyle(color: darkGrey,fontFamily: 'OpenSans',),
+        ),
+        elevation: 0,
+      ),
       backgroundColor: Colors.grey[100],
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
@@ -266,20 +279,10 @@ class _LoginPageState extends State<LoginPage> {
                   physics: AlwaysScrollableScrollPhysics(),
                   padding: EdgeInsets.symmetric(
                     horizontal: 40.0,
-                    vertical: 80.0,
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Text(
-                        'Sign In',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontFamily: 'OpenSans',
-                          fontSize: 30.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
                       SizedBox(height: 30.0),
                       _buildEmailTF(),
                       SizedBox(
