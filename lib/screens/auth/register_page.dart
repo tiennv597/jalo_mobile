@@ -13,6 +13,41 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   bool _rememberMe = false;
 
+  Widget _buildNameUserTF() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          'First & Last Name',
+          style: kLabelStyle,
+        ),
+        SizedBox(height: 8.0),
+        Container(
+          alignment: Alignment.centerLeft,
+          decoration: kBoxDecorationStyle,
+          height: 48.0,
+          child: TextField(
+            keyboardType: TextInputType.emailAddress,
+            style: TextStyle(
+              color: Colors.black,
+              fontFamily: 'OpenSans',
+            ),
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.only(top: 15.0),
+              prefixIcon: Icon(
+                Icons.account_circle,
+                color: Colors.grey,
+              ),
+              hintText: 'Enter your Email',
+              hintStyle: kHintTextStyle,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
   Widget _buildEmailTF() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -29,7 +64,7 @@ class _RegisterPageState extends State<RegisterPage> {
           child: TextField(
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(
-              color: Colors.white,
+              color: Colors.black,
               fontFamily: 'OpenSans',
             ),
             decoration: InputDecoration(
@@ -54,6 +89,41 @@ class _RegisterPageState extends State<RegisterPage> {
       children: <Widget>[
         Text(
           'Password',
+          style: kLabelStyle,
+        ),
+        SizedBox(height: 8.0),
+        Container(
+          alignment: Alignment.centerLeft,
+          decoration: kBoxDecorationStyle,
+          height: 48.0,
+          child: TextField(
+            obscureText: true,
+            style: TextStyle(
+              color: Colors.black,
+              fontFamily: 'OpenSans',
+            ),
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.only(top: 15.0),
+              prefixIcon: Icon(
+                Icons.lock,
+                color: Colors.grey,
+              ),
+              hintText: 'Enter your Password',
+              hintStyle: kHintTextStyle,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildRePasswordTF() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          'RePassword',
           style: kLabelStyle,
         ),
         SizedBox(height: 8.0),
@@ -165,7 +235,7 @@ class _RegisterPageState extends State<RegisterPage> {
         backgroundColor: Colors.transparent,
         title: Text(
           'Sign up',
-          style: TextStyle(color: darkGrey,fontFamily: 'OpenSans'),
+          style: TextStyle(color: darkGrey, fontFamily: 'OpenSans'),
         ),
         elevation: 0,
       ),
@@ -191,11 +261,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       SizedBox(height: 30.0),
-                      _buildEmailTF(),
-                      SizedBox(
-                        height: 30.0,
-                      ),
-                       _buildEmailTF(),
+                      _buildNameUserTF(),
                       SizedBox(
                         height: 30.0,
                       ),
@@ -204,6 +270,10 @@ class _RegisterPageState extends State<RegisterPage> {
                         height: 30.0,
                       ),
                       _buildPasswordTF(),
+                      SizedBox(
+                        height: 30.0,
+                      ),
+                      _buildRePasswordTF(),
                       _buildForgotPasswordBtn(),
                       _buildLoginBtn(),
                       _buildSignupBtn(),

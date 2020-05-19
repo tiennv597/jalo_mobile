@@ -43,6 +43,7 @@ dependencies:
   pretty_dio_logger: ^1.1.0
   dio: ^3.0.8
   flappy_search_bar: 1.7.2
+  fluttertoast: ^4.0.0
 
 
 dev_dependencies:

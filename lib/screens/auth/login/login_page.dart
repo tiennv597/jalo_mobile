@@ -1,4 +1,5 @@
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shinro_int2/constant/app_properties.dart';
 import 'package:shinro_int2/constant/constant.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +30,7 @@ class _LoginPageState extends State<LoginPage> {
           child: TextField(
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(
-              color: Colors.white,
+              color: Colors.black,
               fontFamily: 'OpenSans',
             ),
             decoration: InputDecoration(
@@ -130,7 +131,7 @@ class _LoginPageState extends State<LoginPage> {
       width: double.infinity,
       child: RaisedButton(
         elevation: 5.0,
-        onPressed: () => print('Login Button Pressed'),
+        onPressed: loginCheck,
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),
@@ -258,7 +259,10 @@ class _LoginPageState extends State<LoginPage> {
         backgroundColor: Colors.transparent,
         title: Text(
           'Sign in',
-          style: TextStyle(color: darkGrey,fontFamily: 'OpenSans',),
+          style: TextStyle(
+            color: darkGrey,
+            fontFamily: 'OpenSans',
+          ),
         ),
         elevation: 0,
       ),
@@ -303,6 +307,18 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
       ),
+    );
+  }
+
+  void loginCheck() {
+    Fluttertoast.showToast(
+        msg: "This is Center Short Toast",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0
     );
   }
 }

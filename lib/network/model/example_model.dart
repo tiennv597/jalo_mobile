@@ -4,10 +4,8 @@ import 'grammar_model.dart';
 
 part 'example_model.g.dart';
 
-
 @JsonSerializable()
 class Example {
-
   String sId;
   String exampleId;
   String sentence;
@@ -23,9 +21,8 @@ class Example {
       this.furigana,
       this.grammar});
 
-  factory Example.fromJson(Map<String, dynamic> json)=>_$ExampleFromJson(json);
+  factory Example.fromJson(Map<String, dynamic> json) =>
+      _$ExampleFromJson(json);
 
-  Map<String, dynamic> toJson() =>_$ExampleToJson(this);
+  Map<String, dynamic> toJson() => _$ExampleToJson(this);
 }
-
-
