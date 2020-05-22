@@ -33,6 +33,31 @@ class _ApiService implements ApiService {
     var value = _result.data
         .map((dynamic i) => Example.fromJson(i as Map<String, dynamic>))
         .toList();
-    return Future.value(value);
+    return value;
+  }
+
+  @override
+  loginUser(loginUsername, loginPassword) async {
+    ArgumentError.checkNotNull(loginUsername, 'loginUsername');
+    ArgumentError.checkNotNull(loginPassword, 'loginPassword');
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = {
+      'login_username': loginUsername,
+      'login_password': loginPassword
+    };
+    final Response<List<dynamic>> _result = await _dio.request('login-api',
+        queryParameters: queryParameters,
+        options: RequestOptions(
+            method: 'POST',
+            headers: <String, dynamic>{},
+            extra: _extra,
+            contentType: 'application/x-www-form-urlencoded',
+            baseUrl: baseUrl),
+        data: _data);
+    var value = _result.data
+        .map((dynamic i) => LoginUser.fromJson(i as Map<String, dynamic>))
+        .toList();
+    return value;
   }
 }

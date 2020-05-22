@@ -1,8 +1,10 @@
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart';
 import 'package:shinro_int2/constant/app_properties.dart';
 import 'package:shinro_int2/constant/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:shinro_int2/network/api_service.dart';
 
 import '../register_page.dart';
 
@@ -13,6 +15,8 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool _rememberMe = false;
+  TextEditingController _userController = new TextEditingController();
+  TextEditingController _passController = new TextEditingController();
 
   Widget _buildEmailTF() {
     return Column(
@@ -33,6 +37,7 @@ class _LoginPageState extends State<LoginPage> {
               color: Colors.black,
               fontFamily: 'OpenSans',
             ),
+            controller: _userController,
             decoration: InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 15.0),
@@ -68,6 +73,7 @@ class _LoginPageState extends State<LoginPage> {
               color: Colors.black,
               fontFamily: 'OpenSans',
             ),
+            controller: _passController,
             decoration: InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 15.0),
@@ -311,14 +317,20 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void loginCheck() {
-    Fluttertoast.showToast(
-        msg: "This is Center Short Toast",
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-        fontSize: 16.0
-    );
+    final api = Provider.of<ApiService>(context, listen: false);
+    api.loginUser(_userController.text, _passController.text).then((it) {
+      it.forEach((f) {
+        Fluttertoast.showToast(
+            msg: f.token,
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      });
+    }).catchError((onError) {
+      print("error" + onError.toString());
+    });
   }
 }
