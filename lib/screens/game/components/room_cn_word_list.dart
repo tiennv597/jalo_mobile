@@ -4,7 +4,7 @@ import 'package:shinro_int2/screens/product/product_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-class RecommendedList extends StatelessWidget {
+class RoomCnWordList extends StatelessWidget {
   List<Product> products = [
     Product('assets/bag_1.png', 'Bag', 'Beautiful bag', 2.33),
     Product('assets/cap_5.png', 'Cap', 'Cap with beautiful design', 10),
@@ -37,7 +37,7 @@ class RecommendedList extends StatelessWidget {
               ),
               Center(
                   child: Text(
-                'Recommended',
+                'Chinese Word',
                 style: TextStyle(
                     color: darkGrey,
                     fontSize: 16.0,

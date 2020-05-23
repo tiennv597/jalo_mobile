@@ -3,7 +3,7 @@ import 'package:shinro_int2/utils/custom_background.dart';
 import 'package:shinro_int2/models/product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'components/tab_view.dart';
+import 'components/room_tab_view.dart';
 
 class GameRoomPage extends StatefulWidget {
   @override
@@ -45,48 +45,52 @@ class _GameRoomPageState extends State<GameRoomPage>
 
   Widget _buildButtonFL() {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+      // crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Align(
-            alignment: Alignment.bottomLeft,
-            child: FloatingActionButton(
-              onPressed: () {
-                // Add your onPressed code here!
-              },
-              child: Icon(Icons.thumb_up),
-              backgroundColor: Colors.pink,
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Align(
-            alignment: Alignment.bottomCenter,
-            child: FloatingActionButton(
-              onPressed: () {
-                // Add your onPressed code here!
-              },
-              child: Icon(Icons.thumb_up),
-              backgroundColor: Colors.pink,
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Align(
-            alignment: Alignment.bottomRight,
-            child: FloatingActionButton(
-              onPressed: () {
-                // Add your onPressed code here!
-              },
-              child: Icon(Icons.thumb_up),
-              backgroundColor: Colors.pink,
-            ),
-          ),
-        ),
+            padding: const EdgeInsets.all(16.0),
+            child: Align(
+             alignment: FractionalOffset.bottomCenter,
+              child: Row(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: RaisedButton(
+                      child: Text("Rock & Roll"),
+                      onPressed: () {},
+                      color: Colors.red,
+                      textColor: Colors.yellow,
+                      padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                      splashColor: Colors.grey,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: RaisedButton(
+                      child: Text("Rock & Roll"),
+                      onPressed: () {},
+                      color: Colors.red,
+                      textColor: Colors.yellow,
+                      padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                      splashColor: Colors.grey,
+                    ),
+                  ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: RaisedButton(
+                      child: Text("Rock & Roll"),
+                      onPressed: () {},
+                      color: Colors.red,
+                      textColor: Colors.yellow,
+                      padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                      splashColor: Colors.grey,
+                  ),
+                    ),
+                ],
+              ),
+            )),
       ],
     );
   }
@@ -95,9 +99,9 @@ class _GameRoomPageState extends State<GameRoomPage>
   Widget build(BuildContext context) {
     Widget tabBar = TabBar(
       tabs: [
-        Tab(text: 'Trending'),
-        Tab(text: 'Sports'),
-        Tab(text: 'Headsets'),
+        Tab(text: 'Hán tự'),
+        Tab(text: 'Từ Vựng'),
+        Tab(text: 'Chữ Hán'),
       ],
       labelStyle: TextStyle(fontSize: 36.0),
       unselectedLabelStyle: TextStyle(
