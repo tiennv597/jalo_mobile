@@ -3,11 +3,9 @@ import 'package:shinro_int2/screens/grammar/example_page.dart';
 import 'package:shinro_int2/screens/profile/profile_page.dart';
 import 'package:shinro_int2/utils/custom_background.dart';
 import 'package:shinro_int2/models/product.dart';
-import 'package:shinro_int2/screens/category/category_list_page.dart';
 import 'package:shinro_int2/screens/notifications_page.dart';
 import 'package:shinro_int2/screens/search_page.dart';
-import 'package:shinro_int2/screens/shop/check_out_page.dart';
-import 'package:shinro_int2/screens/tracking_page.dart';
+import 'package:shinro_int2/screens/game/game_home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
@@ -226,11 +224,12 @@ class _MainPageState extends State<MainPage>
                 body: TabView(
                   tabController: tabController,
                 ),
+                
               ),
             ),
             //CategoryListPage(),
             ExamplePage(),
-            CheckOutPage(),
+            GameHomePage(),
             ProfilePage()
           ],
         ),
