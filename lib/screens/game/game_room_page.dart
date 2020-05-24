@@ -1,9 +1,11 @@
 import 'package:shinro_int2/constant/app_properties.dart';
+import 'package:shinro_int2/screens/game/game_start_page.dart';
 import 'package:shinro_int2/utils/custom_background.dart';
 import 'package:shinro_int2/models/product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'components/room_tab_view.dart';
+import 'package:socket_io_client/socket_io_client.dart';
 
 class GameRoomPage extends StatefulWidget {
   @override
@@ -32,15 +34,84 @@ List<Product> products = [
 
 class _GameRoomPageState extends State<GameRoomPage>
     with TickerProviderStateMixin<GameRoomPage> {
+  Socket socket;
   SwiperController swiperController;
   TabController tabController;
+  TextEditingController _tfRoomController;
+  TextEditingController _tfPasswordController;
   // TabController bottomTabController;
 
   @override
   void initState() {
-    super.initState();
     tabController = TabController(length: 3, vsync: this);
-    // bottomTabController = TabController(length: 4, vsync: this);
+    _tfRoomController = new TextEditingController();
+    _tfPasswordController = new TextEditingController();
+    ////Creating the socket
+    socket = io('http://192.168.1.28:3000/game-namespace', <String, dynamic>{
+      'transports': ['websocket'],
+      'extraHeaders': {'foo': 'bar'} // optional
+    });
+    socket.on('connect', (_) {
+      print('connect');
+      socket.emit('msg', 'test');
+    });
+    socket.connect();
+    super.initState();
+  }
+
+  void _joinRoomByName() {
+
+    socket.emit('join-room',{_tfRoomController.text,"tien2"});
+
+    Navigator.of(context).push(MaterialPageRoute(builder: (_) => StrartGameScreen(socket:socket)));
+  }
+
+  Future<String> _showSearchDialog(BuildContext context) async {
+    String teamName = '';
+    return showDialog<String>(
+      context: context,
+      barrierDismissible:
+          false, // dialog is dismissible with a tap on the barrier
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Search Room'),
+          content: Container(
+            height: 120,
+            child: new Column(
+              children: <Widget>[
+                TextField(
+                  controller: _tfRoomController,
+                  autofocus: true,
+                  decoration: new InputDecoration(
+                      labelText: 'Room Name', hintText: 'Enter room name'),
+                  onChanged: (value) {
+                    teamName = value;
+                  },
+                ),
+                TextField(
+                  controller: _tfPasswordController,
+                  autofocus: true,
+                  decoration: new InputDecoration(
+                      labelText: 'Password', hintText: 'Enter password'),
+                  onChanged: (value) {
+                    teamName = value;
+                  },
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop(teamName);
+              },
+            ),
+            FlatButton(child: Text('Ok'), onPressed: _joinRoomByName),
+          ],
+        );
+      },
+    );
   }
 
   Widget _buildButtonFL() {
@@ -52,13 +123,28 @@ class _GameRoomPageState extends State<GameRoomPage>
         Padding(
             padding: const EdgeInsets.all(16.0),
             child: Align(
-             alignment: FractionalOffset.bottomCenter,
+              alignment: FractionalOffset.bottomCenter,
               child: Row(
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: RaisedButton(
-                      child: Text("Rock & Roll"),
+                      child: Text("Search"),
+                      onPressed: () async {
+                        final String currentTeam =
+                            await _showSearchDialog(context);
+                        print("Current team name is $currentTeam");
+                      },
+                      color: Colors.red,
+                      textColor: Colors.yellow,
+                      padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                      splashColor: Colors.grey,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: RaisedButton(
+                      child: Text("Play Now"),
                       onPressed: () {},
                       color: Colors.red,
                       textColor: Colors.yellow,
@@ -69,7 +155,7 @@ class _GameRoomPageState extends State<GameRoomPage>
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: RaisedButton(
-                      child: Text("Rock & Roll"),
+                      child: Text("Create"),
                       onPressed: () {},
                       color: Colors.red,
                       textColor: Colors.yellow,
@@ -77,17 +163,6 @@ class _GameRoomPageState extends State<GameRoomPage>
                       splashColor: Colors.grey,
                     ),
                   ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: RaisedButton(
-                      child: Text("Rock & Roll"),
-                      onPressed: () {},
-                      color: Colors.red,
-                      textColor: Colors.yellow,
-                      padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                      splashColor: Colors.grey,
-                  ),
-                    ),
                 ],
               ),
             )),
@@ -101,7 +176,7 @@ class _GameRoomPageState extends State<GameRoomPage>
       tabs: [
         Tab(text: 'Hán tự'),
         Tab(text: 'Từ Vựng'),
-        Tab(text: 'Chữ Hán'),
+        Tab(text: 'Ngữ Pháp'),
       ],
       labelStyle: TextStyle(fontSize: 36.0),
       unselectedLabelStyle: TextStyle(

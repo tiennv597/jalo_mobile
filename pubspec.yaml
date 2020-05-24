@@ -44,7 +44,7 @@ dependencies:
   dio: ^3.0.8
   flappy_search_bar: 1.7.2
   fluttertoast: ^4.0.0
-
+  socket_io_client: ^0.9.10
 
 dev_dependencies:
   flutter_test:
