@@ -1,0 +1,2 @@
+1. JsonSerializableGenerator
+flutter pub run build_runner build

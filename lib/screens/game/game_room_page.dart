@@ -1,4 +1,5 @@
 import 'package:shinro_int2/constant/app_properties.dart';
+import 'package:shinro_int2/constant/socket_constant.dart' as SOCKET_CONSTANT;
 import 'package:shinro_int2/screens/game/game_start_page.dart';
 import 'package:shinro_int2/utils/custom_background.dart';
 import 'package:shinro_int2/models/product.dart';
@@ -46,12 +47,12 @@ class _GameRoomPageState extends State<GameRoomPage>
     tabController = TabController(length: 3, vsync: this);
     _tfRoomController = new TextEditingController();
     _tfPasswordController = new TextEditingController();
-    ////Creating the socket
-    socket = io('http://192.168.1.28:3000/game-namespace', <String, dynamic>{
+    //Creating the socket
+    socket = io(SOCKET_CONSTANT.basURL+SOCKET_CONSTANT.nameSpase, <String, dynamic>{
       'transports': ['websocket'],
       'extraHeaders': {'foo': 'bar'} // optional
     });
-    socket.on('connect', (_) {
+    socket.on(SOCKET_CONSTANT.connect, (_) {
       print('connect');
       socket.emit('msg', 'test');
     });
