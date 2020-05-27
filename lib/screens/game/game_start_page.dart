@@ -2,9 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
-import 'package:shinro_int2/screens/game/components/message_list_item.dart';
 import 'package:shinro_int2/models/message/message.dart';
+import 'package:shinro_int2/screens/game/components/message_list_item.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 import 'package:shinro_int2/constant/socket_constant.dart' as SOCKET_CONSTANT;
 
@@ -17,8 +16,6 @@ class StrartGameScreen extends StatefulWidget {
     return new StrartGameScreenState();
   }
 }
-
-const String _name = "Tien";
 
 class StrartGameScreenState extends State<StrartGameScreen> {
   final TextEditingController _textEditingController =
@@ -36,17 +33,20 @@ class StrartGameScreenState extends State<StrartGameScreen> {
     _focus.addListener(_onFocusChange);
     _controller = ScrollController();
     _controller.addListener(_scrollListener);
-    setState(() {
-      widget.socket.on(SOCKET_CONSTANT.server_send_message, (data) {
-        //Map messageMap = jsonDecode(data);
-        Message message = Message.fromJson(json.decode(data));
-        // Map<String, dynamic> map = json.decode(data);
-        // List<dynamic> message = map["message"];
-        // print(message[0]["name"]);
-       
 
-        print(message.message);
+    widget.socket.on(SOCKET_CONSTANT.server_send_message, (data) {
+      //Map messageMap = jsonDecode(data);
+      Message message = Message.fromJson(json.decode(data));
+      // Map<String, dynamic> map = json.decode(data);
+      // List<dynamic> message = map["message"];
+      // print(message[0]["name"]);
+      ChatMessage chatMessage = new ChatMessage(
+        text: message.message,
+      );
+      setState(() {
+        _messages.insert(0, chatMessage);
       });
+      print(message.message);
     });
   }
 
@@ -68,13 +68,6 @@ class StrartGameScreenState extends State<StrartGameScreen> {
       _visibility = !_visibility;
       _visibilityBtn = !_visibilityBtn;
     });
-  }
-
-  @override
-  void dispose() {
-    for (ChatMessage message in _messages)
-      message.animationController.dispose();
-    super.dispose();
   }
 
   @override
@@ -108,15 +101,11 @@ class StrartGameScreenState extends State<StrartGameScreen> {
                 child: Container(
                   decoration:
                       new BoxDecoration(color: Theme.of(context).cursorColor),
-                  child: new AnimatedList(
-                    
+                  child: new ListView.builder(
                     padding: new EdgeInsets.all(8.0),
                     reverse: true,
-                    itemBuilder: (_, String text,
-                      Animation<double> animation)  async {
-                      return _messages[index];
-                    },
-                   
+                    itemBuilder: (_, int index) => _messages[index],
+                    itemCount: _messages.length,
                   ),
                 ),
               ),
@@ -226,38 +215,39 @@ class StrartGameScreenState extends State<StrartGameScreen> {
 
   void _signOut() {}
 }
-class ChatMessage extends StatelessWidget {
-  ChatMessage({this.text, this.animationController}); //modified
-  final String text;
-  final AnimationController animationController;
-  @override
-  Widget build(BuildContext context) {
-    return new SizeTransition(
-      sizeFactor: new CurvedAnimation(
-          parent: animationController, curve: Curves.easeOut),
-      axisAlignment: 0.0,
-      child: new Container(
-        margin: const EdgeInsets.symmetric(vertical: 10.0),
-        child: new Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            new Container(
-              margin: const EdgeInsets.only(right: 16.0),
-              child: new CircleAvatar(child: new Text(_name[0])),
-            ),
-            new Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                new Text(_name, style: Theme.of(context).textTheme.bodyText1),
-                new Container(
-                  margin: const EdgeInsets.only(top: 5.0),
-                  child: new Text(text),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
+
+// class ChatMessage extends StatelessWidget {
+//   ChatMessage({this.text, this.animationController}); //modified
+//   final String text;
+//   final AnimationController animationController;
+//   @override
+//   Widget build(BuildContext context) {
+//     return new SizeTransition(
+//       sizeFactor: new CurvedAnimation(
+//           parent: animationController, curve: Curves.easeOut),
+//       axisAlignment: 0.0,
+//       child: new Container(
+//         margin: const EdgeInsets.symmetric(vertical: 10.0),
+//         child: new Row(
+//           crossAxisAlignment: CrossAxisAlignment.start,
+//           children: <Widget>[
+//             new Container(
+//               margin: const EdgeInsets.only(right: 16.0),
+//               child: new CircleAvatar(child: new Text(_name[0])),
+//             ),
+//             new Column(
+//               crossAxisAlignment: CrossAxisAlignment.start,
+//               children: <Widget>[
+//                 new Text(_name, style: Theme.of(context).textTheme.bodyText1),
+//                 new Container(
+//                   margin: const EdgeInsets.only(top: 5.0),
+//                   child: new Text(text),
+//                 ),
+//               ],
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }

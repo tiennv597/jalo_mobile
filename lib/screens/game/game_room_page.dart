@@ -48,7 +48,8 @@ class _GameRoomPageState extends State<GameRoomPage>
     _tfRoomController = new TextEditingController();
     _tfPasswordController = new TextEditingController();
     //Creating the socket
-    socket = io(SOCKET_CONSTANT.basURL+SOCKET_CONSTANT.nameSpase, <String, dynamic>{
+    socket = io(
+        SOCKET_CONSTANT.basURL + SOCKET_CONSTANT.nameSpase, <String, dynamic>{
       'transports': ['websocket'],
       'extraHeaders': {'foo': 'bar'} // optional
     });
@@ -61,10 +62,10 @@ class _GameRoomPageState extends State<GameRoomPage>
   }
 
   void _joinRoomByName() {
+    socket.emit('join-room', {_tfRoomController.text, "tien2"});
 
-    socket.emit('join-room',{_tfRoomController.text,"tien2"});
-
-    Navigator.of(context).push(MaterialPageRoute(builder: (_) => StrartGameScreen(socket:socket)));
+    Navigator.of(context).push(
+        MaterialPageRoute(builder: (_) => StrartGameScreen(socket: socket)));
   }
 
   Future<String> _showSearchDialog(BuildContext context) async {
