@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class CreditCard extends StatelessWidget {
+class TypePlayCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  Container(

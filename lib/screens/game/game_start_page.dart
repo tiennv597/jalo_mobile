@@ -1,11 +1,14 @@
 import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shinro_int2/models/category.dart';
 import 'package:shinro_int2/models/message/message.dart';
 import 'package:shinro_int2/screens/game/components/message_list_item.dart';
+import 'package:shinro_int2/screens/game/components/user_list_modal.dart';
+import 'package:shinro_int2/screens/main/main_page.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 import 'package:shinro_int2/constant/socket_constant.dart' as SOCKET_CONSTANT;
+import 'components/user_item.dart';
 
 class StrartGameScreen extends StatefulWidget {
   final Socket socket;
@@ -18,15 +21,57 @@ class StrartGameScreen extends StatefulWidget {
 }
 
 class StrartGameScreenState extends State<StrartGameScreen> {
+  //text filde send messga
   final TextEditingController _textEditingController =
       new TextEditingController();
+  //on or off button send
   bool _isComposingMessage = false;
   bool _visibilityBtn = false; //Hide button send
   bool _visibility = true; // Hide or show [send icon, ...]
   ScrollController _controller;
   final List<ChatMessage> _messages = <ChatMessage>[];
-
+  //focus TextField message
   FocusNode _focus = new FocusNode();
+  UserListModal userListModal = new UserListModal();
+// data test
+  List<Category> categories = [
+    Category(
+      Color(0xffFCE183),
+      Color(0xffF68D7F),
+      'Gadgets',
+      'assets/jeans_5.png',
+    ),
+    Category(
+      Color(0xffF749A2),
+      Color(0xffFF7375),
+      'Clothes',
+      'assets/jeans_5.png',
+    ),
+    Category(
+      Color(0xff00E9DA),
+      Color(0xff5189EA),
+      'Fashion',
+      'assets/jeans_5.png',
+    ),
+    Category(
+      Color(0xffAF2D68),
+      Color(0xff632376),
+      'Home',
+      'assets/jeans_5.png',
+    ),
+    Category(
+      Color(0xff36E892),
+      Color(0xff33B2B9),
+      'Beauty',
+      'assets/jeans_5.png',
+    ),
+    Category(
+      Color(0xffF123C4),
+      Color(0xff668CEA),
+      'Appliances',
+      'assets/jeans_5.png',
+    ),
+  ];
   @override
   void initState() {
     super.initState();
@@ -35,18 +80,15 @@ class StrartGameScreenState extends State<StrartGameScreen> {
     _controller.addListener(_scrollListener);
 
     widget.socket.on(SOCKET_CONSTANT.server_send_message, (data) {
-      //Map messageMap = jsonDecode(data);
+      // Parsing JSON to Jobject
       Message message = Message.fromJson(json.decode(data));
-      // Map<String, dynamic> map = json.decode(data);
-      // List<dynamic> message = map["message"];
-      // print(message[0]["name"]);
       ChatMessage chatMessage = new ChatMessage(
         text: message.message,
       );
+      //add message to list
       setState(() {
         _messages.insert(0, chatMessage);
       });
-      print(message.message);
     });
   }
 
@@ -63,6 +105,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
     }
   }
 
+//show or hide when focus text TextField send mesage
   void _onFocusChange() {
     setState(() {
       _visibility = !_visibility;
@@ -86,9 +129,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
         floatingActionButton: Padding(
           padding: const EdgeInsets.only(right: 0, bottom: 32),
           child: FloatingActionButton.extended(
-            onPressed: () {
-              // Add your onPressed code here!
-            },
+            onPressed: _startGame,
             label: Text('Start'),
             icon: Icon(Icons.local_airport),
             backgroundColor: Colors.pink,
@@ -97,12 +138,39 @@ class StrartGameScreenState extends State<StrartGameScreen> {
         body: new Container(
           child: new Column(
             children: <Widget>[
-              new Flexible(
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  Container(
+                      margin: EdgeInsets.all(8.0),
+                      height: 30,
+                      width: MediaQuery.of(context).size.width / 3,
+                      //list user in room
+                      child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: categories.length,
+                          itemBuilder: (_, index) => UserItem(
+                                category: categories[index],
+                              ))),
+                  Container(
+                    height: 30,
+                    width: 70,
+                    //button show list user in room
+                    child: RaisedButton.icon(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30.0),
+                            side: BorderSide(color: Colors.white)),
+                        icon: Icon(Icons.account_circle),
+                        label: Text("9"),
+                        onPressed: _showListUser),
+                  ),
+                ],
+              ),
+              Flexible(
                 child: Container(
-                  decoration:
-                      new BoxDecoration(color: Theme.of(context).cursorColor),
-                  child: new ListView.builder(
-                    padding: new EdgeInsets.all(8.0),
+                  // list message
+                  child: ListView.builder(
+                    padding: EdgeInsets.all(8.0),
                     reverse: true,
                     itemBuilder: (_, int index) => _messages[index],
                     itemCount: _messages.length,
@@ -214,40 +282,12 @@ class StrartGameScreenState extends State<StrartGameScreen> {
   }
 
   void _signOut() {}
-}
 
-// class ChatMessage extends StatelessWidget {
-//   ChatMessage({this.text, this.animationController}); //modified
-//   final String text;
-//   final AnimationController animationController;
-//   @override
-//   Widget build(BuildContext context) {
-//     return new SizeTransition(
-//       sizeFactor: new CurvedAnimation(
-//           parent: animationController, curve: Curves.easeOut),
-//       axisAlignment: 0.0,
-//       child: new Container(
-//         margin: const EdgeInsets.symmetric(vertical: 10.0),
-//         child: new Row(
-//           crossAxisAlignment: CrossAxisAlignment.start,
-//           children: <Widget>[
-//             new Container(
-//               margin: const EdgeInsets.only(right: 16.0),
-//               child: new CircleAvatar(child: new Text(_name[0])),
-//             ),
-//             new Column(
-//               crossAxisAlignment: CrossAxisAlignment.start,
-//               children: <Widget>[
-//                 new Text(_name, style: Theme.of(context).textTheme.bodyText1),
-//                 new Container(
-//                   margin: const EdgeInsets.only(top: 5.0),
-//                   child: new Text(text),
-//                 ),
-//               ],
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
+  void _startGame() {
+    Navigator.of(context).push(MaterialPageRoute(builder: (_) => MainPage()));
+  }
+
+  void _showListUser() {
+    userListModal.mainBottomSheet(context,categories);
+  }
+}

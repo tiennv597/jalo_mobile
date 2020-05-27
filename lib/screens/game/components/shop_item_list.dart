@@ -80,7 +80,6 @@ class _ShopItemListState extends State<ShopItemList> {
                           ],
                         ),
                       ),
-//TODO: Work on scroll quantity
                       Theme(
                         data: ThemeData(
                             accentColor: Colors.black,

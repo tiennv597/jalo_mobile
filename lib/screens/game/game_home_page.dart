@@ -4,8 +4,7 @@ import 'package:shinro_int2/screens/game/game_room_page.dart';
 import 'package:shinro_int2/screens/payment/unpaid_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-
-import 'components/credit_card.dart';
+import 'components/type_play_card.dart';
 import 'components/shop_item_list.dart';
 
 class GameHomePage extends StatefulWidget {
@@ -108,7 +107,7 @@ class _GameHomePageState extends State<GameHomePage> {
                   child: Swiper(
                     itemCount: 2,
                     itemBuilder: (_, index) {
-                      return CreditCard();
+                      return TypePlayCard();
                     },
                     scale: 0.8,
                     controller: swiperController,
@@ -138,8 +137,6 @@ class _GameHomePageState extends State<GameHomePage> {
 class Scroll extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    // TODO: implement paint
-
     LinearGradient grT = LinearGradient(
         colors: [Colors.transparent, Colors.black26],
         begin: Alignment.topCenter,
@@ -166,7 +163,6 @@ class Scroll extends CustomPainter {
 
   @override
   bool shouldRepaint(CustomPainter oldDelegate) {
-    // TODO: implement shouldRepaint
     return false;
   }
 }

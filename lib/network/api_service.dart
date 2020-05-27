@@ -1,5 +1,5 @@
 import 'package:shinro_int2/models/user/login_user_model.dart';
-import 'package:shinro_int2/network/model/example_model.dart';
+import 'package:shinro_int2/models/grammar/example_model.dart';
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:retrofit/retrofit.dart';

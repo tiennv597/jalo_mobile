@@ -22,7 +22,7 @@ class ChatMessage extends StatelessWidget {
           new Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              new Text(_name, style: Theme.of(context).textTheme.subhead),
+              new Text(_name,),
               new Container(
                 margin: const EdgeInsets.only(top: 5.0),
                 child: new Text(text),
