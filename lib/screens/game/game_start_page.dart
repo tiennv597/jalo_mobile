@@ -166,6 +166,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
                   ),
                 ],
               ),
+              _buildRoomInfo(),
               Flexible(
                 child: Container(
                   // list message
@@ -269,6 +270,80 @@ class StrartGameScreenState extends State<StrartGameScreen> {
         ));
   }
 
+  Widget _buildRoomInfo() {
+    return Container(
+      height: 128,
+      width: MediaQuery.of(context).size.width,
+      padding: EdgeInsets.all(8.0),
+      decoration: BoxDecoration(
+          color: Colors.blue,
+          borderRadius: BorderRadius.all(Radius.circular(10))),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(right: 24),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(top: 8, bottom: 8),
+                  child: Text(
+                    'Phòng: 123456',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 8, bottom: 8),
+                  child: Text(
+                    'Số câu: 15',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 8, bottom: 8),
+                  child: Text(
+                    'Thời gian: 10 giây/ câu',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 24),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'Hán tự: N5',
+                    style: TextStyle(color: Colors.white, fontSize: 25),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: RaisedButton(
+                    child: Text("Setting"),
+                    onPressed: () {},
+                    color: Colors.red,
+                    textColor: Colors.yellow,
+                    padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                    splashColor: Colors.grey,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   void _textMessageSubmitted(String value) {
     //send massage
     widget.socket.emit(SOCKET_CONSTANT.client_send_message,
@@ -288,6 +363,6 @@ class StrartGameScreenState extends State<StrartGameScreen> {
   }
 
   void _showListUser() {
-    userListModal.mainBottomSheet(context,categories);
+    userListModal.mainBottomSheet(context, categories);
   }
 }

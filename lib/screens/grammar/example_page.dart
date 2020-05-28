@@ -5,7 +5,7 @@ import 'package:shinro_int2/network/api_service.dart';
 import 'package:shinro_int2/models/grammar/example_model.dart';
 import 'package:shinro_int2/constant/app_properties.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+
 
 class ExamplePage extends StatefulWidget {
   @override
