@@ -73,8 +73,10 @@ flutter:
   uses-material-design: true
 
   assets:
+  - images/
   - assets/
   - assets/icons/
+  - assets/data/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.
@@ -94,4 +96,13 @@ flutter:
   - family: NunitoSans
     fonts:
     - asset: fonts/NunitoSans-Regular.ttf
+  - family: Quando
+    fonts:
+    - asset: fonts/Quando.ttf
+  - family: Satisfy
+    fonts:
+    - asset: fonts/Satisfy.ttf
+  - family: Alike
+    fonts:
+    - asset: fonts/Alike-Regular.ttf
 

@@ -5,7 +5,7 @@ import 'package:shinro_int2/models/category.dart';
 import 'package:shinro_int2/models/message/message.dart';
 import 'package:shinro_int2/screens/game/components/message_list_item.dart';
 import 'package:shinro_int2/screens/game/components/user_list_modal.dart';
-import 'package:shinro_int2/screens/main/main_page.dart';
+import 'package:shinro_int2/screens/game/game_quiz_page.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 import 'package:shinro_int2/constant/socket_constant.dart' as SOCKET_CONSTANT;
 import 'components/user_item.dart';
@@ -129,7 +129,14 @@ class StrartGameScreenState extends State<StrartGameScreen> {
         floatingActionButton: Padding(
           padding: const EdgeInsets.only(right: 0, bottom: 32),
           child: FloatingActionButton.extended(
-            onPressed: _startGame,
+            onPressed: () {
+              Navigator.of(context).pushReplacement(MaterialPageRoute(
+                // in changelog 1 we will pass the langname name to ther other widget class
+                // this name will be used to open a particular JSON file
+                // for a particular language
+                builder: (context) => getjson("Python"),
+              ));
+            },
             label: Text('Start'),
             icon: Icon(Icons.local_airport),
             backgroundColor: Colors.pink,
@@ -358,9 +365,9 @@ class StrartGameScreenState extends State<StrartGameScreen> {
 
   void _signOut() {}
 
-  void _startGame() {
-    Navigator.of(context).push(MaterialPageRoute(builder: (_) => MainPage()));
-  }
+  // void _startGame() {
+  //   Navigator.of(context).push(MaterialPageRoute(builder: (_) => MainPage()));
+  // }
 
   void _showListUser() {
     userListModal.mainBottomSheet(context, categories);
