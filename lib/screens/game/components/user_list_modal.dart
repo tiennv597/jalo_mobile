@@ -24,28 +24,4 @@ class UserListModal {
           );
         });
   }
-
-  // ListTile _createTile(
-  //     BuildContext context, String name, IconData icon, Function action) {
-  //   return ListTile(
-  //     leading: Icon(icon),
-  //     title: Text(name),
-  //     onTap: () {
-  //       Navigator.pop(context);
-  //       action();
-  //     },
-  //   );
-  // }
-
-  // _action1() {
-  //   print('action 1');
-  // }
-
-  // _action2() {
-  //   print('action 2');
-  // }
-
-  // _action3() {
-  //   print('action 3');
-  // }
 }

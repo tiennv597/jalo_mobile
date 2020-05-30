@@ -64,7 +64,7 @@ class _GameRoomPageState extends State<GameRoomPage>
   void _joinRoomByName() {
     socket.emit('join-room', {_tfRoomController.text, "tien2"});
 
-    Navigator.of(context).push(
+    Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (_) => StrartGameScreen(socket: socket)));
   }
 
@@ -189,8 +189,20 @@ class _GameRoomPageState extends State<GameRoomPage>
       isScrollable: true,
       controller: tabController,
     );
-
     return Scaffold(
+      appBar: PreferredSize(
+        preferredSize:Size.fromHeight(40.0), // here the desired height
+        child: AppBar(
+          iconTheme: IconThemeData(
+            color: Colors.black,
+          ),
+          brightness: Brightness.light,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          title: Text("Room"),
+        ),
+      ),
+      backgroundColor: Colors.white,
       body: CustomPaint(
         painter: MainBackground(),
         child: SafeArea(

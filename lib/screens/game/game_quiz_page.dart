@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shinro_int2/models/category.dart';
+import 'package:shinro_int2/screens/game/components/user_rank_item.dart';
 import 'package:shinro_int2/screens/game/game_result_page.dart';
 
 class getjson extends StatelessWidget {
@@ -49,24 +51,24 @@ class getjson extends StatelessWidget {
             ),
           );
         } else {
-          return quizpage(mydata: mydata);
+          return GameQuizPage(mydata: mydata);
         }
       },
     );
   }
 }
 
-class quizpage extends StatefulWidget {
+class GameQuizPage extends StatefulWidget {
   var mydata;
 
-  quizpage({Key key, @required this.mydata}) : super(key: key);
+  GameQuizPage({Key key, @required this.mydata}) : super(key: key);
   @override
-  _quizpageState createState() => _quizpageState(mydata);
+  GameQuizPageState createState() => GameQuizPageState(mydata);
 }
 
-class _quizpageState extends State<quizpage> {
+class GameQuizPageState extends State<GameQuizPage> {
   var mydata;
-  _quizpageState(this.mydata);
+  GameQuizPageState(this.mydata);
 
   Color colortoshow = Colors.indigoAccent;
   Color right = Colors.green;
@@ -78,6 +80,45 @@ class _quizpageState extends State<quizpage> {
   int timer = 30;
   String showtimer = "30";
   var random_array;
+  //data test
+  List<Category> categories = [
+    Category(
+      Color(0xffFCE183),
+      Color(0xffF68D7F),
+      'Gadgets',
+      'assets/jeans_5.png',
+    ),
+    Category(
+      Color(0xffF749A2),
+      Color(0xffFF7375),
+      'Clothes',
+      'assets/jeans_5.png',
+    ),
+    Category(
+      Color(0xff00E9DA),
+      Color(0xff5189EA),
+      'Fashion',
+      'assets/jeans_5.png',
+    ),
+    Category(
+      Color(0xffAF2D68),
+      Color(0xff632376),
+      'Home',
+      'assets/jeans_5.png',
+    ),
+    Category(
+      Color(0xff36E892),
+      Color(0xff33B2B9),
+      'Beauty',
+      'assets/jeans_5.png',
+    ),
+    Category(
+      Color(0xffF123C4),
+      Color(0xff668CEA),
+      'Appliances',
+      'assets/jeans_5.png',
+    ),
+  ];
 
   Map<String, Color> btncolor = {
     "a": Colors.indigoAccent,
@@ -106,23 +147,6 @@ class _quizpageState extends State<quizpage> {
     }
     print(random_array);
   }
-
-  //   var random_array;
-  //   var distinctIds = [];
-  //   var rand = new Random();
-  //     for (int i = 0; ;) {
-  //     distinctIds.add(rand.nextInt(10));
-  //       random_array = distinctIds.toSet().toList();
-  //       if(random_array.length < 10){
-  //         continue;
-  //       }else{
-  //         break;
-  //       }
-  //     }
-  //   print(random_array);
-
-  // ----- END OF CODE
-  // var random_array = [1, 6, 7, 2, 4, 10, 8, 3, 9, 5];
 
   // overriding the initstate function to start timer as this screen is created
   @override
@@ -206,8 +230,8 @@ class _quizpageState extends State<quizpage> {
   Widget choicebutton(String k) {
     return Padding(
       padding: EdgeInsets.symmetric(
-        vertical: 10.0,
-        horizontal: 20.0,
+        vertical: 8.0,
+        horizontal: 8.0,
       ),
       child: MaterialButton(
         onPressed: () => checkanswer(k),
@@ -223,91 +247,108 @@ class _quizpageState extends State<quizpage> {
         color: btncolor[k],
         splashColor: Colors.indigo[700],
         highlightColor: Colors.indigo[700],
-        minWidth: 200.0,
-        height: 45.0,
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+        minWidth: 400.0,
+        height: 64.0,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    var screenHeight = MediaQuery.of(context).size.height;
+    var screenWidth = MediaQuery.of(context).size.width;
     SystemChrome.setPreferredOrientations(
-      
         [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]);
-    return WillPopScope(
-      
-      onWillPop: () {
-        return showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-                  title: Text(
-                    "Quizstar",
-                  ),
-                  content: Text("You Can't Go Back At This Stage."),
-                  actions: <Widget>[
-                    FlatButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: Text(
-                        'Ok',
-                      ),
-                    )
-                  ],
-                ));
-      },
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        body: Column(
-          children: <Widget>[
-            Expanded(
-              flex: 3,
-              child: Container(
-                padding: EdgeInsets.all(15.0),
-                alignment: Alignment.bottomLeft,
-                child: Text(
-                  mydata[0][i.toString()],
-                  style: TextStyle(
-                    fontSize: 16.0,
-                    fontFamily: "Quando",
-                  ),
+    SystemChrome.setEnabledSystemUIOverlays([]);
+    return Scaffold(
+      appBar: PreferredSize(
+         preferredSize:Size.fromHeight(40.0), // here the desired height
+        child: AppBar(
+          iconTheme: IconThemeData(
+            color: Colors.black,
+          ),
+          brightness: Brightness.light,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ),
+      ),
+      backgroundColor: Colors.white,
+      body: Stack(
+        children: <Widget>[
+          Positioned(
+            top: 0,
+            child: Container(
+              height: 80,
+              width: screenWidth / 2,
+              // list message
+              child: ListView.builder(
+                //reverse: true,
+                itemBuilder: (context, int index) => UserRankItem(
+                  category: categories[index],
                 ),
+                itemCount: categories.length,
               ),
             ),
-            Expanded(
-              flex: 6,
+          ),
+          Positioned(top: 88, left: 8, child: Text("Câu hỏi: 1/15")),
+          Positioned(top: 88, right: 8, child: Text("Score:0000")),
+          Positioned(
+            top: 110,
+            left: 8,
+            child: Container(
+              width: screenWidth-16,
+              height: 160,
+              decoration: BoxDecoration(
+                  color: Colors.blue,
+                  borderRadius: BorderRadius.all(Radius.circular(10))),
               child: Container(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    choicebutton('a'),
-                    choicebutton('b'),
-                    choicebutton('c'),
-                    choicebutton('d'),
-                  ],
-                ),
-              ),
-            ),
-            Expanded(
-              flex: 1,
-              child: Container(
-                alignment: Alignment.topCenter,
                 child: Center(
                   child: Text(
-                    showtimer,
+                    mydata[0][i.toString()],
                     style: TextStyle(
-                      fontSize: 35.0,
-                      fontWeight: FontWeight.w700,
-                      fontFamily: 'Times New Roman',
+                      fontSize: 16.0,
+                      fontFamily: "Quando",
                     ),
                   ),
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+          Positioned(
+            top: 80,
+            left: screenWidth / 2 - 30,
+            child: Container(
+              width: 60,
+              height: 60,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(Radius.circular(40))),
+              child: Center(
+                child: Text(
+                  showtimer,
+                  style: TextStyle(
+                    fontSize: 36.0,
+                    fontWeight: FontWeight.w700,
+                    fontFamily: 'Times New Roman',
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            top: 280,
+            left: -4,
+            child: Column(
+              children: <Widget>[
+                choicebutton('a'),
+                choicebutton('b'),
+                choicebutton('c'),
+                choicebutton('d'),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

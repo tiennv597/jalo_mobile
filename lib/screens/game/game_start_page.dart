@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:shinro_int2/models/category.dart';
 import 'package:shinro_int2/models/message/message.dart';
 import 'package:shinro_int2/screens/game/components/message_list_item.dart';
@@ -115,6 +116,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIOverlays([]);
     return new Scaffold(
         backgroundColor: Colors.white,
         appBar: new AppBar(

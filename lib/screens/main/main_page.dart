@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:shinro_int2/constant/app_properties.dart';
 import 'package:shinro_int2/screens/grammar/example_page.dart';
 import 'package:shinro_int2/screens/profile/profile_page.dart';
@@ -54,6 +55,7 @@ class _MainPageState extends State<MainPage>
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIOverlays([]);
     Widget appBar = Container(
       height: kToolbarHeight + MediaQuery.of(context).padding.top,
       child: Row(
