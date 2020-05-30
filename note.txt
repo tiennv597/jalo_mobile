@@ -1,2 +1,2 @@
-1. JsonSerializableGenerator
+1. JsonSerializableGenerator(factory)
 flutter pub run build_runner build
