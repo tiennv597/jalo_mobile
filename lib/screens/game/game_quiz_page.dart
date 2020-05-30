@@ -1,75 +1,32 @@
 import 'dart:async';
 import 'dart:convert';
+
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shinro_int2/models/category.dart';
+import 'package:shinro_int2/models/question/question_model.dart';
 import 'package:shinro_int2/screens/game/components/user_rank_item.dart';
 import 'package:shinro_int2/screens/game/game_result_page.dart';
-
-class getjson extends StatelessWidget {
-  // accept the langname as a parameter
-
-  String langname;
-  getjson(this.langname);
-  String assettoload;
-
-  // a function
-  // sets the asset to a particular JSON file
-  // and opens the JSON
-  setasset() {
-    if (langname == "Python") {
-      assettoload = "assets/data/python.json";
-    } else if (langname == "Java") {
-      assettoload = "assets/data/java.json";
-    } else if (langname == "Javascript") {
-      assettoload = "assets/data/js.json";
-    } else if (langname == "C++") {
-      assettoload = "assets/data/cpp.json";
-    } else {
-      assettoload = "assets/data/linux.json";
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    // this function is called before the build so that
-    // the string assettoload is avialable to the DefaultAssetBuilder
-    setasset();
-    // and now we return the FutureBuilder to load and decode JSON
-    return FutureBuilder(
-      future:
-          DefaultAssetBundle.of(context).loadString(assettoload, cache: true),
-      builder: (context, snapshot) {
-        List mydata = json.decode(snapshot.data.toString());
-        if (mydata == null) {
-          return Scaffold(
-            body: Center(
-              child: Text(
-                "Loading",
-              ),
-            ),
-          );
-        } else {
-          return GameQuizPage(mydata: mydata);
-        }
-      },
-    );
-  }
-}
+import 'package:socket_io_client/socket_io_client.dart';
+import 'package:shinro_int2/constant/socket_constant.dart' as SOCKET_CONSTANT;
 
 class GameQuizPage extends StatefulWidget {
   var mydata;
+  Socket socket;
 
-  GameQuizPage({Key key, @required this.mydata}) : super(key: key);
+  GameQuizPage({this.socket, this.mydata});
+
   @override
-  GameQuizPageState createState() => GameQuizPageState(mydata);
+  GameQuizPageState createState() {
+    return new GameQuizPageState();
+  }
 }
 
 class GameQuizPageState extends State<GameQuizPage> {
-  var mydata;
-  GameQuizPageState(this.mydata);
-
+  // var mydata;
+  // Socket socket;
+  // GameQuizPageState(this.socket,this.mydata);
   Color colortoshow = Colors.indigoAccent;
   Color right = Colors.green;
   Color wrong = Colors.red;
@@ -151,9 +108,25 @@ class GameQuizPageState extends State<GameQuizPage> {
   // overriding the initstate function to start timer as this screen is created
   @override
   void initState() {
+    super.initState();
+    widget.socket.emit(SOCKET_CONSTANT.start_game, {"tttt", "n5", "goi"});
+    widget.socket.on(SOCKET_CONSTANT.start_game, (data) {
+      // Parsing JSON to Jobject
+      //final List parsedList = json.decode(data);
+      //Question questions = Question.fromJson(json.decode(data));
+      //List<Question> listQuestion = parsedList.map((val) =>  Question.fromJson(val)).toList();
+      var value = data
+          .map((dynamic i) => Question.fromJson(i as Map<String, dynamic>))
+          .toList();
+      for (var item in value) {
+        Question question = new Question();
+        question = item;
+        print(question.content);
+      }
+      //add message to list
+    });
     starttimer();
     genrandomarray();
-    super.initState();
   }
 
   // overriding the setstate function to be called only if mounted
@@ -206,7 +179,7 @@ class GameQuizPageState extends State<GameQuizPage> {
     // mydata[2]["1"] == mydata[1]["1"][k]
     // which i forgot to change
     // so nake sure that this is now corrected
-    if (mydata[2][i.toString()] == mydata[1][i.toString()][k]) {
+    if (widget.mydata[2][i.toString()] == widget.mydata[1][i.toString()][k]) {
       // just a print sattement to check the correct working
       // debugPrint(mydata[2][i.toString()] + " is equal to " + mydata[1][i.toString()][k]);
       marks = marks + 5;
@@ -236,7 +209,7 @@ class GameQuizPageState extends State<GameQuizPage> {
       child: MaterialButton(
         onPressed: () => checkanswer(k),
         child: Text(
-          mydata[1][i.toString()][k],
+          widget.mydata[1][i.toString()][k],
           style: TextStyle(
             color: Colors.white,
             fontFamily: "Alike",
@@ -263,7 +236,7 @@ class GameQuizPageState extends State<GameQuizPage> {
     SystemChrome.setEnabledSystemUIOverlays([]);
     return Scaffold(
       appBar: PreferredSize(
-         preferredSize:Size.fromHeight(40.0), // here the desired height
+        preferredSize: Size.fromHeight(40.0), // here the desired height
         child: AppBar(
           iconTheme: IconThemeData(
             color: Colors.black,
@@ -297,7 +270,7 @@ class GameQuizPageState extends State<GameQuizPage> {
             top: 110,
             left: 8,
             child: Container(
-              width: screenWidth-16,
+              width: screenWidth - 16,
               height: 160,
               decoration: BoxDecoration(
                   color: Colors.blue,
@@ -305,7 +278,7 @@ class GameQuizPageState extends State<GameQuizPage> {
               child: Container(
                 child: Center(
                   child: Text(
-                    mydata[0][i.toString()],
+                    widget.mydata[0][i.toString()],
                     style: TextStyle(
                       fontSize: 16.0,
                       fontFamily: "Quando",

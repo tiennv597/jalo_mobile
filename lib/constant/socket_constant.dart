@@ -25,4 +25,5 @@ const String pong = 'pong';
 const String message = 'message';
 const String client_send_message = 'client_send_message';
 const String server_send_message = 'server_send_message';
+const String start_game = 'start_game';
 //const String message = 'message';

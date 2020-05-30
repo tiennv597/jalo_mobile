@@ -12,7 +12,7 @@ import 'package:shinro_int2/constant/socket_constant.dart' as SOCKET_CONSTANT;
 import 'components/user_item.dart';
 
 class StrartGameScreen extends StatefulWidget {
-  final Socket socket;
+  Socket socket;
 
   StrartGameScreen({this.socket});
   @override
@@ -73,6 +73,25 @@ class StrartGameScreenState extends State<StrartGameScreen> {
       'assets/jeans_5.png',
     ),
   ];
+  List dataquiz = [
+    {
+      "1":
+          "What Will Be The Output Of the Following Code ?\na = \"p\" * 3\nprint(a)",
+      "2": "Which function finds out the Variable type in Python ?",
+      "3":
+          "Which of the following keyword is used to define a function in Python ?",
+      "4": "Which of the following is a print Function in Python ?",
+      "5": "Which function finds out the Variable type in Python ?"
+    },
+    {
+      "1": {"a": "pp", "b": "ppp", "c": "3p", "d": "p3"},
+      "2": {"a": "typedef", "b": "typeof", "c": "type", "d": "find"},
+      "3": {"a": "func", "b": "def", "c": "void", "d": "function"},
+      "4": {"a": "cout", "b": "print", "c": "println", "d": "stderr"},
+      "5": {"a": "typedef", "b": "typeof", "c": "type", "d": "find"}
+    },
+    {"1": "ppp", "2": "type", "3": "def", "4": "print", "5": "type"}
+  ];
   @override
   void initState() {
     super.initState();
@@ -120,7 +139,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
     return new Scaffold(
         backgroundColor: Colors.white,
         appBar: PreferredSize(
-           preferredSize:Size.fromHeight(40.0), // here the desired height
+          preferredSize: Size.fromHeight(40.0), // here the desired height
           child: new AppBar(
             elevation:
                 Theme.of(context).platform == TargetPlatform.iOS ? 0.0 : 4.0,
@@ -138,7 +157,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
                 // in changelog 1 we will pass the langname name to ther other widget class
                 // this name will be used to open a particular JSON file
                 // for a particular language
-                builder: (context) => getjson("Python"),
+                builder: (context) => GameQuizPage(socket:widget.socket,mydata:dataquiz),
               ));
             },
             label: Text('Start'),
