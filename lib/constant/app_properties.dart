@@ -7,6 +7,7 @@ const Color transparentYellow = Color.fromRGBO(253, 184, 70, 0.7);
 const Color darkGrey = Color(0xff202020);
 
 const Color blueTypeOne = Color(0xff009966);
+const Color whiteTypeOne = Color(0xFFFFFF);
 const Color blueTypeTwo = Color(0xff669966);
 const Color blueTypeThree = Color(0xff339966);
 

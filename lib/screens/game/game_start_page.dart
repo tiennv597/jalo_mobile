@@ -119,14 +119,16 @@ class StrartGameScreenState extends State<StrartGameScreen> {
     SystemChrome.setEnabledSystemUIOverlays([]);
     return new Scaffold(
         backgroundColor: Colors.white,
-        appBar: new AppBar(
-          title: new Text("Phòng 123"),
-          elevation:
-              Theme.of(context).platform == TargetPlatform.iOS ? 0.0 : 4.0,
-          actions: <Widget>[
-            new IconButton(
-                icon: new Icon(Icons.exit_to_app), onPressed: _signOut)
-          ],
+        appBar: PreferredSize(
+           preferredSize:Size.fromHeight(40.0), // here the desired height
+          child: new AppBar(
+            elevation:
+                Theme.of(context).platform == TargetPlatform.iOS ? 0.0 : 4.0,
+            actions: <Widget>[
+              new IconButton(
+                  icon: new Icon(Icons.exit_to_app), onPressed: _signOut)
+            ],
+          ),
         ),
         floatingActionButton: Padding(
           padding: const EdgeInsets.only(right: 0, bottom: 32),
