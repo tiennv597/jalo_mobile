@@ -157,7 +157,8 @@ class StrartGameScreenState extends State<StrartGameScreen> {
                 // in changelog 1 we will pass the langname name to ther other widget class
                 // this name will be used to open a particular JSON file
                 // for a particular language
-                builder: (context) => GameQuizPage(socket:widget.socket,mydata:dataquiz),
+                builder: (context) =>
+                    GameQuizPage(socket: widget.socket, mydata: dataquiz),
               ));
             },
             label: Text('Start'),

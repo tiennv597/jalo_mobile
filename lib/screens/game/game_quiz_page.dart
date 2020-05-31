@@ -226,6 +226,8 @@ class GameQuizPageState extends State<GameQuizPage> {
   }
 
   Widget choiceButton(int k) {
+    //Answers answers = new Answers();
+    //answers = questions[current].answers[k];
     return Padding(
       padding: EdgeInsets.symmetric(
         vertical: 8.0,
@@ -235,8 +237,8 @@ class GameQuizPageState extends State<GameQuizPage> {
         //onPressed: () => checkanswer(k),
         onPressed: () => {},
         child: Text(
-          questions[current].answers[k].answer.toString(),
-          //"dddd",
+          //answers.answer,
+          "dddd",
           style: TextStyle(
             color: Colors.white,
             fontFamily: "Alike",
@@ -253,7 +255,10 @@ class GameQuizPageState extends State<GameQuizPage> {
       ),
     );
   }
-
+Future<List<Question>> getFutureQuestion() async =>
+      await Future.delayed(Duration(seconds: 1), () {
+        return questions;
+      });
   @override
   Widget build(BuildContext context) {
     var screenHeight = MediaQuery.of(context).size.height;
@@ -261,96 +266,108 @@ class GameQuizPageState extends State<GameQuizPage> {
     SystemChrome.setPreferredOrientations(
         [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]);
     SystemChrome.setEnabledSystemUIOverlays([]);
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(40.0), // here the desired height
-        child: AppBar(
-          iconTheme: IconThemeData(
-            color: Colors.black,
-          ),
-          brightness: Brightness.light,
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-        ),
-      ),
-      backgroundColor: Colors.white,
-      body: Stack(
-        children: <Widget>[
-          Positioned(
-            top: 0,
-            child: Container(
-              height: 80,
-              width: screenWidth / 2,
-              // list message
-              child: ListView.builder(
-                //reverse: true,
-                itemBuilder: (context, int index) => UserRankItem(
-                  category: categories[index],
+    return FutureBuilder(
+        future: getFutureQuestion(),
+        builder: (context, snapshot) {
+          List<Question> questions1 = new List<Question>();
+          questions1=snapshot.data;
+          print(questions1);
+        if(!snapshot.hasData){
+          return Text("loading");
+        }
+        else{
+            return Scaffold(
+            appBar: PreferredSize(
+              preferredSize: Size.fromHeight(40.0), // here the desired height
+              child: AppBar(
+                iconTheme: IconThemeData(
+                  color: Colors.black,
                 ),
-                itemCount: categories.length,
+                brightness: Brightness.light,
+                backgroundColor: Colors.transparent,
+                elevation: 0,
               ),
             ),
-          ),
-          Positioned(top: 88, left: 8, child: Text("Câu hỏi: 1/15")),
-          Positioned(top: 88, right: 8, child: Text("Score:0000")),
-          Positioned(
-            top: 110,
-            left: 8,
-            child: Container(
-              width: screenWidth - 16,
-              height: 160,
-              decoration: BoxDecoration(
-                  color: Colors.blue,
-                  borderRadius: BorderRadius.all(Radius.circular(10))),
-              child: Container(
-                child: Center(
-                  child: Text(
-                    //questions[current].content.toString(),
-                    "ddddddddd",
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      fontFamily: "Quando",
+            backgroundColor: Colors.white,
+            body: Stack(
+              children: <Widget>[
+                Positioned(
+                  top: 0,
+                  child: Container(
+                    height: 80,
+                    width: screenWidth / 2,
+                    // list message
+                    child: ListView.builder(
+                      //reverse: true,
+                      itemBuilder: (context, int index) => UserRankItem(
+                        category: categories[index],
+                      ),
+                      itemCount: categories.length,
                     ),
                   ),
                 ),
-              ),
-            ),
-          ),
-          Positioned(
-            top: 80,
-            left: screenWidth / 2 - 30,
-            child: Container(
-              width: 60,
-              height: 60,
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(40))),
-              child: Center(
-                child: Text(
-                  showtimer,
-                  style: TextStyle(
-                    fontSize: 36.0,
-                    fontWeight: FontWeight.w700,
-                    fontFamily: 'Times New Roman',
+                Positioned(top: 88, left: 8, child: Text("Câu hỏi: 1/15")),
+                Positioned(top: 88, right: 8, child: Text("Score:0000")),
+                Positioned(
+                  top: 110,
+                  left: 8,
+                  child: Container(
+                    width: screenWidth - 16,
+                    height: 160,
+                    decoration: BoxDecoration(
+                        color: Colors.blue,
+                        borderRadius: BorderRadius.all(Radius.circular(10))),
+                    child: Container(
+                      child: Center(
+                        child: Text(
+                          questions1[current].content.toString(),
+                          //"ddddddddd",
+                          style: TextStyle(
+                            fontSize: 16.0,
+                            fontFamily: "Quando",
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ),
-          ),
-          Positioned(
-            top: 280,
-            left: -4,
-            child: Column(
-              children: <Widget>[
-                choiceButton(random[0]),
-                choiceButton(random[1]),
-                choiceButton(random[2]),
-                choiceButton(random[3]),
+                Positioned(
+                  top: 80,
+                  left: screenWidth / 2 - 30,
+                  child: Container(
+                    width: 60,
+                    height: 60,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(40))),
+                    child: Center(
+                      child: Text(
+                        showtimer,
+                        style: TextStyle(
+                          fontSize: 36.0,
+                          fontWeight: FontWeight.w700,
+                          fontFamily: 'Times New Roman',
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  top: 280,
+                  left: -4,
+                  child: Column(
+                    children: <Widget>[
+                      choiceButton(random[0]),
+                      choiceButton(random[1]),
+                      choiceButton(random[2]),
+                      choiceButton(random[3]),
+                    ],
+                  ),
+                ),
               ],
             ),
-          ),
-        ],
-      ),
-    );
+          );
+        }
+        });
   }
 }
