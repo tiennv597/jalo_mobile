@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
-
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -117,9 +115,6 @@ class GameQuizPageState extends State<GameQuizPage> {
     widget.socket.emit(SOCKET_CONSTANT.start_game, {"tttt", "n5", "goi"});
     widget.socket.on(SOCKET_CONSTANT.start_game, (data) {
       // Parsing JSON to Jobject
-      //final List parsedList = json.decode(data);
-      //Question questions = Question.fromJson(json.decode(data));
-      //List<Question> listQuestion = parsedList.map((val) =>  Question.fromJson(val)).toList();
       var list = data
           .map((dynamic i) => Question.fromJson(i as Map<String, dynamic>))
           .toList();
@@ -199,20 +194,14 @@ class GameQuizPageState extends State<GameQuizPage> {
     starttimer();
   }
 
-  void checkanswer(String k) {
-    // in the previous version this was
-    // mydata[2]["1"] == mydata[1]["1"][k]
-    // which i forgot to change
+  void checkAnswer(String k, bool result) {
     // so nake sure that this is now corrected
-    if (widget.mydata[2][i.toString()] == widget.mydata[1][i.toString()][k]) {
-      // just a print sattement to check the correct working
-      // debugPrint(mydata[2][i.toString()] + " is equal to " + mydata[1][i.toString()][k]);
+    if (result) {
       marks = marks + 5;
       // changing the color variable to be green
       colortoshow = right;
     } else {
       // just a print sattement to check the correct working
-      // debugPrint(mydata[2]["1"] + " is equal to " + mydata[1]["1"][k]);
       colortoshow = wrong;
     }
     setState(() {
@@ -225,7 +214,7 @@ class GameQuizPageState extends State<GameQuizPage> {
     Timer(Duration(seconds: 1), nextquestion);
   }
 
-  Widget choiceButton(int k) {
+  Widget choiceButton(String k, Answers answers) {
     //Answers answers = new Answers();
     //answers = questions[current].answers[k];
     return Padding(
@@ -234,11 +223,9 @@ class GameQuizPageState extends State<GameQuizPage> {
         horizontal: 8.0,
       ),
       child: MaterialButton(
-        //onPressed: () => checkanswer(k),
-        onPressed: () => {},
+        onPressed: () => checkAnswer(k, answers.result),
         child: Text(
-          //answers.answer,
-          "dddd",
+          answers.answer, //set answer on button
           style: TextStyle(
             color: Colors.white,
             fontFamily: "Alike",
@@ -246,7 +233,7 @@ class GameQuizPageState extends State<GameQuizPage> {
           ),
           maxLines: 1,
         ),
-        color: Colors.blue,
+        color: btncolor[k],
         splashColor: Colors.indigo[700],
         highlightColor: Colors.indigo[700],
         minWidth: 400.0,
@@ -255,7 +242,8 @@ class GameQuizPageState extends State<GameQuizPage> {
       ),
     );
   }
-Future<List<Question>> getFutureQuestion() async =>
+
+  Future<List<Question>> getFutureQuestion() async =>
       await Future.delayed(Duration(seconds: 1), () {
         return questions;
       });
@@ -269,105 +257,107 @@ Future<List<Question>> getFutureQuestion() async =>
     return FutureBuilder(
         future: getFutureQuestion(),
         builder: (context, snapshot) {
-          List<Question> questions1 = new List<Question>();
-          questions1=snapshot.data;
-          print(questions1);
-        if(!snapshot.hasData){
-          return Text("loading");
-        }
-        else{
+          List<Question> questions = new List<Question>();
+          questions = snapshot.data;
+          print(questions);
+          if (!snapshot.hasData) {
+            return Text("loading");
+          } else {
             return Scaffold(
-            appBar: PreferredSize(
-              preferredSize: Size.fromHeight(40.0), // here the desired height
-              child: AppBar(
-                iconTheme: IconThemeData(
-                  color: Colors.black,
+              appBar: PreferredSize(
+                preferredSize: Size.fromHeight(40.0), // here the desired height
+                child: AppBar(
+                  iconTheme: IconThemeData(
+                    color: Colors.black,
+                  ),
+                  brightness: Brightness.light,
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
                 ),
-                brightness: Brightness.light,
-                backgroundColor: Colors.transparent,
-                elevation: 0,
               ),
-            ),
-            backgroundColor: Colors.white,
-            body: Stack(
-              children: <Widget>[
-                Positioned(
-                  top: 0,
-                  child: Container(
-                    height: 80,
-                    width: screenWidth / 2,
-                    // list message
-                    child: ListView.builder(
-                      //reverse: true,
-                      itemBuilder: (context, int index) => UserRankItem(
-                        category: categories[index],
+              backgroundColor: Colors.white,
+              body: Stack(
+                children: <Widget>[
+                  Positioned(
+                    top: 0,
+                    child: Container(
+                      height: 80,
+                      width: screenWidth / 2,
+                      // list message
+                      child: ListView.builder(
+                        //reverse: true,
+                        itemBuilder: (context, int index) => UserRankItem(
+                          category: categories[index],
+                        ),
+                        itemCount: categories.length,
                       ),
-                      itemCount: categories.length,
                     ),
                   ),
-                ),
-                Positioned(top: 88, left: 8, child: Text("Câu hỏi: 1/15")),
-                Positioned(top: 88, right: 8, child: Text("Score:0000")),
-                Positioned(
-                  top: 110,
-                  left: 8,
-                  child: Container(
-                    width: screenWidth - 16,
-                    height: 160,
-                    decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.all(Radius.circular(10))),
+                  Positioned(top: 88, left: 8, child: Text("Câu hỏi: 1/15")),
+                  Positioned(top: 88, right: 8, child: Text("Score:0000")),
+                  Positioned(
+                    top: 110,
+                    left: 8,
                     child: Container(
-                      child: Center(
-                        child: Text(
-                          questions1[current].content.toString(),
-                          //"ddddddddd",
-                          style: TextStyle(
-                            fontSize: 16.0,
-                            fontFamily: "Quando",
+                      width: screenWidth - 16,
+                      height: 160,
+                      decoration: BoxDecoration(
+                          color: Colors.blue,
+                          borderRadius: BorderRadius.all(Radius.circular(10))),
+                      child: Container(
+                        child: Center(
+                          child: Text(
+                            questions[current].content.toString(),
+                            style: TextStyle(
+                              fontSize: 16.0,
+                              fontFamily: "Quando",
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ),
-                ),
-                Positioned(
-                  top: 80,
-                  left: screenWidth / 2 - 30,
-                  child: Container(
-                    width: 60,
-                    height: 60,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(40))),
-                    child: Center(
-                      child: Text(
-                        showtimer,
-                        style: TextStyle(
-                          fontSize: 36.0,
-                          fontWeight: FontWeight.w700,
-                          fontFamily: 'Times New Roman',
+                  Positioned(
+                    top: 80,
+                    left: screenWidth / 2 - 30,
+                    child: Container(
+                      width: 60,
+                      height: 60,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(Radius.circular(40))),
+                      child: Center(
+                        child: Text(
+                          showtimer,
+                          style: TextStyle(
+                            fontSize: 36.0,
+                            fontWeight: FontWeight.w700,
+                            fontFamily: 'Times New Roman',
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-                Positioned(
-                  top: 280,
-                  left: -4,
-                  child: Column(
-                    children: <Widget>[
-                      choiceButton(random[0]),
-                      choiceButton(random[1]),
-                      choiceButton(random[2]),
-                      choiceButton(random[3]),
-                    ],
+                  Positioned(
+                    top: 280,
+                    left: -4,
+                    child: Column(
+                      children: <Widget>[
+                        choiceButton(
+                            "a", questions[current].answers[random[0]]),
+                        choiceButton(
+                            "b", questions[current].answers[random[1]]),
+                        choiceButton(
+                            "c", questions[current].answers[random[2]]),
+                        choiceButton(
+                            "d", questions[current].answers[random[3]]),
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            ),
-          );
-        }
+                ],
+              ),
+            );
+          }
         });
   }
 }
