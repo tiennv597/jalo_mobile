@@ -5,6 +5,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shinro_int2/models/category.dart';
+import 'package:shinro_int2/models/question/answers_model.dart';
 import 'package:shinro_int2/models/question/question_model.dart';
 import 'package:shinro_int2/screens/game/components/user_rank_item.dart';
 import 'package:shinro_int2/screens/game/game_result_page.dart';
@@ -34,9 +35,13 @@ class GameQuizPageState extends State<GameQuizPage> {
   int i = 1;
   // extra varibale to iterate
   int j = 1;
+  int current = 0; //current question
   int timer = 30;
   String showtimer = "30";
   var random_array;
+  List<Question> questions = new List<Question>();
+  List random = new List();
+  Question question;
   //data test
   List<Category> categories = [
     Category(
@@ -108,25 +113,28 @@ class GameQuizPageState extends State<GameQuizPage> {
   // overriding the initstate function to start timer as this screen is created
   @override
   void initState() {
-    super.initState();
+    random = shuffle([0, 1, 2, 3]);
     widget.socket.emit(SOCKET_CONSTANT.start_game, {"tttt", "n5", "goi"});
     widget.socket.on(SOCKET_CONSTANT.start_game, (data) {
       // Parsing JSON to Jobject
       //final List parsedList = json.decode(data);
       //Question questions = Question.fromJson(json.decode(data));
       //List<Question> listQuestion = parsedList.map((val) =>  Question.fromJson(val)).toList();
-      var value = data
+      var list = data
           .map((dynamic i) => Question.fromJson(i as Map<String, dynamic>))
           .toList();
-      for (var item in value) {
+      for (var item in list) {
         Question question = new Question();
         question = item;
-        print(question.content);
+        questions.add(question);
       }
-      //add message to list
     });
+
     starttimer();
     genrandomarray();
+
+    super.initState();
+    print(random);
   }
 
   // overriding the setstate function to be called only if mounted
@@ -135,6 +143,23 @@ class GameQuizPageState extends State<GameQuizPage> {
     if (mounted) {
       super.setState(fn);
     }
+  }
+
+// shuffle list
+  List shuffle(List items) {
+    var random = new Random();
+
+    // Go through all elements.
+    for (var i = items.length - 1; i > 0; i--) {
+      // Pick a pseudorandom number according to the list length
+      var n = random.nextInt(i + 1);
+
+      var temp = items[i];
+      items[i] = items[n];
+      items[n] = temp;
+    }
+
+    return items;
   }
 
   void starttimer() async {
@@ -200,16 +225,18 @@ class GameQuizPageState extends State<GameQuizPage> {
     Timer(Duration(seconds: 1), nextquestion);
   }
 
-  Widget choicebutton(String k) {
+  Widget choiceButton(int k) {
     return Padding(
       padding: EdgeInsets.symmetric(
         vertical: 8.0,
         horizontal: 8.0,
       ),
       child: MaterialButton(
-        onPressed: () => checkanswer(k),
+        //onPressed: () => checkanswer(k),
+        onPressed: () => {},
         child: Text(
-          widget.mydata[1][i.toString()][k],
+          //questions[current].answers[k].answer.toString(),
+          "dddd",
           style: TextStyle(
             color: Colors.white,
             fontFamily: "Alike",
@@ -217,7 +244,7 @@ class GameQuizPageState extends State<GameQuizPage> {
           ),
           maxLines: 1,
         ),
-        color: btncolor[k],
+        //color: btncolor[k],
         splashColor: Colors.indigo[700],
         highlightColor: Colors.indigo[700],
         minWidth: 400.0,
@@ -278,7 +305,8 @@ class GameQuizPageState extends State<GameQuizPage> {
               child: Container(
                 child: Center(
                   child: Text(
-                    widget.mydata[0][i.toString()],
+                    //questions[current].content.toString(),
+                    "ddddddddd",
                     style: TextStyle(
                       fontSize: 16.0,
                       fontFamily: "Quando",
@@ -314,10 +342,10 @@ class GameQuizPageState extends State<GameQuizPage> {
             left: -4,
             child: Column(
               children: <Widget>[
-                choicebutton('a'),
-                choicebutton('b'),
-                choicebutton('c'),
-                choicebutton('d'),
+                // choiceButton(random[0]),
+                // choiceButton(random[1]),
+                // choiceButton(random[2]),
+                // choiceButton(random[3]),
               ],
             ),
           ),
