@@ -25,7 +25,7 @@ class GameQuizPage extends StatefulWidget {
 }
 
 class GameQuizPageState extends State<GameQuizPage> {
-  // var mydata;
+  var mydata;
   // Socket socket;
   // GameQuizPageState(this.socket,this.mydata);
   Color colortoshow = Colors.indigoAccent;
@@ -235,8 +235,8 @@ class GameQuizPageState extends State<GameQuizPage> {
         //onPressed: () => checkanswer(k),
         onPressed: () => {},
         child: Text(
-          //questions[current].answers[k].answer.toString(),
-          "dddd",
+          questions[current].answers[k].answer.toString(),
+          //"dddd",
           style: TextStyle(
             color: Colors.white,
             fontFamily: "Alike",
@@ -244,7 +244,7 @@ class GameQuizPageState extends State<GameQuizPage> {
           ),
           maxLines: 1,
         ),
-        //color: btncolor[k],
+        color: Colors.blue,
         splashColor: Colors.indigo[700],
         highlightColor: Colors.indigo[700],
         minWidth: 400.0,
@@ -342,10 +342,10 @@ class GameQuizPageState extends State<GameQuizPage> {
             left: -4,
             child: Column(
               children: <Widget>[
-                // choiceButton(random[0]),
-                // choiceButton(random[1]),
-                // choiceButton(random[2]),
-                // choiceButton(random[3]),
+                choiceButton(random[0]),
+                choiceButton(random[1]),
+                choiceButton(random[2]),
+                choiceButton(random[3]),
               ],
             ),
           ),

@@ -153,7 +153,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
           padding: const EdgeInsets.only(right: 0, bottom: 32),
           child: FloatingActionButton.extended(
             onPressed: () {
-              Navigator.of(context).pushReplacement(MaterialPageRoute(
+              Navigator.of(context).push(MaterialPageRoute(
                 // in changelog 1 we will pass the langname name to ther other widget class
                 // this name will be used to open a particular JSON file
                 // for a particular language
