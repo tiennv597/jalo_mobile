@@ -34,6 +34,7 @@ class GameQuizPageState extends State<GameQuizPage> {
   // extra varibale to iterate
   int j = 1;
   int current = 0; //current question
+  int totalQuestion = 0; //total of questions
   int timer = 30;
   String showtimer = "30";
   var random_array;
@@ -123,6 +124,7 @@ class GameQuizPageState extends State<GameQuizPage> {
         question = item;
         questions.add(question);
       }
+      totalQuestion = questions.length - 1;
     });
 
     starttimer();
@@ -143,17 +145,14 @@ class GameQuizPageState extends State<GameQuizPage> {
 // shuffle list
   List shuffle(List items) {
     var random = new Random();
-
     // Go through all elements.
     for (var i = items.length - 1; i > 0; i--) {
       // Pick a pseudorandom number according to the list length
       var n = random.nextInt(i + 1);
-
       var temp = items[i];
       items[i] = items[n];
       items[n] = temp;
     }
-
     return items;
   }
 
@@ -178,9 +177,8 @@ class GameQuizPageState extends State<GameQuizPage> {
     canceltimer = false;
     timer = 30;
     setState(() {
-      if (j < 10) {
-        i = random_array[j];
-        j++;
+      if (current < totalQuestion) {
+        current++;
       } else {
         Navigator.of(context).pushReplacement(MaterialPageRoute(
           builder: (context) => resultpage(marks: marks),
@@ -261,7 +259,10 @@ class GameQuizPageState extends State<GameQuizPage> {
           questions = snapshot.data;
           print(questions);
           if (!snapshot.hasData) {
-            return Text("loading");
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+            ;
           } else {
             return Scaffold(
               appBar: PreferredSize(

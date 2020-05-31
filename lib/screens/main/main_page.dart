@@ -229,7 +229,6 @@ class _MainPageState extends State<MainPage>
                 
               ),
             ),
-            //CategoryListPage(),
             ExamplePage(),
             GameHomePage(),
             ProfilePage()
