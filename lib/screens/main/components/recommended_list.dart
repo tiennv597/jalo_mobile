@@ -1,86 +1,116 @@
-import 'package:shinro_int2/constant/app_properties.dart';
-import 'package:shinro_int2/models/product.dart';
-import 'package:shinro_int2/screens/product/product_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:shinro_int2/models/movie.dart';
+import 'package:shinro_int2/screens/main/components/top_rated_list_item.dart';
+import 'package:shinro_int2/screens/main/components/vertical_list_item.dart';
+import 'package:shinro_int2/screens/main/components/horizontal_list_item.dart';
 
 class RecommendedList extends StatelessWidget {
-  List<Product> products = [
-    Product('assets/bag_1.png', 'Bag', 'Beautiful bag', 2.33),
-    Product('assets/cap_5.png', 'Cap', 'Cap with beautiful design', 10),
-    Product('assets/jeans_1.png', 'Jeans', 'Jeans for you', 20),
-    Product('assets/womanshoe_3.png', 'Woman Shoes', 'Shoes with special discount', 30),
-    Product('assets/bag_10.png', 'Bag Express', 'Bag for your shops', 40),
-    Product('assets/jeans_3.png', 'Jeans', 'Beautiful Jeans', 102.33),
-    Product('assets/ring_1.png', 'Silver Ring', 'Description', 52.33),
-    Product('assets/shoeman_7.png', 'Shoes', 'Description', 62.33),
-    Product('assets/headphone_9.png', 'Headphones', 'Description', 72.33),
-
-
-  ];
-
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        SizedBox(
-          height: 20,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              IntrinsicHeight(
-                child: Container(
-                  margin: const EdgeInsets.only(left: 16.0, right: 8.0),
-                  width: 4,
-                  color: mediumYellow,
-                ),
-              ),
-              Center(
-                  child: Text(
-                'Recommended',
-                style: TextStyle(
-                    color: darkGrey,
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.bold),
-              )),
-            ],
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Movies App'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {},
           ),
-        ),
-        Flexible(
-          child: Container(
-            padding: EdgeInsets.only(top: 16.0, right: 16.0, left: 16.0),
-            child: StaggeredGridView.countBuilder(
-    physics: NeverScrollableScrollPhysics(),
-              padding: EdgeInsets.zero,
-              crossAxisCount: 4,
-              itemCount: products.length,
-              itemBuilder: (BuildContext context, int index) => new ClipRRect(
-                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                    child: InkWell(
-                      onTap: () => Navigator.of(context).push(
-                          MaterialPageRoute(builder: (_) => ProductPage(product:products[index]))),
-                      child: Container(
-                          decoration: BoxDecoration(
-                            gradient: RadialGradient(
-                                colors: [Colors.grey[500], Colors.grey[700]],
-                                center: Alignment(0, 0),
-                                radius: 0.6,
-                                focal: Alignment(0, 0),
-                                focalRadius: 0.1),
-                          ),
-                          child: Hero(
-                              tag: products[index].image,
-                              child: Image.asset(products[index].image))),
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(
+                    'Recommended',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-              staggeredTileBuilder: (int index) =>
-                  new StaggeredTile.count(2, index.isEven ? 3 : 2),
-              mainAxisSpacing: 4.0,
-              crossAxisSpacing: 4.0,
+                  FlatButton(
+                    child: Text('View All'),
+                    onPressed: () {},
+                  ),
+                ],
+              ),
             ),
-          ),
+            Container(
+              height: 280,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: movieList.length,
+                itemBuilder: (ctx, i) => HorizontalListItem(i),
+              ),
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(
+                    'Best of 2019',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  FlatButton(
+                    child: Text('View All'),
+                    onPressed: () {},
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              height: 500,
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: ListView.builder(
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: bestMovieList.length,
+                itemBuilder: (ctx, i) => VerticalListItem(i),
+              ),
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(
+                    'Top Rated Movies',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  FlatButton(
+                    child: Text('View All'),
+                    onPressed: () {},
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              height: 280,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: topRatedMovieList.length,
+                itemBuilder: (ctx, i) => TopRatedListItem(i),
+              ),
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
 }

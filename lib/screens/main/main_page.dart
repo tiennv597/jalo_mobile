@@ -49,7 +49,7 @@ class _MainPageState extends State<MainPage>
   @override
   void initState() {
     super.initState();
-    tabController = TabController(length: 5, vsync: this);
+    tabController = TabController(length: 3, vsync: this);
     bottomTabController = TabController(length: 4, vsync: this);
   }
 
@@ -180,8 +180,6 @@ class _MainPageState extends State<MainPage>
         Tab(text: 'Trending'),
         Tab(text: 'Sports'),
         Tab(text: 'Headsets'),
-        Tab(text: 'Wireless'),
-        Tab(text: 'Bluetooth'),
       ],
       labelStyle: TextStyle(fontSize: 16.0),
       unselectedLabelStyle: TextStyle(
@@ -207,17 +205,17 @@ class _MainPageState extends State<MainPage>
                     (BuildContext context, bool innerBoxIsScrolled) {
                   // These are the slivers that show up in the "outer" scroll view.
                   return <Widget>[
-                    SliverToBoxAdapter(
-                      child: appBar,
-                    ),
-                    SliverToBoxAdapter(
-                      child: topHeader,
-                    ),
-                    SliverToBoxAdapter(
-                      child: ProductList(
-                        products: products,
-                      ),
-                    ),
+                    // SliverToBoxAdapter(
+                    //   child: appBar,
+                    // ),
+                    // SliverToBoxAdapter(
+                    //   child: topHeader,
+                    // ),
+                    // SliverToBoxAdapter(
+                    //   child: ProductList(
+                    //     products: products,
+                    //   ),
+                    // ),
                     SliverToBoxAdapter(
                       child: tabBar,
                     )
@@ -226,7 +224,6 @@ class _MainPageState extends State<MainPage>
                 body: TabView(
                   tabController: tabController,
                 ),
-                
               ),
             ),
             ExamplePage(),

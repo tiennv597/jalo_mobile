@@ -1,10 +1,8 @@
-import 'package:shinro_int2/constant/app_properties.dart';
 import 'package:shinro_int2/models/category.dart';
-
 import 'package:flutter/material.dart';
-
 import 'category_card.dart';
 import 'recommended_list.dart';
+import 'social_tab.dart';
 
 class TabView extends StatelessWidget {
   List<Category> categories = [
@@ -52,11 +50,17 @@ class TabView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(MediaQuery.of(context).size.height / 9);
     return TabBarView(
-        physics: NeverScrollableScrollPhysics(),
+        //physics: NeverScrollableScrollPhysics(),
         controller: tabController,
         children: <Widget>[
+          Column(children: <Widget>[Flexible(child: SocialTab())]),
+          Column(children: <Widget>[
+            SizedBox(
+              height: 16.0,
+            ),
+            Flexible(child: RecommendedList())
+          ]),
           Container(
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -78,30 +82,6 @@ class TabView extends StatelessWidget {
               ],
             ),
           ),
-          Column(children: <Widget>[
-            SizedBox(
-              height: 16.0,
-            ),
-            Flexible(child: RecommendedList())
-          ]),
-          Column(children: <Widget>[
-            SizedBox(
-              height: 16.0,
-            ),
-            Flexible(child: RecommendedList())
-          ]),
-          Column(children: <Widget>[
-            SizedBox(
-              height: 16.0,
-            ),
-            Flexible(child: RecommendedList())
-          ]),
-          Column(children: <Widget>[
-            SizedBox(
-              height: 16.0,
-            ),
-            Flexible(child: RecommendedList())
-          ]),
         ]);
   }
 }
