@@ -1,2 +1,4 @@
 1. JsonSerializableGenerator(factory)
 flutter pub run build_runner build
+2. Change icon app
+flutter pub run flutter_launcher_icons:main -f pubspec.yaml
