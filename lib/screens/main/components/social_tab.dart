@@ -62,23 +62,23 @@ class _SocialTabState extends State<SocialTab> {
                         scrollDirection: Axis.horizontal,
                         children: <Widget>[
                           makeStory(
-                            storyImage: 'assets/bag_3.png', 
-                            userImage: 'assets/bag_3.png', 
+                            storyImage: 'assets/image.jpg', 
+                            userImage: 'assets/image.jpg', 
                             userName: 'Aatik Tasneem'
                           ),
                           makeStory(
-                            storyImage: 'assets/bag_3.png', 
-                            userImage: 'assets/bag_3.png', 
+                            storyImage: 'assets/image.jpg', 
+                            userImage: 'assets/image.jpg', 
                             userName: 'Aiony Haust'
                           ),
                           makeStory(
-                            storyImage: 'assets/bag_3.png', 
-                            userImage: 'assets/bag_3.png', 
+                            storyImage: 'assets/image.jpg', 
+                            userImage: 'assets/image.jpg', 
                             userName: 'Averie Woodard'
                           ),
                           makeStory(
-                            storyImage: 'assets/bag_3.png', 
-                            userImage: 'assets/bag_3.png', 
+                            storyImage: 'assets/image.jpg', 
+                            userImage: 'assets/image.jpg', 
                             userName: 'Azamat Zhanisov'
                           ),
                         ],
@@ -87,24 +87,24 @@ class _SocialTabState extends State<SocialTab> {
                     SizedBox(height: 40,),
                     makeFeed(
                       userName: 'Aiony Haust',
-                      userImage: 'assets/bag_3.png',
+                      userImage: 'assets/image.jpg',
                       feedTime: '1 hr ago',
                       feedText: 'All the Lorem Ipsum generators on the Internet tend to repeat predefined.',
-                      feedImage: 'assets/bag_3.png'
+                      feedImage: 'assets/image.jpg'
                     ),
                     makeFeed(
                       userName: 'Azamat Zhanisov', 
-                      userImage: 'assets/bag_3.png', 
+                      userImage: 'assets/image.jpg', 
                       feedTime: '3 mins ago', 
                       feedText: "All the Lorem Ipsum generators on the Internet tend to repeat predefined.All the Lorem Ipsum generators on the Internet tend to repeat predefined.All the Lorem Ipsum generators on the Internet tend to repeat predefined.", 
                       feedImage: ''
                     ),
                     makeFeed(
                       userName: 'Azamat Zhanisov', 
-                      userImage: 'assets/bag_3.png', 
+                      userImage: 'assets/image.jpg', 
                       feedTime: '3 mins ago', 
                       feedText: "All the Lorem Ipsum generators on the Internet tend to repeat predefined.", 
-                      feedImage: 'assets/bag_3.png'
+                      feedImage: 'assets/image.jpg'
                     ),
                   ],
                 ),

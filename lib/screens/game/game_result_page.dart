@@ -9,9 +9,9 @@ class resultpage extends StatefulWidget {
 
 class _resultpageState extends State<resultpage> {
   List<String> images = [
-    "images/success.png",
-    "images/good.png",
-    "images/bad.png",
+    "assets/success.png",
+    "assets/good.png",
+    "assets/bad.png",
   ];
 
   String message;
