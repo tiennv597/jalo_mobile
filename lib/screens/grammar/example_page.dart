@@ -1,11 +1,11 @@
 import 'package:flappy_search_bar/flappy_search_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:shinro_int2/network/api_service.dart';
 import 'package:shinro_int2/models/grammar/example_model.dart';
 import 'package:shinro_int2/constant/app_properties.dart';
 import 'package:flutter/cupertino.dart';
-
 
 class ExamplePage extends StatefulWidget {
   @override
@@ -32,53 +32,77 @@ class _ExamplePageState extends State<ExamplePage> {
     return api.getExample(text);
   }
 
+  _dismissKeyboard(BuildContext context) {
+    FocusScope.of(context).requestFocus(new FocusNode());
+  }
+
+  @override
+  void initState() {
+    //SystemChannels.textInput.invokeMethod('TextInput.hide');
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: SafeArea(
-          child: SearchBar<Example>(
-            searchBarPadding: EdgeInsets.symmetric(horizontal: 0),
-            headerPadding: EdgeInsets.symmetric(horizontal: 0),
-            // listPadding: EdgeInsets.symmetric(horizontal: 8),
-            onSearch: _getExample,
-            searchBarController: _searchBarController,
-            minimumChars: 1, //Minimum number of chars to start querying
-            placeHolder: Text("placeholder"),
-            cancellationWidget: Text("cancel"),
-            emptyWidget: Text("empty"),
-            header: Row(
-              children: <Widget>[
-                RaisedButton(
-                  child: Text("Desort"),
-                  onPressed: () {
-                    _searchBarController.removeSort();
+     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    return Listener(
+      onPointerUp: (e) {
+      _dismissKeyboard(context);
+    },
+      // on:() {
+      //   FocusScopeNode currentFocus = FocusScope.of(context);
+
+      //   if (!currentFocus.hasPrimaryFocus) {
+      //     currentFocus.unfocus();
+      //   }
+      // },
+      child: Scaffold(
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: SafeArea(
+            child: SearchBar<Example>(
+              searchBarPadding: EdgeInsets.symmetric(horizontal: 0),
+              headerPadding: EdgeInsets.symmetric(horizontal: 0),
+              // listPadding: EdgeInsets.symmetric(horizontal: 8),
+              onSearch: _getExample,
+              searchBarController: _searchBarController,
+              minimumChars: 1, //Minimum number of chars to start querying
+              placeHolder: Text("placeholder"),
+              cancellationWidget: Text("cancel"),
+              emptyWidget: Text("empty"),              
+              header: Row(
+                children: <Widget>[
+                  RaisedButton(
+                    child: Text("Desort"),
+                    onPressed: () {
+                      _searchBarController.removeSort();
+                    },
+                  ),
+                  RaisedButton(
+                    child: Text("Replay"),
+                    onPressed: () {
+                      isReplay = !isReplay;
+                      _searchBarController.replayLastSearch();
+                    },
+                  ),
+                ],
+              ),
+              onCancelled: () {
+                print("Cancelled triggered");
+              },
+              onItemFound: (Example example, int index) {
+                return ListTile(
+                  title: Text(example.sId),
+                  isThreeLine: true,
+                  subtitle: Text(example.sentence),
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => DetailPage(example: example)));
                   },
-                ),
-                RaisedButton(
-                  child: Text("Replay"),
-                  onPressed: () {
-                    isReplay = !isReplay;
-                    _searchBarController.replayLastSearch();
-                  },
-                ),
-              ],
+                  
+                );
+              },
             ),
-            onCancelled: () {
-              print("Cancelled triggered");
-            },
-            onItemFound: (Example example, int index) {
-              return ListTile(
-                title: Text(example.sId),
-                isThreeLine: true,
-                subtitle: Text(example.sentence),
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => DetailPage(example: example)));
-                },
-              );
-            },
           ),
         ),
       ),
