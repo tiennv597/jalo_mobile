@@ -204,17 +204,6 @@ class _MainPageState extends State<MainPage>
                     (BuildContext context, bool innerBoxIsScrolled) {
                   // These are the slivers that show up in the "outer" scroll view.
                   return <Widget>[
-                    // SliverToBoxAdapter(
-                    //   child: appBar,
-                    // ),
-                    // SliverToBoxAdapter(
-                    //   child: topHeader,
-                    // ),
-                    // SliverToBoxAdapter(
-                    //   child: ProductList(
-                    //     products: products,
-                    //   ),
-                    // ),
                     SliverToBoxAdapter(
                       child: tabBar,
                     )

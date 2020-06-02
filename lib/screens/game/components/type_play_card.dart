@@ -8,6 +8,10 @@ class TypePlayCard extends StatelessWidget {
       width: 250,
       padding: EdgeInsets.all(16.0),
       decoration: BoxDecoration(
+        image: new DecorationImage(
+            image: new ExactAssetImage('assets/image.jpg'),
+            fit: BoxFit.cover,
+          ),
           color: Colors.deepPurple[700],
           borderRadius: BorderRadius.all(Radius.circular(10))),
       child: Column(
@@ -16,25 +20,12 @@ class TypePlayCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           Text(
-            'CREDIT CARD',
-            style: TextStyle(color: Colors.white),
-          ),
-          Container(
-            height: 25,
-            width: 40,
-            color: Colors.white,
-          ),
-          Text(
-            'xxxx - xxxx - xxxx - 4951',
-            style: TextStyle(color: Colors.white),
+            'COMPETITION',
+            style: TextStyle(color: Colors.blueAccent),
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(
-                'Name',
-                style: TextStyle(color: Colors.grey),
-              ),
               Text(
                 'GEORGE W BUSH',
                 style: TextStyle(color: Colors.white),

@@ -40,26 +40,13 @@ class ShopProduct extends StatelessWidget {
 class ShopProductDisplay extends StatelessWidget {
   final Product product;
   final Function onPressed;
-
   const ShopProductDisplay(this.product,{Key key,this.onPressed}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 150,
-      width: 200,
+      width: 150,
       child: Stack(children: <Widget>[
-        Positioned(
-          left: 25,
-          child: SizedBox(
-            height: 150,
-            width: 150,
-            child: Transform.scale(
-              scale: 1.2,
-              child: Image.asset('assets/bottom_yellow.png'),
-            ),
-          ),
-        ),
         Positioned(
           left: 50,
           top: 5,
@@ -68,16 +55,6 @@ class ShopProductDisplay extends StatelessWidget {
               width: 80,
               child: Image.asset('${product.image}',fit: BoxFit.contain,)),
         ),
-        Positioned(
-          right: 30,
-          bottom: 25,
-          child: Align(
-            child: IconButton(
-              icon: Image.asset('assets/red_clear.png'),
-              onPressed: onPressed,
-            ),
-          ),
-        )
       ]),
     );
   }

@@ -83,7 +83,7 @@ class AddAddressPage extends StatelessWidget {
                                     Padding(
                                       padding: const EdgeInsets.all(4.0),
                                       child: Image.asset(
-                                          'assets/icons/address_home.png'),
+                                          'assets/image.jpg'),
                                     ),
                                     Text(
                                       'Add New Address',
@@ -111,7 +111,7 @@ class AddAddressPage extends StatelessWidget {
                                     Padding(
                                       padding: const EdgeInsets.all(4.0),
                                       child: Image.asset(
-                                        'assets/icons/address_home.png',
+                                        'assets/image.jpg',
                                         color: Colors.white,
                                         height: 20,
                                       ),
@@ -142,7 +142,7 @@ class AddAddressPage extends StatelessWidget {
                                     Padding(
                                       padding: const EdgeInsets.all(4.0),
                                       child: Image.asset(
-                                          'assets/icons/address_work.png',
+                                          'assets/image.jpg',
                                           color: Colors.white,
                                           height: 20),
                                     ),
