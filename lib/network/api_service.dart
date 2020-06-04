@@ -1,5 +1,6 @@
 import 'package:shinro_int2/models/user/login_user_model.dart';
 import 'package:shinro_int2/models/grammar/example_model.dart';
+import 'package:shinro_int2/models/user/user_token.dart';
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:retrofit/retrofit.dart';
@@ -20,6 +21,6 @@ abstract class ApiService {
   Future<List<Example>> getExample(@Query("key_search") String keySearch);
   @FormUrlEncoded()
   @POST("login-api")
-  Future<List<LoginUser>> loginUser(@Field("login_username") String loginUsername,
+  Future<UserToken> loginUser(@Field("login_username") String loginUsername,
       @Field("login_password") String loginPassword);
 }

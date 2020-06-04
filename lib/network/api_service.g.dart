@@ -46,7 +46,8 @@ class _ApiService implements ApiService {
       'login_username': loginUsername,
       'login_password': loginPassword
     };
-    final Response<List<dynamic>> _result = await _dio.request('login-api',
+    final Response<Map<String, dynamic>> _result = await _dio.request(
+        'login-api',
         queryParameters: queryParameters,
         options: RequestOptions(
             method: 'POST',
@@ -55,9 +56,7 @@ class _ApiService implements ApiService {
             contentType: 'application/x-www-form-urlencoded',
             baseUrl: baseUrl),
         data: _data);
-    var value = _result.data
-        .map((dynamic i) => LoginUser.fromJson(i as Map<String, dynamic>))
-        .toList();
+    final value = UserToken.fromJson(_result.data);
     return value;
   }
 }

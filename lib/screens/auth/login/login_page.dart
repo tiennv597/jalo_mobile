@@ -319,16 +319,7 @@ class _LoginPageState extends State<LoginPage> {
   void loginCheck() {
     final api = Provider.of<ApiService>(context, listen: false);
     api.loginUser(_userController.text, _passController.text).then((it) {
-      it.forEach((f) {
-        Fluttertoast.showToast(
-            msg: f.token,
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
-            fontSize: 16.0);
-      });
+      print(it.token.toString());
     }).catchError((onError) {
       print("error" + onError.toString());
     });
