@@ -1,6 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shinro_int2/constant/app_properties.dart';
 import 'package:shinro_int2/constant/constant.dart';
 import 'package:flutter/material.dart';
@@ -318,8 +319,12 @@ class _LoginPageState extends State<LoginPage> {
 
   void loginCheck() {
     final api = Provider.of<ApiService>(context, listen: false);
-    api.loginUser(_userController.text, _passController.text).then((it) {
+    api.loginUser(_userController.text, _passController.text).then((it) async {
       print(it.token.toString());
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      if (it.token.toString() != null) {
+        prefs.setString("token", it.token.toString());
+      } else {}
     }).catchError((onError) {
       print("error" + onError.toString());
     });
