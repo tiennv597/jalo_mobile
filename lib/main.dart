@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return Provider<ApiService>(
       create: (context) => ApiService.create(),
       child: MaterialApp(
-        title: 'Shinro int2',
+        title: 'Japanese Love Me',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           brightness: Brightness.light,

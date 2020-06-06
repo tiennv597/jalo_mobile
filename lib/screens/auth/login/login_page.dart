@@ -5,6 +5,7 @@ import 'package:shinro_int2/constant/app_properties.dart';
 import 'package:shinro_int2/constant/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:shinro_int2/network/api_service.dart';
+import 'package:shinro_int2/constant/shared_preferences.dart' as SHARED_PREFERNCES;
 
 import '../register_page.dart';
 
@@ -322,7 +323,7 @@ class _LoginPageState extends State<LoginPage> {
       print(it.token.toString());
       SharedPreferences prefs = await SharedPreferences.getInstance();
       if (it.token.toString() != null) {
-        prefs.setString("token", it.token.toString());
+        prefs.setString(SHARED_PREFERNCES.token, it.token.toString());
       } else {}
     }).catchError((onError) {
       print("error" + onError.toString());

@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'components/type_play_card.dart';
 import 'components/info_user_item.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shinro_int2/constant/shared_preferences.dart'
+    as SHARED_PREFERNCES;
 
 class GameHomePage extends StatefulWidget {
   @override
@@ -12,6 +15,31 @@ class GameHomePage extends StatefulWidget {
 
 class _GameHomePageState extends State<GameHomePage> {
   SwiperController swiperController = SwiperController();
+  bool logined;
+  String display_name;
+
+  @override
+  void initState() {
+    super.initState();
+    logined = false;
+    //display_name="";
+    checkLogin();
+  }
+
+  Future<void> checkLogin() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool checkValue = prefs.containsKey(SHARED_PREFERNCES.first_launch);
+    if (checkValue) {
+      logined = prefs.getBool(SHARED_PREFERNCES.logined);
+    }
+
+    if (logined) {
+      setState(() {
+        display_name = prefs.getString(SHARED_PREFERNCES.display_name);
+        print(display_name);
+      });
+    } else {}
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,15 +76,13 @@ class _GameHomePageState extends State<GameHomePage> {
         builder: (_, constraints) => Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            InfoUserItem(),
+            InfoUserItem(display_name),
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Text(
                 'Play Type',
                 style: TextStyle(
-                    fontSize: 20,
-                    color: darkGrey,
-                    fontWeight: FontWeight.bold),
+                    fontSize: 20, color: darkGrey, fontWeight: FontWeight.bold),
               ),
             ),
             SizedBox(

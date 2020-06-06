@@ -6,6 +6,7 @@ import 'package:shinro_int2/screens/auth/login/login_page.dart';
 import 'package:shinro_int2/screens/faq_page.dart';
 import 'package:shinro_int2/screens/settings/settings_page.dart';
 import 'package:flutter/material.dart';
+import 'package:shinro_int2/constant/shared_preferences.dart' as SHARED_PREFERNCES;
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -116,7 +117,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Future<void> checkToken() async {
     final api = Provider.of<ApiService>(context, listen: false);
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String jwt = prefs.getString('token');
+    String jwt = prefs.getString(SHARED_PREFERNCES.token);
     print(jwt);
     if (jwt != null) {
       api.checkToken(jwt).then((it) async {
@@ -125,12 +126,16 @@ class _ProfilePageState extends State<ProfilePage> {
             logined = true;
             print(logined);
           });
+          prefs.setBool(SHARED_PREFERNCES.logined, true);
+          prefs.setString(SHARED_PREFERNCES.user_id, it.id);
+          prefs.setString(SHARED_PREFERNCES.display_name, it.displayName);
         }
       }).catchError((onError) {
         print("error" + onError.toString());
       });
     } else {
       logined = false;
+       prefs.setBool(SHARED_PREFERNCES.logined, false);
     }
   }
 }

@@ -1,8 +1,16 @@
 import 'package:shinro_int2/constant/app_properties.dart';
-import 'package:shinro_int2/screens/product/components/color_list.dart';
 import 'package:flutter/material.dart';
 
-class InfoUserItem extends StatelessWidget {
+class InfoUserItem extends StatefulWidget {
+  String display_name;
+
+  // In the constructor, require a Example.
+  InfoUserItem(this.display_name);
+  @override
+  _InfoUserItemPageState createState() => _InfoUserItemPageState();
+}
+
+class _InfoUserItemPageState extends State<InfoUserItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -42,7 +50,7 @@ class InfoUserItem extends StatelessWidget {
                                           image: new NetworkImage(
                                               "https://i.imgur.com/BoN9kdC.png")))),
                             ),
-                            new Text("Nguyễn Văn Tiến", textScaleFactor: 1.5)
+                            new Text(widget.display_name, textScaleFactor: 1.5)
                           ],
                         )),
                         Container(
@@ -91,21 +99,20 @@ class InfoUserItem extends StatelessWidget {
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
-                              'なし',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                    color: darkGrey,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18.0),
-                            ),
+                                    'なし',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: darkGrey,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18.0),
+                                  ),
                                 ),
                                 Text(
-                              'なし',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: darkGrey,
-                                  fontSize: 16.0),
-                            )
+                                  'なし',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      color: darkGrey, fontSize: 16.0),
+                                )
                               ],
                             ),
                             Column(
@@ -113,21 +120,20 @@ class InfoUserItem extends StatelessWidget {
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
-                              'なし',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                    color: darkGrey,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18.0),
-                            ),
+                                    'なし',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: darkGrey,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18.0),
+                                  ),
                                 ),
                                 Text(
-                              'なし',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: darkGrey,
-                                  fontSize: 16.0),
-                            )
+                                  'なし',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      color: darkGrey, fontSize: 16.0),
+                                )
                               ],
                             ),
                           ],

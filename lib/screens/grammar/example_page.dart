@@ -37,8 +37,7 @@ class _ExamplePageState extends State<ExamplePage> {
   }
 
   @override
-  void initState() {
-    //SystemChannels.textInput.invokeMethod('TextInput.hide');
+  void initState() {   
     super.initState();
   }
 
@@ -49,13 +48,6 @@ class _ExamplePageState extends State<ExamplePage> {
       onPointerUp: (e) {
       _dismissKeyboard(context);
     },
-      // on:() {
-      //   FocusScopeNode currentFocus = FocusScope.of(context);
-
-      //   if (!currentFocus.hasPrimaryFocus) {
-      //     currentFocus.unfocus();
-      //   }
-      // },
       child: Scaffold(
         body: Padding(
           padding: const EdgeInsets.all(8.0),

@@ -3,6 +3,7 @@ import 'package:shinro_int2/constant/app_properties.dart';
 import 'package:shinro_int2/screens/intro_page.dart';
 import 'package:flutter/material.dart';
 import 'package:shinro_int2/screens/main/main_page.dart';
+import 'package:shinro_int2/constant/shared_preferences.dart' as SHARED_PREFERNCES;
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -38,9 +39,9 @@ class _SplashScreenState extends State<SplashScreen>
   void navigationPage() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     //Return bool
-    bool checkValue = prefs.containsKey('firstLaunch');
+    bool checkValue = prefs.containsKey(SHARED_PREFERNCES.first_launch);
     if (checkValue) {
-      firstLaunch = prefs.getBool('firstLaunch');
+      firstLaunch = prefs.getBool(SHARED_PREFERNCES.first_launch);
     }
     if (firstLaunch) {
       Navigator.of(context)
@@ -48,7 +49,7 @@ class _SplashScreenState extends State<SplashScreen>
     } else {
       Navigator.of(context)
           .pushReplacement(MaterialPageRoute(builder: (_) => IntroPage()));
-      prefs.setBool('firstLaunch', true); //set true login one time
+      prefs.setBool(SHARED_PREFERNCES.first_launch, true); //set true login one time
     }
   }
 
@@ -76,7 +77,7 @@ class _SplashScreenState extends State<SplashScreen>
                         children: [
                           TextSpan(text: 'Powered by '),
                           TextSpan(
-                              text: 'shinroTeam',
+                              text: 'JaloTeam',
                               style: TextStyle(fontWeight: FontWeight.bold))
                         ]),
                   ),
