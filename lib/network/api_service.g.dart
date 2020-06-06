@@ -59,4 +59,23 @@ class _ApiService implements ApiService {
     final value = UserToken.fromJson(_result.data);
     return value;
   }
+
+  @override
+  checkToken(jwt) async {
+    ArgumentError.checkNotNull(jwt, 'jwt');
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final Response<Map<String, dynamic>> _result = await _dio.request(
+        'login-api',
+        queryParameters: queryParameters,
+        options: RequestOptions(
+            method: 'GET',
+            headers: <String, dynamic>{r'Authorization': jwt},
+            extra: _extra,
+            baseUrl: baseUrl),
+        data: _data);
+    final value = User.fromJson(_result.data);
+    return value;
+  }
 }

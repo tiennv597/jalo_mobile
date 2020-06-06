@@ -1,4 +1,7 @@
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shinro_int2/constant/app_properties.dart';
+import 'package:shinro_int2/network/api_service.dart';
 import 'package:shinro_int2/screens/auth/login/login_page.dart';
 import 'package:shinro_int2/screens/faq_page.dart';
 import 'package:shinro_int2/screens/settings/settings_page.dart';
@@ -10,6 +13,12 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  @override
+  void initState() {
+    super.initState();
+    checkToken();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -96,7 +105,19 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   void goToLoginPage() {
-    Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (_) => LoginPage()));
+    Navigator.of(context).push(MaterialPageRoute(builder: (_) => LoginPage()));
+  }
+
+  Future<void> checkToken() async {
+    final api = Provider.of<ApiService>(context, listen: false);
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String jwt = prefs.getString('token');
+    if (jwt != null) {
+      api.checkToken(jwt).then((it) async {
+        print(it);
+      }).catchError((onError) {
+        print("error" + onError.toString());
+      });
+    }
   }
 }
