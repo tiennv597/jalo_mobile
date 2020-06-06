@@ -1,6 +1,5 @@
 import 'package:shinro_int2/constant/app_properties.dart';
 import 'package:shinro_int2/screens/game/game_room_page.dart';
-import 'package:shinro_int2/screens/payment/unpaid_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'components/type_play_card.dart';

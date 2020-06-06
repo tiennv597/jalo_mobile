@@ -13,9 +13,11 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  bool logined;
   @override
   void initState() {
     super.initState();
+    logined = false;
     checkToken();
   }
 
@@ -37,14 +39,17 @@ class _ProfilePageState extends State<ProfilePage> {
                         stream: null,
                         builder: (context, snapshot) => Visibility(
                               visible: true,
-                              child: RaisedButton(
-                                child: Text("Sign in"),
-                                onPressed: goToLoginPage,
-                                color: Colors.red,
-                                textColor: Colors.yellow,
-                                padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                                splashColor: Colors.grey,
-                              ),
+                              child: logined
+                                  ? Text("data")
+                                  : RaisedButton(
+                                      child: Text("Sign in"),
+                                      onPressed: goToLoginPage,
+                                      color: Colors.red,
+                                      textColor: Colors.yellow,
+                                      padding:
+                                          EdgeInsets.fromLTRB(10, 10, 10, 10),
+                                      splashColor: Colors.grey,
+                                    ),
                               replacement: Column(
                                 children: <Widget>[
                                   CircleAvatar(
@@ -112,12 +117,20 @@ class _ProfilePageState extends State<ProfilePage> {
     final api = Provider.of<ApiService>(context, listen: false);
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String jwt = prefs.getString('token');
+    print(jwt);
     if (jwt != null) {
       api.checkToken(jwt).then((it) async {
-        print(it);
+        if (it.success) {
+          setState(() {
+            logined = true;
+            print(logined);
+          });
+        }
       }).catchError((onError) {
         print("error" + onError.toString());
       });
+    } else {
+      logined = false;
     }
   }
 }
