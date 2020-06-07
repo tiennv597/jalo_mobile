@@ -1,5 +1,4 @@
 import 'package:shinro_int2/constant/app_properties.dart';
-import 'package:shinro_int2/models/product.dart';
 import 'package:shinro_int2/constant/socket_constant.dart' as SOCKET_CONSTANT;
 import 'package:flutter/material.dart';
 import 'package:socket_io_client/socket_io_client.dart';

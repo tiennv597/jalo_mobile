@@ -35,13 +35,13 @@ class TabView extends StatelessWidget {
             SizedBox(
               height: 16.0,
             ),
-            Flexible(child: RoomVocabularyList())
+            Flexible(child: RoomVocabularyList(socket:socket))
           ]),
           Column(children: <Widget>[
             SizedBox(
               height: 16.0,
             ),
-            Flexible(child: RoomGrammarList())
+            Flexible(child: RoomGrammarList(socket:socket))
           ]),
         ]);
   }
