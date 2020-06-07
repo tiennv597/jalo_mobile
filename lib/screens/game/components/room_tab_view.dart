@@ -17,7 +17,7 @@ class TabView extends StatelessWidget {
   
     print(MediaQuery.of(context).size.height / 9);
     return TabBarView(
-        physics: NeverScrollableScrollPhysics(),
+        //physics: NeverScrollableScrollPhysics(),
         controller: tabController,
         children: <Widget>[
           Container(

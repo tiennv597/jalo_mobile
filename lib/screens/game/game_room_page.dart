@@ -2,7 +2,6 @@ import 'package:shinro_int2/constant/app_properties.dart';
 import 'package:shinro_int2/constant/socket_constant.dart' as SOCKET_CONSTANT;
 import 'package:shinro_int2/screens/game/game_start_page.dart';
 import 'package:shinro_int2/utils/custom_background.dart';
-import 'package:shinro_int2/models/product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'components/room_tab_view.dart';
@@ -13,26 +12,6 @@ class GameRoomPage extends StatefulWidget {
   _GameRoomPageState createState() => _GameRoomPageState();
 }
 
-String selectedTimeline = 'Weekly featured';
-
-List<Product> products = [
-  Product(
-      'assets/image.jpg',
-      'Skullcandy headset L325',
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut labore et dolore magna aliqua. Nec nam aliquam sem et tortor consequat id porta nibh. Orci porta non pulvinar neque laoreet suspendisse. Id nibh tortor id aliquet. Dui sapien eget mi proin. Viverra vitae congue eu consequat ac felis donec. Etiam dignissim diam quis enim lobortis scelerisque fermentum dui faucibus. Vulputate mi sit amet mauris commodo quis imperdiet. Vel fringilla est ullamcorper eget nulla facilisi etiam dignissim. Sit amet cursus sit amet dictum sit amet justo. Mattis pellentesque id nibh tortor. Sed blandit libero volutpat sed cras ornare arcu dui. Fermentum et sollicitudin ac orci phasellus. Ipsum nunc aliquet bibendum enim facilisis gravida. Viverra suspendisse potenti nullam ac tortor. Dapibus ultrices in iaculis nunc sed. Nisi porta lorem mollis aliquam ut porttitor leo a. Phasellus egestas tellus rutrum tellus pellentesque. Et malesuada fames ac turpis egestas maecenas pharetra convallis. Commodo ullamcorper a lacus vestibulum sed arcu non odio. Urna id volutpat lacus laoreet non curabitur gravida arcu ac. Eros in cursus turpis massa. Eget mauris pharetra et ultrices neque.',
-      102.99),
-  Product(
-      'assets/image.jpg',
-      'Skullcandy headset X25',
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut labore et dolore magna aliqua. Nec nam aliquam sem et tortor consequat id porta nibh. Orci porta non pulvinar neque laoreet suspendisse. Id nibh tortor id aliquet. Dui sapien eget mi proin. Viverra vitae congue eu consequat ac felis donec. Etiam dignissim diam quis enim lobortis scelerisque fermentum dui faucibus. Vulputate mi sit amet mauris commodo quis imperdiet. Vel fringilla est ullamcorper eget nulla facilisi etiam dignissim. Sit amet cursus sit amet dictum sit amet justo. Mattis pellentesque id nibh tortor. Sed blandit libero volutpat sed cras ornare arcu dui. Fermentum et sollicitudin ac orci phasellus. Ipsum nunc aliquet bibendum enim facilisis gravida. Viverra suspendisse potenti nullam ac tortor. Dapibus ultrices in iaculis nunc sed. Nisi porta lorem mollis aliquam ut porttitor leo a. Phasellus egestas tellus rutrum tellus pellentesque. Et malesuada fames ac turpis egestas maecenas pharetra convallis. Commodo ullamcorper a lacus vestibulum sed arcu non odio. Urna id volutpat lacus laoreet non curabitur gravida arcu ac. Eros in cursus turpis massa. Eget mauris pharetra et ultrices neque.',
-      55.99),
-  Product(
-      'assets/image.jpg',
-      'Blackzy PRO hedphones M003',
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut labore et dolore magna aliqua. Nec nam aliquam sem et tortor consequat id porta nibh. Orci porta non pulvinar neque laoreet suspendisse. Id nibh tortor id aliquet. Dui sapien eget mi proin. Viverra vitae congue eu consequat ac felis donec. Etiam dignissim diam quis enim lobortis scelerisque fermentum dui faucibus. Vulputate mi sit amet mauris commodo quis imperdiet. Vel fringilla est ullamcorper eget nulla facilisi etiam dignissim. Sit amet cursus sit amet dictum sit amet justo. Mattis pellentesque id nibh tortor. Sed blandit libero volutpat sed cras ornare arcu dui. Fermentum et sollicitudin ac orci phasellus. Ipsum nunc aliquet bibendum enim facilisis gravida. Viverra suspendisse potenti nullam ac tortor. Dapibus ultrices in iaculis nunc sed. Nisi porta lorem mollis aliquam ut porttitor leo a. Phasellus egestas tellus rutrum tellus pellentesque. Et malesuada fames ac turpis egestas maecenas pharetra convallis. Commodo ullamcorper a lacus vestibulum sed arcu non odio. Urna id volutpat lacus laoreet non curabitur gravida arcu ac. Eros in cursus turpis massa. Eget mauris pharetra et ultrices neque.',
-      152.99),
-];
-
 class _GameRoomPageState extends State<GameRoomPage>
     with TickerProviderStateMixin<GameRoomPage> {
   Socket socket;
@@ -40,7 +19,10 @@ class _GameRoomPageState extends State<GameRoomPage>
   TabController tabController;
   TextEditingController _tfRoomController;
   TextEditingController _tfPasswordController;
-  // TabController bottomTabController;
+  String level = 'N5';
+  String type = 'Chinese Word';
+  String quantity = '10';
+  String time = '10';
 
   @override
   void initState() {
@@ -63,7 +45,12 @@ class _GameRoomPageState extends State<GameRoomPage>
 
   void _joinRoomByName() {
     socket.emit('join-room', {_tfRoomController.text, "tien2"});
+    Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (_) => StrartGameScreen(socket: socket)));
+  }
 
+  void _createRoomByName() {
+    socket.emit('join-room', {_tfRoomController.text, "tien2"});
     Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (_) => StrartGameScreen(socket: socket)));
   }
@@ -73,7 +60,6 @@ class _GameRoomPageState extends State<GameRoomPage>
   }
 
   Future<String> _showSearchDialog(BuildContext context) async {
-    String teamName = '';
     return showDialog<String>(
       context: context,
       barrierDismissible:
@@ -90,18 +76,14 @@ class _GameRoomPageState extends State<GameRoomPage>
                   autofocus: true,
                   decoration: new InputDecoration(
                       labelText: 'Room Name', hintText: 'Enter room name'),
-                  onChanged: (value) {
-                    teamName = value;
-                  },
+                  onChanged: (value) {},
                 ),
                 TextField(
                   controller: _tfPasswordController,
                   autofocus: true,
                   decoration: new InputDecoration(
                       labelText: 'Password', hintText: 'Enter password'),
-                  onChanged: (value) {
-                    teamName = value;
-                  },
+                  onChanged: (value) {},
                 ),
               ],
             ),
@@ -110,10 +92,184 @@ class _GameRoomPageState extends State<GameRoomPage>
             FlatButton(
               child: Text('Cancel'),
               onPressed: () {
-                Navigator.of(context).pop(teamName);
+                Navigator.of(context).pop();
               },
             ),
             FlatButton(child: Text('Ok'), onPressed: _joinRoomByName),
+          ],
+        );
+      },
+    );
+  }
+
+  //dialog creatr room
+  Future<String> _showCreateDialog(BuildContext context) async {
+    return showDialog<String>(
+      context: context,
+      barrierDismissible:
+          false, // dialog is dismissible with a tap on the barrier
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Create Room'),
+          content: StatefulBuilder(
+              builder: (BuildContext context, StateSetter setState) {
+            return Container(
+              height: 300,
+              width: 300,
+              child: new Column(
+                children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      Container(
+                        width: 120,
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 8, right: 32),
+                          child: Text("Level : "),
+                        ),
+                      ),
+                      DropdownButton<String>(
+                        dropdownColor: Colors.white,
+                        value: level,
+                        icon: Icon(Icons.arrow_downward),
+                        iconSize: 16,
+                        elevation: 16,
+                        style: TextStyle(color: Colors.deepPurple),
+                        underline: Container(
+                          height: 1,
+                          color: Colors.deepPurpleAccent,
+                        ),
+                        onChanged: (String newValue) {
+                          setState(() {
+                            level = newValue;
+                          });
+                        },
+                        items: <String>['N5', 'N4', 'N3', 'N2', 'N1']
+                            .map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Container(
+                        width: 120,
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 8),
+                          child: Text("Quantity : "),
+                        ),
+                      ),
+                      DropdownButton<String>(
+                        dropdownColor: Colors.white,
+                        value: quantity,
+                        icon: Icon(Icons.arrow_downward),
+                        iconSize: 16,
+                        elevation: 16,
+                        style: TextStyle(color: Colors.deepPurple),
+                        underline: Container(
+                          height: 1,
+                          color: Colors.deepPurpleAccent,
+                        ),
+                        onChanged: (String newValue) {
+                          setState(() {
+                            quantity = newValue;
+                          });
+                        },
+                        items: <String>['5', '10', '15', '20', '25']
+                            .map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Container(
+                        width: 120,
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 8, right: 32),
+                          child: Text("Time : "),
+                        ),
+                      ),
+                      DropdownButton<String>(
+                        dropdownColor: Colors.white,
+                        value: time,
+                        icon: Icon(Icons.arrow_downward),
+                        iconSize: 16,
+                        elevation: 16,
+                        style: TextStyle(color: Colors.deepPurple),
+                        underline: Container(
+                          height: 1,
+                          color: Colors.deepPurpleAccent,
+                        ),
+                        onChanged: (String newValue) {
+                          setState(() {
+                            time = newValue;
+                          });
+                        },
+                        items: <String>['5', '10', '15', '20', '25']
+                            .map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Container(
+                        width: 120,
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 8, right: 32),
+                          child: Text("Type : "),
+                        ),
+                      ),
+                      DropdownButton<String>(
+                        dropdownColor: Colors.white,
+                        value: type,
+                        icon: Icon(Icons.arrow_downward),
+                        iconSize: 16,
+                        elevation: 16,
+                        style: TextStyle(color: Colors.deepPurple),
+                        underline: Container(
+                          height: 1,
+                          color: Colors.deepPurpleAccent,
+                        ),
+                        onChanged: (String newValue) {
+                          setState(() {
+                            type = newValue;
+                          });
+                        },
+                        items: <String>['Chinese Word', 'Vocabulary', 'Grammar']
+                            .map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            );
+          }),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            FlatButton(child: Text('Ok'), onPressed: _createRoomByName),
           ],
         );
       },
@@ -162,7 +318,10 @@ class _GameRoomPageState extends State<GameRoomPage>
                     padding: const EdgeInsets.all(8.0),
                     child: RaisedButton(
                       child: Text("Create"),
-                      onPressed: () {},
+                      onPressed: () async {
+                        // final String currentTeam =
+                        await _showCreateDialog(context);
+                      },
                       color: Colors.red,
                       textColor: Colors.yellow,
                       padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
@@ -180,13 +339,13 @@ class _GameRoomPageState extends State<GameRoomPage>
   Widget build(BuildContext context) {
     Widget tabBar = TabBar(
       tabs: [
-        Tab(text: 'Hán tự'),
-        Tab(text: 'Từ Vựng'),
-        Tab(text: 'Ngữ Pháp'),
+        Tab(text: 'Chinese Word'),
+        Tab(text: 'Vocabulary'),
+        Tab(text: 'Grammar'),
       ],
-      labelStyle: TextStyle(fontSize: 36.0),
+      labelStyle: TextStyle(fontSize: 24.0),
       unselectedLabelStyle: TextStyle(
-        fontSize: 24.0,
+        fontSize: 18.0,
       ),
       labelColor: darkGrey,
       unselectedLabelColor: Color.fromRGBO(0, 0, 0, 0.5),
