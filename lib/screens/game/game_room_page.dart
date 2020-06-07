@@ -49,7 +49,7 @@ class _GameRoomPageState extends State<GameRoomPage>
     _tfPasswordController = new TextEditingController();
     //Creating the socket
     socket = io(
-        SOCKET_CONSTANT.basURL + SOCKET_CONSTANT.nameSpase, <String, dynamic>{
+        SOCKET_CONSTANT.basURL + SOCKET_CONSTANT.default_ns, <String, dynamic>{
       'transports': ['websocket'],
       'extraHeaders': {'foo': 'bar'} // optional
     });
@@ -66,6 +66,10 @@ class _GameRoomPageState extends State<GameRoomPage>
 
     Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (_) => StrartGameScreen(socket: socket)));
+  }
+
+  void _getRoom() {
+    //socket.emit(SOCKET_CONSTANT.client_get_rooms, {});
   }
 
   Future<String> _showSearchDialog(BuildContext context) async {
@@ -147,7 +151,7 @@ class _GameRoomPageState extends State<GameRoomPage>
                     padding: const EdgeInsets.all(8.0),
                     child: RaisedButton(
                       child: Text("Play Now"),
-                      onPressed: () {},
+                      onPressed: _getRoom,
                       color: Colors.red,
                       textColor: Colors.yellow,
                       padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
@@ -191,7 +195,7 @@ class _GameRoomPageState extends State<GameRoomPage>
     );
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize:Size.fromHeight(40.0), // here the desired height
+        preferredSize: Size.fromHeight(40.0), // here the desired height
         child: AppBar(
           iconTheme: IconThemeData(
             color: Colors.black,
@@ -220,6 +224,7 @@ class _GameRoomPageState extends State<GameRoomPage>
                 },
                 body: TabView(
                   tabController: tabController,
+                  socket: socket,
                 ),
               ),
               SizedBox(

@@ -30,10 +30,10 @@ class _InfoUserItemPageState extends State<InfoUserItem> {
               child: Column(
                 children: <Widget>[
                   Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Center(
+                        Container(
                             child: new Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -57,6 +57,7 @@ class _InfoUserItemPageState extends State<InfoUserItem> {
                           padding: EdgeInsets.only(left: 24, right: 30),
                           width: 180,
                           child: Column(
+                            
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Padding(
