@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'components/room_tab_view.dart';
 import 'package:socket_io_client/socket_io_client.dart';
+import 'package:shinro_int2/models/game/info_room.dart';
 
 class GameRoomPage extends StatefulWidget {
   @override
@@ -43,16 +44,17 @@ class _GameRoomPageState extends State<GameRoomPage>
     super.initState();
   }
 
-  void _joinRoomByName() {
-    socket.emit('join-room', {_tfRoomController.text, "tien2"});
-    Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) => StrartGameScreen(socket: socket)));
-  }
+  // void _joinRoomByName() {
+  //   socket.emit('join-room', {_tfRoomController.text, "tien2"});
+  //   Navigator.of(context).pushReplacement(
+  //       MaterialPageRoute(builder: (_) => StrartGameScreen(socket: socket)));
+  // }
 
   void _createRoomByName() {
-    socket.emit('join-room', {_tfRoomController.text, "tien2"});
+    InfoRoom infoRoom = new InfoRoom(level, type, quantity, time);
+    //socket.emit('join-room', {_tfRoomController.text, "tien2"});
     Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) => StrartGameScreen(socket: socket)));
+        MaterialPageRoute(builder: (_) => StrartGameScreen(infoRoom)));
   }
 
   void _getRoom() {
@@ -95,7 +97,7 @@ class _GameRoomPageState extends State<GameRoomPage>
                 Navigator.of(context).pop();
               },
             ),
-            FlatButton(child: Text('Ok'), onPressed: _joinRoomByName),
+            FlatButton(child: Text('Ok'), onPressed: (){}),
           ],
         );
       },

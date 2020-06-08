@@ -21,8 +21,7 @@ class _GameHomePageState extends State<GameHomePage> {
   @override
   void initState() {
     super.initState();
-    logined = false;
-    //display_name="";
+    logined = false; 
     checkLogin();
   }
 

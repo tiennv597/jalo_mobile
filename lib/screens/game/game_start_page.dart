@@ -10,11 +10,12 @@ import 'package:shinro_int2/screens/game/game_quiz_page.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 import 'package:shinro_int2/constant/socket_constant.dart' as SOCKET_CONSTANT;
 import 'components/user_item.dart';
+import 'package:shinro_int2/models/game/info_room.dart';
 
 class StrartGameScreen extends StatefulWidget {
-  Socket socket;
+  InfoRoom infoRoom;
 
-  StrartGameScreen({this.socket});
+  StrartGameScreen(this.infoRoom);
   @override
   StrartGameScreenState createState() {
     return new StrartGameScreenState();
@@ -25,6 +26,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
   //text filde send messga
   final TextEditingController _textEditingController =
       new TextEditingController();
+  String nsp = '';
   //on or off button send
   bool _isComposingMessage = false;
   bool _visibilityBtn = false; //Hide button send
@@ -34,6 +36,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
   //focus TextField message
   FocusNode _focus = new FocusNode();
   UserListModal userListModal = new UserListModal();
+  Socket socket;
 // data test
   List<Category> categories = [
     Category(
@@ -95,16 +98,54 @@ class StrartGameScreenState extends State<StrartGameScreen> {
   @override
   void initState() {
     super.initState();
-    _focus.addListener(_onFocusChange);
-    _controller = ScrollController();
-    _controller.addListener(_scrollListener);
 
-    widget.socket.on(SOCKET_CONSTANT.server_send_message, (data) {
+    switch (widget.infoRoom.type) {
+      case 'Chinese Word':
+        {
+          nsp = SOCKET_CONSTANT.china_word_ns;
+        }
+        break;
+
+      case 'Vocabulary':
+        {
+          nsp = SOCKET_CONSTANT.vocabulary_ns;
+        }
+        break;
+      case 'Grammar':
+        {
+          nsp = SOCKET_CONSTANT.grammar_ns;
+        }
+        break;
+
+      default:
+        {}
+        break;
+    }
+
+    socket = io(SOCKET_CONSTANT.basURL + nsp, <String, dynamic>{
+      'transports': ['websocket'],
+      'extraHeaders': {'foo': 'bar'} // optional
+    });
+
+    socket.emit(SOCKET_CONSTANT.creat_room, {
+      widget.infoRoom.type,
+      widget.infoRoom.level,
+      widget.infoRoom.quantity
+    });
+
+    socket.on(SOCKET_CONSTANT.connect, (_) {
+      print('connect');
+    });
+
+    socket.on(SOCKET_CONSTANT.server_send_message, (data) {
       // Parsing JSON to Jobject
       Message message = Message.fromJson(json.decode(data));
       ChatMessage chatMessage = new ChatMessage(
         text: message.message,
       );
+      _focus.addListener(_onFocusChange);
+      _controller = ScrollController();
+      _controller.addListener(_scrollListener);
       //add message to list
       setState(() {
         _messages.insert(0, chatMessage);
@@ -133,6 +174,11 @@ class StrartGameScreenState extends State<StrartGameScreen> {
     });
   }
 
+  void _getdRoom() {
+    socket.emit(SOCKET_CONSTANT.creat_room, {widget.infoRoom});
+    print("object");
+  }
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIOverlays([]);
@@ -158,7 +204,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
                 // this name will be used to open a particular JSON file
                 // for a particular language
                 builder: (context) =>
-                    GameQuizPage(socket: widget.socket, mydata: dataquiz),
+                    GameQuizPage(socket: socket, mydata: dataquiz),
               ));
             },
             label: Text('Start'),
@@ -314,7 +360,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.only(right: 24),
+            padding: const EdgeInsets.only(right: 8),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -322,21 +368,21 @@ class StrartGameScreenState extends State<StrartGameScreen> {
                 Padding(
                   padding: const EdgeInsets.only(top: 8, bottom: 8),
                   child: Text(
-                    'Phòng: 123456',
+                    'Phòng: 5545 ',
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 8, bottom: 8),
                   child: Text(
-                    'Số câu: 15',
+                    'Số câu: ' + widget.infoRoom.quantity,
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 8, bottom: 8),
                   child: Text(
-                    'Thời gian: 10 giây/ câu',
+                    'Thời gian: ' + widget.infoRoom.time + ' giây/ câu',
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
@@ -344,7 +390,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 24),
+            padding: const EdgeInsets.only(left: 8),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -352,15 +398,15 @@ class StrartGameScreenState extends State<StrartGameScreen> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    'Hán tự: N5',
-                    style: TextStyle(color: Colors.white, fontSize: 25),
+                    widget.infoRoom.type + ':' + widget.infoRoom.level,
+                    style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: RaisedButton(
                     child: Text("Setting"),
-                    onPressed: () {},
+                    onPressed: _getdRoom,
                     color: Colors.red,
                     textColor: Colors.yellow,
                     padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
@@ -377,7 +423,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
 
   void _textMessageSubmitted(String value) {
     //send massage
-    widget.socket.emit(SOCKET_CONSTANT.client_send_message,
+    socket.emit(SOCKET_CONSTANT.client_send_message,
         {"tttt", "tien2", _textEditingController.text});
     //remove focus
     FocusScope.of(context).requestFocus(new FocusNode());
