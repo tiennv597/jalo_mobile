@@ -34,6 +34,8 @@ const String server_send_rooms = 'server_send_rooms';
 const String client_get_rooms = 'client_get_rooms';
 const String join_room = 'join_room';
 const String creat_room = 'creat_room';
+const String server_send_room = 'server_send_room';
+const String leave = 'leave';
 
 //const String message = 'message';
 

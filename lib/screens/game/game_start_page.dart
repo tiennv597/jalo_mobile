@@ -27,6 +27,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
   final TextEditingController _textEditingController =
       new TextEditingController();
   String nsp = '';
+  String id_room = '';
   //on or off button send
   bool _isComposingMessage = false;
   bool _visibilityBtn = false; //Hide button send
@@ -76,28 +77,31 @@ class StrartGameScreenState extends State<StrartGameScreen> {
       'assets/image.jpg',
     ),
   ];
-  List dataquiz = [
-    {
-      "1":
-          "What Will Be The Output Of the Following Code ?\na = \"p\" * 3\nprint(a)",
-      "2": "Which function finds out the Variable type in Python ?",
-      "3":
-          "Which of the following keyword is used to define a function in Python ?",
-      "4": "Which of the following is a print Function in Python ?",
-      "5": "Which function finds out the Variable type in Python ?"
-    },
-    {
-      "1": {"a": "pp", "b": "ppp", "c": "3p", "d": "p3"},
-      "2": {"a": "typedef", "b": "typeof", "c": "type", "d": "find"},
-      "3": {"a": "func", "b": "def", "c": "void", "d": "function"},
-      "4": {"a": "cout", "b": "print", "c": "println", "d": "stderr"},
-      "5": {"a": "typedef", "b": "typeof", "c": "type", "d": "find"}
-    },
-    {"1": "ppp", "2": "type", "3": "def", "4": "print", "5": "type"}
-  ];
+  // List dataquiz = [
+  //   {
+  //     "1":
+  //         "What Will Be The Output Of the Following Code ?\na = \"p\" * 3\nprint(a)",
+  //     "2": "Which function finds out the Variable type in Python ?",
+  //     "3":
+  //         "Which of the following keyword is used to define a function in Python ?",
+  //     "4": "Which of the following is a print Function in Python ?",
+  //     "5": "Which function finds out the Variable type in Python ?"
+  //   },
+  //   {
+  //     "1": {"a": "pp", "b": "ppp", "c": "3p", "d": "p3"},
+  //     "2": {"a": "typedef", "b": "typeof", "c": "type", "d": "find"},
+  //     "3": {"a": "func", "b": "def", "c": "void", "d": "function"},
+  //     "4": {"a": "cout", "b": "print", "c": "println", "d": "stderr"},
+  //     "5": {"a": "typedef", "b": "typeof", "c": "type", "d": "find"}
+  //   },
+  //   {"1": "ppp", "2": "type", "3": "def", "4": "print", "5": "type"}
+  // ];
   @override
   void initState() {
     super.initState();
+    _focus.addListener(_onFocusChange);
+    _controller = ScrollController();
+    _controller.addListener(_scrollListener);
 
     switch (widget.infoRoom.type) {
       case 'Chinese Word':
@@ -126,26 +130,33 @@ class StrartGameScreenState extends State<StrartGameScreen> {
       'transports': ['websocket'],
       'extraHeaders': {'foo': 'bar'} // optional
     });
-
-    socket.emit(SOCKET_CONSTANT.creat_room, {
-      widget.infoRoom.type,
-      widget.infoRoom.level,
-      widget.infoRoom.quantity
-    });
+    //set create room or join room
+    if (widget.infoRoom.id == '') {
+      socket.emit(SOCKET_CONSTANT.creat_room);
+    } else {
+      socket.emit(SOCKET_CONSTANT.join_room, {
+        // widget.infoRoom.type,
+        // widget.infoRoom.level,
+        // widget.infoRoom.quantity
+      });
+    }
 
     socket.on(SOCKET_CONSTANT.connect, (_) {
       print('connect');
     });
 
+    socket.on(SOCKET_CONSTANT.server_send_room, (data) {
+      setState(() {
+        id_room = data.toString();
+      });
+    });
     socket.on(SOCKET_CONSTANT.server_send_message, (data) {
       // Parsing JSON to Jobject
       Message message = Message.fromJson(json.decode(data));
       ChatMessage chatMessage = new ChatMessage(
         text: message.message,
       );
-      _focus.addListener(_onFocusChange);
-      _controller = ScrollController();
-      _controller.addListener(_scrollListener);
+
       //add message to list
       setState(() {
         _messages.insert(0, chatMessage);
@@ -204,7 +215,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
                 // this name will be used to open a particular JSON file
                 // for a particular language
                 builder: (context) =>
-                    GameQuizPage(socket: socket, mydata: dataquiz),
+                    GameQuizPage(socket: socket),
               ));
             },
             label: Text('Start'),
@@ -368,7 +379,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
                 Padding(
                   padding: const EdgeInsets.only(top: 8, bottom: 8),
                   child: Text(
-                    'Phòng: 5545 ',
+                    'Phòng: ' + id_room,
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
@@ -441,5 +452,12 @@ class StrartGameScreenState extends State<StrartGameScreen> {
 
   void _showListUser() {
     userListModal.mainBottomSheet(context, categories);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    print("close");
+    socket.emit(SOCKET_CONSTANT.leave, id_room);
   }
 }

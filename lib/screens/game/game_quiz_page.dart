@@ -11,10 +11,10 @@ import 'package:socket_io_client/socket_io_client.dart';
 import 'package:shinro_int2/constant/socket_constant.dart' as SOCKET_CONSTANT;
 
 class GameQuizPage extends StatefulWidget {
-  var mydata;
+  //var mydata;
   Socket socket;
 
-  GameQuizPage({this.socket, this.mydata});
+  GameQuizPage({this.socket});
 
   @override
   GameQuizPageState createState() {
