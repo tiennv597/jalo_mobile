@@ -417,6 +417,7 @@ class _GameRoomPageState extends State<GameRoomPage>
                   cw: cw, // list rooms chinese word
                   vc: vc, // list rooms vocabulary
                   gr: gr, // list rooms grammar
+                  socket: socket,//sockets
                 ),
               ),
               SizedBox(

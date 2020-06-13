@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:shinro_int2/screens/game/components/rooms_list.dart';
+import 'package:socket_io_client/socket_io_client.dart';
 
 class TabView extends StatelessWidget {
   final TabController tabController;
+  Socket socket;
   List cw;
   List vc;
   List gr;
-  TabView({Key key, this.tabController, this.cw, this.vc, this.gr})
+  TabView({Key key, this.tabController, this.cw, this.vc, this.gr, this.socket})
       : super(key: key);
 
   @override
@@ -23,7 +25,12 @@ class TabView extends StatelessWidget {
                 SizedBox(
                   height: 16.0,
                 ),
-                Flexible(child: RoomsList(cw: cw)),
+                Flexible(
+                    child: RoomsList(
+                  rooms: cw,
+                  type: "Chinese Word",
+                  socket: socket,
+                )),
               ],
             ),
           ),
@@ -31,13 +38,23 @@ class TabView extends StatelessWidget {
             SizedBox(
               height: 16.0,
             ),
-            Flexible(child: RoomsList(cw: cw))
+            Flexible(
+                child: RoomsList(
+              rooms: cw,
+              type: "Vocabulary",
+              socket: socket,
+            ))
           ]),
           Column(children: <Widget>[
             SizedBox(
               height: 16.0,
             ),
-            Flexible(child: RoomsList(cw: cw))
+            Flexible(
+                child: RoomsList(
+              rooms: cw,
+              type: "Grammar",
+              socket: socket,
+            ))
           ]),
         ]);
   }
