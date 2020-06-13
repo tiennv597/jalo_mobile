@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shinro_int2/screens/game/components/room_cn_word_list.dart';
-import 'package:shinro_int2/screens/game/components/room_vocabulary_list.dart';
-import 'package:shinro_int2/screens/game/components/room_grammar_list.dart';
-import 'package:socket_io_client/socket_io_client.dart';
+import 'package:shinro_int2/screens/game/components/rooms_list.dart';
 
 class TabView extends StatelessWidget {
   final TabController tabController;
@@ -26,7 +23,7 @@ class TabView extends StatelessWidget {
                 SizedBox(
                   height: 16.0,
                 ),
-                Flexible(child: RoomCnWordList(cw: cw)),
+                Flexible(child: RoomsList(cw: cw)),
               ],
             ),
           ),
@@ -34,13 +31,13 @@ class TabView extends StatelessWidget {
             SizedBox(
               height: 16.0,
             ),
-            Flexible(child: RoomVocabularyList(cw: cw))
+            Flexible(child: RoomsList(cw: cw))
           ]),
           Column(children: <Widget>[
             SizedBox(
               height: 16.0,
             ),
-            Flexible(child: RoomGrammarList(cw: cw))
+            Flexible(child: RoomsList(cw: cw))
           ]),
         ]);
   }
