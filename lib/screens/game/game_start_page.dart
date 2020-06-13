@@ -77,25 +77,6 @@ class StrartGameScreenState extends State<StrartGameScreen> {
       'assets/image.jpg',
     ),
   ];
-  // List dataquiz = [
-  //   {
-  //     "1":
-  //         "What Will Be The Output Of the Following Code ?\na = \"p\" * 3\nprint(a)",
-  //     "2": "Which function finds out the Variable type in Python ?",
-  //     "3":
-  //         "Which of the following keyword is used to define a function in Python ?",
-  //     "4": "Which of the following is a print Function in Python ?",
-  //     "5": "Which function finds out the Variable type in Python ?"
-  //   },
-  //   {
-  //     "1": {"a": "pp", "b": "ppp", "c": "3p", "d": "p3"},
-  //     "2": {"a": "typedef", "b": "typeof", "c": "type", "d": "find"},
-  //     "3": {"a": "func", "b": "def", "c": "void", "d": "function"},
-  //     "4": {"a": "cout", "b": "print", "c": "println", "d": "stderr"},
-  //     "5": {"a": "typedef", "b": "typeof", "c": "type", "d": "find"}
-  //   },
-  //   {"1": "ppp", "2": "type", "3": "def", "4": "print", "5": "type"}
-  // ];
   @override
   void initState() {
     super.initState();
@@ -214,8 +195,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
                 // in changelog 1 we will pass the langname name to ther other widget class
                 // this name will be used to open a particular JSON file
                 // for a particular language
-                builder: (context) =>
-                    GameQuizPage(socket: socket),
+                builder: (context) => GameQuizPage(socket: socket),
               ));
             },
             label: Text('Start'),
@@ -435,7 +415,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
   void _textMessageSubmitted(String value) {
     //send massage
     socket.emit(SOCKET_CONSTANT.client_send_message,
-        {"tttt", "tien2", _textEditingController.text});
+        {id_room, "tien2", _textEditingController.text});
     //remove focus
     FocusScope.of(context).requestFocus(new FocusNode());
 
@@ -445,10 +425,6 @@ class StrartGameScreenState extends State<StrartGameScreen> {
   }
 
   void _signOut() {}
-
-  // void _startGame() {
-  //   Navigator.of(context).push(MaterialPageRoute(builder: (_) => MainPage()));
-  // }
 
   void _showListUser() {
     userListModal.mainBottomSheet(context, categories);

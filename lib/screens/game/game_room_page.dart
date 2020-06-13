@@ -20,7 +20,8 @@ class _GameRoomPageState extends State<GameRoomPage>
   TabController tabController;
   TextEditingController _tfRoomController;
   TextEditingController _tfPasswordController;
-  String id='';
+  String id = '';
+  String password = '';
   String level = 'N5';
   String type = 'Chinese Word';
   String quantity = '10';
@@ -45,14 +46,17 @@ class _GameRoomPageState extends State<GameRoomPage>
     super.initState();
   }
 
-  // void _joinRoomByName() {
-  //   socket.emit('join-room', {_tfRoomController.text, "tien2"});
-  //   Navigator.of(context).pushReplacement(
-  //       MaterialPageRoute(builder: (_) => StrartGameScreen(socket: socket)));
-  // }
+  void _strartGameScreen() {
+    // socket.emit(SOCKET_CONSTANT.join_room,
+    //     {_tfRoomController.text, _tfPasswordController});
+    InfoRoom infoRoom =
+        InfoRoom(id, _tfPasswordController.text, level, type, quantity, time);
+    Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (_) => StrartGameScreen(infoRoom)));
+  }
 
   void _createRoomByName() {
-    InfoRoom infoRoom = new InfoRoom(id,level, type, quantity, time);
+    InfoRoom infoRoom = new InfoRoom(id, password, level, type, quantity, time);
     //socket.emit('join-room', {_tfRoomController.text, "tien2"});
     Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (_) => StrartGameScreen(infoRoom)));
@@ -98,7 +102,7 @@ class _GameRoomPageState extends State<GameRoomPage>
                 Navigator.of(context).pop();
               },
             ),
-            FlatButton(child: Text('Ok'), onPressed: (){}),
+            FlatButton(child: Text('Ok'), onPressed: _strartGameScreen),
           ],
         );
       },
