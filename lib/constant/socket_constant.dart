@@ -42,3 +42,5 @@ const String leave = 'leave';
 //event test
 
 const String get_room = 'get_room';
+const String check_info_room = 'check_info_room';
+const String result_check_room='result_check_room';

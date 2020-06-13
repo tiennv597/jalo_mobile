@@ -1,6 +1,8 @@
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:shinro_int2/constant/app_properties.dart';
 import 'package:shinro_int2/constant/socket_constant.dart' as SOCKET_CONSTANT;
 import 'package:flutter/material.dart';
+import 'package:shinro_int2/screens/product/product_page.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 
 class RoomCnWordList extends StatefulWidget {
@@ -14,10 +16,17 @@ class RoomCnWordList extends StatefulWidget {
 }
 
 class RoomCnWordListState extends State<RoomCnWordList> {
+  List<dynamic> rooms = [];
   void initState() {
     super.initState();
 
-    widget.socket.emit(SOCKET_CONSTANT.client_get_rooms, {});
+    widget.socket.emit(SOCKET_CONSTANT.client_get_rooms, 'cw');
+    widget.socket.on(SOCKET_CONSTANT.server_send_rooms, (data) {
+      setState(() {
+        //rooms = data;
+        print(data);
+      });
+    });
   }
 
   @override
@@ -47,41 +56,38 @@ class RoomCnWordListState extends State<RoomCnWordList> {
             ],
           ),
         ),
-        //     Flexible(
-        //       child: Container(
-        //         padding: EdgeInsets.only(top: 16.0, right: 16.0, left: 16.0),
-        //         child: StaggeredGridView.countBuilder(
-        // physics: NeverScrollableScrollPhysics(),
-        //           padding: EdgeInsets.zero,
-        //           crossAxisCount: 4,
-        //           itemCount: products.length,
-        //           itemBuilder: (BuildContext context, int index) => new ClipRRect(
-        //                 borderRadius: BorderRadius.all(Radius.circular(5.0)),
-        //                 child: InkWell(
-        //                   onTap: () => Navigator.of(context).push(
-        //                       MaterialPageRoute(builder: (_) => ProductPage(product:products[index]))),
-        //                   child: Container(
-        //                       decoration: BoxDecoration(
-        //                         gradient: RadialGradient(
-        //                             colors: [Colors.grey[500], Colors.grey[700]],
-        //                             center: Alignment(0, 0),
-        //                             radius: 0.6,
-        //                             focal: Alignment(0, 0),
-        //                             focalRadius: 0.1),
-        //                       ),
-        //                       // child: Hero(
-        //                       //     tag: products[index].image,
-        //                       //     child: Image.asset(products[index].image))
-        //                           ),
-        //                 ),
-        //               ),
-        //           staggeredTileBuilder: (int index) =>
-        //               new StaggeredTile.count(2, index.isEven ? 3 : 2),
-        //           mainAxisSpacing: 4.0,
-        //           crossAxisSpacing: 4.0,
-        //         ),
-        //       ),
-        //     ),
+        Flexible(
+          child: Container(
+            padding: EdgeInsets.only(top: 16.0, right: 16.0, left: 16.0),
+            child: ListView.builder(
+              physics: NeverScrollableScrollPhysics(),
+              padding: EdgeInsets.zero,
+              itemCount: rooms.length,
+              itemBuilder: (BuildContext context, int index) => new ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                child: InkWell(
+                  onTap: () {},
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                        height: 60,
+                        decoration: BoxDecoration(
+                          gradient: RadialGradient(
+                              colors: [Colors.grey[500], Colors.grey[700]],
+                              center: Alignment(0, 0),
+                              radius: 0.6,
+                              focal: Alignment(0, 0),
+                              focalRadius: 0.1),
+                        ),
+                        child: Text(
+                          rooms[index],
+                        )),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
       ],
     );
   }

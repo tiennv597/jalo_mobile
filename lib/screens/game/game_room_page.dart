@@ -42,6 +42,10 @@ class _GameRoomPageState extends State<GameRoomPage>
       print('connect');
       socket.emit('msg', 'test');
     });
+    socket.on(SOCKET_CONSTANT.result_check_room, (data) {
+      print(data);
+      
+    });
     socket.connect();
     super.initState();
   }
@@ -51,8 +55,14 @@ class _GameRoomPageState extends State<GameRoomPage>
     //     {_tfRoomController.text, _tfPasswordController});
     InfoRoom infoRoom =
         InfoRoom(id, _tfPasswordController.text, level, type, quantity, time);
-    Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) => StrartGameScreen(infoRoom)));
+    socket.emit(SOCKET_CONSTANT.check_info_room, {
+      id,
+      password,
+    });
+    
+
+    // Navigator.of(context).pushReplacement(
+    //     MaterialPageRoute(builder: (_) => StrartGameScreen(infoRoom)));
   }
 
   void _createRoomByName() {

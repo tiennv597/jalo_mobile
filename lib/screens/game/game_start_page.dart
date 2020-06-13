@@ -116,11 +116,11 @@ class StrartGameScreenState extends State<StrartGameScreen> {
       socket.emit(SOCKET_CONSTANT.creat_room);
     } else {
       socket.emit(SOCKET_CONSTANT.join_room, {
-        // widget.infoRoom.type,
-        // widget.infoRoom.level,
-        // widget.infoRoom.quantity
+        widget.infoRoom.id,
+        widget.infoRoom.password,
       });
     }
+    
 
     socket.on(SOCKET_CONSTANT.connect, (_) {
       print('connect');
