@@ -23,20 +23,17 @@ class StrartGameScreen extends StatefulWidget {
 }
 
 class StrartGameScreenState extends State<StrartGameScreen> {
-  //text filde send messga
   final TextEditingController _textEditingController =
-      new TextEditingController();
-  String nsp = '';
-  String id_room = '';
-  //on or off button send
-  bool _isComposingMessage = false;
+      new TextEditingController(); //text filde send messga
+  String nsp = ''; // name space
+  String id_room = ''; //id room current
+  bool _isComposingMessage = false; //on or off button send
   bool _visibilityBtn = false; //Hide button send
   bool _visibility = true; // Hide or show [send icon, ...]
   ScrollController _controller;
-  final List<ChatMessage> _messages = <ChatMessage>[];
-  //focus TextField message
-  FocusNode _focus = new FocusNode();
-  UserListModal userListModal = new UserListModal();
+  final List<ChatMessage> _messages = <ChatMessage>[]; // list messege chat
+  FocusNode _focus = new FocusNode(); //focus TextField message
+  UserListModal userListModal = new UserListModal(); // list user of room
   Socket socket;
 // data test
   List<Category> categories = [
@@ -111,16 +108,18 @@ class StrartGameScreenState extends State<StrartGameScreen> {
       'transports': ['websocket'],
       'extraHeaders': {'foo': 'bar'} // optional
     });
-    //set create room or join room
+    //judgment create room or join room
     if (widget.infoRoom.id == '') {
       socket.emit(SOCKET_CONSTANT.creat_room);
     } else {
+      setState(() {
+        id_room = widget.infoRoom.id;
+      });
       socket.emit(SOCKET_CONSTANT.join_room, {
         widget.infoRoom.id,
         widget.infoRoom.password,
       });
     }
-    
 
     socket.on(SOCKET_CONSTANT.connect, (_) {
       print('connect');
@@ -137,7 +136,6 @@ class StrartGameScreenState extends State<StrartGameScreen> {
       ChatMessage chatMessage = new ChatMessage(
         text: message.message,
       );
-
       //add message to list
       setState(() {
         _messages.insert(0, chatMessage);
@@ -158,7 +156,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
     }
   }
 
-//show or hide when focus text TextField send mesage
+  //show or hide when focus text TextField send mesage
   void _onFocusChange() {
     setState(() {
       _visibility = !_visibility;
@@ -169,6 +167,12 @@ class StrartGameScreenState extends State<StrartGameScreen> {
   void _getdRoom() {
     socket.emit(SOCKET_CONSTANT.creat_room, {widget.infoRoom});
     print("object");
+  }
+
+  void _strart() {
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => GameQuizPage(socket: socket),
+    ));
   }
 
   @override
@@ -187,20 +191,40 @@ class StrartGameScreenState extends State<StrartGameScreen> {
             ],
           ),
         ),
-        floatingActionButton: Padding(
-          padding: const EdgeInsets.only(right: 0, bottom: 32),
-          child: FloatingActionButton.extended(
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                // in changelog 1 we will pass the langname name to ther other widget class
-                // this name will be used to open a particular JSON file
-                // for a particular language
-                builder: (context) => GameQuizPage(socket: socket),
-              ));
-            },
-            label: Text('Start'),
-            icon: Icon(Icons.local_airport),
-            backgroundColor: Colors.pink,
+        floatingActionButton: Visibility(
+          visible: _visibility,
+          child: Stack(
+            children: <Widget>[
+              Positioned(
+                bottom: 112.0,
+                right: 8.0,
+                child: FloatingActionButton(
+                  heroTag: 'save',
+                  onPressed: () {
+                    // What you want to do
+                  },
+                  child: Icon(Icons.group_add),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5.0),
+                  ),
+                ),
+              ),
+              Positioned(
+                bottom: 42,
+                right: 8.0,
+                child: FloatingActionButton(
+                  heroTag: 'strart',
+                  onPressed: () {},
+                  child: Icon(
+                    Icons.arrow_right,
+                    size: 54,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5.0),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
         body: new Container(
