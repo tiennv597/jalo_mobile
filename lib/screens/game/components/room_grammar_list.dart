@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 
 class RoomGrammarList extends StatefulWidget {
-  Socket socket;
+  List cw;
 
-  RoomGrammarList({this.socket});
+  RoomGrammarList({this.cw});
   @override
   RoomGrammarListState createState() {
     return new RoomGrammarListState();
@@ -17,7 +17,7 @@ class RoomGrammarListState extends State<RoomGrammarList> {
   void initState() {
     super.initState();
 
-    widget.socket.emit(SOCKET_CONSTANT.client_get_rooms, {});
+    //widget.socket.emit(SOCKET_CONSTANT.client_get_rooms, {});
   }
 
   @override

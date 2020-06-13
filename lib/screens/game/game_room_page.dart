@@ -1,5 +1,7 @@
+import 'dart:convert';
 import 'package:shinro_int2/constant/app_properties.dart';
 import 'package:shinro_int2/constant/socket_constant.dart' as SOCKET_CONSTANT;
+import 'package:shinro_int2/models/game/rooms.dart';
 import 'package:shinro_int2/screens/game/game_start_page.dart';
 import 'package:shinro_int2/utils/custom_background.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +28,9 @@ class _GameRoomPageState extends State<GameRoomPage>
   String type = 'Chinese Word';
   String quantity = '10';
   String time = '10';
+  List cw = [];
+  List vc = [];
+  List gr = [];
 
   @override
   void initState() {
@@ -44,8 +49,18 @@ class _GameRoomPageState extends State<GameRoomPage>
     });
     socket.on(SOCKET_CONSTANT.result_check_room, (data) {
       print(data);
-      
     });
+    socket.on(SOCKET_CONSTANT.server_send_rooms, (data) {
+      Rooms rooms = Rooms.fromJson(json.decode(data));
+      setState(() {
+        //rooms = data;
+        cw = rooms.idRoomCw;
+        vc = rooms.idRoomVc;
+        gr = rooms.idRoomGr;
+        print(cw);
+      });
+    });
+    socket.emit(SOCKET_CONSTANT.client_get_rooms);
     socket.connect();
     super.initState();
   }
@@ -59,7 +74,6 @@ class _GameRoomPageState extends State<GameRoomPage>
       id,
       password,
     });
-    
 
     // Navigator.of(context).pushReplacement(
     //     MaterialPageRoute(builder: (_) => StrartGameScreen(infoRoom)));
@@ -400,7 +414,9 @@ class _GameRoomPageState extends State<GameRoomPage>
                 },
                 body: TabView(
                   tabController: tabController,
-                  socket: socket,
+                  cw: cw, // list rooms chinese word
+                  vc: vc, // list rooms vocabulary
+                  gr: gr, // list rooms grammar
                 ),
               ),
               SizedBox(

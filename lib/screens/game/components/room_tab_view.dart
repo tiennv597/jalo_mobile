@@ -6,15 +6,14 @@ import 'package:socket_io_client/socket_io_client.dart';
 
 class TabView extends StatelessWidget {
   final TabController tabController;
-  Socket socket;
-
-  TabView({Key key, this.tabController,this.socket}) : super(key: key);
-
- 
+  List cw;
+  List vc;
+  List gr;
+  TabView({Key key, this.tabController, this.cw, this.vc, this.gr})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-  
     print(MediaQuery.of(context).size.height / 9);
     return TabBarView(
         //physics: NeverScrollableScrollPhysics(),
@@ -27,7 +26,7 @@ class TabView extends StatelessWidget {
                 SizedBox(
                   height: 16.0,
                 ),
-                Flexible(child: RoomCnWordList(socket:socket)),
+                Flexible(child: RoomCnWordList(cw: cw)),
               ],
             ),
           ),
@@ -35,13 +34,13 @@ class TabView extends StatelessWidget {
             SizedBox(
               height: 16.0,
             ),
-            Flexible(child: RoomVocabularyList(socket:socket))
+            Flexible(child: RoomVocabularyList(cw: cw))
           ]),
           Column(children: <Widget>[
             SizedBox(
               height: 16.0,
             ),
-            Flexible(child: RoomGrammarList(socket:socket))
+            Flexible(child: RoomGrammarList(cw: cw))
           ]),
         ]);
   }

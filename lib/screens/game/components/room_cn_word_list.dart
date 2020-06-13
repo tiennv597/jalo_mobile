@@ -6,9 +6,8 @@ import 'package:shinro_int2/screens/product/product_page.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 
 class RoomCnWordList extends StatefulWidget {
-  Socket socket;
-
-  RoomCnWordList({this.socket});
+  List cw;
+  RoomCnWordList({this.cw});
   @override
   RoomCnWordListState createState() {
     return new RoomCnWordListState();
@@ -16,17 +15,17 @@ class RoomCnWordList extends StatefulWidget {
 }
 
 class RoomCnWordListState extends State<RoomCnWordList> {
-  List<dynamic> rooms = [];
+  //List<dynamic> rooms = [];
   void initState() {
     super.initState();
 
-    widget.socket.emit(SOCKET_CONSTANT.client_get_rooms, 'cw');
-    widget.socket.on(SOCKET_CONSTANT.server_send_rooms, (data) {
-      setState(() {
-        //rooms = data;
-        print(data);
-      });
-    });
+    // widget.socket.emit(SOCKET_CONSTANT.client_get_rooms, 'cw');
+    // widget.socket.on(SOCKET_CONSTANT.server_send_rooms, (data) {
+    //   setState(() {
+    //     //rooms = data;
+    //     print(data);
+    //   });
+    // });
   }
 
   @override
@@ -62,7 +61,7 @@ class RoomCnWordListState extends State<RoomCnWordList> {
             child: ListView.builder(
               physics: NeverScrollableScrollPhysics(),
               padding: EdgeInsets.zero,
-              itemCount: rooms.length,
+              itemCount: widget.cw.length,
               itemBuilder: (BuildContext context, int index) => new ClipRRect(
                 borderRadius: BorderRadius.all(Radius.circular(5.0)),
                 child: InkWell(
@@ -80,7 +79,7 @@ class RoomCnWordListState extends State<RoomCnWordList> {
                               focalRadius: 0.1),
                         ),
                         child: Text(
-                          rooms[index],
+                          widget.cw[index],
                         )),
                   ),
                 ),
