@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shinro_int2/models/category.dart';
+import 'package:shinro_int2/models/game/room.dart';
 import 'package:shinro_int2/models/message/message.dart';
 import 'package:shinro_int2/screens/game/components/message_list_item.dart';
 import 'package:shinro_int2/screens/game/components/user_list_modal.dart';
@@ -35,6 +36,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
   FocusNode _focus = new FocusNode(); //focus TextField message
   UserListModal userListModal = new UserListModal(); // list user of room
   Socket socket;
+  bool owner = false;
 // data test
   List<Category> categories = [
     Category(
@@ -126,8 +128,11 @@ class StrartGameScreenState extends State<StrartGameScreen> {
     });
 
     socket.on(SOCKET_CONSTANT.server_send_room, (data) {
+      Room room = Room.fromJson(json.decode(data));
+      print(data);
       setState(() {
-        id_room = data.toString();
+        id_room = room.idRoom;
+        owner = room.owner;
       });
     });
     socket.on(SOCKET_CONSTANT.server_send_message, (data) {
@@ -212,17 +217,29 @@ class StrartGameScreenState extends State<StrartGameScreen> {
               Positioned(
                 bottom: 42,
                 right: 8.0,
-                child: FloatingActionButton(
-                  heroTag: 'strart',
-                  onPressed: () {},
-                  child: Icon(
-                    Icons.arrow_right,
-                    size: 54,
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5.0),
-                  ),
-                ),
+                child: owner
+                    ? FloatingActionButton(
+                        heroTag: 'strart',
+                        onPressed: () {},
+                        child: Icon(
+                          Icons.arrow_right,
+                          size: 54,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5.0),
+                        ),
+                      )
+                    : FloatingActionButton(
+                        heroTag: 'strart',
+                        onPressed: () {},
+                        child: Icon(
+                          Icons.touch_app,
+                          size: 40,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5.0),
+                        ),
+                      ),
               ),
             ],
           ),
