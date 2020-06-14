@@ -40,6 +40,8 @@ const String joined_room = 'joined_room';
 const String ready = 'ready';
 const String get_client_in_room = 'get_client_in_room';
 const String send_client_in_room = 'send_client_in_room';
+const String get_quizzes = 'get_quizzes';
+const String send_quizzes = 'send_quizzes';
 
 //const String message = 'message';
 

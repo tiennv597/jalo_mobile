@@ -132,6 +132,10 @@ class StrartGameScreenState extends State<StrartGameScreen> {
     socket.on(SOCKET_CONSTANT.connect, (_) {
       print('connect');
     });
+    socket.on(SOCKET_CONSTANT.start_game, (_) {
+      Navigator.of(context).push(
+          MaterialPageRoute(builder: (_) => GameQuizPage(socket: socket)));
+    });
 
     socket.on(SOCKET_CONSTANT.ready, (data) {
       if (data) {
@@ -217,10 +221,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
   }
 
   void _strart() {
-    // Navigator.of(context).push(MaterialPageRoute(
-    //   builder: (context) => GameQuizPage(socket: socket),
-    // ));
-    print("ok strart");
+    socket.emit(SOCKET_CONSTANT.start_game,id_room);
   }
 
   void _ready() {

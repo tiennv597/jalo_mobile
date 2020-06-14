@@ -76,8 +76,8 @@ class GameQuizPageState extends State<GameQuizPage> {
   @override
   void initState() {
     random = shuffle([0, 1, 2, 3]);
-    widget.socket.emit(SOCKET_CONSTANT.start_game, {"tttt", "n5", "goi"});
-    widget.socket.on(SOCKET_CONSTANT.start_game, (data) {
+    widget.socket.emit(SOCKET_CONSTANT.get_quizzes, {"tttt", "n5", "goi"});
+    widget.socket.on(SOCKET_CONSTANT.send_quizzes, (data) {
       // Parsing JSON to Jobject
       var list = data
           .map((dynamic i) => Question.fromJson(i as Map<String, dynamic>))
