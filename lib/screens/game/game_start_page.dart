@@ -36,7 +36,13 @@ class StrartGameScreenState extends State<StrartGameScreen> {
   FocusNode _focus = new FocusNode(); //focus TextField message
   UserListModal userListModal = new UserListModal(); // list user of room
   Socket socket;
-  bool owner = false;
+  bool owner = false; // owner off room
+  bool ready = false; //check user ready?
+  bool all_ready = false; //check user ready?
+
+  int user_ready = 1; // count user
+  int user_in_room = 1; // clients in room
+
 // data test
   List<Category> categories = [
     Category(
@@ -127,6 +133,37 @@ class StrartGameScreenState extends State<StrartGameScreen> {
       print('connect');
     });
 
+    socket.on(SOCKET_CONSTANT.ready, (data) {
+      if (data) {
+        setState(() {
+          user_ready++;
+        });
+      } else {
+        setState(() {
+          user_ready--;
+        });
+      }
+
+      if (user_ready == user_in_room) {
+        setState(() {
+          all_ready=true;
+        });
+      }
+    });
+
+    socket.on(SOCKET_CONSTANT.joined_room, (data) {
+      print(data);
+      setState(() {
+        user_in_room++;
+      });
+    });
+    socket.on(SOCKET_CONSTANT.leave, (data) {
+      setState(() {
+        user_in_room--;
+        all_ready=false;
+      });
+    });
+
     socket.on(SOCKET_CONSTANT.server_send_room, (data) {
       Room room = Room.fromJson(json.decode(data));
       print(data);
@@ -175,9 +212,21 @@ class StrartGameScreenState extends State<StrartGameScreen> {
   }
 
   void _strart() {
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => GameQuizPage(socket: socket),
-    ));
+    // Navigator.of(context).push(MaterialPageRoute(
+    //   builder: (context) => GameQuizPage(socket: socket),
+    // ));
+    print("ok strart");
+  }
+
+  void _ready() {
+    setState(() {
+      ready = !ready;
+
+    });
+    socket.emit(SOCKET_CONSTANT.ready, {
+      id_room,
+      ready,
+    });
   }
 
   @override
@@ -220,7 +269,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
                 child: owner
                     ? FloatingActionButton(
                         heroTag: 'strart',
-                        onPressed: () {},
+                        onPressed: all_ready ? _strart : null,
                         child: Icon(
                           Icons.arrow_right,
                           size: 54,
@@ -230,12 +279,17 @@ class StrartGameScreenState extends State<StrartGameScreen> {
                         ),
                       )
                     : FloatingActionButton(
-                        heroTag: 'strart',
-                        onPressed: () {},
-                        child: Icon(
-                          Icons.touch_app,
-                          size: 40,
-                        ),
+                        heroTag: 'ready',
+                        onPressed: _ready,
+                        child: ready
+                            ? Icon(
+                                Icons.cancel,
+                                size: 40,
+                              )
+                            : Icon(
+                                Icons.touch_app,
+                                size: 40,
+                              ),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(5.0),
                         ),
@@ -270,7 +324,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
                             borderRadius: BorderRadius.circular(30.0),
                             side: BorderSide(color: Colors.white)),
                         icon: Icon(Icons.account_circle),
-                        label: Text("9"),
+                        label: Text(user_in_room.toString()),
                         onPressed: _showListUser),
                   ),
                 ],

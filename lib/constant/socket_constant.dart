@@ -36,6 +36,10 @@ const String join_room = 'join_room';
 const String creat_room = 'creat_room';
 const String server_send_room = 'server_send_room';
 const String leave = 'leave';
+const String joined_room = 'joined_room';
+const String ready = 'ready';
+const String get_client_in_room = 'get_client_in_room';
+const String send_client_in_room = 'send_client_in_room';
 
 //const String message = 'message';
 
@@ -43,4 +47,4 @@ const String leave = 'leave';
 
 const String get_room = 'get_room';
 const String check_info_room = 'check_info_room';
-const String result_check_room='result_check_room';
+const String result_check_room = 'result_check_room';
