@@ -141,12 +141,13 @@ class StrartGameScreenState extends State<StrartGameScreen> {
       } else {
         setState(() {
           user_ready--;
+          all_ready = false;
         });
       }
 
       if (user_ready == user_in_room) {
         setState(() {
-          all_ready=true;
+          all_ready = true;
         });
       }
     });
@@ -160,7 +161,11 @@ class StrartGameScreenState extends State<StrartGameScreen> {
     socket.on(SOCKET_CONSTANT.leave, (data) {
       setState(() {
         user_in_room--;
-        all_ready=false;
+        if (user_ready == user_in_room) {
+          all_ready = true;
+        } else {
+          all_ready = false;
+        }
       });
     });
 
@@ -221,7 +226,6 @@ class StrartGameScreenState extends State<StrartGameScreen> {
   void _ready() {
     setState(() {
       ready = !ready;
-
     });
     socket.emit(SOCKET_CONSTANT.ready, {
       id_room,
