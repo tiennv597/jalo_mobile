@@ -38,8 +38,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
   Socket socket;
   bool owner = false; // owner off room
   bool ready = false; //check user ready?
-  bool all_ready = false; //check user ready?
-
+  bool all_ready = true; //check user ready?
   int user_ready = 1; // count user
   int user_in_room = 1; // clients in room
 
@@ -133,8 +132,13 @@ class StrartGameScreenState extends State<StrartGameScreen> {
       print('connect');
     });
     socket.on(SOCKET_CONSTANT.start_game, (_) {
-      Navigator.of(context).push(
-          MaterialPageRoute(builder: (_) => GameQuizPage(socket: socket)));
+      Navigator.of(context).push(MaterialPageRoute(
+          builder: (_) => GameQuizPage(
+                socket: socket,
+                id_room: id_room,
+                owner: owner,
+                infoRoom: widget.infoRoom,
+              )));
     });
 
     socket.on(SOCKET_CONSTANT.ready, (data) {
@@ -160,6 +164,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
       print(data);
       setState(() {
         user_in_room++;
+        all_ready = false;
       });
     });
     socket.on(SOCKET_CONSTANT.leave, (data) {
@@ -221,7 +226,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
   }
 
   void _strart() {
-    socket.emit(SOCKET_CONSTANT.start_game,id_room);
+    socket.emit(SOCKET_CONSTANT.start_game, id_room);
   }
 
   void _ready() {

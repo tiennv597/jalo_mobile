@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shinro_int2/models/category.dart';
+import 'package:shinro_int2/models/game/info_room.dart';
 import 'package:shinro_int2/models/question/answers_model.dart';
 import 'package:shinro_int2/models/question/question_model.dart';
 import 'package:shinro_int2/screens/game/components/user_rank_item.dart';
@@ -13,8 +14,11 @@ import 'package:shinro_int2/constant/socket_constant.dart' as SOCKET_CONSTANT;
 class GameQuizPage extends StatefulWidget {
   //var mydata;
   Socket socket;
+  String id_room;
+  bool owner;
+  InfoRoom infoRoom;
 
-  GameQuizPage({this.socket});
+  GameQuizPage({this.socket, this.id_room, this.owner, this.infoRoom});
 
   @override
   GameQuizPageState createState() {
@@ -23,7 +27,7 @@ class GameQuizPage extends StatefulWidget {
 }
 
 class GameQuizPageState extends State<GameQuizPage> {
-  var mydata;
+  //var mydata;
   // Socket socket;
   // GameQuizPageState(this.socket,this.mydata);
   Color colortoshow = Colors.indigoAccent;
@@ -76,7 +80,11 @@ class GameQuizPageState extends State<GameQuizPage> {
   @override
   void initState() {
     random = shuffle([0, 1, 2, 3]);
-    widget.socket.emit(SOCKET_CONSTANT.get_quizzes, {"tttt", "n5", "goi"});
+    if (widget.owner) {
+      widget.socket.emit(SOCKET_CONSTANT.get_quizzes,
+          {widget.id_room, widget.infoRoom.level, "goi"});
+    } else {}
+
     widget.socket.on(SOCKET_CONSTANT.send_quizzes, (data) {
       // Parsing JSON to Jobject
       var list = data
@@ -86,7 +94,9 @@ class GameQuizPageState extends State<GameQuizPage> {
         Question question = new Question();
         question = item;
         questions.add(question);
+        print(question.content);
       }
+
       totalQuestion = questions.length - 1;
     });
 
