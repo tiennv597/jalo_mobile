@@ -13,10 +13,10 @@ import 'package:shinro_int2/constant/socket_constant.dart' as SOCKET_CONSTANT;
 
 class GameQuizPage extends StatefulWidget {
   //var mydata;
-  Socket socket;
-  String idRoom;
-  bool owner;
-  InfoRoom infoRoom;
+  final Socket socket;
+  final String idRoom;
+  final bool owner;
+  final InfoRoom infoRoom;
 
   GameQuizPage({this.socket, this.idRoom, this.owner, this.infoRoom});
 
@@ -154,7 +154,7 @@ class GameQuizPageState extends State<GameQuizPage> {
         current++;
       } else {
         Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => resultpage(marks: marks),
+          builder: (context) => ResultPage(marks: marks),
         ));
       }
       btncolor["a"] = Colors.indigoAccent;
@@ -220,7 +220,7 @@ class GameQuizPageState extends State<GameQuizPage> {
       });
   @override
   Widget build(BuildContext context) {
-    var screenHeight = MediaQuery.of(context).size.height;
+    //var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
     SystemChrome.setPreferredOrientations(
         [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]);

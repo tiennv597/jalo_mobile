@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class resultpage extends StatefulWidget {
-  int marks;
-  resultpage({Key key, @required this.marks}) : super(key: key);
+class ResultPage extends StatefulWidget {
+  final int marks;
+  ResultPage({Key key, @required this.marks}) : super(key: key);
   @override
-  _resultpageState createState() => _resultpageState(marks);
+  _ResultPageState createState() => _ResultPageState(marks);
 }
 
-class _resultpageState extends State<resultpage> {
+class _ResultPageState extends State<ResultPage> {
   List<String> images = [
     "assets/success.png",
     "assets/good.png",
@@ -33,7 +33,7 @@ class _resultpageState extends State<resultpage> {
   }
 
   int marks;
-  _resultpageState(this.marks);
+  _ResultPageState(this.marks);
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -128,7 +128,7 @@ class _ProfilePageState extends State<ProfilePage> {
           });
           prefs.setBool(SHARED_PREFERNCES.logined, true);
           prefs.setString(SHARED_PREFERNCES.user_id, it.id);
-          prefs.setString(SHARED_PREFERNCES.display_name, it.displayName);
+          prefs.setString(SHARED_PREFERNCES.displayName, it.displayName);
         }
       }).catchError((onError) {
         print("error" + onError.toString());

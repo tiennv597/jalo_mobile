@@ -16,7 +16,7 @@ class GameHomePage extends StatefulWidget {
 class _GameHomePageState extends State<GameHomePage> {
   SwiperController swiperController = SwiperController();
   bool logined;
-  String display_name;
+  String displayName;
 
   @override
   void initState() {
@@ -34,8 +34,8 @@ class _GameHomePageState extends State<GameHomePage> {
 
     if (logined) {
       setState(() {
-        display_name = prefs.getString(SHARED_PREFERNCES.display_name);
-        print(display_name);
+        displayName = prefs.getString(SHARED_PREFERNCES.displayName);
+        print(displayName);
       });
     } else {}
   }
@@ -75,7 +75,7 @@ class _GameHomePageState extends State<GameHomePage> {
         builder: (_, constraints) => Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            InfoUserItem(display_name),
+            InfoUserItem(displayName),
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Text(

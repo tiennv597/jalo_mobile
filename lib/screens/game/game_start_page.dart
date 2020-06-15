@@ -14,7 +14,7 @@ import 'components/user_item.dart';
 import 'package:shinro_int2/models/game/info_room.dart';
 
 class StrartGameScreen extends StatefulWidget {
-  InfoRoom infoRoom;
+  final InfoRoom infoRoom;
 
   StrartGameScreen(this.infoRoom);
   @override

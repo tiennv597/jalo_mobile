@@ -4,10 +4,10 @@ import 'package:socket_io_client/socket_io_client.dart';
 
 class TabView extends StatelessWidget {
   final TabController tabController;
-  Socket socket;
-  List cw;
-  List vc;
-  List gr;
+  final Socket socket;
+  final List cw;
+  final List vc;
+  final List gr;
   TabView({Key key, this.tabController, this.cw, this.vc, this.gr, this.socket})
       : super(key: key);
 

@@ -49,7 +49,7 @@ class _SplashScreenState extends State<SplashScreen>
     } else {
       Navigator.of(context)
           .pushReplacement(MaterialPageRoute(builder: (_) => IntroPage()));
-      prefs.setBool(SHARED_PREFERNCES.first_launch, true); //set true login one time
+      prefs.setBool(SHARED_PREFERNCES.first_launch, false); //set true login one time
     }
   }
 
@@ -59,7 +59,7 @@ class _SplashScreenState extends State<SplashScreen>
           image: DecorationImage(
               image: AssetImage('assets/background.jpg'), fit: BoxFit.cover)),
       child: Container(
-        decoration: BoxDecoration(color: transparentYellow),
+        decoration: BoxDecoration(color: transparentWhite),
         child: SafeArea(
           child: new Scaffold(
             body: Column(
@@ -67,7 +67,7 @@ class _SplashScreenState extends State<SplashScreen>
                 Expanded(
                   child: Opacity(
                       opacity: opacity.value,
-                      child: new Image.asset('assets/logo.png')),
+                      child: new Image.asset('assets/good.png')),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),

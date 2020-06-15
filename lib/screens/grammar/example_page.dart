@@ -239,13 +239,13 @@ class Panel {
 
 class PanelGrammar {
   String title;
-  String grammar_id;
+  String grammarId;
   String level;
   String content;
   String mean;
   String use;
   String note;
   bool expanded;
-  PanelGrammar(this.title, this.grammar_id, this.level, this.content, this.mean,
+  PanelGrammar(this.title, this.grammarId, this.level, this.content, this.mean,
       this.use, this.note, this.expanded);
 }

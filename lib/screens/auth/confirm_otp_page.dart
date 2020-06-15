@@ -105,20 +105,20 @@ class _ConfirmOtpPageState extends State<ConfirmOtpPage> {
       ),
     );
 
-    Widget otpCode = Container(
-      padding: const EdgeInsets.only(right: 28.0),
-      height: 190,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          otpBox(otp1),
-          otpBox(otp2),
-          otpBox(otp3),
-          otpBox(otp4),
-          otpBox(otp5)
-        ],
-      ),
-    );
+    // Widget otpCode = Container(
+    //   padding: const EdgeInsets.only(right: 28.0),
+    //   height: 190,
+    //   child: Row(
+    //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    //     children: <Widget>[
+    //       otpBox(otp1),
+    //       otpBox(otp2),
+    //       otpBox(otp3),
+    //       otpBox(otp4),
+    //       otpBox(otp5)
+    //     ],
+    //   ),
+    // );
 
     Widget resendText = Row(
       mainAxisAlignment: MainAxisAlignment.center,

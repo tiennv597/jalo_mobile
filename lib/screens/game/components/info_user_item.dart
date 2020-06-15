@@ -2,10 +2,10 @@ import 'package:shinro_int2/constant/app_properties.dart';
 import 'package:flutter/material.dart';
 
 class InfoUserItem extends StatefulWidget {
-  String display_name;
+  final String displayName;
 
   // In the constructor, require a Example.
-  InfoUserItem(this.display_name);
+  InfoUserItem(this.displayName);
   @override
   _InfoUserItemPageState createState() => _InfoUserItemPageState();
 }
@@ -50,7 +50,7 @@ class _InfoUserItemPageState extends State<InfoUserItem> {
                                           image: new NetworkImage(
                                               "https://i.imgur.com/BoN9kdC.png")))),
                             ),
-                            new Text(widget.display_name, textScaleFactor: 1.5)
+                            new Text(widget.displayName, textScaleFactor: 1.5)
                           ],
                         )),
                         Container(

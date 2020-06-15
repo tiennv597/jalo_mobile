@@ -80,17 +80,16 @@ class _ShopItemListState extends State<ShopItemList> {
                           ],
                         ),
                       ),
-//TODO: Work on scroll quantity
                       Theme(
                         data: ThemeData(
                             accentColor: Colors.black,
                             textTheme: TextTheme(
-                              headline: TextStyle(
+                            headline1: TextStyle(
                                   fontFamily: 'Montserrat',
                                   fontSize: 14,
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold),
-                              body1: TextStyle(
+                              bodyText1: TextStyle(
                                 fontFamily: 'Montserrat',
                                 fontSize: 12,
                                 color: Colors.grey[400],

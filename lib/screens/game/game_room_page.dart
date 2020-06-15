@@ -68,8 +68,8 @@ class _GameRoomPageState extends State<GameRoomPage>
   void _strartGameScreen() {
     // socket.emit(SOCKET_CONSTANT.join_room,
     //     {_tfRoomController.text, _tfPasswordController});
-    InfoRoom infoRoom =
-        InfoRoom(id, _tfPasswordController.text, level, type, quantity, time);
+    // InfoRoom infoRoom =
+    //     InfoRoom(id, _tfPasswordController.text, level, type, quantity, time);
     socket.emit(SOCKET_CONSTANT.check_info_room, {
       id,
       password,

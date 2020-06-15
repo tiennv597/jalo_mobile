@@ -1,6 +1,5 @@
-/**
- * socket constant value
- */
+/// socket constant value
+
 const String basURL = 'http://192.168.1.28:3000';
 const String nameSpase = '/game-namespace';
 const String default_ns = '/';
@@ -24,7 +23,7 @@ const String reconnecting = 'reconnecting';
 const String ping = 'ping';
 const String pong = 'pong';
 
-//additton
+///additton 
 
 const String message = 'message';
 const String client_send_message = 'client_send_message';
@@ -42,8 +41,6 @@ const String get_client_in_room = 'get_client_in_room';
 const String send_client_in_room = 'send_client_in_room';
 const String get_quizzes = 'get_quizzes';
 const String send_quizzes = 'send_quizzes';
-
-//const String message = 'message';
 
 //event test
 

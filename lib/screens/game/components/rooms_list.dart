@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:shinro_int2/models/game/info_room.dart';
 import 'package:socket_io_client/socket_io_client.dart';
-import 'package:shinro_int2/constant/socket_constant.dart' as SOCKET_CONSTANT;
 
 import '../game_start_page.dart';
 
 class RoomsList extends StatefulWidget {
-  List rooms;
-  String type;
-  Socket socket;
+  final List rooms;
+  final String type;
+  final Socket socket;
   RoomsList({this.rooms, this.type, this.socket});
   @override
   RoomsListState createState() {
@@ -22,15 +21,15 @@ class RoomsListState extends State<RoomsList> {
   }
 
 // check info room
-  void _checkInfoRoom() {
-    // socket.emit(SOCKET_CONSTANT.join_room,
-    //     {_tfRoomController.text, _tfPasswordController});
+  // void _checkInfoRoom() {
+  //   // socket.emit(SOCKET_CONSTANT.join_room,
+  //   //     {_tfRoomController.text, _tfPasswordController});
 
-    widget.socket.emit(SOCKET_CONSTANT.check_info_room, {});
+  //   widget.socket.emit(SOCKET_CONSTANT.check_info_room, {});
 
-    // Navigator.of(context).pushReplacement(
-    //     MaterialPageRoute(builder: (_) => StrartGameScreen(infoRoom)));
-  }
+  //   // Navigator.of(context).pushReplacement(
+  //   //     MaterialPageRoute(builder: (_) => StrartGameScreen(infoRoom)));
+  // }
 
   void _strartGameScreen(String id) {
     // socket.emit(SOCKET_CONSTANT.join_room,
