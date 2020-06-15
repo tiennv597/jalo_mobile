@@ -79,9 +79,9 @@ class _SearchPageState extends State<SearchPage>
     super.dispose();
   }
 
-  void _expand() {
-    _controller.expand();
-  }
+  // void _expand() {
+  //   _controller.expand();
+  // }
 
   Widget _getLowerLayer() {
     return Container(

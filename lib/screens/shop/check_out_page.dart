@@ -8,7 +8,7 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'components/credit_card.dart';
 import 'components/shop_item_list.dart';
 
-//TODO: NOT DONE. WHEEL SCROLL QUANTITY
+
 class CheckOutPage extends StatefulWidget {
   @override
   _CheckOutPageState createState() => _CheckOutPageState();
@@ -173,8 +173,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
 class Scroll extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    // TODO: implement paint
-
+ 
     LinearGradient grT = LinearGradient(
         colors: [Colors.transparent, Colors.black26],
         begin: Alignment.topCenter,
@@ -201,7 +200,6 @@ class Scroll extends CustomPainter {
 
   @override
   bool shouldRepaint(CustomPainter oldDelegate) {
-    // TODO: implement shouldRepaint
     return false;
   }
 }

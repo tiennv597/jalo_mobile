@@ -66,7 +66,6 @@ class PromoItem extends StatelessWidget {
                               ],
                             ),
                           ),
-//TODO: Work on scroll quantity
 //                            CustomPaint(
 //                              painter: Scroll(),
 //                              child: Container(

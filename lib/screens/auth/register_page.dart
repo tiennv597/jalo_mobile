@@ -11,7 +11,7 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  bool _rememberMe = false;
+  //bool _rememberMe = false;
 
   Widget _buildNameUserTF() {
     return Column(

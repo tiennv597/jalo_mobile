@@ -27,7 +27,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
   final TextEditingController _textEditingController =
       new TextEditingController(); //text filde send messga
   String nsp = ''; // name space
-  String id_room = ''; //id room current
+  String idRoom = ''; //id room current
   bool _isComposingMessage = false; //on or off button send
   bool _visibilityBtn = false; //Hide button send
   bool _visibility = true; // Hide or show [send icon, ...]
@@ -38,9 +38,9 @@ class StrartGameScreenState extends State<StrartGameScreen> {
   Socket socket;
   bool owner = false; // owner off room
   bool ready = false; //check user ready?
-  bool all_ready = true; //check user ready?
-  int user_ready = 1; // count user
-  int user_in_room = 1; // clients in room
+  bool allReady = true; //check user ready?
+  int userReady = 1; // count user
+  int userInRoom = 1; // clients in room
 
 // data test
   List<Category> categories = [
@@ -120,7 +120,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
       socket.emit(SOCKET_CONSTANT.creat_room);
     } else {
       setState(() {
-        id_room = widget.infoRoom.id;
+        idRoom = widget.infoRoom.id;
       });
       socket.emit(SOCKET_CONSTANT.join_room, {
         widget.infoRoom.id,
@@ -135,7 +135,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
       Navigator.of(context).push(MaterialPageRoute(
           builder: (_) => GameQuizPage(
                 socket: socket,
-                id_room: id_room,
+                idRoom: idRoom,
                 owner: owner,
                 infoRoom: widget.infoRoom,
               )));
@@ -144,18 +144,18 @@ class StrartGameScreenState extends State<StrartGameScreen> {
     socket.on(SOCKET_CONSTANT.ready, (data) {
       if (data) {
         setState(() {
-          user_ready++;
+          userReady++;
         });
       } else {
         setState(() {
-          user_ready--;
-          all_ready = false;
+          userReady--;
+          allReady = false;
         });
       }
 
-      if (user_ready == user_in_room) {
+      if (userReady == userInRoom) {
         setState(() {
-          all_ready = true;
+          allReady = true;
         });
       }
     });
@@ -163,17 +163,17 @@ class StrartGameScreenState extends State<StrartGameScreen> {
     socket.on(SOCKET_CONSTANT.joined_room, (data) {
       print(data);
       setState(() {
-        user_in_room++;
-        all_ready = false;
+        userInRoom++;
+        allReady = false;
       });
     });
     socket.on(SOCKET_CONSTANT.leave, (data) {
       setState(() {
-        user_in_room--;
-        if (user_ready == user_in_room) {
-          all_ready = true;
+        userInRoom--;
+        if (userReady == userInRoom) {
+          allReady = true;
         } else {
-          all_ready = false;
+          allReady = false;
         }
       });
     });
@@ -182,7 +182,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
       Room room = Room.fromJson(json.decode(data));
       print(data);
       setState(() {
-        id_room = room.idRoom;
+        idRoom = room.idRoom;
         owner = room.owner;
       });
     });
@@ -226,7 +226,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
   }
 
   void _strart() {
-    socket.emit(SOCKET_CONSTANT.start_game, id_room);
+    socket.emit(SOCKET_CONSTANT.start_game, idRoom);
   }
 
   void _ready() {
@@ -234,7 +234,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
       ready = !ready;
     });
     socket.emit(SOCKET_CONSTANT.ready, {
-      id_room,
+      idRoom,
       ready,
     });
   }
@@ -279,7 +279,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
                 child: owner
                     ? FloatingActionButton(
                         heroTag: 'strart',
-                        onPressed: all_ready ? _strart : null,
+                        onPressed: allReady ? _strart : null,
                         child: Icon(
                           Icons.arrow_right,
                           size: 54,
@@ -334,7 +334,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
                             borderRadius: BorderRadius.circular(30.0),
                             side: BorderSide(color: Colors.white)),
                         icon: Icon(Icons.account_circle),
-                        label: Text(user_in_room.toString()),
+                        label: Text(userInRoom.toString()),
                         onPressed: _showListUser),
                   ),
                 ],
@@ -464,7 +464,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
                 Padding(
                   padding: const EdgeInsets.only(top: 8, bottom: 8),
                   child: Text(
-                    'Phòng: ' + id_room,
+                    'Phòng: ' + idRoom,
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
@@ -520,7 +520,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
   void _textMessageSubmitted(String value) {
     //send massage
     socket.emit(SOCKET_CONSTANT.client_send_message,
-        {id_room, "tien2", _textEditingController.text});
+        {idRoom, "tien2", _textEditingController.text});
     //remove focus
     FocusScope.of(context).requestFocus(new FocusNode());
 
@@ -539,6 +539,6 @@ class StrartGameScreenState extends State<StrartGameScreen> {
   void dispose() {
     super.dispose();
     print("close");
-    socket.emit(SOCKET_CONSTANT.leave, id_room);
+    socket.emit(SOCKET_CONSTANT.leave, idRoom);
   }
 }

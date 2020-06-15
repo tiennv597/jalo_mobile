@@ -25,8 +25,7 @@ class _PaymentHistoryPageState extends State<PaymentHistoryPage> {
   }
 
   @override
-  void initState() {
-    // TODO: implement initState
+  void initState() { 
     _getUsers();
     super.initState();
   }

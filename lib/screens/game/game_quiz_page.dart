@@ -14,11 +14,11 @@ import 'package:shinro_int2/constant/socket_constant.dart' as SOCKET_CONSTANT;
 class GameQuizPage extends StatefulWidget {
   //var mydata;
   Socket socket;
-  String id_room;
+  String idRoom;
   bool owner;
   InfoRoom infoRoom;
 
-  GameQuizPage({this.socket, this.id_room, this.owner, this.infoRoom});
+  GameQuizPage({this.socket, this.idRoom, this.owner, this.infoRoom});
 
   @override
   GameQuizPageState createState() {
@@ -82,7 +82,7 @@ class GameQuizPageState extends State<GameQuizPage> {
     random = shuffle([0, 1, 2, 3]);
     if (widget.owner) {
       widget.socket.emit(SOCKET_CONSTANT.get_quizzes,
-          {widget.id_room, widget.infoRoom.level, "goi"});
+          {widget.idRoom, widget.infoRoom.level, "goi"});
     } else {}
 
     widget.socket.on(SOCKET_CONSTANT.send_quizzes, (data) {
@@ -235,7 +235,6 @@ class GameQuizPageState extends State<GameQuizPage> {
             return Center(
               child: CircularProgressIndicator(),
             );
-            ;
           } else {
             return Scaffold(
               appBar: PreferredSize(
