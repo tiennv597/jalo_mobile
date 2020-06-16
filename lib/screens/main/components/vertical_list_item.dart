@@ -34,7 +34,7 @@ class VerticalListItem extends StatelessWidget {
                   tag: bestMovieList[index].id,
                   child: Container(
                     height: 150,
-                    width: 100,
+                    width: MediaQuery.of(context).size.width / 4,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(5),
@@ -66,7 +66,7 @@ class VerticalListItem extends StatelessWidget {
                         height: 10,
                       ),
                       Container(
-                        width: 240,
+                        width: MediaQuery.of(context).size.width / 1.8,
                         child: Text(
                           bestMovieList[index].description,
                         ),

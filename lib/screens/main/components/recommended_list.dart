@@ -31,6 +31,7 @@ class RecommendedList extends StatelessWidget {
               ),
             ),
             Container(
+              width: MediaQuery.of(context).size.width,
               height: 280,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
@@ -61,7 +62,8 @@ class RecommendedList extends StatelessWidget {
               ),
             ),
             Container(
-              height: 500,
+              width: MediaQuery.of(context).size.width ,
+              height: MediaQuery.of(context).size.height/4,
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: ListView.builder(
                 physics: NeverScrollableScrollPhysics(),

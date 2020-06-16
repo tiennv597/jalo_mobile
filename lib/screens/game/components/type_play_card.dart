@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:shinro_int2/models/game/types.dart';
 
 class TypePlayCard extends StatelessWidget {
+  final Types types;
+
+  TypePlayCard(this.types);
   @override
   Widget build(BuildContext context) {
-    return  Container(
+    return Container(
       height: 200,
       width: 250,
       padding: EdgeInsets.all(16.0),
       decoration: BoxDecoration(
-        image: new DecorationImage(
-            image: new ExactAssetImage('assets/image.jpg'),
+          image: new DecorationImage(
+            image: new ExactAssetImage('assets/background.png'),
             fit: BoxFit.cover,
           ),
           color: Colors.deepPurple[700],
@@ -20,14 +24,14 @@ class TypePlayCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           Text(
-            'COMPETITION',
-            style: TextStyle(color: Colors.blueAccent),
+            types.types,
+            style: TextStyle(color: Colors.white,fontSize: 24,fontWeight:FontWeight.bold ),
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                'GEORGE W BUSH',
+                '',
                 style: TextStyle(color: Colors.white),
               ),
             ],

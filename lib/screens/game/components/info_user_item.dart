@@ -14,12 +14,11 @@ class _InfoUserItemPageState extends State<InfoUserItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      //margin: EdgeInsets.only(top: 20),
-      height: 200,
+      height: MediaQuery.of(context).size.height / 3,
       child: Stack(
         children: <Widget>[
           Container(
-              height: 200,
+              height: 300,
               margin: EdgeInsets.symmetric(horizontal: 16.0),
               decoration: BoxDecoration(
                   color: Colors.white,
@@ -57,7 +56,6 @@ class _InfoUserItemPageState extends State<InfoUserItem> {
                           padding: EdgeInsets.only(left: 24, right: 30),
                           width: 180,
                           child: Column(
-                            
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Padding(

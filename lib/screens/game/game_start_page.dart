@@ -494,8 +494,8 @@ class StrartGameScreenState extends State<StrartGameScreen> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    widget.infoRoom.type + ':' + widget.infoRoom.level,
-                    style: TextStyle(color: Colors.white, fontSize: 20),
+                    widget.infoRoom.type + ': ' + widget.infoRoom.level,
+                    style: TextStyle(color: Colors.white, fontSize: 16),
                   ),
                 ),
                 Padding(

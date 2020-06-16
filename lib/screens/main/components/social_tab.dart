@@ -281,7 +281,8 @@ class _SocialTabState extends State<SocialTab> {
   }
   Widget makeLikeButton({isActive}) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+      width:MediaQuery.of(context).size.width/3.5 ,
+      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey[200]),
         borderRadius: BorderRadius.circular(50),
@@ -290,9 +291,9 @@ class _SocialTabState extends State<SocialTab> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Icon(Icons.thumb_up, color: isActive ? Colors.blue : Colors.grey, size: 18,),
+            Icon(Icons.thumb_up, color: isActive ? Colors.blue : Colors.grey, size: 13,),
             SizedBox(width: 5,),
-            Text("Like", style: TextStyle(color: isActive ? Colors.blue : Colors.grey),)
+            Text("Like", style: TextStyle(color: isActive ? Colors.blue : Colors.grey,fontSize: 12),)
           ],
         ),
       ),
@@ -300,7 +301,8 @@ class _SocialTabState extends State<SocialTab> {
   }
   Widget makeCommentButton() {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+      width:MediaQuery.of(context).size.width/3.5,
+      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey[200]),
         borderRadius: BorderRadius.circular(50),
@@ -309,9 +311,9 @@ class _SocialTabState extends State<SocialTab> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Icon(Icons.chat, color: Colors.grey, size: 18),
+            Icon(Icons.chat, color: Colors.grey, size: 13),
             SizedBox(width: 5,),
-            Text("Comment", style: TextStyle(color: Colors.grey),)
+            Text("Comment", style: TextStyle(color: Colors.grey,fontSize: 12),)
           ],
         ),
       ),
@@ -319,7 +321,8 @@ class _SocialTabState extends State<SocialTab> {
   }
   Widget makeShareButton() {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+      width:MediaQuery.of(context).size.width/3.5,
+      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey[200]),
         borderRadius: BorderRadius.circular(50),
@@ -328,9 +331,9 @@ class _SocialTabState extends State<SocialTab> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Icon(Icons.share, color: Colors.grey, size: 18),
+            Icon(Icons.share, color: Colors.grey, size: 13),
             SizedBox(width: 5,),
-            Text("Share", style: TextStyle(color: Colors.grey),)
+            Text("Share", style: TextStyle(color: Colors.grey,fontSize: 12),)
           ],
         ),
       ),

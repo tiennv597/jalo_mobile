@@ -6,7 +6,8 @@ import 'package:shinro_int2/screens/auth/login/login_page.dart';
 import 'package:shinro_int2/screens/faq_page.dart';
 import 'package:shinro_int2/screens/settings/settings_page.dart';
 import 'package:flutter/material.dart';
-import 'package:shinro_int2/constant/shared_preferences.dart' as SHARED_PREFERNCES;
+import 'package:shinro_int2/constant/shared_preferences.dart'
+    as SHARED_PREFERNCES;
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -135,7 +136,7 @@ class _ProfilePageState extends State<ProfilePage> {
       });
     } else {
       logined = false;
-       prefs.setBool(SHARED_PREFERNCES.logined, false);
+      prefs.setBool(SHARED_PREFERNCES.logined, false);
     }
   }
 }

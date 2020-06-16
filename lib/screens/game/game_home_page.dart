@@ -1,4 +1,5 @@
 import 'package:shinro_int2/constant/app_properties.dart';
+import 'package:shinro_int2/models/game/types.dart';
 import 'package:shinro_int2/screens/game/game_room_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
@@ -17,11 +18,25 @@ class _GameHomePageState extends State<GameHomePage> {
   SwiperController swiperController = SwiperController();
   bool logined;
   String displayName;
+  List<Types> types = [
+    Types(
+      Color(0xff36E892),
+      Color(0xff33B2B9),
+      'Competition',
+      'assets/background.png',
+    ),
+    Types(
+      Color(0xffF123C4),
+      Color(0xff668CEA),
+      'Practice',
+      'assets/background.png',
+    ),
+  ];
 
   @override
   void initState() {
     super.initState();
-    logined = false; 
+    logined = false;
     checkLogin();
   }
 
@@ -85,11 +100,11 @@ class _GameHomePageState extends State<GameHomePage> {
               ),
             ),
             SizedBox(
-              height: 220,
+              height: MediaQuery.of(context).size.width / 2,
               child: Swiper(
-                itemCount: 2,
+                itemCount: types.length,
                 itemBuilder: (_, index) {
-                  return TypePlayCard();
+                  return TypePlayCard(types[index]);
                 },
                 scale: 0.8,
                 controller: swiperController,
