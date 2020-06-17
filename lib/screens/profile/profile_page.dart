@@ -1,8 +1,6 @@
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shinro_int2/constant/app_properties.dart';
 import 'package:shinro_int2/models/user/user_model.dart';
-import 'package:shinro_int2/network/api_service.dart';
 import 'package:shinro_int2/screens/auth/login/login_page.dart';
 import 'package:shinro_int2/screens/faq_page.dart';
 import 'package:shinro_int2/screens/settings/settings_page.dart';
@@ -129,30 +127,6 @@ class _ProfilePageState extends State<ProfilePage> {
     Navigator.of(context).push(MaterialPageRoute(builder: (_) => LoginPage()));
   }
 
-  // Future<void> checkToken() async {
-  //   final api = Provider.of<ApiService>(context, listen: false);
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   String jwt = prefs.getString(SHARED_PREFERNCES.token);
-  //   print(jwt);
-  //   if (jwt != null) {
-  //     api.checkToken(jwt).then((it) async {
-  //       if (it.success) {
-  //         setState(() {
-  //           logined = true;
-  //           print(logined);
-  //         });
-  //         prefs.setBool(SHARED_PREFERNCES.logined, true);
-  //         prefs.setString(SHARED_PREFERNCES.user_id, it.id);
-  //         prefs.setString(SHARED_PREFERNCES.displayName, it.displayName);
-  //       }
-  //     }).catchError((onError) {
-  //       print("error" + onError.toString());
-  //     });
-  //   } else {
-  //     logined = false;
-  //     prefs.setBool(SHARED_PREFERNCES.logined, false);
-  //   }
-  // }
   Future<User> checkLogin() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     logined = prefs.getBool(SHARED_PREFERNCES.logined);

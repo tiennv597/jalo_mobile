@@ -16,10 +16,10 @@ class Example {
   Example(
       {this.sId,
       this.exampleId,
-      this.sentence,
-      this.vi,
-      this.furigana,
-      this.grammar});
+      this.sentence, // câu bằng tiếng nhật
+      this.vi, // câu tiếng việt
+      this.furigana, //phiên âm
+      this.grammar}); // cấu trúc ngữ pháp
 
   factory Example.fromJson(Map<String, dynamic> json) =>
       _$ExampleFromJson(json);
