@@ -1,5 +1,6 @@
 import 'package:shinro_int2/constant/app_properties.dart';
 import 'package:shinro_int2/models/game/types.dart';
+import 'package:shinro_int2/models/user/user_model.dart';
 import 'package:shinro_int2/screens/game/game_room_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
@@ -36,23 +37,38 @@ class _GameHomePageState extends State<GameHomePage> {
   @override
   void initState() {
     super.initState();
-    logined = false;
-    checkLogin();
   }
 
-  Future<void> checkLogin() async {
+  Future<User> checkLogin() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool checkValue = prefs.containsKey(SHARED_PREFERNCES.first_launch);
-    if (checkValue) {
-      logined = prefs.getBool(SHARED_PREFERNCES.logined);
-    }
-
+    logined = prefs.getBool(SHARED_PREFERNCES.logined);
+    User user = new User();
     if (logined) {
-      setState(() {
-        displayName = prefs.getString(SHARED_PREFERNCES.displayName);
-        print(displayName);
-      });
-    } else {}
+      user.displayName = prefs.getString(SHARED_PREFERNCES.displayName);
+      return user;
+    } else {
+      return null;
+    }
+  }
+
+  Widget infoUser() {
+    return FutureBuilder(
+        future: checkLogin(),
+        builder: (context, snapshot) {
+          User user = snapshot.data;
+          if (snapshot.hasData) {
+            return InfoUserItem(user.displayName);
+          } else {
+            return RaisedButton(
+              child: Text("Sign in"),
+              onPressed: () {},
+              color: Colors.red,
+              textColor: Colors.yellow,
+              padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+              splashColor: Colors.grey,
+            );
+          }
+        });
   }
 
   @override
@@ -90,7 +106,7 @@ class _GameHomePageState extends State<GameHomePage> {
         builder: (_, constraints) => Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            InfoUserItem(displayName),
+            infoUser(),
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Text(

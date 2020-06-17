@@ -1,10 +1,13 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shinro_int2/constant/app_properties.dart';
+import 'package:shinro_int2/screens/main/main_page.dart';
 import 'package:shinro_int2/utils/custom_background.dart';
 import 'package:shinro_int2/screens/settings/change_country.dart';
 import 'package:shinro_int2/screens/settings/change_password_page.dart';
 import 'package:shinro_int2/screens/settings/legal_about_page.dart';
 import 'package:shinro_int2/screens/settings/notifications_settings_page.dart';
+import 'package:shinro_int2/constant/shared_preferences.dart'
+    as SHARED_PREFERNCES;
 import 'package:flutter/material.dart';
 
 import 'change_language_page.dart';
@@ -108,7 +111,15 @@ class SettingsPage extends StatelessWidget {
                                 title: Text('Sign out'),
                                 leading:
                                     Image.asset('assets/icons/sign_out.png'),
-                                onTap: logOut),
+                                onTap: () async {
+                                  SharedPreferences prefs =
+                                      await SharedPreferences.getInstance();
+                                  prefs.remove(SHARED_PREFERNCES.token);
+                                  prefs.setBool(
+                                      SHARED_PREFERNCES.logined, false);
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (_) => MainPage()));
+                                }),
                           ],
                         ),
                       ),
@@ -119,9 +130,5 @@ class SettingsPage extends StatelessWidget {
     );
   }
 
-  Future<dynamic> logOut() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.remove('token');
-    //Navigator.of(context).push(MaterialPageRoute(builder: (_) => LoginPage()));
-  }
+  // Future<dynamic> logOut() async {}
 }

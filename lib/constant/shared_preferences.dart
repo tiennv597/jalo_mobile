@@ -6,7 +6,7 @@
 const String first_launch = 'first_launch';
 //json web token
 const String token = 'token';
-//logined check
+//logined check value: bool true or false
 const String logined = 'logined';
 //display name
 const String displayName = 'displayName';

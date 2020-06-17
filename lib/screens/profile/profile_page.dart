@@ -1,6 +1,7 @@
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shinro_int2/constant/app_properties.dart';
+import 'package:shinro_int2/models/user/user_model.dart';
 import 'package:shinro_int2/network/api_service.dart';
 import 'package:shinro_int2/screens/auth/login/login_page.dart';
 import 'package:shinro_int2/screens/faq_page.dart';
@@ -16,11 +17,34 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   bool logined;
+
   @override
-  void initState() {
-    super.initState();
-    logined = false;
-    checkToken();
+  void setState(fn) {
+    if (mounted) {
+      super.setState(fn);
+    }
+  }
+
+  Widget infoUser() {
+    return FutureBuilder(
+        future: checkLogin(),
+        builder: (context, snapshot) {
+          User user = snapshot.data;
+          if (snapshot.hasData) {
+            return Text(
+              user.displayName,
+            );
+          } else {
+            return RaisedButton(
+              child: Text("Sign in"),
+              onPressed: goToLoginPage,
+              color: Colors.red,
+              textColor: Colors.yellow,
+              padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+              splashColor: Colors.grey,
+            );
+          }
+        });
   }
 
   @override
@@ -41,17 +65,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         stream: null,
                         builder: (context, snapshot) => Visibility(
                               visible: true,
-                              child: logined
-                                  ? Text("data")
-                                  : RaisedButton(
-                                      child: Text("Sign in"),
-                                      onPressed: goToLoginPage,
-                                      color: Colors.red,
-                                      textColor: Colors.yellow,
-                                      padding:
-                                          EdgeInsets.fromLTRB(10, 10, 10, 10),
-                                      splashColor: Colors.grey,
-                                    ),
+                              child: infoUser(),
                               replacement: Column(
                                 children: <Widget>[
                                   CircleAvatar(
@@ -115,28 +129,44 @@ class _ProfilePageState extends State<ProfilePage> {
     Navigator.of(context).push(MaterialPageRoute(builder: (_) => LoginPage()));
   }
 
-  Future<void> checkToken() async {
-    final api = Provider.of<ApiService>(context, listen: false);
+  // Future<void> checkToken() async {
+  //   final api = Provider.of<ApiService>(context, listen: false);
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   String jwt = prefs.getString(SHARED_PREFERNCES.token);
+  //   print(jwt);
+  //   if (jwt != null) {
+  //     api.checkToken(jwt).then((it) async {
+  //       if (it.success) {
+  //         setState(() {
+  //           logined = true;
+  //           print(logined);
+  //         });
+  //         prefs.setBool(SHARED_PREFERNCES.logined, true);
+  //         prefs.setString(SHARED_PREFERNCES.user_id, it.id);
+  //         prefs.setString(SHARED_PREFERNCES.displayName, it.displayName);
+  //       }
+  //     }).catchError((onError) {
+  //       print("error" + onError.toString());
+  //     });
+  //   } else {
+  //     logined = false;
+  //     prefs.setBool(SHARED_PREFERNCES.logined, false);
+  //   }
+  // }
+  Future<User> checkLogin() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String jwt = prefs.getString(SHARED_PREFERNCES.token);
-    print(jwt);
-    if (jwt != null) {
-      api.checkToken(jwt).then((it) async {
-        if (it.success) {
-          setState(() {
-            logined = true;
-            print(logined);
-          });
-          prefs.setBool(SHARED_PREFERNCES.logined, true);
-          prefs.setString(SHARED_PREFERNCES.user_id, it.id);
-          prefs.setString(SHARED_PREFERNCES.displayName, it.displayName);
-        }
-      }).catchError((onError) {
-        print("error" + onError.toString());
-      });
+    logined = prefs.getBool(SHARED_PREFERNCES.logined);
+    User user = new User();
+    if (logined) {
+      user.displayName = prefs.getString(SHARED_PREFERNCES.displayName);
+      return user;
     } else {
-      logined = false;
-      prefs.setBool(SHARED_PREFERNCES.logined, false);
+      return null;
     }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 }

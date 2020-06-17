@@ -1,9 +1,12 @@
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shinro_int2/constant/app_properties.dart';
+import 'package:shinro_int2/network/api_service.dart';
 import 'package:shinro_int2/screens/intro_page.dart';
 import 'package:flutter/material.dart';
 import 'package:shinro_int2/screens/main/main_page.dart';
-import 'package:shinro_int2/constant/shared_preferences.dart' as SHARED_PREFERNCES;
+import 'package:shinro_int2/constant/shared_preferences.dart'
+    as SHARED_PREFERNCES;
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -44,12 +47,32 @@ class _SplashScreenState extends State<SplashScreen>
       firstLaunch = prefs.getBool(SHARED_PREFERNCES.first_launch);
     }
     if (firstLaunch) {
-      Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (_) => MainPage()));
+      final api = Provider.of<ApiService>(context, listen: false);
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String jwt = prefs.getString(SHARED_PREFERNCES.token);
+      print(jwt);
+      if (jwt != null) {
+        api.checkToken(jwt).then((it) async {
+          if (it.success) {
+            prefs.setBool(SHARED_PREFERNCES.logined, true);
+            prefs.setString(SHARED_PREFERNCES.user_id, it.id);
+            prefs.setString(SHARED_PREFERNCES.displayName, it.displayName);
+            Navigator.of(context)
+                .pushReplacement(MaterialPageRoute(builder: (_) => MainPage()));
+          }
+        }).catchError((onError) {
+          print("error" + onError.toString());
+        });
+      } else {
+        prefs.setBool(SHARED_PREFERNCES.logined, false);
+        Navigator.of(context)
+            .pushReplacement(MaterialPageRoute(builder: (_) => MainPage()));
+      }
     } else {
       Navigator.of(context)
           .pushReplacement(MaterialPageRoute(builder: (_) => IntroPage()));
-      prefs.setBool(SHARED_PREFERNCES.first_launch, false); //set true login one time
+      prefs.setBool(
+          SHARED_PREFERNCES.first_launch, false); //set true login one time
     }
   }
 
