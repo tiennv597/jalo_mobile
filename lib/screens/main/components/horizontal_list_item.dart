@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shinro_int2/screens/main/components/movie_details_screen.dart';
-import 'package:shinro_int2/models/movie.dart';
+import 'package:shinro_int2/screens/main/components/trending_details_screen.dart';
+import 'package:shinro_int2/models/trending.dart';
 
 class HorizontalListItem extends StatelessWidget {
   final int index;
@@ -14,15 +14,15 @@ class HorizontalListItem extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           Navigator.of(context).pushNamed(
-            MovieDetailsScreen.routeName,
+            TrendingDetailsScreen.routeName,
             arguments: {
-              'id': movieList[index].id,
-              'title': movieList[index].title,
-              'imageUrl': movieList[index].imageUrl,
-              'description': movieList[index].description,
-              'rating': movieList[index].rating,
-              'year': movieList[index].year,
-              'duration': movieList[index].duration,
+              'id': trendingList[index].id,
+              'title': trendingList[index].title,
+              'imageUrl': trendingList[index].imageUrl,
+              'description': trendingList[index].description,
+              'rating': trendingList[index].rating,
+              'year': trendingList[index].year,
+              'duration': trendingList[index].duration,
             },
           );
         },
@@ -31,14 +31,14 @@ class HorizontalListItem extends StatelessWidget {
             Card(
               elevation: 10,
               child: Hero(
-                tag: movieList[index].id,
+                tag: trendingList[index].id,
                 child: Container(
                   height: 200,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
                     image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: NetworkImage(movieList[index].imageUrl),
+                      image: NetworkImage(trendingList[index].imageUrl),
                     ),
                   ),
                 ),
@@ -48,7 +48,7 @@ class HorizontalListItem extends StatelessWidget {
               height: 10,
             ),
             Text(
-              movieList[index].title,
+              trendingList[index].title,
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,

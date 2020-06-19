@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:shinro_int2/models/movie.dart';
-import 'package:shinro_int2/screens/main/components/movie_details_screen.dart';
+import 'package:shinro_int2/models/trending.dart';
+import 'package:shinro_int2/screens/main/components/trending_details_screen.dart';
 
 class TopRatedListItem extends StatelessWidget {
   final int index;
@@ -15,15 +15,15 @@ class TopRatedListItem extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           Navigator.of(context).pushNamed(
-            MovieDetailsScreen.routeName,
+            TrendingDetailsScreen.routeName,
             arguments: {
-              'id': topRatedMovieList[index].id,
-              'title': topRatedMovieList[index].title,
-              'imageUrl': topRatedMovieList[index].imageUrl,
-              'description': topRatedMovieList[index].description,
-              'rating': topRatedMovieList[index].rating,
-              'year': topRatedMovieList[index].year,
-              'duration': topRatedMovieList[index].duration,
+              'id': topRatedList[index].id,
+              'title': topRatedList[index].title,
+              'imageUrl': topRatedList[index].imageUrl,
+              'description': topRatedList[index].description,
+              'rating': topRatedList[index].rating,
+              'year': topRatedList[index].year,
+              'duration': topRatedList[index].duration,
             },
           );
         },
@@ -32,14 +32,14 @@ class TopRatedListItem extends StatelessWidget {
             Card(
               elevation: 10,
               child: Hero(
-                tag: topRatedMovieList[index].id,
+                tag: topRatedList[index].id,
                 child: Container(
                   height: 200,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
                     image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: NetworkImage(topRatedMovieList[index].imageUrl),
+                      image: NetworkImage(topRatedList[index].imageUrl),
                     ),
                   ),
                 ),
@@ -49,7 +49,7 @@ class TopRatedListItem extends StatelessWidget {
               height: 10,
             ),
             Text(
-              topRatedMovieList[index].title,
+              topRatedList[index].title,
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,

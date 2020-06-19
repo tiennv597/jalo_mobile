@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shinro_int2/models/movie.dart';
+import 'package:shinro_int2/models/trending.dart';
 import 'package:shinro_int2/screens/main/components/top_rated_list_item.dart';
 import 'package:shinro_int2/screens/main/components/vertical_list_item.dart';
 import 'package:shinro_int2/screens/main/components/horizontal_list_item.dart';
@@ -17,7 +17,7 @@ class RecommendedList extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
-                    'Recommended',
+                    'New',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -35,7 +35,7 @@ class RecommendedList extends StatelessWidget {
               height: 280,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: movieList.length,
+                itemCount: trendingList.length,
                 itemBuilder: (ctx, i) => HorizontalListItem(i),
               ),
             ),
@@ -67,7 +67,7 @@ class RecommendedList extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: ListView.builder(
                 physics: NeverScrollableScrollPhysics(),
-                itemCount: bestMovieList.length,
+                itemCount: bestList.length,
                 itemBuilder: (ctx, i) => VerticalListItem(i),
               ),
             ),
@@ -80,7 +80,7 @@ class RecommendedList extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
-                    'Top Rated Movies',
+                    'Trending',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -97,7 +97,7 @@ class RecommendedList extends StatelessWidget {
               height: 280,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: topRatedMovieList.length,
+                itemCount: topRatedList.length,
                 itemBuilder: (ctx, i) => TopRatedListItem(i),
               ),
             ),

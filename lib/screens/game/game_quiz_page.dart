@@ -101,7 +101,6 @@ class GameQuizPageState extends State<GameQuizPage> {
     });
 
     starttimer();
-    // genrandomarray();
 
     super.initState();
     print(random);
@@ -186,30 +185,33 @@ class GameQuizPageState extends State<GameQuizPage> {
   }
 
   Widget choiceButton(String k, Answers answers) {
-    //Answers answers = new Answers();
-    //answers = questions[current].answers[k];
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        vertical: 8.0,
-        horizontal: 8.0,
-      ),
-      child: MaterialButton(
-        onPressed: () => checkAnswer(k, answers.result),
-        child: Text(
-          answers.answer, //set answer on button
-          style: TextStyle(
-            color: Colors.white,
-            fontFamily: "Alike",
-            fontSize: 16.0,
-          ),
-          maxLines: 1,
+    var screenHeight = MediaQuery.of(context).size.height;
+    var screenWidth = MediaQuery.of(context).size.width;
+    return Container(
+      width: screenWidth,
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          vertical: 8.0,
+          horizontal: 8.0,
         ),
-        color: btncolor[k],
-        splashColor: Colors.indigo[700],
-        highlightColor: Colors.indigo[700],
-        minWidth: 400.0,
-        height: 64.0,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+        child: MaterialButton(
+          onPressed: () => checkAnswer(k, answers.result),
+          child: Text(
+            answers.answer, //set answer on button
+            style: TextStyle(
+              color: Colors.white,
+              fontFamily: "Alike",
+              fontSize: 16.0,
+            ),
+            maxLines: 1,
+          ),
+          color: btncolor[k],
+          splashColor: Colors.indigo[700],
+          highlightColor: Colors.indigo[700],
+          height: screenHeight/10,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+        ),
       ),
     );
   }
@@ -220,7 +222,7 @@ class GameQuizPageState extends State<GameQuizPage> {
       });
   @override
   Widget build(BuildContext context) {
-    //var screenHeight = MediaQuery.of(context).size.height;
+    var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
     SystemChrome.setPreferredOrientations(
         [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]);
@@ -254,7 +256,7 @@ class GameQuizPageState extends State<GameQuizPage> {
                   Positioned(
                     top: 0,
                     child: Container(
-                      height: 80,
+                      height: screenHeight/8,
                       width: screenWidth / 2,
                       // list message
                       child: ListView.builder(

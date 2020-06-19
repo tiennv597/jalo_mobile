@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:shinro_int2/models/movie.dart';
-import 'package:shinro_int2/screens/main/components/movie_details_screen.dart';
+import 'package:shinro_int2/models/trending.dart';
+import 'package:shinro_int2/screens/main/components/trending_details_screen.dart';
 
 class VerticalListItem extends StatelessWidget {
   final int index;
@@ -14,15 +14,15 @@ class VerticalListItem extends StatelessWidget {
         GestureDetector(
           onTap: () {
             Navigator.of(context).pushNamed(
-              MovieDetailsScreen.routeName,
+              TrendingDetailsScreen.routeName,
               arguments: {
-                'id': bestMovieList[index].id,
-                'title': bestMovieList[index].title,
-                'imageUrl': bestMovieList[index].imageUrl,
-                'description': bestMovieList[index].description,
-                'rating': bestMovieList[index].rating,
-                'year': bestMovieList[index].year,
-                'duration': bestMovieList[index].duration,
+                'id': bestList[index].id,
+                'title': bestList[index].title,
+                'imageUrl': bestList[index].imageUrl,
+                'description': bestList[index].description,
+                'rating': bestList[index].rating,
+                'year': bestList[index].year,
+                'duration': bestList[index].duration,
               },
             );
           },
@@ -31,7 +31,7 @@ class VerticalListItem extends StatelessWidget {
             child: Row(
               children: <Widget>[
                 Hero(
-                  tag: bestMovieList[index].id,
+                  tag: bestList[index].id,
                   child: Container(
                     height: 150,
                     width: MediaQuery.of(context).size.width / 4,
@@ -43,7 +43,7 @@ class VerticalListItem extends StatelessWidget {
                       image: DecorationImage(
                         fit: BoxFit.cover,
                         image: NetworkImage(
-                          bestMovieList[index].imageUrl,
+                          bestList[index].imageUrl,
                         ),
                       ),
                     ),
@@ -56,7 +56,7 @@ class VerticalListItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        bestMovieList[index].title,
+                        bestList[index].title,
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -68,7 +68,7 @@ class VerticalListItem extends StatelessWidget {
                       Container(
                         width: MediaQuery.of(context).size.width / 1.8,
                         child: Text(
-                          bestMovieList[index].description,
+                          bestList[index].description,
                         ),
                       ),
                     ],
