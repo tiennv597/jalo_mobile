@@ -9,7 +9,7 @@ part of 'api_service.dart';
 class _ApiService implements ApiService {
   _ApiService(this._dio, {this.baseUrl}) {
     ArgumentError.checkNotNull(_dio, '_dio');
-    this.baseUrl ??= 'http://192.168.1.28:3000/';
+    this.baseUrl ??= 'https://shinrojp-server.herokuapp.com/';
   }
 
   final Dio _dio;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class MovieDetailsScreen extends StatelessWidget {
+class TrendingDetailsScreen extends StatelessWidget {
   static const routeName = '/movie-details';
 
   @override

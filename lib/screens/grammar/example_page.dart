@@ -64,19 +64,19 @@ class _ExamplePageState extends State<ExamplePage> {
               emptyWidget: Text("empty"),              
               header: Row(
                 children: <Widget>[
-                  RaisedButton(
-                    child: Text("Desort"),
-                    onPressed: () {
-                      _searchBarController.removeSort();
-                    },
-                  ),
-                  RaisedButton(
-                    child: Text("Replay"),
-                    onPressed: () {
-                      isReplay = !isReplay;
-                      _searchBarController.replayLastSearch();
-                    },
-                  ),
+                  // RaisedButton(
+                  //   child: Text("Desort"),
+                  //   onPressed: () {
+                  //     _searchBarController.removeSort();
+                  //   },
+                  // ),
+                  // RaisedButton(
+                  //   child: Text("Replay"),
+                  //   onPressed: () {
+                  //     isReplay = !isReplay;
+                  //     _searchBarController.replayLastSearch();
+                  //   },
+                  // ),
                 ],
               ),
               onCancelled: () {
