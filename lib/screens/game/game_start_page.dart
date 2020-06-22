@@ -9,7 +9,7 @@ import 'package:shinro_int2/screens/game/components/message_list_item.dart';
 import 'package:shinro_int2/screens/game/components/user_list_modal.dart';
 import 'package:shinro_int2/screens/game/game_quiz_page.dart';
 import 'package:socket_io_client/socket_io_client.dart';
-import 'package:shinro_int2/constant/socket_constant.dart' as SOCKET_CONSTANT;
+import 'package:shinro_int2/constant/network_constant.dart' as NETWORK_CONSTANT;
 import 'components/user_item.dart';
 import 'package:shinro_int2/models/game/info_room.dart';
 
@@ -91,18 +91,18 @@ class StrartGameScreenState extends State<StrartGameScreen> {
     switch (widget.infoRoom.type) {
       case 'Chinese Word':
         {
-          nsp = SOCKET_CONSTANT.china_word_ns;
+          nsp = NETWORK_CONSTANT.china_word_ns;
         }
         break;
 
       case 'Vocabulary':
         {
-          nsp = SOCKET_CONSTANT.vocabulary_ns;
+          nsp = NETWORK_CONSTANT.vocabulary_ns;
         }
         break;
       case 'Grammar':
         {
-          nsp = SOCKET_CONSTANT.grammar_ns;
+          nsp = NETWORK_CONSTANT.grammar_ns;
         }
         break;
 
@@ -111,27 +111,27 @@ class StrartGameScreenState extends State<StrartGameScreen> {
         break;
     }
 
-    socket = io(SOCKET_CONSTANT.basURL + nsp, <String, dynamic>{
+    socket = io(NETWORK_CONSTANT.basURL + nsp, <String, dynamic>{
       'transports': ['websocket'],
       'extraHeaders': {'foo': 'bar'} // optional
     });
     //judgment create room or join room
     if (widget.infoRoom.id == '') {
-      socket.emit(SOCKET_CONSTANT.creat_room);
+      socket.emit(NETWORK_CONSTANT.creat_room);
     } else {
       setState(() {
         idRoom = widget.infoRoom.id;
       });
-      socket.emit(SOCKET_CONSTANT.join_room, {
+      socket.emit(NETWORK_CONSTANT.join_room, {
         widget.infoRoom.id,
         widget.infoRoom.password,
       });
     }
 
-    socket.on(SOCKET_CONSTANT.connect, (_) {
+    socket.on(NETWORK_CONSTANT.connect, (_) {
       print('connect');
     });
-    socket.on(SOCKET_CONSTANT.start_game, (_) {
+    socket.on(NETWORK_CONSTANT.start_game, (_) {
       Navigator.of(context).push(MaterialPageRoute(
           builder: (_) => GameQuizPage(
                 socket: socket,
@@ -141,7 +141,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
               )));
     });
 
-    socket.on(SOCKET_CONSTANT.ready, (data) {
+    socket.on(NETWORK_CONSTANT.ready, (data) {
       if (data) {
         setState(() {
           userReady++;
@@ -160,14 +160,14 @@ class StrartGameScreenState extends State<StrartGameScreen> {
       }
     });
 
-    socket.on(SOCKET_CONSTANT.joined_room, (data) {
+    socket.on(NETWORK_CONSTANT.joined_room, (data) {
       print(data);
       setState(() {
         userInRoom++;
         allReady = false;
       });
     });
-    socket.on(SOCKET_CONSTANT.leave, (data) {
+    socket.on(NETWORK_CONSTANT.leave, (data) {
       setState(() {
         userInRoom--;
         if (userReady == userInRoom) {
@@ -178,7 +178,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
       });
     });
 
-    socket.on(SOCKET_CONSTANT.server_send_room, (data) {
+    socket.on(NETWORK_CONSTANT.server_send_room, (data) {
       Room room = Room.fromJson(json.decode(data));
       print(data);
       setState(() {
@@ -186,7 +186,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
         owner = room.owner;
       });
     });
-    socket.on(SOCKET_CONSTANT.server_send_message, (data) {
+    socket.on(NETWORK_CONSTANT.server_send_message, (data) {
       // Parsing JSON to Jobject
       Message message = Message.fromJson(json.decode(data));
       ChatMessage chatMessage = new ChatMessage(
@@ -221,19 +221,19 @@ class StrartGameScreenState extends State<StrartGameScreen> {
   }
 
   void _getdRoom() {
-    socket.emit(SOCKET_CONSTANT.creat_room, {widget.infoRoom});
+    socket.emit(NETWORK_CONSTANT.creat_room, {widget.infoRoom});
     print("object");
   }
 
   void _strart() {
-    socket.emit(SOCKET_CONSTANT.start_game, idRoom);
+    socket.emit(NETWORK_CONSTANT.start_game, idRoom);
   }
 
   void _ready() {
     setState(() {
       ready = !ready;
     });
-    socket.emit(SOCKET_CONSTANT.ready, {
+    socket.emit(NETWORK_CONSTANT.ready, {
       idRoom,
       ready,
     });
@@ -519,7 +519,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
 
   void _textMessageSubmitted(String value) {
     //send massage
-    socket.emit(SOCKET_CONSTANT.client_send_message,
+    socket.emit(NETWORK_CONSTANT.client_send_message,
         {idRoom, "tien2", _textEditingController.text});
     //remove focus
     FocusScope.of(context).requestFocus(new FocusNode());
@@ -539,6 +539,6 @@ class StrartGameScreenState extends State<StrartGameScreen> {
   void dispose() {
     super.dispose();
     print("close");
-    socket.emit(SOCKET_CONSTANT.leave, idRoom);
+    socket.emit(NETWORK_CONSTANT.leave, idRoom);
   }
 }

@@ -1,6 +1,7 @@
 /// socket constant value
+//https://shinrojp-server.herokuapp.com
+const String basURL = 'http://192.168.1.28:3000';
 
-const String basURL = 'https://shinrojp-server.herokuapp.com';
 const String nameSpase = '/game-namespace';
 const String default_ns = '/';
 const String china_word_ns = '/china_word_ns';
@@ -23,7 +24,7 @@ const String reconnecting = 'reconnecting';
 const String ping = 'ping';
 const String pong = 'pong';
 
-///additton 
+///additton
 
 const String message = 'message';
 const String client_send_message = 'client_send_message';

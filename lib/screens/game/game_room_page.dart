@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:shinro_int2/constant/app_properties.dart';
-import 'package:shinro_int2/constant/socket_constant.dart' as SOCKET_CONSTANT;
+import 'package:shinro_int2/constant/network_constant.dart' as NETWORK_CONSTANT;
 import 'package:shinro_int2/models/game/rooms.dart';
 import 'package:shinro_int2/screens/game/game_start_page.dart';
 import 'package:shinro_int2/utils/custom_background.dart';
@@ -39,18 +39,18 @@ class _GameRoomPageState extends State<GameRoomPage>
     _tfPasswordController = new TextEditingController();
     //Creating the socket
     socket = io(
-        SOCKET_CONSTANT.basURL + SOCKET_CONSTANT.default_ns, <String, dynamic>{
+        NETWORK_CONSTANT.basURL + NETWORK_CONSTANT.default_ns, <String, dynamic>{
       'transports': ['websocket'],
       'extraHeaders': {'foo': 'bar'} // optional
     });
-    socket.on(SOCKET_CONSTANT.connect, (_) {
+    socket.on(NETWORK_CONSTANT.connect, (_) {
       print('connect');
       socket.emit('msg', 'test');
     });
-    socket.on(SOCKET_CONSTANT.result_check_room, (data) {
+    socket.on(NETWORK_CONSTANT.result_check_room, (data) {
       print(data);
     });
-    socket.on(SOCKET_CONSTANT.server_send_rooms, (data) {
+    socket.on(NETWORK_CONSTANT.server_send_rooms, (data) {
       Rooms rooms = Rooms.fromJson(json.decode(data));
       setState(() {
         //rooms = data;
@@ -60,17 +60,17 @@ class _GameRoomPageState extends State<GameRoomPage>
         print(cw);
       });
     });
-    socket.emit(SOCKET_CONSTANT.client_get_rooms);
+    socket.emit(NETWORK_CONSTANT.client_get_rooms);
     socket.connect();
     super.initState();
   }
 
   void _strartGameScreen() {
-    // socket.emit(SOCKET_CONSTANT.join_room,
+    // socket.emit(NETWORK_CONSTANT.join_room,
     //     {_tfRoomController.text, _tfPasswordController});
     // InfoRoom infoRoom =
     //     InfoRoom(id, _tfPasswordController.text, level, type, quantity, time);
-    socket.emit(SOCKET_CONSTANT.check_info_room, {
+    socket.emit(NETWORK_CONSTANT.check_info_room, {
       id,
       password,
     });
@@ -87,7 +87,7 @@ class _GameRoomPageState extends State<GameRoomPage>
   }
 
   void _getRoom() {
-    //socket.emit(SOCKET_CONSTANT.client_get_rooms, {});
+    //socket.emit(NETWORK_CONSTANT.client_get_rooms, {});
   }
 
   Future<String> _showSearchDialog(BuildContext context) async {

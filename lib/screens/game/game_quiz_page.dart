@@ -9,7 +9,7 @@ import 'package:shinro_int2/models/question/question_model.dart';
 import 'package:shinro_int2/screens/game/components/user_rank_item.dart';
 import 'package:shinro_int2/screens/game/game_result_page.dart';
 import 'package:socket_io_client/socket_io_client.dart';
-import 'package:shinro_int2/constant/socket_constant.dart' as SOCKET_CONSTANT;
+import 'package:shinro_int2/constant/network_constant.dart' as NETWORK_CONSTANT;
 
 class GameQuizPage extends StatefulWidget {
   //var mydata;
@@ -81,11 +81,11 @@ class GameQuizPageState extends State<GameQuizPage> {
   void initState() {
     random = shuffle([0, 1, 2, 3]);
     if (widget.owner) {
-      widget.socket.emit(SOCKET_CONSTANT.get_quizzes,
+      widget.socket.emit(NETWORK_CONSTANT.get_quizzes,
           {widget.idRoom, widget.infoRoom.level, "goi"});
     } else {}
 
-    widget.socket.on(SOCKET_CONSTANT.send_quizzes, (data) {
+    widget.socket.on(NETWORK_CONSTANT.send_quizzes, (data) {
       // Parsing JSON to Jobject
       var list = data
           .map((dynamic i) => Question.fromJson(i as Map<String, dynamic>))

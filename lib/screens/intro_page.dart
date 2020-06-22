@@ -35,7 +35,7 @@ class _IntroPageState extends State<IntroPage> {
                   children: <Widget>[
                     Center(
                       child: Image.asset(
-                        'assets/firstScreen.png',
+                        'assets/vector1.png',
                         height: 200,
                         width: 200,
                       ),
@@ -43,7 +43,7 @@ class _IntroPageState extends State<IntroPage> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 32),
                       child: Text(
-                        'Get Any Thing Online',
+                        'Learng Any Thing Online',
                         textAlign: TextAlign.right,
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 16),
@@ -53,7 +53,7 @@ class _IntroPageState extends State<IntroPage> {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 32, vertical: 16.0),
                       child: Text(
-                        'You can buy anything ranging from digital products to hardware within few clicks.',
+                        'Quiz Game.',
                         textAlign: TextAlign.right,
                         style: TextStyle(color: Colors.grey, fontSize: 12.0),
                       ),
@@ -66,7 +66,7 @@ class _IntroPageState extends State<IntroPage> {
                   children: <Widget>[
                     Center(
                       child: Image.asset(
-                        'assets/secondScreen.png',
+                        'assets/vector2.png',
                         height: 200,
                         width: 200,
                       ),
@@ -74,7 +74,7 @@ class _IntroPageState extends State<IntroPage> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 32),
                       child: Text(
-                        'Shipping to anywhere ',
+                        'Learng to anywhere ',
                         textAlign: TextAlign.right,
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 16),
@@ -97,7 +97,7 @@ class _IntroPageState extends State<IntroPage> {
                   children: <Widget>[
                     Center(
                       child: Image.asset(
-                        'assets/thirdScreen.png',
+                        'assets/vector3.png',
                         height: 200,
                         width: 200,
                       ),

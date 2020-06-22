@@ -325,10 +325,22 @@ class _LoginPageState extends State<LoginPage> {
       print(it.token.toString());
       SharedPreferences prefs = await SharedPreferences.getInstance();
       if (it.token.toString() != null && it.success == true) {
+        api.checkToken(it.token.toString()).then((it) async {
+          if (it.success) {
+            prefs.setBool(SHARED_PREFERNCES.logined, true);
+            prefs.setString(SHARED_PREFERNCES.user_id, it.id);
+            prefs.setString(SHARED_PREFERNCES.displayName, it.displayName);
+            Navigator.of(context)
+                .pushReplacement(MaterialPageRoute(builder: (_) => MainPage()));
+          }
+        }).catchError((onError) {
+          print("error" + onError.toString());
+        });
         prefs.setString(SHARED_PREFERNCES.token, it.token.toString());
-        prefs.setBool(SHARED_PREFERNCES.logined, true);
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => MainPage()));
+
+        // prefs.setBool(SHARED_PREFERNCES.logined, true);
+        // Navigator.of(context)
+        //     .push(MaterialPageRoute(builder: (context) => MainPage()));
       } else {}
     }).catchError((onError) {
       print("error" + onError.toString());

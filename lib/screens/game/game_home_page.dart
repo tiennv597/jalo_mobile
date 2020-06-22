@@ -43,7 +43,7 @@ class _GameHomePageState extends State<GameHomePage> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     logined = prefs.getBool(SHARED_PREFERNCES.logined);
     User user = new User();
-    if (logined) {
+    if (logined == true && logined != null) {
       user.displayName = prefs.getString(SHARED_PREFERNCES.displayName);
       return user;
     } else {
