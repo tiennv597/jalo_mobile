@@ -1,7 +1,6 @@
 import 'package:shinro_int2/constant/app_properties.dart';
 import 'package:shinro_int2/models/game/types.dart';
 import 'package:shinro_int2/models/user/user_model.dart';
-import 'package:shinro_int2/screens/game/game_room_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'components/type_play_card.dart';
@@ -73,33 +72,6 @@ class _GameHomePageState extends State<GameHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    Widget checkOutButton = InkWell(
-      onTap: () => Navigator.of(context)
-          .push(MaterialPageRoute(builder: (_) => GameRoomPage())),
-      child: Container(
-        height: 80,
-        width: MediaQuery.of(context).size.width / 1.5,
-        decoration: BoxDecoration(
-            gradient: mainButton,
-            boxShadow: [
-              BoxShadow(
-                color: Color.fromRGBO(0, 0, 0, 0.16),
-                offset: Offset(0, 5),
-                blurRadius: 10.0,
-              )
-            ],
-            borderRadius: BorderRadius.circular(9.0)),
-        child: Center(
-          child: Text("Start Game",
-              style: const TextStyle(
-                  color: const Color(0xfffefefe),
-                  fontWeight: FontWeight.w600,
-                  fontStyle: FontStyle.normal,
-                  fontSize: 20.0)),
-        ),
-      ),
-    );
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: LayoutBuilder(
@@ -116,7 +88,7 @@ class _GameHomePageState extends State<GameHomePage> {
               ),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.width / 2,
+              height: MediaQuery.of(context).size.width / 1.5,
               child: Swiper(
                 itemCount: types.length,
                 itemBuilder: (_, index) {
@@ -129,15 +101,15 @@ class _GameHomePageState extends State<GameHomePage> {
                 fade: 0.7,
               ),
             ),
-            SizedBox(height: 24),
-            Center(
-                child: Padding(
-              padding: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).padding.bottom == 0
-                      ? 20
-                      : MediaQuery.of(context).padding.bottom),
-              child: checkOutButton,
-            ))
+            SizedBox(height: 36),
+            // Center(
+            //     child: Padding(
+            //   padding: EdgeInsets.only(
+            //       bottom: MediaQuery.of(context).padding.bottom == 0
+            //           ? 20
+            //           : MediaQuery.of(context).padding.bottom),
+            //   child: checkOutButton,
+            // ))
           ],
         ),
       ),
