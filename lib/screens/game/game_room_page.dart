@@ -328,8 +328,8 @@ class _GameRoomPageState extends State<GameRoomPage>
                             await _showSearchDialog(context);
                         print("Current team name is $currentTeam");
                       },
-                      color: Colors.red,
-                      textColor: Colors.yellow,
+                      color: Colors.deepPurple,
+                      textColor: Colors.white,
                       padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
                       splashColor: Colors.grey,
                     ),
@@ -339,8 +339,8 @@ class _GameRoomPageState extends State<GameRoomPage>
                     child: RaisedButton(
                       child: Text("Play Now"),
                       onPressed: _getRoom,
-                      color: Colors.red,
-                      textColor: Colors.yellow,
+                      color: Colors.deepPurple,
+                      textColor: Colors.white,
                       padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
                       splashColor: Colors.grey,
                     ),
@@ -353,8 +353,8 @@ class _GameRoomPageState extends State<GameRoomPage>
                         // final String currentTeam =
                         await _showCreateDialog(context);
                       },
-                      color: Colors.red,
-                      textColor: Colors.yellow,
+                      color: Colors.deepPurple,
+                      textColor: Colors.white,
                       padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
                       splashColor: Colors.grey,
                     ),

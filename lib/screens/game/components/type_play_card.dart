@@ -55,12 +55,12 @@ class TypePlayCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               RaisedButton.icon(
-                  color: Colors.grey,
+                  color: Colors.deepPurple,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30.0),
-                      side: BorderSide(color: Colors.grey)),
-                  icon: Icon(Icons.games),
-                  label: Text('Start'),
+                      side: BorderSide(color: Colors.deepPurple)),
+                  icon: Icon(Icons.games,color: Colors.white,),
+                  label: Text('Start',style: TextStyle(color: Colors.white),),
                   onPressed: _checkType),
             ],
           )

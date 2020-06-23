@@ -66,6 +66,7 @@ class _MainPageState extends State<MainPage>
       unselectedLabelColor: Color.fromRGBO(0, 0, 0, 0.5),
       isScrollable: true,
       controller: tabController,
+      indicatorColor: transparentPurple,
     );
 
     return Scaffold(

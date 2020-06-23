@@ -178,7 +178,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         ),
         child: Container(
           decoration: BoxDecoration(
-            color:transparentYellow
+            color:transparentPurple
           ),
           child: Scaffold(
             appBar: AppBar(

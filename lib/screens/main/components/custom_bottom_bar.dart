@@ -6,34 +6,37 @@ class CustomBottomBar extends StatelessWidget {
   const CustomBottomBar({Key key, this.controller}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+ 
+
     return BottomAppBar(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           IconButton(
             //SvgPicture
-            icon: Image.asset(
-                    'assets/icons/icon_home.png',
-                    fit: BoxFit.fitWidth,
-                    ),
+            icon: Icon(Icons.home, size: 32, color: Colors.grey),
             onPressed: () {
               controller.animateTo(0);
             },
           ),
           IconButton(
-            icon: Image.asset('assets/icons/icon_grammar.png'),
+            icon: Icon(
+              Icons.g_translate,
+              size: 28,
+              color: Colors.grey,
+            ),
             onPressed: () {
               controller.animateTo(1);
             },
           ),
           IconButton(
-            icon: Image.asset('assets/icons/icon_play_game.png'),
+            icon: Icon(Icons.videogame_asset, size: 28, color: Colors.grey),
             onPressed: () {
               controller.animateTo(2);
             },
           ),
           IconButton(
-            icon: Image.asset('assets/icons/icon_info.png'),
+            icon: Icon(Icons.person_pin, size: 28, color: Colors.grey),
             onPressed: () {
               controller.animateTo(3);
             },

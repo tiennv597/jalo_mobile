@@ -14,7 +14,7 @@ class AuthBackground extends CustomPainter {
     if (image != null)
       canvas.drawImage(image, new Offset(0.0, 0.0), new Paint());
     canvas.drawRect(Rect.fromLTRB(0, 0, size.width, size.height),
-        Paint()..color = transparentYellow);
+        Paint()..color = transparentPurple);
   }
 
   @override
