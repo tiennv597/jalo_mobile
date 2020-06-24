@@ -35,6 +35,7 @@ class _GameHomePageState extends State<GameHomePage> {
   @override
   void initState() {
     super.initState();
+    checkLogin();
   }
 
   Future<User> checkLogin() async {
@@ -49,61 +50,74 @@ class _GameHomePageState extends State<GameHomePage> {
     }
   }
 
-  // Widget infoUser() {
-  //   return FutureBuilder(
-  //       future: checkLogin(),
-  //       builder: (context, snapshot) {
-  //         User user = snapshot.data;
-  //         if (snapshot.hasData) {
-  //           return InfoUserItem(user.displayName);
-  //         } else {
-  //           return RaisedButton(
-  //             child: Text("Sign in"),
-  //             onPressed: () {},
-  //             color: Colors.red,
-  //             textColor: Colors.yellow,
-  //             padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-  //             splashColor: Colors.grey,
-  //           );
-  //         }
-  //       });
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
           top: true,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              // infoUser(),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  'Game',
-                  style: TextStyle(
-                      fontSize: 20, color: darkGrey, fontWeight: FontWeight.bold),
-                ),
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.width / 1.5,
-                child: Swiper(
-                  itemCount: types.length,
-                  itemBuilder: (_, index) {
-                    return TypePlayCard(types[index],logined);
-                  },
-                  scale: 0.8,
-                  controller: swiperController,
-                  viewportFraction: 0.6,
-                  loop: false,
-                  fade: 0.7,
-                ),
-              ),
-              SizedBox(height: 36),
-            ],
-          )),
+          child:  GridView.count(
+                primary: false,
+                padding: const EdgeInsets.all(20),
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                crossAxisCount: 2,
+                children: <Widget>[
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    child: const Text("He'd have you all unravel at the"),
+                    color: Colors.teal[100],
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    child: const Text('Heed not the rabble'),
+                    color: Colors.teal[200],
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    child: const Text('Sound of screams but the'),
+                    color: Colors.teal[300],
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    child: const Text('Who scream'),
+                    color: Colors.teal[400],
+                  ),
+                ],
+              )
+          // Column(
+          //   crossAxisAlignment: CrossAxisAlignment.start,
+          //   children: <Widget>[
+          //     // infoUser(),
+          //     Padding(
+          //       padding: const EdgeInsets.all(8.0),
+          //       child: Text(
+          //         'Game',
+          //         style: TextStyle(
+          //             fontSize: 20,
+          //             color: darkGrey,
+          //             fontWeight: FontWeight.bold),
+          //       ),
+          //     ),
+          //     // SizedBox(
+          //     //   height: MediaQuery.of(context).size.width / 1.5,
+          //     //   child: Swiper(
+          //     //     itemCount: types.length,
+          //     //     itemBuilder: (_, index) {
+          //     //       return TypePlayCard(types[index],logined);
+          //     //     },
+          //     //     scale: 0.8,
+          //     //     controller: swiperController,
+          //     //     viewportFraction: 0.6,
+          //     //     loop: false,
+          //     //     fade: 0.7,
+          //     //   ),
+          //     // ),
+          //     // SizedBox(height: 36),
+             
+          //   ],
+          // )
+          ),
     );
   }
 }

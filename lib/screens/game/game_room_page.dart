@@ -373,17 +373,17 @@ class _GameRoomPageState extends State<GameRoomPage>
   Widget build(BuildContext context) {
     Widget tabBar = TabBar(
       tabs: [
-        Tab(text: 'Chinese Word'),
-        Tab(text: 'Vocabulary'),
-        Tab(text: 'Grammar'),
+        Tab(text: '漢字'),
+        Tab(text: '語彙'),
+        Tab(text: '文法'),
       ],
-      labelStyle: TextStyle(fontSize: 24.0),
-      unselectedLabelStyle: TextStyle(
-        fontSize: 18.0,
-      ),
+      labelStyle: TextStyle(fontSize: 15.0),
+      // unselectedLabelStyle: TextStyle(
+      //   fontSize: 18.0,
+      // ),
       labelColor: darkGrey,
       unselectedLabelColor: Color.fromRGBO(0, 0, 0, 0.5),
-      isScrollable: true,
+      isScrollable: false,
       controller: tabController,
     );
     return Scaffold(
@@ -408,7 +408,6 @@ class _GameRoomPageState extends State<GameRoomPage>
               NestedScrollView(
                 headerSliverBuilder:
                     (BuildContext context, bool innerBoxIsScrolled) {
-                  // These are the slivers that show up in the "outer" scroll view.
                   return <Widget>[
                     SliverToBoxAdapter(
                       child: tabBar,
