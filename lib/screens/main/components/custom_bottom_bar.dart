@@ -9,6 +9,7 @@ class CustomBottomBar extends StatelessWidget {
  
 
     return BottomAppBar(
+      
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[

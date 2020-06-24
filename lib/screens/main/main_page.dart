@@ -2,12 +2,10 @@ import 'package:flutter/services.dart';
 import 'package:shinro_int2/constant/app_properties.dart';
 import 'package:shinro_int2/screens/grammar/example_page.dart';
 import 'package:shinro_int2/screens/profile/profile_page.dart';
-import 'package:shinro_int2/utils/custom_background.dart';
 import 'package:shinro_int2/models/product.dart';
 import 'package:shinro_int2/screens/game/game_home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'components/custom_bottom_bar.dart';
 import 'components/tab_view.dart';
 
 class MainPage extends StatefulWidget {
@@ -41,6 +39,7 @@ class _MainPageState extends State<MainPage>
   SwiperController swiperController;
   TabController tabController;
   TabController bottomTabController;
+  int _selectedIndex = 0;
 
   @override
   void initState() {
@@ -69,36 +68,67 @@ class _MainPageState extends State<MainPage>
       indicatorColor: transparentPurple,
     );
 
-    return Scaffold(
-      bottomNavigationBar: CustomBottomBar(controller: bottomTabController),
-      body: CustomPaint(
-        painter: MainBackground(),
-        child: TabBarView(
-          controller: bottomTabController,
-          physics: NeverScrollableScrollPhysics(),
-          children: <Widget>[
-            SafeArea(
-              child: NestedScrollView(
-                headerSliverBuilder:
-                    (BuildContext context, bool innerBoxIsScrolled) {
-                  // These are the slivers that show up in the "outer" scroll view.
-                  return <Widget>[
-                    SliverToBoxAdapter(
-                      child: tabBar,
-                    )
-                  ];
-                },
-                body: TabView(
-                  tabController: tabController,
-                ),
-              ),
-            ),
-            ExamplePage(),
-            GameHomePage(),
-            ProfilePage()
-          ],
+    void _onItemTapped(int index) {
+      setState(() {
+        _selectedIndex = index;
+      });
+    }
+
+    List<Widget> _widgetOptions = <Widget>[
+      SafeArea(
+        child: NestedScrollView(
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            // These are the slivers that show up in the "outer" scroll view.
+            return <Widget>[
+              SliverToBoxAdapter(
+                child: tabBar,
+              )
+            ];
+          },
+          body: TabView(
+            tabController: tabController,
+          ),
         ),
       ),
+      ExamplePage(),
+      GameHomePage(),
+      ProfilePage()
+    ];
+
+    return Scaffold(
+      backgroundColor: Colors.white,
+      bottomNavigationBar: BottomNavigationBar(
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        backgroundColor: Colors.white,
+        type: BottomNavigationBarType.fixed,
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            title: Text('Home'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.g_translate),
+            title: Text('Grammar'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.videogame_asset),
+            title: Text('Game'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person_pin),
+            title: Text('Profile'),
+          ),
+        ],
+        currentIndex: _selectedIndex,
+
+        unselectedItemColor: Colors.grey,
+        // selectedItemColor: Colors.deepPurple[800],
+        fixedColor: Colors.deepPurple,
+        onTap: _onItemTapped,
+      ),
+      body:
+          Container(color: Colors.white, child: _widgetOptions[_selectedIndex]),
     );
   }
 }
