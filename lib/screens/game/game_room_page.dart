@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/services.dart';
 import 'package:shinro_int2/constant/app_properties.dart';
 import 'package:shinro_int2/constant/network_constant.dart' as NETWORK_CONSTANT;
 import 'package:shinro_int2/models/game/rooms.dart';
@@ -34,15 +35,17 @@ class _GameRoomPageState extends State<GameRoomPage>
 
   @override
   void initState() {
+    SystemChrome.setEnabledSystemUIOverlays([]);
     tabController = TabController(length: 3, vsync: this);
     _tfRoomController = new TextEditingController();
     _tfPasswordController = new TextEditingController();
     //Creating the socket
     socket = io(
-        NETWORK_CONSTANT.basURL + NETWORK_CONSTANT.default_ns, <String, dynamic>{
-      'transports': ['websocket'],
-      'extraHeaders': {'foo': 'bar'} // optional
-    });
+        NETWORK_CONSTANT.basURL + NETWORK_CONSTANT.default_ns,
+        <String, dynamic>{
+          'transports': ['websocket'],
+          'extraHeaders': {'foo': 'bar'} // optional
+        });
     socket.on(NETWORK_CONSTANT.connect, (_) {
       print('connect');
       socket.emit('msg', 'test');
@@ -417,7 +420,7 @@ class _GameRoomPageState extends State<GameRoomPage>
                   cw: cw, // list rooms chinese word
                   vc: vc, // list rooms vocabulary
                   gr: gr, // list rooms grammar
-                  socket: socket,//sockets
+                  socket: socket, //sockets
                 ),
               ),
               SizedBox(
@@ -429,5 +432,11 @@ class _GameRoomPageState extends State<GameRoomPage>
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
+    super.dispose();
   }
 }

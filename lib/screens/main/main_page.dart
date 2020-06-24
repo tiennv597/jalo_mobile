@@ -1,4 +1,3 @@
-import 'package:flutter/services.dart';
 import 'package:shinro_int2/constant/app_properties.dart';
 import 'package:shinro_int2/screens/grammar/example_page.dart';
 import 'package:shinro_int2/screens/profile/profile_page.dart';
@@ -50,12 +49,11 @@ class _MainPageState extends State<MainPage>
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIOverlays([]);
     Widget tabBar = TabBar(
       tabs: [
-        Tab(text: 'New'),
-        Tab(text: 'Trending'),
-        Tab(text: 'Tips'),
+        Tab(text: 'Related'),
+        Tab(text: 'Hot'),
+        Tab(text: 'Explore'),
       ],
       labelStyle: TextStyle(fontSize: 16.0),
       unselectedLabelStyle: TextStyle(
@@ -120,15 +118,13 @@ class _MainPageState extends State<MainPage>
             title: Text('Profile'),
           ),
         ],
+        iconSize: 28,
         currentIndex: _selectedIndex,
-
         unselectedItemColor: Colors.grey,
-        // selectedItemColor: Colors.deepPurple[800],
         fixedColor: Colors.deepPurple,
         onTap: _onItemTapped,
       ),
-      body:
-          Container(color: Colors.white, child: _widgetOptions[_selectedIndex]),
+      body: _widgetOptions[_selectedIndex],
     );
   }
 }

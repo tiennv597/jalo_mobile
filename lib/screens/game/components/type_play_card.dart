@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shinro_int2/models/game/types.dart';
 
 import '../game_room_page.dart';
 
 class TypePlayCard extends StatelessWidget {
   final Types types;
+  final bool logined;
 
-  TypePlayCard(this.types);
+  TypePlayCard(this.types, this.logined);
 
   @override
   Widget build(BuildContext context) {
@@ -14,14 +16,36 @@ class TypePlayCard extends StatelessWidget {
       switch (types.types) {
         case 'Competition':
           {
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (_) => GameRoomPage()));
+            if (logined == true && logined != null) {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (_) => GameRoomPage()));
+            } else {
+              Fluttertoast.showToast(
+                  msg: "You need to login to use!",
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.BOTTOM,
+                  timeInSecForIosWeb: 1,
+                  backgroundColor: Colors.redAccent,
+                  textColor: Colors.white,
+                  fontSize: 16.0);
+            }
           }
           break;
         case 'Practice':
           {
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (_) => GameRoomPage()));
+            if (logined == true && logined != null) {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (_) => GameRoomPage()));
+            } else {
+               Fluttertoast.showToast(
+                  msg: "You need to login to use!",
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.BOTTOM,
+                  timeInSecForIosWeb: 1,
+                  backgroundColor: Colors.red,
+                  textColor: Colors.white,
+                  fontSize: 16.0);
+            }
           }
           break;
         default:
@@ -59,8 +83,14 @@ class TypePlayCard extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30.0),
                       side: BorderSide(color: Colors.deepPurple)),
-                  icon: Icon(Icons.games,color: Colors.white,),
-                  label: Text('Start',style: TextStyle(color: Colors.white),),
+                  icon: Icon(
+                    Icons.games,
+                    color: Colors.white,
+                  ),
+                  label: Text(
+                    'Start',
+                    style: TextStyle(color: Colors.white),
+                  ),
                   onPressed: _checkType),
             ],
           )

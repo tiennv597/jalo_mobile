@@ -4,7 +4,6 @@ import 'package:shinro_int2/models/user/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'components/type_play_card.dart';
-import 'components/info_user_item.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shinro_int2/constant/shared_preferences.dart'
     as SHARED_PREFERNCES;
@@ -50,69 +49,61 @@ class _GameHomePageState extends State<GameHomePage> {
     }
   }
 
-  Widget infoUser() {
-    return FutureBuilder(
-        future: checkLogin(),
-        builder: (context, snapshot) {
-          User user = snapshot.data;
-          if (snapshot.hasData) {
-            return InfoUserItem(user.displayName);
-          } else {
-            return RaisedButton(
-              child: Text("Sign in"),
-              onPressed: () {},
-              color: Colors.red,
-              textColor: Colors.yellow,
-              padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-              splashColor: Colors.grey,
-            );
-          }
-        });
-  }
+  // Widget infoUser() {
+  //   return FutureBuilder(
+  //       future: checkLogin(),
+  //       builder: (context, snapshot) {
+  //         User user = snapshot.data;
+  //         if (snapshot.hasData) {
+  //           return InfoUserItem(user.displayName);
+  //         } else {
+  //           return RaisedButton(
+  //             child: Text("Sign in"),
+  //             onPressed: () {},
+  //             color: Colors.red,
+  //             textColor: Colors.yellow,
+  //             padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+  //             splashColor: Colors.grey,
+  //           );
+  //         }
+  //       });
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: LayoutBuilder(
-        builder: (_, constraints) => Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            infoUser(),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                'Play Type',
-                style: TextStyle(
-                    fontSize: 20, color: darkGrey, fontWeight: FontWeight.bold),
+      body: SafeArea(
+          top: true,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              // infoUser(),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  'Game',
+                  style: TextStyle(
+                      fontSize: 20, color: darkGrey, fontWeight: FontWeight.bold),
+                ),
               ),
-            ),
-            SizedBox(
-              height: MediaQuery.of(context).size.width / 1.5,
-              child: Swiper(
-                itemCount: types.length,
-                itemBuilder: (_, index) {
-                  return TypePlayCard(types[index]);
-                },
-                scale: 0.8,
-                controller: swiperController,
-                viewportFraction: 0.6,
-                loop: false,
-                fade: 0.7,
+              SizedBox(
+                height: MediaQuery.of(context).size.width / 1.5,
+                child: Swiper(
+                  itemCount: types.length,
+                  itemBuilder: (_, index) {
+                    return TypePlayCard(types[index],logined);
+                  },
+                  scale: 0.8,
+                  controller: swiperController,
+                  viewportFraction: 0.6,
+                  loop: false,
+                  fade: 0.7,
+                ),
               ),
-            ),
-            SizedBox(height: 36),
-            // Center(
-            //     child: Padding(
-            //   padding: EdgeInsets.only(
-            //       bottom: MediaQuery.of(context).padding.bottom == 0
-            //           ? 20
-            //           : MediaQuery.of(context).padding.bottom),
-            //   child: checkOutButton,
-            // ))
-          ],
-        ),
-      ),
+              SizedBox(height: 36),
+            ],
+          )),
     );
   }
 }
