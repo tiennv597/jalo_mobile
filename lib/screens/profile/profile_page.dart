@@ -105,35 +105,6 @@ class _ProfilePageState extends State<ProfilePage> {
                     ],
                   ),
                 ),
-                // Container(
-                //   height: 18,
-                // ),
-                // MaterialButton(
-                //   color: Colors.redAccent,
-                //   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                //   shape: RoundedRectangleBorder(
-                //     borderRadius: BorderRadius.circular(5),
-                //   ),
-                //   child: Text(
-                //     "Follow",
-                //     style: TextStyle(fontSize: 20, color: Colors.white),
-                //   ),
-                //   onPressed: () {},
-                // ),
-                // Container(
-                //   height: 18,
-                // ),
-                // Text(
-                //   "I am lyrically criminal",
-                //   style: TextStyle(color: Colors.grey),
-                // ),
-                // Container(
-                //   height: 8,
-                // ),
-                // Text("SEE TRANSLATION"),
-                // Container(
-                //   height: 18,
-                // ),
               ],
             );
           } else {
@@ -152,7 +123,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffF9F9F9),
+      backgroundColor: Colors.white,
       body: SafeArea(
         top: true,
         child: SingleChildScrollView(

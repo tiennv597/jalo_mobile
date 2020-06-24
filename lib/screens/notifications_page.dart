@@ -1,5 +1,4 @@
 import 'package:shinro_int2/constant/app_properties.dart';
-import 'package:shinro_int2/screens/rating/rating_page.dart';
 import 'package:shinro_int2/screens/tracking_page.dart';
 import 'package:flutter/material.dart';
 
@@ -263,9 +262,7 @@ class NotificationsPage extends StatelessWidget {
                             ]),
                           ),
                           InkWell(
-                            onTap: () => Navigator.of(context).push(
-                                MaterialPageRoute(
-                                    builder: (_) => RatingPage())),
+                            onTap: () => {},
                             child: Container(
                                 padding: const EdgeInsets.all(14.0),
                                 decoration: BoxDecoration(
