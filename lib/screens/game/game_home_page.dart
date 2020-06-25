@@ -1,12 +1,12 @@
-import 'package:shinro_int2/constant/app_properties.dart';
 import 'package:shinro_int2/models/game/types.dart';
 import 'package:shinro_int2/models/user/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'components/type_play_card.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shinro_int2/constant/shared_preferences.dart'
     as SHARED_PREFERNCES;
+
+import 'game_room_page.dart';
 
 class GameHomePage extends StatefulWidget {
   @override
@@ -56,35 +56,55 @@ class _GameHomePageState extends State<GameHomePage> {
       backgroundColor: Colors.white,
       body: SafeArea(
           top: true,
-          child:  GridView.count(
-                primary: false,
-                padding: const EdgeInsets.all(20),
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-                crossAxisCount: 2,
-                children: <Widget>[
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    child: const Text("He'd have you all unravel at the"),
-                    color: Colors.teal[100],
+          child: GridView.count(
+            primary: false,
+            padding: const EdgeInsets.all(20),
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 10,
+            crossAxisCount: 2,
+            children: <Widget>[
+              Container(
+                padding: const EdgeInsets.all(8),
+                child: RaisedButton(
+                  onPressed: () {
+                     Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (_) => GameRoomPage()));
+                  },
+                  textColor: Colors.white,
+                  padding: const EdgeInsets.all(0.0),
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: <Color>[
+                          Color(0xFF0D47A1),
+                          Color(0xFF1976D2),
+                          Color(0xFF42A5F5),
+                        ],
+                      ),
+                    ),
+                    padding: const EdgeInsets.all(10.0),
+                    child: const Text('Gradient Color'),
                   ),
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    child: const Text('Heed not the rabble'),
-                    color: Colors.teal[200],
-                  ),
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    child: const Text('Sound of screams but the'),
-                    color: Colors.teal[300],
-                  ),
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    child: const Text('Who scream'),
-                    color: Colors.teal[400],
-                  ),
-                ],
-              )
+                ),
+                //color: Colors.teal[100],
+              ),
+              Container(
+                padding: const EdgeInsets.all(8),
+                child: const Text('Heed not the rabble'),
+                color: Colors.teal[200],
+              ),
+              Container(
+                padding: const EdgeInsets.all(8),
+                child: const Text('Sound of screams but the'),
+                color: Colors.teal[300],
+              ),
+              Container(
+                padding: const EdgeInsets.all(8),
+                child: const Text('Who scream'),
+                color: Colors.teal[400],
+              ),
+            ],
+          )
           // Column(
           //   crossAxisAlignment: CrossAxisAlignment.start,
           //   children: <Widget>[
@@ -114,7 +134,7 @@ class _GameHomePageState extends State<GameHomePage> {
           //     //   ),
           //     // ),
           //     // SizedBox(height: 36),
-             
+
           //   ],
           // )
           ),
