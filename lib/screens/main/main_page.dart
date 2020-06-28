@@ -1,15 +1,10 @@
-import 'package:flutter_svg/svg.dart';
 import 'package:shinro_int2/constant/app_properties.dart';
 import 'package:shinro_int2/screens/game/game_room_page.dart';
 import 'package:shinro_int2/screens/grammar/example_page.dart';
-import 'package:shinro_int2/screens/main/components/product_list.dart';
 import 'package:shinro_int2/screens/main/components/rank_type_tab.dart';
-import 'package:shinro_int2/screens/main/components/recommended_list.dart';
 import 'package:shinro_int2/constant/app_colors.dart' as COLORS;
-import 'package:shinro_int2/screens/main/main_test.dart';
 import 'package:shinro_int2/screens/profile/profile_page.dart';
 import 'package:shinro_int2/models/product.dart';
-import 'package:shinro_int2/screens/game/game_home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'components/tab_view.dart';
@@ -71,24 +66,24 @@ class _MainPageState extends State<MainPage>
       controller: tabController,
       indicatorColor: transparentPurple,
     );
-    Widget tabBar2 = TabBar(
-      tabs: [
-        Tab(text: 'Related'),
-        Tab(text: 'Hot'),
-        Tab(text: 'Explore'),
-        Tab(text: 'Explore'),
-        Tab(text: 'Explore'),
-      ],
-      labelStyle: TextStyle(fontSize: 16.0),
-      unselectedLabelStyle: TextStyle(
-        fontSize: 14.0,
-      ),
-      labelColor: darkGrey,
-      unselectedLabelColor: Color.fromRGBO(0, 0, 0, 0.5),
-      isScrollable: true,
-      controller: tabController2,
-      indicatorColor: transparentPurple,
-    );
+    // Widget tabBar2 = TabBar(
+    //   tabs: [
+    //     Tab(text: 'Related'),
+    //     Tab(text: 'Hot'),
+    //     Tab(text: 'Explore'),
+    //     Tab(text: 'Explore'),
+    //     Tab(text: 'Explore'),
+    //   ],
+    //   labelStyle: TextStyle(fontSize: 16.0),
+    //   unselectedLabelStyle: TextStyle(
+    //     fontSize: 14.0,
+    //   ),
+    //   labelColor: darkGrey,
+    //   unselectedLabelColor: Color.fromRGBO(0, 0, 0, 0.5),
+    //   isScrollable: true,
+    //   controller: tabController2,
+    //   indicatorColor: transparentPurple,
+    // );
     void _onItemTapped(int index) {
       setState(() {
         _selectedIndex = index;
@@ -184,7 +179,8 @@ class _MainPageState extends State<MainPage>
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Padding(
-                          padding: const EdgeInsets.only(top: 0,left: 8,right: 8),
+                          padding:
+                              const EdgeInsets.only(top: 0, left: 8, right: 8),
                           child: Column(
                             children: <Widget>[
                               Padding(

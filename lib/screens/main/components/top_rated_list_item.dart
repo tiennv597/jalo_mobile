@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:shinro_int2/models/trending.dart';
 import 'package:shinro_int2/screens/main/components/trending_details_screen.dart';
 

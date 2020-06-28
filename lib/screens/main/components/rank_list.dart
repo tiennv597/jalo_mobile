@@ -1,10 +1,10 @@
 import 'package:shinro_int2/constant/app_properties.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+
 import 'package:shinro_int2/models/product.dart';
 import 'package:shinro_int2/screens/game/game_home_page.dart';
 
-class RecommendedList2 extends StatelessWidget {
+class RankList extends StatelessWidget {
   List<Product> products = [
     Product('assets/bad.png', 'Bag', 'Beautiful bag', 2.33),
     Product('assets/bad.png', 'Cap', 'Cap with beautiful design', 10),
@@ -15,8 +15,6 @@ class RecommendedList2 extends StatelessWidget {
     Product('assets/bad.png', 'Silver Ring', 'Description', 52.33),
     Product('assets/bad.png', 'Shoes', 'Description', 62.33),
     Product('assets/bad.png', 'Headphones', 'Description', 72.33),
-
-
   ];
 
   @override
@@ -37,7 +35,7 @@ class RecommendedList2 extends StatelessWidget {
               ),
               Center(
                   child: Text(
-                'Recommended',
+                'Rank',
                 style: TextStyle(
                     color: darkGrey,
                     fontSize: 16.0,
@@ -49,34 +47,21 @@ class RecommendedList2 extends StatelessWidget {
         Flexible(
           child: Container(
             padding: EdgeInsets.only(top: 16.0, right: 16.0, left: 16.0),
-            child: StaggeredGridView.countBuilder(
-    physics: NeverScrollableScrollPhysics(),
+            child: ListView.builder(
+              physics: NeverScrollableScrollPhysics(),
               padding: EdgeInsets.zero,
-              crossAxisCount: 4,
               itemCount: products.length,
               itemBuilder: (BuildContext context, int index) => new ClipRRect(
-                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                    child: InkWell(
-                      onTap: () => Navigator.of(context).push(
-                          MaterialPageRoute(builder: (_) => GameHomePage())),
-                      child: Container(
-                          decoration: BoxDecoration(
-                            gradient: RadialGradient(
-                                colors: [Colors.grey[500], Colors.grey[700]],
-                                center: Alignment(0, 0),
-                                radius: 0.6,
-                                focal: Alignment(0, 0),
-                                focalRadius: 0.1),
-                          ),
-                          child: Hero(
-                              tag: products[index].image,
-                              child: Image.asset(products[index].image))),
-                    ),
-                  ),
-              staggeredTileBuilder: (int index) =>
-                  new StaggeredTile.count(2, index.isEven ? 3 : 2),
-              mainAxisSpacing: 4.0,
-              crossAxisSpacing: 4.0,
+                borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                child: InkWell(
+                  onTap: () => Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (_) => GameHomePage())),
+                  child: Container(
+                      decoration: BoxDecoration(
+                      ),
+                      child: Text("Top 1")),
+                ),
+              ),
             ),
           ),
         ),
