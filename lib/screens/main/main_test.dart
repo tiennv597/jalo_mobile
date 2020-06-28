@@ -1,65 +1,60 @@
-import 'package:shinro_int2/models/category.dart';
 import 'package:flutter/material.dart';
-import 'package:shinro_int2/screens/game/components/rank_list.dart';
+import 'package:shinro_int2/models/category.dart';
 import 'package:shinro_int2/screens/main/components/category_card.dart';
+import 'package:shinro_int2/screens/main/components/recommended_list2.dart';
 
-class RankTabView extends StatelessWidget {
-  final List<Category> categories = [
+
+class TabView2 extends StatelessWidget {
+  List<Category> categories = [
     Category(
       Color(0xffFCE183),
       Color(0xffF68D7F),
-      'Title1',
-      'assets/image.jpg',
+      'Gadgets',
+      'assets/fujisan.png',
     ),
     Category(
       Color(0xffF749A2),
       Color(0xffFF7375),
-      'Title2',
-      'assets/image.jpg',
+      'Clothes',
+      'assets/fujisan.png',
     ),
     Category(
       Color(0xff00E9DA),
       Color(0xff5189EA),
-      'Title3',
-      'assets/image.jpg',
+      'Fashion',
+      'assets/fujisan.png',
     ),
     Category(
       Color(0xffAF2D68),
       Color(0xff632376),
-      'Title4',
-      'assets/image.jpg',
+      'Home',
+      'assets/fujisan.png',
     ),
     Category(
       Color(0xff36E892),
       Color(0xff33B2B9),
-      'Title5',
-      'assets/image.jpg',
+      'Beauty',
+      'assets/fujisan.png',
     ),
     Category(
       Color(0xffF123C4),
       Color(0xff668CEA),
-      'Title6',
-      'assets/image.jpg',
+      'Appliances',
+      'assets/fujisan.png',
     ),
   ];
 
-  final TabController tabController;
+  TabController tabController;
 
-  RankTabView({Key key, this.tabController}) : super(key: key);
+  TabView2({Key key, this.tabController}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    print(MediaQuery.of(context).size.height / 9);
     return TabBarView(
         physics: NeverScrollableScrollPhysics(),
         controller: tabController,
         children: <Widget>[
-          Column(children: <Widget>[Flexible(child: RankList())]),
-          Column(children: <Widget>[
-            SizedBox(
-              height: 16.0,
-            ),
-            Flexible(child: RankList())
-          ]),
           Container(
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -77,10 +72,34 @@ class RankTabView extends StatelessWidget {
                 SizedBox(
                   height: 16.0,
                 ),
-                Flexible(child: RankList()),
+                Flexible(child: RecommendedList2()),
               ],
             ),
           ),
+          Column(children: <Widget>[
+            SizedBox(
+              height: 16.0,
+            ),
+            Flexible(child: RecommendedList2())
+          ]),
+          Column(children: <Widget>[
+            SizedBox(
+              height: 16.0,
+            ),
+            Flexible(child: RecommendedList2())
+          ]),
+          Column(children: <Widget>[
+            SizedBox(
+              height: 16.0,
+            ),
+            Flexible(child: RecommendedList2())
+          ]),
+          Column(children: <Widget>[
+            SizedBox(
+              height: 16.0,
+            ),
+            Flexible(child: RecommendedList2())
+          ]),
         ]);
   }
 }

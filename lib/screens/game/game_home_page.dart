@@ -86,8 +86,8 @@ class _GameHomePageState extends State<GameHomePage>
 
     Widget tabBar = TabBar(
       tabs: [
-        Tab(text: 'Related'),
-        Tab(text: 'Hot'),
+        Tab(text: 'Competition'),
+        Tab(text: 'JLPT'),
         Tab(text: 'Explore'),
       ],
       labelStyle: TextStyle(fontSize: 16.0),
@@ -96,88 +96,77 @@ class _GameHomePageState extends State<GameHomePage>
       ),
       labelColor: COLORS.darkGrey,
       unselectedLabelColor: Color.fromRGBO(0, 0, 0, 0.5),
-      isScrollable: true,
+      isScrollable: false,
       controller: tabController,
       indicatorColor: COLORS.transparentPurple,
     );
 
-    // Widget _buildRankTab() {
-    //   return;
-    // }
-
     return Scaffold(
       body: SafeArea(
         top: true,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(top: 8, left: 20, bottom: 0),
-              child: Text("Game"),
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(top: 0),
-                  child: Column(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: _buildTypeBtn('Competition', 'assets/ninja.png',
-                            COLORS.colorOrange),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: _buildTypeBtn(
-                            'JLPT', 'assets/benkyou.png', COLORS.colorBlue),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: Column(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: _buildTypeBtn(
-                            'Practice', 'assets/gokaku.png', COLORS.colorGreen),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: _buildTypeBtn('Competition', 'assets/good.png',
-                            COLORS.colorPurple),
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 16, right: 16),
-              child: Container(
-                width: withS,
-                height: heightS,
-                color: Colors.red,
-                child: NestedScrollView(
-                  headerSliverBuilder:
-                      (BuildContext context, bool innerBoxIsScrolled) {
-                    // These are the slivers that show up in the "outer" scroll view.
-                    return <Widget>[
-                      SliverToBoxAdapter(
-                        child: tabBar,
-                      )
-                    ];
-                  },
-                  body: RankTabView(
-                    tabController: tabController,
-                  ),
+        child: NestedScrollView(
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            // These are the slivers that show up in the "outer" scroll view.
+            return <Widget>[
+              SliverToBoxAdapter(
+                child: Column(
+                  children: <Widget>[
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(top: 8, left: 20, bottom: 0),
+                      child: Text("Game"),
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.only(top: 0),
+                          child: Column(
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: _buildTypeBtn('Competition',
+                                    'assets/ninja.png', COLORS.colorOrange),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: _buildTypeBtn('JLPT',
+                                    'assets/benkyou.png', COLORS.colorBlue),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8),
+                          child: Column(
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: _buildTypeBtn('Practice',
+                                    'assets/gokaku.png', COLORS.colorGreen),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: _buildTypeBtn('Competition',
+                                    'assets/good.png', COLORS.colorPurple),
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ],
                 ),
               ),
-            ),
-          ],
+              // SliverToBoxAdapter(
+              //   child: tabBar,
+              // )
+            ];
+          },
+          body: RankTabView(
+            tabController: tabController,
+          ),
         ),
       ),
     );
