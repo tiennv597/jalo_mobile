@@ -11,35 +11,29 @@ class RankTypeTab extends StatelessWidget {
     print(MediaQuery.of(context).size.height / 9);
     return TabBarView(controller: tabController, children: <Widget>[
       Column(children: <Widget>[
-        SizedBox(
-          height: 16.0,
-        ),
         Flexible(child: RankList())
       ]),
       Column(children: <Widget>[
-        SizedBox(
-          height: 16.0,
-        ),
         Flexible(child: RankList())
       ]),
-      Column(children: <Widget>[
-        SizedBox(
-          height: 16.0,
-        ),
-        Flexible(child: RankList())
-      ]),
-      Column(children: <Widget>[
-        SizedBox(
-          height: 16.0,
-        ),
-        Flexible(child: RankList())
-      ]),
-      Column(children: <Widget>[
-        SizedBox(
-          height: 16.0,
-        ),
-        Flexible(child: RankList())
-      ]),
+      // Column(children: <Widget>[
+      //   SizedBox(
+      //     height: 16.0,
+      //   ),
+      //   Flexible(child: RankList())
+      // ]),
+      // Column(children: <Widget>[
+      //   SizedBox(
+      //     height: 16.0,
+      //   ),
+      //   Flexible(child: RankList())
+      // ]),
+      // Column(children: <Widget>[
+      //   SizedBox(
+      //     height: 16.0,
+      //   ),
+      //   Flexible(child: RankList())
+      // ]),
     ]);
   }
 }

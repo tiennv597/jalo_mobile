@@ -44,7 +44,7 @@ class _MainPageState extends State<MainPage>
   void initState() {
     super.initState();
     tabController = TabController(length: 3, vsync: this);
-    tabController2 = TabController(length: 5, vsync: this);
+    tabController2 = TabController(length: 2, vsync: this);
     bottomTabController = TabController(length: 4, vsync: this);
   }
 
@@ -219,34 +219,39 @@ class _MainPageState extends State<MainPage>
                 ),
               ),
               SliverPadding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(0),
                 sliver: SliverAppBar(
-                  title: Text('Tab Controller Example'),
+                  // title: Text('Board Top'),
+                  expandedHeight: 20,
                   pinned: true,
                   floating: true,
-                  forceElevated: innerBoxIsScrolled,
+                 
+                  //forceElevated: innerBoxIsScrolled,
                   bottom: TabBar(
+                   
+                    indicatorColor: Colors
+                        .transparent, // then you can control color with transparent value
                     tabs: <Widget>[
                       Tab(
                         text: "Home",
-                        icon: Icon(Icons.home),
+                        //icon: Icon(Icons.home),
                       ),
                       Tab(
                         text: "Example page",
-                        icon: Icon(Icons.help),
+                        //icon: Icon(Icons.help),
                       ),
-                      Tab(
-                        text: "Home",
-                        icon: Icon(Icons.home),
-                      ),
-                      Tab(
-                        text: "Example page",
-                        icon: Icon(Icons.help),
-                      ),
-                      Tab(
-                        text: "Example page",
-                        icon: Icon(Icons.help),
-                      )
+                      // Tab(
+                      //   text: "Home",
+                      //   icon: Icon(Icons.home),
+                      // ),
+                      // Tab(
+                      //   text: "Example page",
+                      //   icon: Icon(Icons.help),
+                      // ),
+                      // Tab(
+                      //   text: "Example page",
+                      //   icon: Icon(Icons.help),
+                      // )
                     ],
                     controller: tabController2,
                   ),
@@ -261,7 +266,6 @@ class _MainPageState extends State<MainPage>
       ),
       ProfilePage()
     ];
-
     return Scaffold(
       backgroundColor: Colors.white,
       bottomNavigationBar: BottomNavigationBar(
