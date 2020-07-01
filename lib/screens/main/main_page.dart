@@ -4,7 +4,6 @@ import 'package:shinro_int2/screens/grammar/example_page.dart';
 import 'package:shinro_int2/screens/main/components/rank_type_tab.dart';
 import 'package:shinro_int2/constant/app_colors.dart' as COLORS;
 import 'package:shinro_int2/screens/profile/profile_page.dart';
-import 'package:shinro_int2/models/product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'components/tab_view.dart';
@@ -13,24 +12,6 @@ class MainPage extends StatefulWidget {
   @override
   _MainPageState createState() => _MainPageState();
 }
-
-// List<Product> products = [
-//   Product(
-//       'assets/image.jpg',
-//       'Skullcandy headset L325',
-//       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut labore et dolore magna aliqua. Nec nam aliquam sem et tortor consequat id porta nibh. Orci porta non pulvinar neque laoreet suspendisse. Id nibh tortor id aliquet. Dui sapien eget mi proin. Viverra vitae congue eu consequat ac felis donec. Etiam dignissim diam quis enim lobortis scelerisque fermentum dui faucibus. Vulputate mi sit amet mauris commodo quis imperdiet. Vel fringilla est ullamcorper eget nulla facilisi etiam dignissim. Sit amet cursus sit amet dictum sit amet justo. Mattis pellentesque id nibh tortor. Sed blandit libero volutpat sed cras ornare arcu dui. Fermentum et sollicitudin ac orci phasellus. Ipsum nunc aliquet bibendum enim facilisis gravida. Viverra suspendisse potenti nullam ac tortor. Dapibus ultrices in iaculis nunc sed. Nisi porta lorem mollis aliquam ut porttitor leo a. Phasellus egestas tellus rutrum tellus pellentesque. Et malesuada fames ac turpis egestas maecenas pharetra convallis. Commodo ullamcorper a lacus vestibulum sed arcu non odio. Urna id volutpat lacus laoreet non curabitur gravida arcu ac. Eros in cursus turpis massa. Eget mauris pharetra et ultrices neque.',
-//       102.99),
-//   Product(
-//       'assets/image.jpg',
-//       'Skullcandy headset X25',
-//       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut labore et dolore magna aliqua. Nec nam aliquam sem et tortor consequat id porta nibh. Orci porta non pulvinar neque laoreet suspendisse. Id nibh tortor id aliquet. Dui sapien eget mi proin. Viverra vitae congue eu consequat ac felis donec. Etiam dignissim diam quis enim lobortis scelerisque fermentum dui faucibus. Vulputate mi sit amet mauris commodo quis imperdiet. Vel fringilla est ullamcorper eget nulla facilisi etiam dignissim. Sit amet cursus sit amet dictum sit amet justo. Mattis pellentesque id nibh tortor. Sed blandit libero volutpat sed cras ornare arcu dui. Fermentum et sollicitudin ac orci phasellus. Ipsum nunc aliquet bibendum enim facilisis gravida. Viverra suspendisse potenti nullam ac tortor. Dapibus ultrices in iaculis nunc sed. Nisi porta lorem mollis aliquam ut porttitor leo a. Phasellus egestas tellus rutrum tellus pellentesque. Et malesuada fames ac turpis egestas maecenas pharetra convallis. Commodo ullamcorper a lacus vestibulum sed arcu non odio. Urna id volutpat lacus laoreet non curabitur gravida arcu ac. Eros in cursus turpis massa. Eget mauris pharetra et ultrices neque.',
-//       55.99),
-//   Product(
-//       'assets/image.jpg',
-//       'Blackzy PRO hedphones M003',
-//       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut labore et dolore magna aliqua. Nec nam aliquam sem et tortor consequat id porta nibh. Orci porta non pulvinar neque laoreet suspendisse. Id nibh tortor id aliquet. Dui sapien eget mi proin. Viverra vitae congue eu consequat ac felis donec. Etiam dignissim diam quis enim lobortis scelerisque fermentum dui faucibus. Vulputate mi sit amet mauris commodo quis imperdiet. Vel fringilla est ullamcorper eget nulla facilisi etiam dignissim. Sit amet cursus sit amet dictum sit amet justo. Mattis pellentesque id nibh tortor. Sed blandit libero volutpat sed cras ornare arcu dui. Fermentum et sollicitudin ac orci phasellus. Ipsum nunc aliquet bibendum enim facilisis gravida. Viverra suspendisse potenti nullam ac tortor. Dapibus ultrices in iaculis nunc sed. Nisi porta lorem mollis aliquam ut porttitor leo a. Phasellus egestas tellus rutrum tellus pellentesque. Et malesuada fames ac turpis egestas maecenas pharetra convallis. Commodo ullamcorper a lacus vestibulum sed arcu non odio. Urna id volutpat lacus laoreet non curabitur gravida arcu ac. Eros in cursus turpis massa. Eget mauris pharetra et ultrices neque.',
-//       152.99),
-// ];
 
 class _MainPageState extends State<MainPage>
     with TickerProviderStateMixin<MainPage> {
@@ -66,24 +47,6 @@ class _MainPageState extends State<MainPage>
       controller: tabController,
       indicatorColor: transparentPurple,
     );
-    // Widget tabBar2 = TabBar(
-    //   tabs: [
-    //     Tab(text: 'Related'),
-    //     Tab(text: 'Hot'),
-    //     Tab(text: 'Explore'),
-    //     Tab(text: 'Explore'),
-    //     Tab(text: 'Explore'),
-    //   ],
-    //   labelStyle: TextStyle(fontSize: 16.0),
-    //   unselectedLabelStyle: TextStyle(
-    //     fontSize: 14.0,
-    //   ),
-    //   labelColor: darkGrey,
-    //   unselectedLabelColor: Color.fromRGBO(0, 0, 0, 0.5),
-    //   isScrollable: true,
-    //   controller: tabController2,
-    //   indicatorColor: transparentPurple,
-    // );
     void _onItemTapped(int index) {
       setState(() {
         _selectedIndex = index;
@@ -130,16 +93,61 @@ class _MainPageState extends State<MainPage>
     }
 
     List<Widget> _widgetOptions = <Widget>[
-      SafeArea(
-        child: NestedScrollView(
-          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-            // These are the slivers that show up in the "outer" scroll view.
-            return <Widget>[
-              SliverToBoxAdapter(
-                child: tabBar,
-              )
-            ];
-          },
+      DefaultTabController(
+        length: 3,
+        child: Scaffold(
+          backgroundColor: Colors.white,
+          appBar: AppBar(
+            backgroundColor: Colors.white,
+            elevation: 0.0,
+            bottom: PreferredSize(
+              preferredSize: Size.fromHeight(-20),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Container(
+                  height: 32,
+                  child: TabBar(
+                    isScrollable: true,
+                    unselectedLabelColor: Colors.grey,
+                    
+                    indicatorSize: TabBarIndicatorSize.tab,
+                    labelColor: Colors.black,
+                    labelStyle: TextStyle(fontWeight: FontWeight.bold),
+                    tabs: <Widget>[
+                      Tab(
+                        child: Container(
+                          height: 32,
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: Text("Related"),
+                          ),
+                        ),
+                      ),
+                      Tab(
+                        child: Container(
+                          height: 32,
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: Text("Hot"),
+                          ),
+                        ),
+                      ),
+                      Tab(
+                        child: Container(
+                          height: 32,
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: Text("Explore"),
+                          ),
+                        ),
+                      ),
+                    ],
+                    controller: tabController,
+                  ),
+                ),
+              ),
+            ),
+          ),
           body: TabView(
             tabController: tabController,
           ),
@@ -201,7 +209,7 @@ class _MainPageState extends State<MainPage>
                           child: Column(
                             children: <Widget>[
                               Padding(
-                               padding: const EdgeInsets.only(
+                                padding: const EdgeInsets.only(
                                     right: 8, bottom: 8, left: 8),
                                 child: _buildTypeBtn('Practice',
                                     'assets/gokaku.png', COLORS.colorGreen),
@@ -216,6 +224,25 @@ class _MainPageState extends State<MainPage>
                         )
                       ],
                     ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 18),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            'Rank',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          FlatButton(
+                            child: Text('View All'),
+                            onPressed: () {},
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -226,6 +253,9 @@ class _MainPageState extends State<MainPage>
                   expandedHeight: 10,
                   pinned: true,
                   floating: true,
+                  primary: true,
+                  //disable AppBar shadow when no content is scrolled under it
+                  elevation: 0.0,
                   backgroundColor: Colors.white,
                   //forceElevated: innerBoxIsScrolled,
                   bottom: PreferredSize(
