@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
-
 import 'package:shinro_int2/models/product.dart';
 import 'package:shinro_int2/screens/game/game_home_page.dart';
 
-class RankList extends StatelessWidget {
+class RankList extends StatefulWidget {
+  @override
+  _RankListState createState() => _RankListState();
+}
+
+class _RankListState extends State<RankList>
+    with TickerProviderStateMixin<RankList> {
   List<Product> products = [
     Product('assets/bad.png', 'Bag', 'Beautiful bag', 2.33),
     Product('assets/bad.png', 'Cap', 'Cap with beautiful design', 10),
@@ -15,39 +20,98 @@ class RankList extends StatelessWidget {
     Product('assets/bad.png', 'Shoes', 'Description', 62.33),
     Product('assets/bad.png', 'Headphones', 'Description', 72.33),
   ];
+  TabController tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    tabController = TabController(length: 3, vsync: this);
+  }
 
   @override
   Widget build(BuildContext context) {
+    // Widget tabBar = TabBar(
+    //   tabs: [
+    //     Tab(text: 'Related'),
+    //     Tab(text: 'Hot'),
+    //     Tab(text: 'Explore'),
+    //   ],
+    //   labelStyle: TextStyle(fontSize: 16.0),
+    //   unselectedLabelStyle: TextStyle(
+    //     fontSize: 14.0,
+    //   ),
+    //   labelColor: darkGrey,
+    //   unselectedLabelColor: Color.fromRGBO(0, 0, 0, 0.5),
+    //   isScrollable: true,
+    //   controller: tabController,
+    //   indicatorColor: transparentPurple,
+    // );
     return MaterialApp(
       home: DefaultTabController(
-        length: 3,
+        length: 4,
         child: Scaffold(
-          appBar: PreferredSize(
-            preferredSize: Size.fromHeight(60.0), // here the desired height
-            child: AppBar(
-              bottom: TabBar(
-                indicatorColor: Colors
-                    .transparent, // then you can control color with transparent value
-                tabs: [
-                  Tab(
-                    text: "Tab1",
-                  ),
-                  Tab(
-                    text: "Tab2",
-                  ),
-                  Tab(
-                    text: "Tab3",
-                  ),
-                ],
+          appBar: AppBar(
+            backgroundColor: Colors.white,
+            elevation: 0,
+            bottom: PreferredSize(
+              preferredSize: new Size(180.0, -20.0),
+              child: Container(
+                width: MediaQuery.of(context).size.width*0.85,
+                height: 24,
+                child: TabBar(
+                    unselectedLabelColor: Colors.redAccent,
+                    //indicatorSize: TabBarIndicatorSize.,
+                    indicator: BoxDecoration(
+                        gradient: LinearGradient(
+                            colors: [Colors.redAccent, Colors.orangeAccent]),
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.redAccent),
+                    tabs: [
+                      Tab(
+                        child: Container(
+                          height: 20,
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: Text("Vocabulary"),
+                          ),
+                        ),
+                      ),
+                      Tab(
+                        child: Container(
+                          height: 20,
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: Text("Grammar"),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        height: 20,
+                        child: Tab(
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: Text("Reading"),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        height: 20,
+                        child: Tab(
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: Text("Listen"),
+                          ),
+                        ),
+                      ),
+                    ]),
               ),
-              //title: Text('Tabs Demo'),
             ),
           ),
           body: TabBarView(
             children: [
               Flexible(
                 child: Container(
-                  padding: EdgeInsets.only(top: 16.0, right: 16.0, left: 16.0),
+                  //padding: EdgeInsets.only(top: 16.0, right: 16.0, left: 16.0),
                   child: ListView.builder(
                     physics: NeverScrollableScrollPhysics(),
                     padding: EdgeInsets.zero,
@@ -66,6 +130,7 @@ class RankList extends StatelessWidget {
                 ),
               ),
               Icon(Icons.directions_transit),
+              Icon(Icons.directions_bike),
               Icon(Icons.directions_bike),
             ],
           ),

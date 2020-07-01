@@ -16,24 +16,6 @@ class RankTypeTab extends StatelessWidget {
       Column(children: <Widget>[
         Flexible(child: RankList())
       ]),
-      // Column(children: <Widget>[
-      //   SizedBox(
-      //     height: 16.0,
-      //   ),
-      //   Flexible(child: RankList())
-      // ]),
-      // Column(children: <Widget>[
-      //   SizedBox(
-      //     height: 16.0,
-      //   ),
-      //   Flexible(child: RankList())
-      // ]),
-      // Column(children: <Widget>[
-      //   SizedBox(
-      //     height: 16.0,
-      //   ),
-      //   Flexible(child: RankList())
-      // ]),
     ]);
   }
 }

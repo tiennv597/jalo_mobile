@@ -14,23 +14,23 @@ class MainPage extends StatefulWidget {
   _MainPageState createState() => _MainPageState();
 }
 
-List<Product> products = [
-  Product(
-      'assets/image.jpg',
-      'Skullcandy headset L325',
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut labore et dolore magna aliqua. Nec nam aliquam sem et tortor consequat id porta nibh. Orci porta non pulvinar neque laoreet suspendisse. Id nibh tortor id aliquet. Dui sapien eget mi proin. Viverra vitae congue eu consequat ac felis donec. Etiam dignissim diam quis enim lobortis scelerisque fermentum dui faucibus. Vulputate mi sit amet mauris commodo quis imperdiet. Vel fringilla est ullamcorper eget nulla facilisi etiam dignissim. Sit amet cursus sit amet dictum sit amet justo. Mattis pellentesque id nibh tortor. Sed blandit libero volutpat sed cras ornare arcu dui. Fermentum et sollicitudin ac orci phasellus. Ipsum nunc aliquet bibendum enim facilisis gravida. Viverra suspendisse potenti nullam ac tortor. Dapibus ultrices in iaculis nunc sed. Nisi porta lorem mollis aliquam ut porttitor leo a. Phasellus egestas tellus rutrum tellus pellentesque. Et malesuada fames ac turpis egestas maecenas pharetra convallis. Commodo ullamcorper a lacus vestibulum sed arcu non odio. Urna id volutpat lacus laoreet non curabitur gravida arcu ac. Eros in cursus turpis massa. Eget mauris pharetra et ultrices neque.',
-      102.99),
-  Product(
-      'assets/image.jpg',
-      'Skullcandy headset X25',
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut labore et dolore magna aliqua. Nec nam aliquam sem et tortor consequat id porta nibh. Orci porta non pulvinar neque laoreet suspendisse. Id nibh tortor id aliquet. Dui sapien eget mi proin. Viverra vitae congue eu consequat ac felis donec. Etiam dignissim diam quis enim lobortis scelerisque fermentum dui faucibus. Vulputate mi sit amet mauris commodo quis imperdiet. Vel fringilla est ullamcorper eget nulla facilisi etiam dignissim. Sit amet cursus sit amet dictum sit amet justo. Mattis pellentesque id nibh tortor. Sed blandit libero volutpat sed cras ornare arcu dui. Fermentum et sollicitudin ac orci phasellus. Ipsum nunc aliquet bibendum enim facilisis gravida. Viverra suspendisse potenti nullam ac tortor. Dapibus ultrices in iaculis nunc sed. Nisi porta lorem mollis aliquam ut porttitor leo a. Phasellus egestas tellus rutrum tellus pellentesque. Et malesuada fames ac turpis egestas maecenas pharetra convallis. Commodo ullamcorper a lacus vestibulum sed arcu non odio. Urna id volutpat lacus laoreet non curabitur gravida arcu ac. Eros in cursus turpis massa. Eget mauris pharetra et ultrices neque.',
-      55.99),
-  Product(
-      'assets/image.jpg',
-      'Blackzy PRO hedphones M003',
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut labore et dolore magna aliqua. Nec nam aliquam sem et tortor consequat id porta nibh. Orci porta non pulvinar neque laoreet suspendisse. Id nibh tortor id aliquet. Dui sapien eget mi proin. Viverra vitae congue eu consequat ac felis donec. Etiam dignissim diam quis enim lobortis scelerisque fermentum dui faucibus. Vulputate mi sit amet mauris commodo quis imperdiet. Vel fringilla est ullamcorper eget nulla facilisi etiam dignissim. Sit amet cursus sit amet dictum sit amet justo. Mattis pellentesque id nibh tortor. Sed blandit libero volutpat sed cras ornare arcu dui. Fermentum et sollicitudin ac orci phasellus. Ipsum nunc aliquet bibendum enim facilisis gravida. Viverra suspendisse potenti nullam ac tortor. Dapibus ultrices in iaculis nunc sed. Nisi porta lorem mollis aliquam ut porttitor leo a. Phasellus egestas tellus rutrum tellus pellentesque. Et malesuada fames ac turpis egestas maecenas pharetra convallis. Commodo ullamcorper a lacus vestibulum sed arcu non odio. Urna id volutpat lacus laoreet non curabitur gravida arcu ac. Eros in cursus turpis massa. Eget mauris pharetra et ultrices neque.',
-      152.99),
-];
+// List<Product> products = [
+//   Product(
+//       'assets/image.jpg',
+//       'Skullcandy headset L325',
+//       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut labore et dolore magna aliqua. Nec nam aliquam sem et tortor consequat id porta nibh. Orci porta non pulvinar neque laoreet suspendisse. Id nibh tortor id aliquet. Dui sapien eget mi proin. Viverra vitae congue eu consequat ac felis donec. Etiam dignissim diam quis enim lobortis scelerisque fermentum dui faucibus. Vulputate mi sit amet mauris commodo quis imperdiet. Vel fringilla est ullamcorper eget nulla facilisi etiam dignissim. Sit amet cursus sit amet dictum sit amet justo. Mattis pellentesque id nibh tortor. Sed blandit libero volutpat sed cras ornare arcu dui. Fermentum et sollicitudin ac orci phasellus. Ipsum nunc aliquet bibendum enim facilisis gravida. Viverra suspendisse potenti nullam ac tortor. Dapibus ultrices in iaculis nunc sed. Nisi porta lorem mollis aliquam ut porttitor leo a. Phasellus egestas tellus rutrum tellus pellentesque. Et malesuada fames ac turpis egestas maecenas pharetra convallis. Commodo ullamcorper a lacus vestibulum sed arcu non odio. Urna id volutpat lacus laoreet non curabitur gravida arcu ac. Eros in cursus turpis massa. Eget mauris pharetra et ultrices neque.',
+//       102.99),
+//   Product(
+//       'assets/image.jpg',
+//       'Skullcandy headset X25',
+//       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut labore et dolore magna aliqua. Nec nam aliquam sem et tortor consequat id porta nibh. Orci porta non pulvinar neque laoreet suspendisse. Id nibh tortor id aliquet. Dui sapien eget mi proin. Viverra vitae congue eu consequat ac felis donec. Etiam dignissim diam quis enim lobortis scelerisque fermentum dui faucibus. Vulputate mi sit amet mauris commodo quis imperdiet. Vel fringilla est ullamcorper eget nulla facilisi etiam dignissim. Sit amet cursus sit amet dictum sit amet justo. Mattis pellentesque id nibh tortor. Sed blandit libero volutpat sed cras ornare arcu dui. Fermentum et sollicitudin ac orci phasellus. Ipsum nunc aliquet bibendum enim facilisis gravida. Viverra suspendisse potenti nullam ac tortor. Dapibus ultrices in iaculis nunc sed. Nisi porta lorem mollis aliquam ut porttitor leo a. Phasellus egestas tellus rutrum tellus pellentesque. Et malesuada fames ac turpis egestas maecenas pharetra convallis. Commodo ullamcorper a lacus vestibulum sed arcu non odio. Urna id volutpat lacus laoreet non curabitur gravida arcu ac. Eros in cursus turpis massa. Eget mauris pharetra et ultrices neque.',
+//       55.99),
+//   Product(
+//       'assets/image.jpg',
+//       'Blackzy PRO hedphones M003',
+//       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut labore et dolore magna aliqua. Nec nam aliquam sem et tortor consequat id porta nibh. Orci porta non pulvinar neque laoreet suspendisse. Id nibh tortor id aliquet. Dui sapien eget mi proin. Viverra vitae congue eu consequat ac felis donec. Etiam dignissim diam quis enim lobortis scelerisque fermentum dui faucibus. Vulputate mi sit amet mauris commodo quis imperdiet. Vel fringilla est ullamcorper eget nulla facilisi etiam dignissim. Sit amet cursus sit amet dictum sit amet justo. Mattis pellentesque id nibh tortor. Sed blandit libero volutpat sed cras ornare arcu dui. Fermentum et sollicitudin ac orci phasellus. Ipsum nunc aliquet bibendum enim facilisis gravida. Viverra suspendisse potenti nullam ac tortor. Dapibus ultrices in iaculis nunc sed. Nisi porta lorem mollis aliquam ut porttitor leo a. Phasellus egestas tellus rutrum tellus pellentesque. Et malesuada fames ac turpis egestas maecenas pharetra convallis. Commodo ullamcorper a lacus vestibulum sed arcu non odio. Urna id volutpat lacus laoreet non curabitur gravida arcu ac. Eros in cursus turpis massa. Eget mauris pharetra et ultrices neque.',
+//       152.99),
+// ];
 
 class _MainPageState extends State<MainPage>
     with TickerProviderStateMixin<MainPage> {
@@ -179,12 +179,12 @@ class _MainPageState extends State<MainPage>
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Padding(
-                          padding:
-                              const EdgeInsets.only(top: 0, left: 8, right: 8),
+                          padding: const EdgeInsets.only(left: 8, right: 8),
                           child: Column(
                             children: <Widget>[
                               Padding(
-                                padding: const EdgeInsets.all(8.0),
+                                padding: const EdgeInsets.only(
+                                    right: 8, bottom: 8, left: 8),
                                 child: _buildTypeBtn('Competition',
                                     'assets/ninja.png', COLORS.colorOrange),
                               ),
@@ -197,11 +197,12 @@ class _MainPageState extends State<MainPage>
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(12),
+                          padding: const EdgeInsets.only(left: 8, right: 8),
                           child: Column(
                             children: <Widget>[
                               Padding(
-                                padding: const EdgeInsets.all(8.0),
+                               padding: const EdgeInsets.only(
+                                    right: 8, bottom: 8, left: 8),
                                 child: _buildTypeBtn('Practice',
                                     'assets/gokaku.png', COLORS.colorGreen),
                               ),
@@ -222,38 +223,52 @@ class _MainPageState extends State<MainPage>
                 padding: const EdgeInsets.all(0),
                 sliver: SliverAppBar(
                   // title: Text('Board Top'),
-                  expandedHeight: 20,
+                  expandedHeight: 10,
                   pinned: true,
                   floating: true,
-                 
+                  backgroundColor: Colors.white,
                   //forceElevated: innerBoxIsScrolled,
-                  bottom: TabBar(
-                   
-                    indicatorColor: Colors
-                        .transparent, // then you can control color with transparent value
-                    tabs: <Widget>[
-                      Tab(
-                        text: "Home",
-                        //icon: Icon(Icons.home),
+                  bottom: PreferredSize(
+                    preferredSize: new Size(200.0, 32.0),
+                    child: Container(
+                      height: 30,
+                      child: TabBar(
+                        unselectedLabelColor: Colors.redAccent,
+                        indicatorSize: TabBarIndicatorSize.label,
+                        indicator: BoxDecoration(
+                            borderRadius: BorderRadius.circular(50),
+                            color: Colors.redAccent),
+                        tabs: <Widget>[
+                          Tab(
+                            child: Container(
+                              height: 30,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50),
+                                  border: Border.all(
+                                      color: Colors.redAccent, width: 1)),
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Text("Competition"),
+                              ),
+                            ),
+                          ),
+                          Tab(
+                            child: Container(
+                              height: 30,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50),
+                                  border: Border.all(
+                                      color: Colors.redAccent, width: 1)),
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Text("JLPT"),
+                              ),
+                            ),
+                          ),
+                        ],
+                        controller: tabController2,
                       ),
-                      Tab(
-                        text: "Example page",
-                        //icon: Icon(Icons.help),
-                      ),
-                      // Tab(
-                      //   text: "Home",
-                      //   icon: Icon(Icons.home),
-                      // ),
-                      // Tab(
-                      //   text: "Example page",
-                      //   icon: Icon(Icons.help),
-                      // ),
-                      // Tab(
-                      //   text: "Example page",
-                      //   icon: Icon(Icons.help),
-                      // )
-                    ],
-                    controller: tabController2,
+                    ),
                   ),
                 ),
               )
