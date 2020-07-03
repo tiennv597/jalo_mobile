@@ -60,17 +60,53 @@ class RoomsListState extends State<RoomsList> {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Container(
-                        height: 60,
+                        height: 54,
                         decoration: BoxDecoration(
-                          gradient: RadialGradient(
-                              colors: [Colors.grey[500], Colors.grey[700]],
-                              center: Alignment(0, 0),
-                              radius: 0.6,
-                              focal: Alignment(0, 0),
-                              focalRadius: 0.1),
+                          gradient: LinearGradient(
+                              begin: Alignment.topRight,
+                              end: Alignment.bottomLeft,
+                              colors: [
+                                Color(0xFF42A5F5),
+                                Color(0xFF1E88E5),
+                                Color(0xFF1976D2),
+                              ]),
                         ),
-                        child: Text(
-                          widget.rooms[index],
+                        child: Container(
+                          child: Row(
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: CircleAvatar(
+                                    backgroundColor: Colors.brown.shade800,
+                                    child: Text(
+                                      widget.rooms[index],
+                                    )),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  "Solo 1222",
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  "N5",
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  children: <Widget>[
+                                    Icon(Icons.account_circle),
+                                    Text(
+                                      "15",
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         )),
                   ),
                 ),

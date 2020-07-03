@@ -372,18 +372,40 @@ class _GameRoomPageState extends State<GameRoomPage>
   @override
   Widget build(BuildContext context) {
     Widget tabBar = TabBar(
-      tabs: [
-        Tab(text: '漢字'),
-        Tab(text: '語彙'),
-        Tab(text: '文法'),
+      isScrollable: true,
+      unselectedLabelColor: Colors.grey,
+      indicatorSize: TabBarIndicatorSize.tab,
+      labelColor: Colors.black,
+      labelStyle: TextStyle(fontWeight: FontWeight.bold),
+      tabs: <Widget>[
+        Tab(
+          child: Container(
+            height: 32,
+            child: Align(
+              alignment: Alignment.center,
+              child: Text("漢字"),
+            ),
+          ),
+        ),
+        Tab(
+          child: Container(
+            height: 32,
+            child: Align(
+              alignment: Alignment.center,
+              child: Text("語彙"),
+            ),
+          ),
+        ),
+        Tab(
+          child: Container(
+            height: 32,
+            child: Align(
+              alignment: Alignment.center,
+              child: Text("文法"),
+            ),
+          ),
+        ),
       ],
-      labelStyle: TextStyle(fontSize: 15.0),
-      // unselectedLabelStyle: TextStyle(
-      //   fontSize: 18.0,
-      // ),
-      labelColor: darkGrey,
-      unselectedLabelColor: Color.fromRGBO(0, 0, 0, 0.5),
-      isScrollable: false,
       controller: tabController,
     );
     return Scaffold(
@@ -396,7 +418,10 @@ class _GameRoomPageState extends State<GameRoomPage>
           brightness: Brightness.light,
           backgroundColor: Colors.transparent,
           elevation: 0,
-          title: Text("Room"),
+          title: Text(
+            "Room",
+            style: TextStyle(color: Colors.black),
+          ),
         ),
       ),
       backgroundColor: Colors.white,
@@ -405,21 +430,31 @@ class _GameRoomPageState extends State<GameRoomPage>
         child: SafeArea(
           child: Stack(
             children: <Widget>[
-              NestedScrollView(
-                headerSliverBuilder:
-                    (BuildContext context, bool innerBoxIsScrolled) {
-                  return <Widget>[
-                    SliverToBoxAdapter(
-                      child: tabBar,
+              DefaultTabController(
+                length: 3,
+                child: Scaffold(
+                  backgroundColor: Colors.white,
+                  appBar: AppBar(
+                    backgroundColor: Colors.white,
+                    elevation: 0.0,
+                    bottom: PreferredSize(
+                      preferredSize: Size.fromHeight(-20),
+                      child: Align(
+                        //alignment: Alignment.centerLeft,
+                        child: Container(
+                          height: 32,
+                          child: tabBar,
+                        ),
+                      ),
                     ),
-                  ];
-                },
-                body: TabView(
-                  tabController: tabController,
-                  cw: cw, // list rooms chinese word
-                  vc: vc, // list rooms vocabulary
-                  gr: gr, // list rooms grammar
-                  socket: socket, //sockets
+                  ),
+                  body: TabView(
+                    tabController: tabController,
+                    cw: cw, // list rooms chinese word
+                    vc: vc, // list rooms vocabulary
+                    gr: gr, // list rooms grammar
+                    socket: socket, //sockets
+                  ),
                 ),
               ),
               SizedBox(

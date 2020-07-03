@@ -109,7 +109,6 @@ class _MainPageState extends State<MainPage>
                   child: TabBar(
                     isScrollable: true,
                     unselectedLabelColor: Colors.grey,
-                    
                     indicatorSize: TabBarIndicatorSize.tab,
                     labelColor: Colors.black,
                     labelStyle: TextStyle(fontWeight: FontWeight.bold),
