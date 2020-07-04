@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shinro_int2/models/game/info_room.dart';
 import 'package:socket_io_client/socket_io_client.dart';
+import 'package:shinro_int2/constant/app_colors.dart' as COLORS;
 
 import '../game_start_page.dart';
 
@@ -66,43 +67,58 @@ class RoomsListState extends State<RoomsList> {
                               begin: Alignment.topRight,
                               end: Alignment.bottomLeft,
                               colors: [
-                                Color(0xFF42A5F5),
-                                Color(0xFF1E88E5),
-                                Color(0xFF1976D2),
+                                COLORS.tiColor51,
+                                COLORS.tiColor52,
                               ]),
                         ),
                         child: Container(
                           child: Row(
                             children: <Widget>[
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: CircleAvatar(
-                                    backgroundColor: Colors.brown.shade800,
-                                    child: Text(
-                                      widget.rooms[index],
-                                    )),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  "Solo 1222",
+                              Container(
+                                width: MediaQuery.of(context).size.width / 5,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: CircleAvatar(
+                                      backgroundColor: COLORS.tiColor52,
+                                      child: Text(
+                                        widget.rooms[index],
+                                        style: TextStyle(color: Colors.white),
+                                      )),
                                 ),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  "N5",
+                              Container(
+                                width: MediaQuery.of(context).size.width / 2.5,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    "Solo 1222",
+                                    style: TextStyle(color: Colors.white),
+                                  ),
                                 ),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Row(
-                                  children: <Widget>[
-                                    Icon(Icons.account_circle),
-                                    Text(
-                                      "15",
-                                    ),
-                                  ],
+                              Container(
+                                width: MediaQuery.of(context).size.width / 10,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    "N5",
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                width: MediaQuery.of(context).size.width / 6,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    children: <Widget>[
+                                      Icon(Icons.account_circle,color: Colors.white,),
+                                      Text(
+                                        "15",
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ],

@@ -10,6 +10,7 @@ import 'package:shinro_int2/screens/game/components/user_list_modal.dart';
 import 'package:shinro_int2/screens/game/game_quiz_page.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 import 'package:shinro_int2/constant/network_constant.dart' as NETWORK_CONSTANT;
+import 'package:shinro_int2/constant/app_colors.dart' as COLORS;
 import 'components/user_item.dart';
 import 'package:shinro_int2/models/game/info_room.dart';
 
@@ -247,8 +248,15 @@ class StrartGameScreenState extends State<StrartGameScreen> {
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(40.0), // here the desired height
           child: new AppBar(
-            elevation:
-                Theme.of(context).platform == TargetPlatform.iOS ? 0.0 : 4.0,
+            iconTheme: IconThemeData(
+              color: Colors.black, //change your color here
+            ),
+            title: Text(
+              "Solo 122",
+              style: TextStyle(color: Colors.black),
+            ),
+            backgroundColor: Colors.white,
+            elevation: 0,
             actions: <Widget>[
               new IconButton(
                   icon: new Icon(Icons.exit_to_app), onPressed: _signOut)
@@ -339,7 +347,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
                   ),
                 ],
               ),
-              _buildRoomInfo(),
+              _buildRoomInfo2(),
               Flexible(
                 child: Container(
                   // list message
@@ -371,7 +379,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
 
   CupertinoButton getIOSSendButton() {
     return new CupertinoButton(
-      child: new Text("Send"),
+      child: new Text("S"),
       onPressed: _isComposingMessage
           ? () => _textMessageSubmitted(_textEditingController.text)
           : null,
@@ -432,7 +440,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
                               ),
                               onPressed: () {}),
                           SizedBox(
-                            width: 280.0,
+                            width: MediaQuery.of(context).size.width / 1.6,
                           )
                         ],
                       ),
@@ -511,6 +519,86 @@ class StrartGameScreenState extends State<StrartGameScreen> {
                 ),
               ],
             ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildRoomInfo2() {
+    return Container(
+      height: MediaQuery.of(context).size.width / 3,
+      width: MediaQuery.of(context).size.width-16,
+      decoration: BoxDecoration(
+          gradient: LinearGradient(
+              colors: [COLORS.tiColor41, COLORS.tiColor42],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight),
+          borderRadius: BorderRadius.all(Radius.circular(10))),
+      padding: const EdgeInsets.all(16.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Align(
+            alignment: Alignment(-1, 0),
+            child: Padding(
+              padding: const EdgeInsets.only(right: 8),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(top: 4, bottom: 4),
+                    child: Text(
+                      'Phòng: ' + idRoom,
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                  Padding(
+                   padding: const EdgeInsets.only(top: 4, bottom: 4),
+                    child: Text(
+                      'Số câu: ' + widget.infoRoom.quantity,
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 4, bottom: 4),
+                    child: Text(
+                      'Thời gian: ' + widget.infoRoom.time + ' giây/ câu',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+//        mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+               Container(
+                 child: Text(
+                   widget.infoRoom.type + ': ' + widget.infoRoom.level,
+                   style: TextStyle(color: Colors.white, fontSize: 16),
+                 ),
+               ),
+              Container(
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(24))),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'Setting',
+                    style: TextStyle(
+                        color: COLORS.tiColor41, fontWeight: FontWeight.bold),
+                  ),
+                ),
+              )
+            ],
           ),
         ],
       ),

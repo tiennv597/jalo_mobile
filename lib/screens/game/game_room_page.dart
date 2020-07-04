@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
-import 'package:shinro_int2/constant/app_properties.dart';
+import 'package:shinro_int2/constant/app_colors.dart' as COLORS;
 import 'package:shinro_int2/constant/network_constant.dart' as NETWORK_CONSTANT;
 import 'package:shinro_int2/models/game/rooms.dart';
 import 'package:shinro_int2/screens/game/game_start_page.dart';
@@ -331,7 +331,7 @@ class _GameRoomPageState extends State<GameRoomPage>
                             await _showSearchDialog(context);
                         print("Current team name is $currentTeam");
                       },
-                      color: Colors.deepPurple,
+                      color: COLORS.tiColor52,
                       textColor: Colors.white,
                       padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
                       splashColor: Colors.grey,
@@ -342,7 +342,7 @@ class _GameRoomPageState extends State<GameRoomPage>
                     child: RaisedButton(
                       child: Text("Play Now"),
                       onPressed: _getRoom,
-                      color: Colors.deepPurple,
+                      color: COLORS.tiColor52,
                       textColor: Colors.white,
                       padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
                       splashColor: Colors.grey,
@@ -356,7 +356,7 @@ class _GameRoomPageState extends State<GameRoomPage>
                         // final String currentTeam =
                         await _showCreateDialog(context);
                       },
-                      color: Colors.deepPurple,
+                      color: COLORS.tiColor52,
                       textColor: Colors.white,
                       padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
                       splashColor: Colors.grey,
@@ -440,7 +440,6 @@ class _GameRoomPageState extends State<GameRoomPage>
                     bottom: PreferredSize(
                       preferredSize: Size.fromHeight(-20),
                       child: Align(
-                        //alignment: Alignment.centerLeft,
                         child: Container(
                           height: 32,
                           child: tabBar,

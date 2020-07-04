@@ -32,20 +32,41 @@ class _MainPageState extends State<MainPage>
   @override
   Widget build(BuildContext context) {
     Widget tabBar = TabBar(
-      tabs: [
-        Tab(text: 'Related'),
-        Tab(text: 'Hot'),
-        Tab(text: 'Explore'),
-      ],
-      labelStyle: TextStyle(fontSize: 16.0),
-      unselectedLabelStyle: TextStyle(
-        fontSize: 14.0,
-      ),
-      labelColor: darkGrey,
-      unselectedLabelColor: Color.fromRGBO(0, 0, 0, 0.5),
       isScrollable: true,
+      unselectedLabelColor: Colors.grey,
+      indicatorSize: TabBarIndicatorSize.tab,
+      labelColor: Colors.black,
+      labelStyle: TextStyle(fontWeight: FontWeight.bold),
+      tabs: <Widget>[
+        Tab(
+          child: Container(
+            height: 32,
+            child: Align(
+              alignment: Alignment.center,
+              child: Text("Related"),
+            ),
+          ),
+        ),
+        Tab(
+          child: Container(
+            height: 32,
+            child: Align(
+              alignment: Alignment.center,
+              child: Text("Hot"),
+            ),
+          ),
+        ),
+        Tab(
+          child: Container(
+            height: 32,
+            child: Align(
+              alignment: Alignment.center,
+              child: Text("Explore"),
+            ),
+          ),
+        ),
+      ],
       controller: tabController,
-      indicatorColor: transparentPurple,
     );
     void _onItemTapped(int index) {
       setState(() {
@@ -106,43 +127,7 @@ class _MainPageState extends State<MainPage>
                 alignment: Alignment.centerLeft,
                 child: Container(
                   height: 32,
-                  child: TabBar(
-                    isScrollable: true,
-                    unselectedLabelColor: Colors.grey,
-                    indicatorSize: TabBarIndicatorSize.tab,
-                    labelColor: Colors.black,
-                    labelStyle: TextStyle(fontWeight: FontWeight.bold),
-                    tabs: <Widget>[
-                      Tab(
-                        child: Container(
-                          height: 32,
-                          child: Align(
-                            alignment: Alignment.center,
-                            child: Text("Related"),
-                          ),
-                        ),
-                      ),
-                      Tab(
-                        child: Container(
-                          height: 32,
-                          child: Align(
-                            alignment: Alignment.center,
-                            child: Text("Hot"),
-                          ),
-                        ),
-                      ),
-                      Tab(
-                        child: Container(
-                          height: 32,
-                          child: Align(
-                            alignment: Alignment.center,
-                            child: Text("Explore"),
-                          ),
-                        ),
-                      ),
-                    ],
-                    controller: tabController,
-                  ),
+                  child: tabBar,
                 ),
               ),
             ),
