@@ -1,6 +1,7 @@
 import 'package:shinro_int2/constant/app_colors.dart' as COLORS;
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'chat/home_chat_screen.dart';
 import 'learning/learing_screen.dart';
 import 'notification/notifications_screen.dart';
 import 'profile/profile_screen.dart';
@@ -143,7 +144,7 @@ class _MainPageState extends State<MainPage>
         ),
       ),
       LearingPage(tabController: tabControllerRank),
-      ProfilePage(),
+      ChatHomeScreen(),
       NotificationsSreen(),
       ProfilePage()
     ];
@@ -169,7 +170,7 @@ class _MainPageState extends State<MainPage>
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.message),
-            title: Text('Profile'),
+            title: Text('Message'),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.notifications),
