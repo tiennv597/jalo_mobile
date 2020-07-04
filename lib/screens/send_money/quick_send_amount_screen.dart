@@ -1,6 +1,6 @@
 import 'package:shinro_int2/constant/app_properties.dart';
 import 'package:shinro_int2/models/user.dart';
-import 'package:shinro_int2/screens/request_money/receive_page.dart';
+import 'package:shinro_int2/screens/request_money/receive_screen.dart';
 import 'package:flutter/material.dart';
 
 class QuickSendAmountPage extends StatelessWidget {

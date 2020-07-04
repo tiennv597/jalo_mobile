@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shinro_int2/models/product.dart';
 
 import 'package:shinro_int2/constant/app_colors.dart' as COLORS;
-import 'package:shinro_int2/screens/main/learning/game_home_page.dart';
+import 'package:shinro_int2/screens/main/learning/learing_screen.dart';
 
 class RankList extends StatefulWidget {
   @override
@@ -89,7 +89,7 @@ class _RankListState extends State<RankList>
                         child: InkWell(
                           onTap: () => Navigator.of(context).push(
                               MaterialPageRoute(
-                                  builder: (_) => GameHomePage())),
+                                  builder: (_) => LearingPage())),
                           child: Container(
                               decoration: BoxDecoration(),
                               child: Text("Top 1")),

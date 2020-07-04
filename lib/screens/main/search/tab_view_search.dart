@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'grammar/example_page.dart';
+import 'grammar/example_screen.dart';
 
 
 class TabSearchView extends StatelessWidget {

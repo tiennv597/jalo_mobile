@@ -5,19 +5,19 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shinro_int2/constant/shared_preferences.dart'
     as SHARED_PREFERNCES;
 import 'package:shinro_int2/constant/app_colors.dart' as COLORS;
-import 'package:shinro_int2/screens/main/components/rank_type_tab.dart';
+import 'package:shinro_int2/screens/main/learning/game/components/rank_type_tab.dart';
 
-import 'game/game_room_page.dart';
+import 'game/game_room_screen.dart';
 
-class GameHomePage extends StatefulWidget {
+class LearingPage extends StatefulWidget {
   final TabController tabController;
-  GameHomePage({Key key, this.tabController}) : super(key: key);
+  LearingPage({Key key, this.tabController}) : super(key: key);
   @override
-  _GameHomePageState createState() => _GameHomePageState();
+  _LearingPageState createState() => _LearingPageState();
 }
 
-class _GameHomePageState extends State<GameHomePage>
-    with TickerProviderStateMixin<GameHomePage> {
+class _LearingPageState extends State<LearingPage>
+    with TickerProviderStateMixin<LearingPage> {
   SwiperController swiperController = SwiperController();
   bool logined;
   String displayName;

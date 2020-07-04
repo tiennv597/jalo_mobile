@@ -10,7 +10,7 @@ import 'components/room_tab_view.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 import 'package:shinro_int2/models/game/info_room.dart';
 
-import 'game_start_page.dart';
+import 'game_start_screen.dart';
 
 class GameRoomPage extends StatefulWidget {
   @override

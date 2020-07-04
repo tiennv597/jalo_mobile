@@ -1,5 +1,5 @@
 import 'package:shinro_int2/constant/app_properties.dart';
-import 'package:shinro_int2/screens/main/main_page.dart';
+import 'package:shinro_int2/screens/main/main_screen.dart';
 import 'package:flutter/material.dart';
 
 class IntroPage extends StatefulWidget {

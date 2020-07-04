@@ -1,11 +1,11 @@
 import 'package:shinro_int2/models/category.dart';
 import 'package:flutter/material.dart';
 import '../components/category_card.dart';
-import 'tab_explore.dart';
-import 'tab_hot.dart';
-import 'tab_home.dart';
+import 'explore_screen.dart';
+import 'hot_screen.dart';
+import 'home_screen.dart';
 
-class TabView extends StatelessWidget {
+class HomeTabView extends StatelessWidget {
   final List<Category> categories = [
     Category(
       Color(0xffFCE183),
@@ -47,7 +47,7 @@ class TabView extends StatelessWidget {
 
   final TabController tabController;
 
-  TabView({Key key, this.tabController}) : super(key: key);
+  HomeTabView({Key key, this.tabController}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -55,12 +55,12 @@ class TabView extends StatelessWidget {
         //physics: NeverScrollableScrollPhysics(),
         controller: tabController,
         children: <Widget>[
-          Column(children: <Widget>[Flexible(child: TabHome())]),
+          Column(children: <Widget>[Flexible(child: HomeScreen())]),
           Column(children: <Widget>[
             SizedBox(
               height: 16.0,
             ),
-            Flexible(child: TabHot())
+            Flexible(child: HotScreen())
           ]),
           Container(
             child: Column(
@@ -79,7 +79,7 @@ class TabView extends StatelessWidget {
                 SizedBox(
                   height: 16.0,
                 ),
-                Flexible(child: TabExplore()),
+                Flexible(child: ExploreScreen()),
               ],
             ),
           ),

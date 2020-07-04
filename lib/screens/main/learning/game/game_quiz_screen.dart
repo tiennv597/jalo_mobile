@@ -11,7 +11,7 @@ import 'package:socket_io_client/socket_io_client.dart';
 import 'package:shinro_int2/constant/network_constant.dart' as NETWORK_CONSTANT;
 
 import 'components/user_rank_item.dart';
-import 'game_result_page.dart';
+import 'game_result_screen.dart';
 
 class GameQuizPage extends StatefulWidget {
   //var mydata;

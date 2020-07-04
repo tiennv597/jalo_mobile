@@ -3,7 +3,7 @@ import 'package:shinro_int2/models/game/info_room.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 import 'package:shinro_int2/constant/app_colors.dart' as COLORS;
 
-import '../game_start_page.dart';
+import '../game_start_screen.dart';
 
 class RoomsList extends StatefulWidget {
   final List rooms;

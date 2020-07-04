@@ -1,12 +1,10 @@
-
 import 'package:shinro_int2/constant/app_colors.dart' as COLORS;
-
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'learning/game_home_page.dart';
-import 'profile/profile_page.dart';
+import 'learning/learing_screen.dart';
+import 'profile/profile_screen.dart';
 import 'search/tab_view_search.dart';
-import 'home/tab_view_home.dart';
+import 'home/home_tab_view.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -70,7 +68,7 @@ class _MainPageState extends State<MainPage>
       ],
       controller: tabControllerHome,
     );
-       Widget tabBarSearch = TabBar(
+    Widget tabBarSearch = TabBar(
       isScrollable: true,
       unselectedLabelColor: Colors.grey,
       indicatorSize: TabBarIndicatorSize.tab,
@@ -114,13 +112,13 @@ class _MainPageState extends State<MainPage>
               ),
             ),
           ),
-          body: TabView(
+          body: HomeTabView(
             tabController: tabControllerHome,
           ),
         ),
       ),
-     // ExamplePage(),
-     DefaultTabController(
+      // ExamplePage(),
+      DefaultTabController(
         length: 1,
         child: Scaffold(
           backgroundColor: Colors.white,
@@ -143,7 +141,7 @@ class _MainPageState extends State<MainPage>
           ),
         ),
       ),
-      GameHomePage(tabController: tabControllerRank),
+      LearingPage(tabController: tabControllerRank),
       ProfilePage()
     ];
     return Scaffold(
@@ -163,7 +161,7 @@ class _MainPageState extends State<MainPage>
             title: Text('Grammar'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.import_contacts ),
+            icon: Icon(Icons.import_contacts),
             title: Text('Game'),
           ),
           BottomNavigationBarItem(

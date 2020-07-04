@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shinro_int2/models/game/types.dart';
 
-import '../game_room_page.dart';
+import '../game_room_screen.dart';
 
 class TypePlayCard extends StatelessWidget {
   final Types types;

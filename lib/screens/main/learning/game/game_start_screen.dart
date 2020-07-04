@@ -13,7 +13,7 @@ import 'components/user_item.dart';
 import 'package:shinro_int2/models/game/info_room.dart';
 
 import 'components/user_list_modal.dart';
-import 'game_quiz_page.dart';
+import 'game_quiz_screen.dart';
 
 class StrartGameScreen extends StatefulWidget {
   final InfoRoom infoRoom;

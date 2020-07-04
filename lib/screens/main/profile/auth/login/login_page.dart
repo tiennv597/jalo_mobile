@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:shinro_int2/network/api_service.dart';
 import 'package:shinro_int2/constant/shared_preferences.dart'
     as SHARED_PREFERNCES;
-import 'package:shinro_int2/screens/main/main_page.dart';
+import 'package:shinro_int2/screens/main/main_screen.dart';
 
 
 import '../register_page.dart';

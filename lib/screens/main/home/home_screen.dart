@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class TabHome extends StatefulWidget {
+class HomeScreen extends StatefulWidget {
   @override
-  _SocialTabState createState() => _SocialTabState();
+  _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _SocialTabState extends State<TabHome> {
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

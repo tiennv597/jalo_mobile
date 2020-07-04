@@ -1,6 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:shinro_int2/screens/splash/splash_page.dart';
+import 'package:shinro_int2/screens/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'network/api_service.dart';
 
