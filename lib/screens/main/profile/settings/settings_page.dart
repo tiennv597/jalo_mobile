@@ -1,15 +1,16 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shinro_int2/constant/app_properties.dart';
 import 'package:shinro_int2/screens/main/main_page.dart';
-import 'package:shinro_int2/screens/settings/change_country.dart';
-import 'package:shinro_int2/screens/settings/change_password_page.dart';
-import 'package:shinro_int2/screens/settings/legal_about_page.dart';
-import 'package:shinro_int2/screens/settings/notifications_settings_page.dart';
+
 import 'package:shinro_int2/constant/shared_preferences.dart'
     as SHARED_PREFERNCES;
 import 'package:flutter/material.dart';
 
+import 'change_country.dart';
 import 'change_language_page.dart';
+import 'change_password_page.dart';
+import 'legal_about_page.dart';
+import 'notifications_settings_page.dart';
 
 class SettingsPage extends StatelessWidget {
   @override

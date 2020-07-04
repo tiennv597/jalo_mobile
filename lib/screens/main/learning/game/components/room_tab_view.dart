@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:shinro_int2/screens/game/components/rooms_list.dart';
 import 'package:socket_io_client/socket_io_client.dart';
+
+import 'rooms_list.dart';
 
 class TabView extends StatelessWidget {
   final TabController tabController;

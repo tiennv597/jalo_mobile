@@ -5,14 +5,15 @@ import 'package:flutter/services.dart';
 import 'package:shinro_int2/models/category.dart';
 import 'package:shinro_int2/models/game/room.dart';
 import 'package:shinro_int2/models/message/message.dart';
-import 'package:shinro_int2/screens/game/components/message_list_item.dart';
-import 'package:shinro_int2/screens/game/components/user_list_modal.dart';
-import 'package:shinro_int2/screens/game/game_quiz_page.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 import 'package:shinro_int2/constant/network_constant.dart' as NETWORK_CONSTANT;
 import 'package:shinro_int2/constant/app_colors.dart' as COLORS;
+import 'components/message_list_item.dart';
 import 'components/user_item.dart';
 import 'package:shinro_int2/models/game/info_room.dart';
+
+import 'components/user_list_modal.dart';
+import 'game_quiz_page.dart';
 
 class StrartGameScreen extends StatefulWidget {
   final InfoRoom infoRoom;
@@ -221,10 +222,10 @@ class StrartGameScreenState extends State<StrartGameScreen> {
     });
   }
 
-  void _getdRoom() {
-    socket.emit(NETWORK_CONSTANT.creat_room, {widget.infoRoom});
-    print("object");
-  }
+  // void _getdRoom() {
+  //   socket.emit(NETWORK_CONSTANT.creat_room, {widget.infoRoom});
+  //   print("object");
+  // }
 
   void _strart() {
     socket.emit(NETWORK_CONSTANT.start_game, idRoom);
@@ -320,7 +321,6 @@ class StrartGameScreenState extends State<StrartGameScreen> {
           ),
         ),
         body: new Container(
-          
           child: new Column(
             children: <Widget>[
               Row(

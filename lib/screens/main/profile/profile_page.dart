@@ -3,11 +3,13 @@ import 'package:shinro_int2/constant/app_properties.dart';
 import 'package:shinro_int2/models/user/user_model.dart';
 import 'package:shinro_int2/screens/auth/login/login_page.dart';
 import 'package:shinro_int2/screens/faq_page.dart';
-import 'package:shinro_int2/screens/settings/settings_page.dart';
+
 import 'package:flutter/material.dart';
 import 'package:shinro_int2/constant/shared_preferences.dart'
     as SHARED_PREFERNCES;
 import 'package:shinro_int2/constant/app_colors.dart' as COLORS;
+
+import 'settings/settings_page.dart';
 
 class ProfilePage extends StatefulWidget {
   @override

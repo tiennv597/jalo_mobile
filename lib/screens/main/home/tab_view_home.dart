@@ -1,9 +1,10 @@
 import 'package:shinro_int2/models/category.dart';
 import 'package:flutter/material.dart';
-import 'package:shinro_int2/screens/game/components/rank_list.dart';
-import 'package:shinro_int2/screens/main/components/category_card.dart';
+import '../components/category_card.dart';
+import '../components/recommended_list.dart';
+import '../components/social_tab.dart';
 
-class RankTabView extends StatelessWidget {
+class TabView extends StatelessWidget {
   final List<Category> categories = [
     Category(
       Color(0xffFCE183),
@@ -45,20 +46,20 @@ class RankTabView extends StatelessWidget {
 
   final TabController tabController;
 
-  RankTabView({Key key, this.tabController}) : super(key: key);
+  TabView({Key key, this.tabController}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TabBarView(
-        physics: NeverScrollableScrollPhysics(),
+        //physics: NeverScrollableScrollPhysics(),
         controller: tabController,
         children: <Widget>[
-          Column(children: <Widget>[Flexible(child: RankList())]),
+          Column(children: <Widget>[Flexible(child: SocialTab())]),
           Column(children: <Widget>[
             SizedBox(
               height: 16.0,
             ),
-            Flexible(child: RankList())
+            Flexible(child: RecommendedList())
           ]),
           Container(
             child: Column(
@@ -77,7 +78,7 @@ class RankTabView extends StatelessWidget {
                 SizedBox(
                   height: 16.0,
                 ),
-                Flexible(child: RankList()),
+                Flexible(child: RecommendedList()),
               ],
             ),
           ),

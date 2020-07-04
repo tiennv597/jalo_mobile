@@ -7,7 +7,7 @@ import 'package:shinro_int2/constant/shared_preferences.dart'
 import 'package:shinro_int2/constant/app_colors.dart' as COLORS;
 import 'package:shinro_int2/screens/main/components/rank_type_tab.dart';
 
-import 'game_room_page.dart';
+import 'game/game_room_page.dart';
 
 class GameHomePage extends StatefulWidget {
   final TabController tabController;
@@ -94,7 +94,7 @@ class _GameHomePageState extends State<GameHomePage>
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Text(
-                          'Game',
+                          'Learing',
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,

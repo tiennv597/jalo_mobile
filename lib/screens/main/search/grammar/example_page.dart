@@ -5,7 +5,8 @@ import 'package:provider/provider.dart';
 import 'package:shinro_int2/network/api_service.dart';
 import 'package:shinro_int2/models/grammar/example_model.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:shinro_int2/screens/grammar/example_detail_page.dart';
+
+import 'example_detail_page.dart';
 
 class ExamplePage extends StatefulWidget {
   @override
@@ -37,20 +38,20 @@ class _ExamplePageState extends State<ExamplePage> {
   }
 
   @override
-  void initState() {   
+  void initState() {
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return Listener(
       onPointerUp: (e) {
-      _dismissKeyboard(context);
-    },
+        _dismissKeyboard(context);
+      },
       child: Scaffold(
         body: Padding(
-          padding: const EdgeInsets.only(left: 8,right: 8),
+          padding: const EdgeInsets.only(left: 8, right: 8),
           child: SafeArea(
             child: SearchBar<Example>(
               searchBarPadding: EdgeInsets.symmetric(horizontal: 0),
@@ -61,7 +62,7 @@ class _ExamplePageState extends State<ExamplePage> {
               minimumChars: 1, //Minimum number of chars to start querying
               placeHolder: Text("placeholder"),
               cancellationWidget: Text("cancel"),
-              emptyWidget: Text("empty"),              
+              emptyWidget: Text("empty"),
               header: Row(
                 children: <Widget>[
                   // RaisedButton(
@@ -91,7 +92,6 @@ class _ExamplePageState extends State<ExamplePage> {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => DetailPage(example: example)));
                   },
-                  
                 );
               },
             ),
@@ -101,5 +101,3 @@ class _ExamplePageState extends State<ExamplePage> {
     );
   }
 }
-
-

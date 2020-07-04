@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shinro_int2/models/product.dart';
-import 'package:shinro_int2/screens/game/game_home_page.dart';
+
 import 'package:shinro_int2/constant/app_colors.dart' as COLORS;
+import 'package:shinro_int2/screens/main/learning/game_home_page.dart';
 
 class RankList extends StatefulWidget {
   @override

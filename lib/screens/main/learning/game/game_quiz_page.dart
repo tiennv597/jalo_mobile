@@ -6,10 +6,12 @@ import 'package:shinro_int2/models/category.dart';
 import 'package:shinro_int2/models/game/info_room.dart';
 import 'package:shinro_int2/models/question/answers_model.dart';
 import 'package:shinro_int2/models/question/question_model.dart';
-import 'package:shinro_int2/screens/game/components/user_rank_item.dart';
-import 'package:shinro_int2/screens/game/game_result_page.dart';
+
 import 'package:socket_io_client/socket_io_client.dart';
 import 'package:shinro_int2/constant/network_constant.dart' as NETWORK_CONSTANT;
+
+import 'components/user_rank_item.dart';
+import 'game_result_page.dart';
 
 class GameQuizPage extends StatefulWidget {
   //var mydata;

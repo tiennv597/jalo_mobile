@@ -3,13 +3,14 @@ import 'package:flutter/services.dart';
 import 'package:shinro_int2/constant/app_colors.dart' as COLORS;
 import 'package:shinro_int2/constant/network_constant.dart' as NETWORK_CONSTANT;
 import 'package:shinro_int2/models/game/rooms.dart';
-import 'package:shinro_int2/screens/game/game_start_page.dart';
 import 'package:shinro_int2/utils/custom_background.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'components/room_tab_view.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 import 'package:shinro_int2/models/game/info_room.dart';
+
+import 'game_start_page.dart';
 
 class GameRoomPage extends StatefulWidget {
   @override

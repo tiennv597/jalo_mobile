@@ -1,11 +1,12 @@
-import 'package:shinro_int2/screens/game/game_home_page.dart';
-import 'package:shinro_int2/screens/grammar/example_page.dart';
+
 import 'package:shinro_int2/constant/app_colors.dart' as COLORS;
-import 'package:shinro_int2/screens/profile/profile_page.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'components/tab_search_view.dart';
-import 'components/tab_view.dart';
+import 'learning/game_home_page.dart';
+import 'profile/profile_page.dart';
+import 'search/tab_view_search.dart';
+import 'home/tab_view_home.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -158,11 +159,11 @@ class _MainPageState extends State<MainPage>
             title: Text('Home'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.g_translate),
+            icon: Icon(Icons.translate),
             title: Text('Grammar'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.videogame_asset),
+            icon: Icon(Icons.import_contacts ),
             title: Text('Game'),
           ),
           BottomNavigationBarItem(
