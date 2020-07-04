@@ -32,18 +32,40 @@ class _ProfilePageState extends State<ProfilePage> {
           if (snapshot.hasData) {
             return Column(
               children: <Widget>[
-                CircleAvatar(
-                  radius: 60,
-                  backgroundColor: Colors.blue,
-                  backgroundImage: NetworkImage(
-                      'https://images.pexels.com/photos/340152/pexels-photo-340152.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'),
-                ),
-                Container(
-                  height: 8,
-                ),
-                Text(
-                  user.displayName,
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                Padding(
+                  padding: const EdgeInsets.only(left: 8,right: 8),
+                  child: Row(
+                    children: <Widget>[
+                      CircleAvatar(
+                        radius: 32,
+                        backgroundColor: Colors.blue,
+                        backgroundImage: NetworkImage(
+                            'https://images.pexels.com/photos/340152/pexels-photo-340152.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'),
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.only(top: 0,bottom: 0,left: 8),
+                            child: Text(
+                              user.displayName,
+                              style:
+                                  TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 0,bottom: 0,left: 8),
+                            child: Text(
+                              "id: 1232316",
+                              style:
+                                  TextStyle(fontSize: 16),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
                 Container(
                   height: 18,
@@ -55,12 +77,12 @@ class _ProfilePageState extends State<ProfilePage> {
                       Column(
                         children: <Widget>[
                           Text(
-                            "100K",
+                            "N5",
                             style: TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            "Following",
+                            "Japanese",
                             style: TextStyle(color: Colors.grey),
                           ),
                         ],
@@ -79,7 +101,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            "Fans",
+                            "Rank",
                             style: TextStyle(color: Colors.grey),
                           ),
                         ],
@@ -98,7 +120,26 @@ class _ProfilePageState extends State<ProfilePage> {
                                 fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            "Heats",
+                            "Level",
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                        ],
+                      ),
+                      Container(
+                        width: 1,
+                        height: 20,
+                        color: Colors.grey,
+                        margin: EdgeInsets.symmetric(horizontal: 20),
+                      ),
+                      Column(
+                        children: <Widget>[
+                          Text(
+                            "1",
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            "Friends",
                             style: TextStyle(color: Colors.grey),
                           ),
                         ],
@@ -129,8 +170,7 @@ class _ProfilePageState extends State<ProfilePage> {
         top: true,
         child: SingleChildScrollView(
           child: Padding(
-            padding:
-                EdgeInsets.only(left: 16.0, right: 16.0, top: kToolbarHeight),
+            padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 8),
             child: Column(
               children: <Widget>[
                 Padding(

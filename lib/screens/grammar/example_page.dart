@@ -50,7 +50,7 @@ class _ExamplePageState extends State<ExamplePage> {
     },
       child: Scaffold(
         body: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.only(left: 8,right: 8),
           child: SafeArea(
             child: SearchBar<Example>(
               searchBarPadding: EdgeInsets.symmetric(horizontal: 0),
