@@ -1,29 +1,30 @@
 import 'package:shinro_int2/constant/app_properties.dart';
-import 'package:shinro_int2/screens/tracking_screen.dart';
 import 'package:flutter/material.dart';
+import 'tracking_screen.dart';
 
-class NotificationsPage extends StatelessWidget {
+class NotificationsSreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
       color: Colors.grey[100],
       child: SafeArea(
         child: Container(
-            margin: const EdgeInsets.only(top: kToolbarHeight),
-            padding: EdgeInsets.symmetric(horizontal: 16.0),
+            padding: const EdgeInsets.all(16.0),
             child: Column(children: <Widget>[
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Text(
-                    'Notification',
-                    style: TextStyle(
-                      color: darkGrey,
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 8),
+                    child: Text(
+                      'Notification',
+                      style: TextStyle(
+                        color: darkGrey,
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-                  CloseButton()
                 ],
               ),
               Flexible(
@@ -241,7 +242,7 @@ class NotificationsPage extends StatelessWidget {
                                         height: 80,
                                         width: 80,
                                         child: Image.asset(
-                                            'assets/headphones.png')),
+                                            'assets/benkyou.png')),
                                   )
                                 ]),
                               ),
@@ -319,7 +320,7 @@ class NotificationsPage extends StatelessWidget {
                                         height: 80,
                                         width: 80,
                                         child: Image.asset(
-                                            'assets/headphones_3.png')),
+                                            'assets/benkyou.png')),
                                   )
                                 ]),
                               ),

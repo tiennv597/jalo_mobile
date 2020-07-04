@@ -2,6 +2,7 @@ import 'package:shinro_int2/constant/app_colors.dart' as COLORS;
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'learning/learing_screen.dart';
+import 'notification/notifications_screen.dart';
 import 'profile/profile_screen.dart';
 import 'search/tab_view_search.dart';
 import 'home/home_tab_view.dart';
@@ -26,7 +27,7 @@ class _MainPageState extends State<MainPage>
     tabControllerHome = TabController(length: 3, vsync: this);
     tabControllerSearch = TabController(length: 1, vsync: this);
     tabControllerRank = TabController(length: 2, vsync: this);
-    bottomTabController = TabController(length: 4, vsync: this);
+    bottomTabController = TabController(length: 6, vsync: this);
   }
 
   @override
@@ -142,6 +143,8 @@ class _MainPageState extends State<MainPage>
         ),
       ),
       LearingPage(tabController: tabControllerRank),
+      ProfilePage(),
+      NotificationsSreen(),
       ProfilePage()
     ];
     return Scaffold(
@@ -165,8 +168,16 @@ class _MainPageState extends State<MainPage>
             title: Text('Game'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person_pin),
+            icon: Icon(Icons.message),
             title: Text('Profile'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.notifications),
+            title: Text('Profile'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.menu),
+            title: Text('menu'),
           ),
         ],
         iconSize: 28,
