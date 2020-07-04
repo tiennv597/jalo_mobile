@@ -67,8 +67,8 @@ class RoomsListState extends State<RoomsList> {
                               begin: Alignment.topRight,
                               end: Alignment.bottomLeft,
                               colors: [
-                                COLORS.tiColor51,
-                                COLORS.tiColor52,
+                                COLORS.cyan700,
+                                COLORS.cyan700,
                               ]),
                         ),
                         child: Container(

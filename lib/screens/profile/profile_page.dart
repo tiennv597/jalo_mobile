@@ -7,6 +7,7 @@ import 'package:shinro_int2/screens/settings/settings_page.dart';
 import 'package:flutter/material.dart';
 import 'package:shinro_int2/constant/shared_preferences.dart'
     as SHARED_PREFERNCES;
+import 'package:shinro_int2/constant/app_colors.dart' as COLORS;
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -111,9 +112,9 @@ class _ProfilePageState extends State<ProfilePage> {
             return RaisedButton(
               child: Text("Sign in"),
               onPressed: goToLoginPage,
-              color: Colors.red,
-              textColor: Colors.yellow,
-              padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+              color: COLORS.cyan700,
+              textColor: COLORS.white,
+              padding: EdgeInsets.fromLTRB(8, 8, 8, 8),
               splashColor: Colors.grey,
             );
           }

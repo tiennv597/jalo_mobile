@@ -271,6 +271,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
                 bottom: 112.0,
                 right: 8.0,
                 child: FloatingActionButton(
+                  backgroundColor: COLORS.cyan700,
                   heroTag: 'save',
                   onPressed: () {
                     // What you want to do
@@ -286,6 +287,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
                 right: 8.0,
                 child: owner
                     ? FloatingActionButton(
+                        backgroundColor: COLORS.cyan700,
                         heroTag: 'strart',
                         onPressed: allReady ? _strart : null,
                         child: Icon(
@@ -297,6 +299,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
                         ),
                       )
                     : FloatingActionButton(
+                        backgroundColor: COLORS.cyan700,
                         heroTag: 'ready',
                         onPressed: _ready,
                         child: ready
@@ -317,6 +320,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
           ),
         ),
         body: new Container(
+          
           child: new Column(
             children: <Widget>[
               Row(
@@ -347,7 +351,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
                   ),
                 ],
               ),
-              _buildRoomInfo2(),
+              _buildRoomInfo(),
               Flexible(
                 child: Container(
                   // list message
@@ -367,13 +371,6 @@ class StrartGameScreenState extends State<StrartGameScreen> {
               ),
             ],
           ),
-          decoration: Theme.of(context).platform == TargetPlatform.iOS
-              ? new BoxDecoration(
-                  border: new Border(
-                      top: new BorderSide(
-                  color: Colors.grey[200],
-                )))
-              : null,
         ));
   }
 
@@ -453,85 +450,11 @@ class StrartGameScreenState extends State<StrartGameScreen> {
 
   Widget _buildRoomInfo() {
     return Container(
-      height: 128,
-      width: MediaQuery.of(context).size.width,
-      padding: EdgeInsets.all(8.0),
-      decoration: BoxDecoration(
-          color: Colors.blue,
-          borderRadius: BorderRadius.all(Radius.circular(10))),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(right: 8),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(top: 8, bottom: 8),
-                  child: Text(
-                    'Phòng: ' + idRoom,
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 8, bottom: 8),
-                  child: Text(
-                    'Số câu: ' + widget.infoRoom.quantity,
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 8, bottom: 8),
-                  child: Text(
-                    'Thời gian: ' + widget.infoRoom.time + ' giây/ câu',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 8),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    widget.infoRoom.type + ': ' + widget.infoRoom.level,
-                    style: TextStyle(color: Colors.white, fontSize: 16),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: RaisedButton(
-                    child: Text("Setting"),
-                    onPressed: _getdRoom,
-                    color: Colors.red,
-                    textColor: Colors.yellow,
-                    padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                    splashColor: Colors.grey,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildRoomInfo2() {
-    return Container(
       height: MediaQuery.of(context).size.width / 3,
-      width: MediaQuery.of(context).size.width-16,
+      width: MediaQuery.of(context).size.width - 16,
       decoration: BoxDecoration(
           gradient: LinearGradient(
-              colors: [COLORS.tiColor41, COLORS.tiColor42],
+              colors: [COLORS.cyan300, COLORS.cyan700],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight),
           borderRadius: BorderRadius.all(Radius.circular(10))),
@@ -555,7 +478,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
                     ),
                   ),
                   Padding(
-                   padding: const EdgeInsets.only(top: 4, bottom: 4),
+                    padding: const EdgeInsets.only(top: 4, bottom: 4),
                     child: Text(
                       'Số câu: ' + widget.infoRoom.quantity,
                       style: TextStyle(color: Colors.white),
@@ -577,12 +500,12 @@ class StrartGameScreenState extends State<StrartGameScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
 //        mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-               Container(
-                 child: Text(
-                   widget.infoRoom.type + ': ' + widget.infoRoom.level,
-                   style: TextStyle(color: Colors.white, fontSize: 16),
-                 ),
-               ),
+              Container(
+                child: Text(
+                  widget.infoRoom.type + ': ' + widget.infoRoom.level,
+                  style: TextStyle(color: Colors.white, fontSize: 16),
+                ),
+              ),
               Container(
                 decoration: BoxDecoration(
                     color: Colors.white,

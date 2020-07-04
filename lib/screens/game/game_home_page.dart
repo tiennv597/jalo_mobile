@@ -5,11 +5,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shinro_int2/constant/shared_preferences.dart'
     as SHARED_PREFERNCES;
 import 'package:shinro_int2/constant/app_colors.dart' as COLORS;
+import 'package:shinro_int2/screens/main/components/rank_type_tab.dart';
 
-import 'components/rank_tab_view.dart';
 import 'game_room_page.dart';
 
 class GameHomePage extends StatefulWidget {
+  final TabController tabController;
+  GameHomePage({Key key, this.tabController}) : super(key: key);
   @override
   _GameHomePageState createState() => _GameHomePageState();
 }
@@ -17,14 +19,12 @@ class GameHomePage extends StatefulWidget {
 class _GameHomePageState extends State<GameHomePage>
     with TickerProviderStateMixin<GameHomePage> {
   SwiperController swiperController = SwiperController();
-  TabController tabController;
   bool logined;
   String displayName;
 
   @override
   void initState() {
     super.initState();
-    tabController = TabController(length: 3, vsync: this);
     checkLogin();
   }
 
@@ -58,6 +58,7 @@ class _GameHomePageState extends State<GameHomePage>
         width: withS,
         height: heightS,
         decoration: BoxDecoration(
+          
           gradient: lgColor,
           borderRadius: BorderRadius.circular(8.0),
         ),
@@ -80,93 +81,155 @@ class _GameHomePageState extends State<GameHomePage>
 
   @override
   Widget build(BuildContext context) {
-    var withS = MediaQuery.of(context).size.width;
-    var heightS = MediaQuery.of(context).size.height / 2.1;
-    tabController = TabController(length: 3, vsync: this);
-
-    Widget tabBar = TabBar(
-      tabs: [
-        Tab(text: 'Competition'),
-        Tab(text: 'JLPT'),
-        Tab(text: 'Explore'),
-      ],
-      labelStyle: TextStyle(fontSize: 16.0),
-      unselectedLabelStyle: TextStyle(
-        fontSize: 14.0,
-      ),
-      labelColor: COLORS.darkGrey,
-      unselectedLabelColor: Color.fromRGBO(0, 0, 0, 0.5),
-      isScrollable: false,
-      controller: tabController,
-      indicatorColor: COLORS.transparentPurple,
-    );
-
-    return Scaffold(
-      body: SafeArea(
-        top: true,
-        child: NestedScrollView(
-          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-            // These are the slivers that show up in the "outer" scroll view.
-            return <Widget>[
-              SliverToBoxAdapter(
-                child: Column(
-                  children: <Widget>[
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(top: 8, left: 20, bottom: 0),
-                      child: Text("Game"),
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
+    return SafeArea(
+      child: NestedScrollView(
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+          return <Widget>[
+            SliverToBoxAdapter(
+              child: Column(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 18),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.only(top: 0),
-                          child: Column(
-                            children: <Widget>[
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: _buildTypeBtn('Competition',
-                                    'assets/ninja.png', COLORS.colorOrange),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: _buildTypeBtn('JLPT',
-                                    'assets/benkyou.png', COLORS.colorBlue),
-                              ),
-                            ],
+                        Text(
+                          'Game',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(8),
-                          child: Column(
-                            children: <Widget>[
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: _buildTypeBtn('Practice',
-                                    'assets/gokaku.png', COLORS.colorGreen),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: _buildTypeBtn('Competition',
-                                    'assets/good.png', COLORS.colorPurple),
-                              ),
-                            ],
-                          ),
-                        )
+                        FlatButton(
+                          child: Text('View All'),
+                          onPressed: () {},
+                        ),
                       ],
                     ),
-                  ],
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8, right: 8),
+                        child: Column(
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  right: 8, bottom: 8, left: 8),
+                              child: _buildTypeBtn('Competition',
+                                  'assets/ninja.png', COLORS.colorOrange),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: _buildTypeBtn('JLPT', 'assets/benkyou.png',
+                                  COLORS.colorBlue),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8, right: 8),
+                        child: Column(
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  right: 8, bottom: 8, left: 8),
+                              child: _buildTypeBtn('Practice',
+                                  'assets/gokaku.png', COLORS.colorGreen),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: _buildTypeBtn('Competition',
+                                  'assets/good.png', COLORS.colorPurple),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 18),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text(
+                          'Rank',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        FlatButton(
+                          child: Text('View All'),
+                          onPressed: () {},
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SliverPadding(
+              padding: const EdgeInsets.all(0),
+              sliver: SliverAppBar(
+                expandedHeight: 10,
+                pinned: true,
+                floating: true,
+                primary: true,
+                //disable AppBar shadow when no content is scrolled under it
+                elevation: 0.0,
+                backgroundColor: Colors.white,
+                //forceElevated: innerBoxIsScrolled,
+                bottom: PreferredSize(
+                  preferredSize: new Size(200.0, 32.0),
+                  child: Container(
+                    height: 30,
+                    child: TabBar(
+                      unselectedLabelColor: COLORS.cyan600,
+                      indicatorSize: TabBarIndicatorSize.label,
+                      indicator: BoxDecoration(
+                          borderRadius: BorderRadius.circular(50),
+                          color: COLORS.cyan600),
+                      tabs: <Widget>[
+                        Tab(
+                          child: Container(
+                            height: 30,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50),
+                                border: Border.all(
+                                    color: COLORS.cyan600, width: 1)),
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: Text("Competition"),
+                            ),
+                          ),
+                        ),
+                        Tab(
+                          child: Container(
+                            height: 30,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50),
+                                border: Border.all(
+                                    color: COLORS.cyan600, width: 1)),
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: Text("JLPT"),
+                            ),
+                          ),
+                        ),
+                      ],
+                      controller: widget.tabController,
+                    ),
+                  ),
                 ),
               ),
-              // SliverToBoxAdapter(
-              //   child: tabBar,
-              // )
-            ];
-          },
-          body: RankTabView(
-            tabController: tabController,
-          ),
+            )
+          ];
+        },
+        body: RankTypeTab(
+          tabController: widget.tabController,
         ),
       ),
     );

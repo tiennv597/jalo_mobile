@@ -169,7 +169,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Widget _buildLoginBtn() {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 25.0),
+      padding: EdgeInsets.symmetric(vertical: 8.0),
       width: double.infinity,
       child: RaisedButton(
         elevation: 5.0,
@@ -260,18 +260,18 @@ class _RegisterPageState extends State<RegisterPage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      SizedBox(height: 30.0),
+                      SizedBox(height: 8.0),
                       _buildNameUserTF(),
                       SizedBox(
-                        height: 30.0,
+                        height: 8.0,
                       ),
                       _buildEmailTF(),
                       SizedBox(
-                        height: 30.0,
+                        height: 8.0,
                       ),
                       _buildPasswordTF(),
                       SizedBox(
-                        height: 30.0,
+                        height: 8.0,
                       ),
                       _buildRePasswordTF(),
                       _buildForgotPasswordBtn(),

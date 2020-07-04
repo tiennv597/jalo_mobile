@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-//https://api.flutter.dev/flutter/material/Colors-class.html
+
+///https://api.flutter.dev/flutter/material/Colors-class.html
 //import 'package:shinro_int2/constant/app_colors.dart' as COLORS;
 
 const Color yellow = Color(0xffFDC054);
@@ -7,9 +8,8 @@ const Color mediumYellow = Color(0xffFDB846);
 const Color darkYellow = Color(0xffE99E22);
 const Color transparentPurple = Color.fromRGBO(205, 0, 205, 0.7);
 const Color transparentWhite = Color.fromRGBO(198, 255, 254, 0.7);
-const Color darkGrey = Color(0xff202020);
-const Color purple = Color(0xff202020);
 
+const Color white = Colors.white;
 const Color blueTypeOne = Color(0xff009966);
 const Color whiteTypeOne = Color(0xFFFFFF);
 const Color blueTypeTwo = Color(0xff669966);
@@ -39,18 +39,29 @@ const Color tiColor52 = Color(0xff33B2B9);
 const Color tiColor61 = Color(0xffF123C4);
 const Color tiColor62 = Color(0xff668CEA);
 
-//teal colors constant
+//green  colors constant
+const Color green50 = Color(0xFFE8F5E9);
+const Color green100 = Color(0xFFC8E6C9);
+const Color green200 = Color(0xFFA5D6A7);
+const Color green300 = Color(0xFF81C784);
+const Color green400 = Color(0xFF66BB6A);
+const Color green500 = Colors.green;
+const Color green600 = Color(0xFF43A047);
+const Color green700 = Color(0xFF388E3C);
+const Color green800 = Color(0xFF2E7D32);
+const Color green900 = Color(0xFF1B5E20);
 
-const Color teal50 = Color(0xFFE0F2F1);
-const Color teal100 = Color(0xFFB2DFDB);
-const Color teal200 = Color(0xFF80CBC4);
-const Color teal300 = Color(0xFF4DB6AC);
-const Color teal400 = Color(0xFF26A69A);
-const Color teal500 = Colors.teal;
-const Color teal600 = Color(0xFF00897B);
-const Color teal700 = Color(0xFF00796B);
-const Color teal800 = Color(0xFF00695C);
-const Color teal900 = Color(0xFF004D40);
+//cyan colors constant
+const Color cyan50 = Color(0xFFE0F7FA);
+const Color cyan100 = Color(0xFFB2EBF2);
+const Color cyan200 = Color(0xFF80DEEA);
+const Color cyan300 = Color(0xFF4DD0E1);
+const Color cyan400 = Color(0xFF26C6DA);
+const Color cyan500 = Colors.cyan;
+const Color cyan600 = Color(0xFF00ACC1);
+const Color cyan700 = Color(0xFF0097A7);
+const Color cyan800 = Color(0xFF00838F);
+const Color cyan900 = Color(0xFF006064);
 
 const LinearGradient mainButton = LinearGradient(colors: [
   Color.fromRGBO(60, 150, 90, 1),
@@ -63,6 +74,8 @@ const List<BoxShadow> shadow = [
 ];
 
 const LinearGradient colorOrange = LinearGradient(
+  begin: Alignment.topRight,
+  end: Alignment.bottomLeft,
   colors: <Color>[
     Color(0xFFFFA726),
     Color(0xFFFB8C00),
@@ -70,6 +83,8 @@ const LinearGradient colorOrange = LinearGradient(
   ],
 );
 const LinearGradient colorBlue = LinearGradient(
+  begin: Alignment.topRight,
+  end: Alignment.bottomLeft,
   colors: <Color>[
     Color(0xFF42A5F5),
     Color(0xFF1E88E5),
@@ -77,6 +92,8 @@ const LinearGradient colorBlue = LinearGradient(
   ],
 );
 const LinearGradient colorGreen = LinearGradient(
+  begin: Alignment.topRight,
+  end: Alignment.bottomLeft,
   colors: <Color>[
     Color(0xFF66BB6A),
     Color(0xFF43A047),
@@ -84,6 +101,8 @@ const LinearGradient colorGreen = LinearGradient(
   ],
 );
 const LinearGradient colorPurple = LinearGradient(
+  begin: Alignment.topRight,
+  end: Alignment.bottomLeft,
   colors: <Color>[
     Color(0xFFAB47BC),
     Color(0xFF8E24AA),

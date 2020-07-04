@@ -9,6 +9,7 @@ import 'package:shinro_int2/constant/shared_preferences.dart'
     as SHARED_PREFERNCES;
 import 'package:shinro_int2/screens/main/main_page.dart';
 
+
 import '../register_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -166,7 +167,7 @@ class _LoginPageState extends State<LoginPage> {
         Text(
           '- OR -',
           style: TextStyle(
-            color: Colors.white,
+            color: Colors.black,
             fontWeight: FontWeight.w400,
           ),
         ),
@@ -265,7 +266,7 @@ class _LoginPageState extends State<LoginPage> {
           color: Colors.black,
         ),
         brightness: Brightness.light,
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white,
         title: Text(
           'Sign in',
           style: TextStyle(
@@ -275,7 +276,7 @@ class _LoginPageState extends State<LoginPage> {
         ),
         elevation: 0,
       ),
-      backgroundColor: Colors.grey[100],
+      backgroundColor: Colors.white,
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
         child: GestureDetector(
@@ -296,10 +297,10 @@ class _LoginPageState extends State<LoginPage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      SizedBox(height: 30.0),
+                      SizedBox(height: 8.0),
                       _buildEmailTF(),
                       SizedBox(
-                        height: 30.0,
+                        height: 8.0,
                       ),
                       _buildPasswordTF(),
                       _buildForgotPasswordBtn(),
@@ -337,10 +338,6 @@ class _LoginPageState extends State<LoginPage> {
           print("error" + onError.toString());
         });
         prefs.setString(SHARED_PREFERNCES.token, it.token.toString());
-
-        // prefs.setBool(SHARED_PREFERNCES.logined, true);
-        // Navigator.of(context)
-        //     .push(MaterialPageRoute(builder: (context) => MainPage()));
       } else {}
     }).catchError((onError) {
       print("error" + onError.toString());
