@@ -1,8 +1,9 @@
 import 'package:shinro_int2/models/category.dart';
 import 'package:flutter/material.dart';
 import '../components/category_card.dart';
-import '../components/recommended_list.dart';
-import '../components/social_tab.dart';
+import 'tab_explore.dart';
+import 'tab_hot.dart';
+import 'tab_home.dart';
 
 class TabView extends StatelessWidget {
   final List<Category> categories = [
@@ -54,12 +55,12 @@ class TabView extends StatelessWidget {
         //physics: NeverScrollableScrollPhysics(),
         controller: tabController,
         children: <Widget>[
-          Column(children: <Widget>[Flexible(child: SocialTab())]),
+          Column(children: <Widget>[Flexible(child: TabHome())]),
           Column(children: <Widget>[
             SizedBox(
               height: 16.0,
             ),
-            Flexible(child: RecommendedList())
+            Flexible(child: TabHot())
           ]),
           Container(
             child: Column(
@@ -78,7 +79,7 @@ class TabView extends StatelessWidget {
                 SizedBox(
                   height: 16.0,
                 ),
-                Flexible(child: RecommendedList()),
+                Flexible(child: TabExplore()),
               ],
             ),
           ),

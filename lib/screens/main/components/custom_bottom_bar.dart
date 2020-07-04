@@ -6,10 +6,7 @@ class CustomBottomBar extends StatelessWidget {
   const CustomBottomBar({Key key, this.controller}) : super(key: key);
   @override
   Widget build(BuildContext context) {
- 
-
     return BottomAppBar(
-      
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[

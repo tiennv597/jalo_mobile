@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class SocialTab extends StatefulWidget {
+class TabHome extends StatefulWidget {
   @override
   _SocialTabState createState() => _SocialTabState();
 }
 
-class _SocialTabState extends State<SocialTab> {
+class _SocialTabState extends State<TabHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

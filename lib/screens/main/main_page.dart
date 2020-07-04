@@ -16,7 +16,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage>
     with TickerProviderStateMixin<MainPage> {
   SwiperController swiperController;
-  TabController tabController;
+  TabController tabControllerHome;
   TabController tabControllerRank;
   TabController tabControllerSearch;
   TabController bottomTabController;
@@ -25,7 +25,7 @@ class _MainPageState extends State<MainPage>
   @override
   void initState() {
     super.initState();
-    tabController = TabController(length: 3, vsync: this);
+    tabControllerHome = TabController(length: 3, vsync: this);
     tabControllerSearch = TabController(length: 1, vsync: this);
     tabControllerRank = TabController(length: 2, vsync: this);
     bottomTabController = TabController(length: 4, vsync: this);
@@ -45,7 +45,7 @@ class _MainPageState extends State<MainPage>
             height: 32,
             child: Align(
               alignment: Alignment.center,
-              child: Text("Related"),
+              child: Text("Home"),
             ),
           ),
         ),
@@ -68,7 +68,7 @@ class _MainPageState extends State<MainPage>
           ),
         ),
       ],
-      controller: tabController,
+      controller: tabControllerHome,
     );
        Widget tabBarSearch = TabBar(
       isScrollable: true,
@@ -115,7 +115,7 @@ class _MainPageState extends State<MainPage>
             ),
           ),
           body: TabView(
-            tabController: tabController,
+            tabController: tabControllerHome,
           ),
         ),
       ),

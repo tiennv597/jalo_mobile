@@ -4,7 +4,7 @@ import 'package:shinro_int2/screens/main/components/top_rated_list_item.dart';
 import 'package:shinro_int2/screens/main/components/vertical_list_item.dart';
 import 'package:shinro_int2/screens/main/components/horizontal_list_item.dart';
 
-class RecommendedList extends StatelessWidget {
+class TabHot extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
