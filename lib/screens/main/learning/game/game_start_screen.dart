@@ -3,15 +3,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shinro_int2/models/category.dart';
+import 'package:shinro_int2/models/event/join.dart';
+import 'package:shinro_int2/models/event/message.dart';
 import 'package:shinro_int2/models/game/room.dart';
-import 'package:shinro_int2/models/message/message.dart';
+
 import 'package:socket_io_client/socket_io_client.dart';
 import 'package:shinro_int2/constant/network_constant.dart' as NETWORK_CONSTANT;
 import 'package:shinro_int2/constant/app_colors.dart' as COLORS;
+import 'package:web_socket_channel/io.dart';
+import 'package:web_socket_channel/web_socket_channel.dart';
 import 'components/message_list_item.dart';
 import 'components/user_item.dart';
 import 'package:shinro_int2/models/game/info_room.dart';
-
 import 'components/user_list_modal.dart';
 import 'game_quiz_screen.dart';
 
@@ -43,6 +46,8 @@ class StrartGameScreenState extends State<StrartGameScreen> {
   bool allReady = true; //check user ready?
   int userReady = 1; // count user
   int userInRoom = 1; // clients in room
+
+  WebSocketChannel channel;
 
 // data test
   List<Category> categories = [
@@ -83,12 +88,18 @@ class StrartGameScreenState extends State<StrartGameScreen> {
       'assets/image.jpg',
     ),
   ];
+
   @override
   void initState() {
     super.initState();
     _focus.addListener(_onFocusChange);
     _controller = ScrollController();
     _controller.addListener(_scrollListener);
+    Join join = new Join("join", "Javascript", "Tien");
+    String jsonEvent = jsonEncode(join);
+
+    channel = IOWebSocketChannel.connect('ws://192.168.1.28:3000/ws');
+    channel.sink.add(jsonEvent);
 
     switch (widget.infoRoom.type) {
       case 'Chinese Word':
@@ -188,17 +199,17 @@ class StrartGameScreenState extends State<StrartGameScreen> {
         owner = room.owner;
       });
     });
-    socket.on(NETWORK_CONSTANT.server_send_message, (data) {
-      // Parsing JSON to Jobject
-      Message message = Message.fromJson(json.decode(data));
-      ChatMessage chatMessage = new ChatMessage(
-        text: message.message,
-      );
-      //add message to list
-      setState(() {
-        _messages.insert(0, chatMessage);
-      });
-    });
+    // socket.on(NETWORK_CONSTANT.server_send_message, (data) {
+    //   // Parsing JSON to Jobject
+    //   Message message = Message.fromJson(json.decode(data));
+    //   ChatMessage chatMessage = new ChatMessage(
+    //     text: message.message,
+    //   );
+    //   //add message to list
+    //   setState(() {
+    //     _messages.insert(0, chatMessage);
+    //   });
+    // });
   }
 
   _scrollListener() {
@@ -530,8 +541,11 @@ class StrartGameScreenState extends State<StrartGameScreen> {
 
   void _textMessageSubmitted(String value) {
     //send massage
-    socket.emit(NETWORK_CONSTANT.client_send_message,
-        {idRoom, "tien2", _textEditingController.text});
+    // socket.emit(NETWORK_CONSTANT.client_send_message,
+    //     {idRoom, "tien2", _textEditingController.text});
+    Message message = new Message("message", _textEditingController.text);
+    String messageEvent = jsonEncode(message);
+    channel.sink.add(messageEvent);
     //remove focus
     FocusScope.of(context).requestFocus(new FocusNode());
 

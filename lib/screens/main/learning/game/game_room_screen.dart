@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:shinro_int2/constant/app_colors.dart' as COLORS;
 import 'package:shinro_int2/constant/network_constant.dart' as NETWORK_CONSTANT;
+import 'package:shinro_int2/models/event/join.dart';
 import 'package:shinro_int2/models/game/rooms.dart';
 import 'package:shinro_int2/utils/custom_background.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,8 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'components/room_tab_view.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 import 'package:shinro_int2/models/game/info_room.dart';
-
+import 'package:web_socket_channel/io.dart';
+import 'package:web_socket_channel/web_socket_channel.dart';
 import 'game_start_screen.dart';
 
 class GameRoomPage extends StatefulWidget {
@@ -41,15 +43,20 @@ class _GameRoomPageState extends State<GameRoomPage>
     _tfRoomController = new TextEditingController();
     _tfPasswordController = new TextEditingController();
     //Creating the socket
+    // Join join = new Join("join", "Javascript", "Tien");
+    // String jsonEvent = jsonEncode(join);
+    // final WebSocketChannel channel =
+    //     IOWebSocketChannel.connect('ws://192.168.1.28:3000/ws');
+    // channel.sink.add(jsonEvent);
     socket = io(
-        NETWORK_CONSTANT.basURL + NETWORK_CONSTANT.default_ns,
+        NETWORK_CONSTANT.basURL + NETWORK_CONSTANT.default_ns1,
         <String, dynamic>{
           'transports': ['websocket'],
           'extraHeaders': {'foo': 'bar'} // optional
         });
     socket.on(NETWORK_CONSTANT.connect, (_) {
       print('connect');
-      socket.emit('msg', 'test');
+      socket.emit('join', 'test');
     });
     socket.on(NETWORK_CONSTANT.result_check_room, (data) {
       print(data);

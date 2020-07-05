@@ -3,7 +3,9 @@
 const String basURL = 'http://192.168.1.28:3000';
 
 const String nameSpase = '/game-namespace';
+
 const String default_ns = '/';
+const String default_ns1 = '/ws';
 const String china_word_ns = '/china_word_ns';
 const String vocabulary_ns = '/vocabulary_ns';
 const String grammar_ns = '/grammar_ns';
