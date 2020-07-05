@@ -6,7 +6,7 @@ import 'package:shinro_int2/models/category.dart';
 import 'package:shinro_int2/models/event/join.dart';
 import 'package:shinro_int2/models/event/message.dart';
 import 'package:shinro_int2/models/game/room.dart';
-
+import 'package:shinro_int2/models/message/rp_message.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 import 'package:shinro_int2/constant/network_constant.dart' as NETWORK_CONSTANT;
 import 'package:shinro_int2/constant/app_colors.dart' as COLORS;
@@ -48,6 +48,8 @@ class StrartGameScreenState extends State<StrartGameScreen> {
   int userInRoom = 1; // clients in room
 
   WebSocketChannel channel;
+
+  //WebSocketChannel channel;
 
 // data test
   List<Category> categories = [
@@ -91,15 +93,48 @@ class StrartGameScreenState extends State<StrartGameScreen> {
 
   @override
   void initState() {
-    super.initState();
     _focus.addListener(_onFocusChange);
     _controller = ScrollController();
     _controller.addListener(_scrollListener);
+    //Creating the socket
     Join join = new Join("join", "Javascript", "Tien");
     String jsonEvent = jsonEncode(join);
-
     channel = IOWebSocketChannel.connect('ws://192.168.1.28:3000/ws');
     channel.sink.add(jsonEvent);
+    //
+    channel.stream.listen((event) {
+      RpMessage rqMessage = RpMessage.fromJson(json.decode(event));
+      print(rqMessage.event);
+      switch (rqMessage.event) {
+        case 'message':
+          {
+            ChatMessage chatMessage = new ChatMessage(
+              text: rqMessage.data.message,
+              name: rqMessage.data.name,
+            );
+            //add message to list
+            setState(() {
+              _messages.insert(0, chatMessage);
+            });
+          }
+          break;
+
+        case 'Vocabulary':
+          {
+            nsp = NETWORK_CONSTANT.vocabulary_ns;
+          }
+          break;
+        case 'Grammar':
+          {
+            nsp = NETWORK_CONSTANT.grammar_ns;
+          }
+          break;
+
+        default:
+          {}
+          break;
+      }
+    });
 
     switch (widget.infoRoom.type) {
       case 'Chinese Word':
@@ -210,6 +245,8 @@ class StrartGameScreenState extends State<StrartGameScreen> {
     //     _messages.insert(0, chatMessage);
     //   });
     // });
+
+    super.initState();
   }
 
   _scrollListener() {
