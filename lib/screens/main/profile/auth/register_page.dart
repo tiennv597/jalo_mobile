@@ -9,8 +9,6 @@ import 'package:shinro_int2/constant/shared_preferences.dart'
     as SHARED_PREFERNCES;
 import 'package:shinro_int2/screens/main/main_screen.dart';
 
-import 'login/login_page.dart';
-
 class RegisterPage extends StatefulWidget {
   @override
   _RegisterPageState createState() => _RegisterPageState();
@@ -181,13 +179,13 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  Widget _buildLoginBtn() {
+  Widget _buildSignupBtn() {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 8.0),
       width: double.infinity,
       child: RaisedButton(
         elevation: 5.0,
-        onPressed: () => print('Login Button Pressed'),
+        onPressed: signUp,
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),
@@ -207,9 +205,9 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  Widget _buildSignupBtn() {
+  Widget _buildLoginBtn() {
     return GestureDetector(
-      onTap: signUp,
+      onTap: () {},
       child: RichText(
         text: TextSpan(
           children: [
@@ -286,8 +284,8 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                       _buildRePasswordTF(),
                       _buildForgotPasswordBtn(),
-                      _buildLoginBtn(),
                       _buildSignupBtn(),
+                      _buildLoginBtn(),
                     ],
                   ),
                 ),
@@ -302,13 +300,35 @@ class _RegisterPageState extends State<RegisterPage> {
   void signUp() {
     final api = Provider.of<ApiService>(context, listen: false);
     // set up login
-    api.signUp("_userController.text", "_passController.text",
-            "tienneee3@gmail.com", "12345678")
+    List<String> fullName = _nameController.text.split(" ");
+    String firstName = fullName[0];
+    String lastName = "";
+    for (var i = 1; i < fullName.length; i++) {
+      lastName += fullName[i] + " ";
+    }
+    //
+    api
+        .signUp(firstName, lastName.trim(), _emailController.text,
+            _passwordController.text)
         .then((it) async {
       print(it.toString());
       SharedPreferences prefs = await SharedPreferences.getInstance();
       if (it.token.toString() != null && it.success == true) {
+        //
+        api.checkToken(it.token.toString()).then((it) async {
+          if (it.success) {
+            prefs.setBool(SHARED_PREFERNCES.logined, true);
+            prefs.setString(SHARED_PREFERNCES.user_id, it.id);
+            prefs.setString(SHARED_PREFERNCES.displayName, it.displayName);
+          }
+        }).catchError((onError) {
+          print("error" + onError.toString());
+        });
+        //
         prefs.setString(SHARED_PREFERNCES.token, it.token.toString());
+        print(it.token.toString());
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => MainPage()));
       } else {}
     }).catchError((onError) {
       print("error" + onError.toString());
