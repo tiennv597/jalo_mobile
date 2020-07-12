@@ -1,7 +1,13 @@
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shinro_int2/constant/app_properties.dart';
 import 'package:shinro_int2/constant/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:shinro_int2/network/api_service.dart';
+import 'package:shinro_int2/constant/shared_preferences.dart'
+    as SHARED_PREFERNCES;
+import 'package:shinro_int2/screens/main/main_screen.dart';
 
 import 'login/login_page.dart';
 
@@ -12,6 +18,10 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   //bool _rememberMe = false;
+  TextEditingController _nameController = new TextEditingController();
+  TextEditingController _emailController = new TextEditingController();
+  TextEditingController _passwordController = new TextEditingController();
+  TextEditingController _rePasswordController = new TextEditingController();
 
   Widget _buildNameUserTF() {
     return Column(
@@ -27,6 +37,7 @@ class _RegisterPageState extends State<RegisterPage> {
           decoration: kBoxDecorationStyle,
           height: 48.0,
           child: TextField(
+            controller: _nameController,
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(
               color: Colors.black,
@@ -62,6 +73,7 @@ class _RegisterPageState extends State<RegisterPage> {
           decoration: kBoxDecorationStyle,
           height: 48.0,
           child: TextField(
+            controller: _emailController,
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(
               color: Colors.black,
@@ -97,6 +109,7 @@ class _RegisterPageState extends State<RegisterPage> {
           decoration: kBoxDecorationStyle,
           height: 48.0,
           child: TextField(
+            controller: _passwordController,
             obscureText: true,
             style: TextStyle(
               color: Colors.black,
@@ -132,6 +145,7 @@ class _RegisterPageState extends State<RegisterPage> {
           decoration: kBoxDecorationStyle,
           height: 48.0,
           child: TextField(
+            controller: _rePasswordController,
             obscureText: true,
             style: TextStyle(
               color: Colors.black,
@@ -195,10 +209,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Widget _buildSignupBtn() {
     return GestureDetector(
-      onTap: () {
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => LoginPage()));
-      },
+      onTap: signUp,
       child: RichText(
         text: TextSpan(
           children: [
@@ -286,5 +297,21 @@ class _RegisterPageState extends State<RegisterPage> {
         ),
       ),
     );
+  }
+
+  void signUp() {
+    final api = Provider.of<ApiService>(context, listen: false);
+    // set up login
+    api.signUp("_userController.text", "_passController.text",
+            "tienneee3@gmail.com", "12345678")
+        .then((it) async {
+      print(it.toString());
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      if (it.token.toString() != null && it.success == true) {
+        prefs.setString(SHARED_PREFERNCES.token, it.token.toString());
+      } else {}
+    }).catchError((onError) {
+      print("error" + onError.toString());
+    });
   }
 }

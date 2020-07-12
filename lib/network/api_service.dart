@@ -26,6 +26,14 @@ abstract class ApiService {
   @POST("/login-api")
   Future<UserToken> loginUser(@Field("login_username") String loginUsername,
       @Field("login_password") String loginPassword);
+  //signup user
+  @FormUrlEncoded()
+  @POST("/users/signup")
+  Future<UserToken> signUp(
+      @Field("firstName") String firstName,
+      @Field("lastName") String lastName,
+      @Field("email") String email,
+      @Field("password") String password);
   //get login user
   @GET("/login-api")
   Future<User> checkToken(@Header("Authorization") String jwt);
