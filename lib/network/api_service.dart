@@ -23,9 +23,9 @@ abstract class ApiService {
   Future<List<Example>> getExample(@Query("key_search") String keySearch);
   //post login user
   @FormUrlEncoded()
-  @POST("/login-api")
-  Future<UserToken> loginUser(@Field("login_username") String loginUsername,
-      @Field("login_password") String loginPassword);
+  @POST("/users/signin")
+  Future<User> loginUser(
+      @Field("email") String email, @Field("password") String password);
   //signup user
   @FormUrlEncoded()
   @POST("/users/signup")

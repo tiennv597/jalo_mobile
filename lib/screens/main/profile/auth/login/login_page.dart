@@ -9,7 +9,6 @@ import 'package:shinro_int2/constant/shared_preferences.dart'
     as SHARED_PREFERNCES;
 import 'package:shinro_int2/screens/main/main_screen.dart';
 
-
 import '../register_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -21,6 +20,13 @@ class _LoginPageState extends State<LoginPage> {
   bool _rememberMe = false;
   TextEditingController _userController = new TextEditingController();
   TextEditingController _passController = new TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _userController.text = "222223frr@gmail.com";
+    _passController.text = "12345678";
+  }
 
   Widget _buildEmailTF() {
     return Column(
@@ -323,22 +329,22 @@ class _LoginPageState extends State<LoginPage> {
   void loginCheck() {
     final api = Provider.of<ApiService>(context, listen: false);
     api.loginUser(_userController.text, _passController.text).then((it) async {
-      print(it.token.toString());
+      print(it.username.toString());
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      if (it.token.toString() != null && it.success == true) {
-        api.checkToken(it.token.toString()).then((it) async {
-          if (it.success) {
-            prefs.setBool(SHARED_PREFERNCES.logined, true);
-            prefs.setString(SHARED_PREFERNCES.user_id, it.id);
-            prefs.setString(SHARED_PREFERNCES.displayName, it.displayName);
-            Navigator.of(context)
-                .pushReplacement(MaterialPageRoute(builder: (_) => MainPage()));
-          }
-        }).catchError((onError) {
-          print("error" + onError.toString());
-        });
-        prefs.setString(SHARED_PREFERNCES.token, it.token.toString());
-      } else {}
+      // if (it.token.toString() != null && it.success == true) {
+      //   api.checkToken(it.token.toString()).then((it) async {
+      //     if (it.success) {
+      //       prefs.setBool(SHARED_PREFERNCES.logined, true);
+      //       prefs.setString(SHARED_PREFERNCES.user_id, it.id);
+      //       prefs.setString(SHARED_PREFERNCES.displayName, it.displayName);
+      //       Navigator.of(context)
+      //           .pushReplacement(MaterialPageRoute(builder: (_) => MainPage()));
+      //     }
+      //   }).catchError((onError) {
+      //     print("error" + onError.toString());
+      //   });
+      //   prefs.setString(SHARED_PREFERNCES.token, it.token.toString());
+      // } else {}
     }).catchError((onError) {
       print("error" + onError.toString());
     });

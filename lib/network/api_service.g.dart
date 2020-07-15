@@ -37,26 +37,23 @@ class _ApiService implements ApiService {
   }
 
   @override
-  loginUser(loginUsername, loginPassword) async {
-    ArgumentError.checkNotNull(loginUsername, 'loginUsername');
-    ArgumentError.checkNotNull(loginPassword, 'loginPassword');
+  loginUser(email, password) async {
+    ArgumentError.checkNotNull(email, 'email');
+    ArgumentError.checkNotNull(password, 'password');
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _data = {
-      'login_username': loginUsername,
-      'login_password': loginPassword
-    };
+    final _data = {'email': email, 'password': password};
     final Response<Map<String, dynamic>> _result = await _dio.request(
-        '/login-api',
+        '/users/signin',
         queryParameters: queryParameters,
         options: RequestOptions(
             method: 'POST',
             headers: <String, dynamic>{},
             extra: _extra,
-            contentType: 'application/x-www-form-urlencoded',
+            contentType: 'application/json',
             baseUrl: baseUrl),
         data: _data);
-    final value = UserToken.fromJson(_result.data);
+    final value = User.fromJson(_result.data);
     return value;
   }
 
