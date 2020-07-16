@@ -56,13 +56,13 @@ class _SplashScreenState extends State<SplashScreen>
       print(jwt);
       if (jwt != null) {
         api.checkToken(jwt).then((it) async {
-          if (it.success) {
-            prefs.setBool(SHARED_PREFERNCES.logined, true);
-            prefs.setString(SHARED_PREFERNCES.user_id, it.id);
-            prefs.setString(SHARED_PREFERNCES.displayName, it.displayName);
-            Navigator.of(context)
-                .pushReplacement(MaterialPageRoute(builder: (_) => MainPage()));
-          }
+          // if (it.success) {
+          //   prefs.setBool(SHARED_PREFERNCES.logined, true);
+          //   prefs.setString(SHARED_PREFERNCES.user_id, it.id);
+          //   prefs.setString(SHARED_PREFERNCES.displayName, it.displayName);
+          //   Navigator.of(context)
+          //       .pushReplacement(MaterialPageRoute(builder: (_) => MainPage()));
+          // }
         }).catchError((onError) {
           print("error" + onError.toString());
         });

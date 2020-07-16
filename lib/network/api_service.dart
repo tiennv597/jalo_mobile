@@ -24,7 +24,7 @@ abstract class ApiService {
   //post login user
   @FormUrlEncoded()
   @POST("/users/signin")
-  Future<User> loginUser(
+  Future<Response<Map<String, dynamic>>> signIn(
       @Field("email") String email, @Field("password") String password);
   //signup user
   @FormUrlEncoded()

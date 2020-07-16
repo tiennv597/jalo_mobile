@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shinro_int2/constant/app_properties.dart';
 import 'package:shinro_int2/constant/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:shinro_int2/models/user/user_model.dart';
 import 'package:shinro_int2/network/api_service.dart';
 import 'package:shinro_int2/constant/shared_preferences.dart'
     as SHARED_PREFERNCES;
@@ -328,22 +329,26 @@ class _LoginPageState extends State<LoginPage> {
 
   void loginCheck() {
     final api = Provider.of<ApiService>(context, listen: false);
-    api.loginUser(_userController.text, _passController.text).then((it) async {
-      print(it.username.toString());
+    api.signIn(_userController.text, _passController.text).then((it) async {
+      print(it.headers.value('authorization'));
+      final user = User.fromJson(it.data);
       SharedPreferences prefs = await SharedPreferences.getInstance();
       // if (it.token.toString() != null && it.success == true) {
       //   api.checkToken(it.token.toString()).then((it) async {
       //     if (it.success) {
-      //       prefs.setBool(SHARED_PREFERNCES.logined, true);
-      //       prefs.setString(SHARED_PREFERNCES.user_id, it.id);
-      //       prefs.setString(SHARED_PREFERNCES.displayName, it.displayName);
-      //       Navigator.of(context)
-      //           .pushReplacement(MaterialPageRoute(builder: (_) => MainPage()));
+      prefs.setBool(SHARED_PREFERNCES.logined, true);
+      prefs.setString(SHARED_PREFERNCES.user_id, user.sId);
+      prefs.setString(
+          SHARED_PREFERNCES.fullName, user.firstName + " " + user.lastName);
+
       //     }
       //   }).catchError((onError) {
       //     print("error" + onError.toString());
       //   });
-      //   prefs.setString(SHARED_PREFERNCES.token, it.token.toString());
+      prefs.setString(
+          SHARED_PREFERNCES.token, it.headers.value('authorization'));
+      Navigator.of(context)
+          .pushReplacement(MaterialPageRoute(builder: (_) => MainPage()));
       // } else {}
     }).catchError((onError) {
       print("error" + onError.toString());

@@ -33,7 +33,7 @@ class _LearingPageState extends State<LearingPage>
     logined = prefs.getBool(SHARED_PREFERNCES.logined);
     User user = new User();
     if (logined == true && logined != null) {
-      user.displayName = prefs.getString(SHARED_PREFERNCES.displayName);
+      user.displayName = prefs.getString(SHARED_PREFERNCES.fullName);
       return user;
     } else {
       return null;

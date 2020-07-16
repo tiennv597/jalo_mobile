@@ -37,7 +37,7 @@ class _ApiService implements ApiService {
   }
 
   @override
-  loginUser(email, password) async {
+  signIn(email, password) async {
     ArgumentError.checkNotNull(email, 'email');
     ArgumentError.checkNotNull(password, 'password');
     const _extra = <String, dynamic>{};
@@ -53,8 +53,8 @@ class _ApiService implements ApiService {
             contentType: 'application/json',
             baseUrl: baseUrl),
         data: _data);
-    final value = User.fromJson(_result.data);
-    return value;
+    //final value = User.fromJson(_result.data);
+    return _result;
   }
 
   @override

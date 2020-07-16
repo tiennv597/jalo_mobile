@@ -9,6 +9,6 @@ const String token = 'token';
 //logined check value: bool true or false
 const String logined = 'logined';
 //display name
-const String displayName = 'displayName';
+const String fullName = 'fullName';
 //user id
 const String user_id = 'user_id';

@@ -315,15 +315,15 @@ class _RegisterPageState extends State<RegisterPage> {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       if (it.token.toString() != null && it.success == true) {
         //
-        api.checkToken(it.token.toString()).then((it) async {
-          if (it.success) {
-            prefs.setBool(SHARED_PREFERNCES.logined, true);
-            prefs.setString(SHARED_PREFERNCES.user_id, it.id);
-            prefs.setString(SHARED_PREFERNCES.displayName, it.displayName);
-          }
-        }).catchError((onError) {
-          print("error" + onError.toString());
-        });
+        // api.checkToken(it.token.toString()).then((it) async {
+        //   if (it.success) {
+        //     prefs.setBool(SHARED_PREFERNCES.logined, true);
+        //     prefs.setString(SHARED_PREFERNCES.user_id, it.id);
+        //     prefs.setString(SHARED_PREFERNCES.displayName, it.displayName);
+        //   }
+        // }).catchError((onError) {
+        //   print("error" + onError.toString());
+        // });
         //
         prefs.setString(SHARED_PREFERNCES.token, it.token.toString());
         print(it.token.toString());

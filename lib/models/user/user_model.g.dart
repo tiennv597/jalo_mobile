@@ -8,26 +8,37 @@ part of 'user_model.dart';
 
 User _$UserFromJson(Map<String, dynamic> json) {
   return User(
-    success: json['success'] as bool,
-    provider: json['provider'] as String,
-    id: json['id'] as String,
-    enable: json['enable'] as bool,
-    username: json['username'] as String,
-    displayName: json['displayName'] as String,
-    creationDate: json['creationDate'] as String,
+    decks: (json['decks'] as List)?.map((e) => e as String)?.toList(),
     gender: json['gender'] as String,
+    languageSpoken:
+        (json['languageSpoken'] as List)?.map((e) => e as String)?.toList(),
+    jobType: json['jobType'] as String,
+    homeTown: json['homeTown'] as String,
+    creationDate: json['creationDate'] as String,
     profileUrl: json['profileUrl'] as String,
+    displayName: json['displayName'] as String,
+    provider: json['provider'] as String,
+    sId: json['_id'] as String,
+    firstName: json['firstName'] as String,
+    lastName: json['lastName'] as String,
+    email: json['email'] as String,
+    iV: json['__v'] as int,
   );
 }
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
-      'success': instance.success,
-      'provider': instance.provider,
-      'id': instance.id,
-      'enable': instance.enable,
-      'username': instance.username,
-      'displayName': instance.displayName,
-      'creationDate': instance.creationDate,
+      'decks': instance.decks,
       'gender': instance.gender,
+      'languageSpoken': instance.languageSpoken,
+      'jobType': instance.jobType,
+      'homeTown': instance.homeTown,
+      'creationDate': instance.creationDate,
       'profileUrl': instance.profileUrl,
+      'displayName': instance.displayName,
+      'provider': instance.provider,
+      '_id': instance.sId,
+      'firstName': instance.firstName,
+      'lastName': instance.lastName,
+      'email': instance.email,
+      '__v': instance.iV,
     };

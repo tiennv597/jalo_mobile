@@ -4,26 +4,36 @@ part 'user_model.g.dart';
 
 @JsonSerializable()
 class User {
-  bool success;
-  String provider;
-  String id;
-  bool enable;
-  String username;
-  String displayName;
-  String creationDate;
+  List<String> decks;
   String gender;
+  List<String> languageSpoken;
+  String jobType;
+  String homeTown;
+  String creationDate;
   String profileUrl;
+  String displayName;
+  String provider;
+  String sId;
+  String firstName;
+  String lastName;
+  String email;
+  int iV;
 
   User(
-      {this.success,
-      this.provider,
-      this.id,
-      this.enable,
-      this.username,
-      this.displayName,
-      this.creationDate,
+      {this.decks,
       this.gender,
-      this.profileUrl});
+      this.languageSpoken,
+      this.jobType,
+      this.homeTown,
+      this.creationDate,
+      this.profileUrl,
+      this.displayName,
+      this.provider,
+      this.sId,
+      this.firstName,
+      this.lastName,
+      this.email,
+      this.iV});
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
