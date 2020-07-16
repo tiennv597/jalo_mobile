@@ -90,7 +90,7 @@ class _ApiService implements ApiService {
   }
 
   @override
-  checkToken(jwt) async {
+  secret(jwt) async {
     ArgumentError.checkNotNull(jwt, 'jwt');
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -104,7 +104,7 @@ class _ApiService implements ApiService {
             extra: _extra,
             baseUrl: baseUrl),
         data: _data);
-    final value = User.fromJson(_result.data);
-    return value;
+    //final value = User.fromJson(_result.data);
+    return _result;
   }
 }

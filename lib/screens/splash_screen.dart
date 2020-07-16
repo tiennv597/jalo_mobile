@@ -55,7 +55,7 @@ class _SplashScreenState extends State<SplashScreen>
       String jwt = prefs.getString(SHARED_PREFERNCES.token);
       print(jwt);
       if (jwt != null) {
-        api.checkToken(jwt).then((it) async {
+        api.secret(jwt).then((it) async {
           // if (it.success) {
           //   prefs.setBool(SHARED_PREFERNCES.logined, true);
           //   prefs.setString(SHARED_PREFERNCES.user_id, it.id);

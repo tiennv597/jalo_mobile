@@ -35,6 +35,6 @@ abstract class ApiService {
       @Field("email") String email,
       @Field("password") String password);
   //get login user
-  @GET("/login-api")
-  Future<User> checkToken(@Header("Authorization") String jwt);
+  @GET("/secret")
+  Future<Response<Map<String, dynamic>>> secret(@Header("Authorization") String jwt);
 }
