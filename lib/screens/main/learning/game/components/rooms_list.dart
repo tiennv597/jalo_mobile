@@ -35,7 +35,7 @@ class RoomsListState extends State<RoomsList> {
   void _strartGameScreen(String id) {
     // socket.emit(SOCKET_CONSTANT.join_room,
     InfoRoom infoRoom = InfoRoom();
-    infoRoom.id = id;
+    infoRoom.idRoom = id;
     infoRoom.type = widget.type;
     Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (_) => StrartGameScreen(infoRoom)));

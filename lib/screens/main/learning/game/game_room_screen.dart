@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shinro_int2/constant/app_colors.dart' as COLORS;
 import 'package:shinro_int2/constant/network_constant.dart' as NETWORK_CONSTANT;
+import 'package:shinro_int2/models/chat/user_model.dart';
 import 'package:shinro_int2/models/game/rooms.dart';
 import 'package:shinro_int2/utils/custom_background.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +11,8 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'components/room_tab_view.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 import 'package:shinro_int2/models/game/info_room.dart';
+import 'package:shinro_int2/constant/shared_preferences.dart'
+    as SHARED_PREFERNCES;
 
 import 'game_start_screen.dart';
 
@@ -80,13 +84,22 @@ class _GameRoomPageState extends State<GameRoomPage>
     });
   }
 
-  void _createRoomByName() {
+  Future<void> _createRoomByName() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String userId = prefs.getString(SHARED_PREFERNCES.user_id);
+    String fullName = prefs.getString(SHARED_PREFERNCES.fullName);
     InfoRoom infoRoom = new InfoRoom();
-    infoRoom.id='';
+    Users user = new Users();
+    List<Users> users = new List<Users>();
+    user.id = userId;
+    user.fullName = fullName;
+    users.insert(0, user);
+    infoRoom.idRoom = '';
     infoRoom.level = level;
     infoRoom.type = type;
     infoRoom.quantity = quantity;
     infoRoom.time = time;
+    infoRoom.users = users;
     Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (_) => StrartGameScreen(infoRoom)));
   }

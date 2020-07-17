@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shinro_int2/models/category.dart';
+import 'package:shinro_int2/models/game/info_user.dart';
 import 'package:shinro_int2/models/message/message.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 import 'package:shinro_int2/constant/network_constant.dart' as NETWORK_CONSTANT;
@@ -47,12 +48,11 @@ class StrartGameScreenState extends State<StrartGameScreen> {
   int userReady = 1; // count user
   int userInRoom = 1; // clients in room
 
-  //
+  InfoRoom room;
   Future<InfoRoom> getFutureInfoRoom() async =>
       await Future.delayed(Duration(seconds: 1), () {
-        return widget.infoRoom;
+        return room;
       });
-
 // data test
   List<Category> categories = [
     Category(
@@ -93,11 +93,12 @@ class StrartGameScreenState extends State<StrartGameScreen> {
     ),
   ];
   @override
-  Future<void> initState() async {
+  void initState() {
     super.initState();
     _focus.addListener(_onFocusChange);
     _controller = ScrollController();
     _controller.addListener(_scrollListener);
+
     switch (widget.infoRoom.type) {
       case 'Chinese Word':
         {
@@ -126,13 +127,10 @@ class StrartGameScreenState extends State<StrartGameScreen> {
       'extraHeaders': {'foo': 'bar'} // optional
     });
     //judgment create room or join room
-    if (widget.infoRoom.id == '') {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      String userId = prefs.getString(SHARED_PREFERNCES.user_id);
-      String fullName = prefs.getString(SHARED_PREFERNCES.fullName);
+    if (widget.infoRoom.idRoom == '') {
       socket.emit(NETWORK_CONSTANT.creat_room, {
-        userId,
-        fullName,
+        widget.infoRoom.users[0].id,
+        widget.infoRoom.users[0].fullName,
         widget.infoRoom.level,
         widget.infoRoom.type,
         widget.infoRoom.quantity,
@@ -140,10 +138,10 @@ class StrartGameScreenState extends State<StrartGameScreen> {
       });
     } else {
       setState(() {
-        idRoom = widget.infoRoom.id;
+        idRoom = widget.infoRoom.idRoom;
       });
       socket.emit(NETWORK_CONSTANT.join_room, {
-        widget.infoRoom.id,
+        widget.infoRoom.idRoom,
         widget.infoRoom.password,
       });
     }
@@ -180,13 +178,13 @@ class StrartGameScreenState extends State<StrartGameScreen> {
       }
     });
 
-    // socket.on(NETWORK_CONSTANT.joined_room, (data) {
-    //   print(data);
-    //   setState(() {
-    //     userInRoom++;
-    //     allReady = false;
-    //   });
-    // });
+    socket.on(NETWORK_CONSTANT.joined_room, (data) {
+      print(data);
+      setState(() {
+        userInRoom++;
+        allReady = false;
+      });
+    });
     socket.on(NETWORK_CONSTANT.leave, (data) {
       setState(() {
         userInRoom--;
@@ -198,14 +196,19 @@ class StrartGameScreenState extends State<StrartGameScreen> {
       });
     });
 
-    // socket.on(NETWORK_CONSTANT.server_send_room, (data) {
-    //   Room room = Room.fromJson(json.decode(data));
-    //   print(data);
-    //   setState(() {
-    //     idRoom = room.idRoom;
-    //     owner = room.owner;
-    //   });
-    // });
+    socket.on(NETWORK_CONSTANT.server_send_room, (data) {
+      room = InfoRoom.fromJson(json.decode(data));
+      print(data);
+
+      setState(() {
+        idRoom = room.idRoom;
+        if (room.idOwner == widget.infoRoom.users[0].id) {
+          setState(() {
+            owner = true;
+          });
+        }
+      });
+    });
     socket.on(NETWORK_CONSTANT.server_send_message, (data) {
       // Parsing JSON to Jobject
       Message message = Message.fromJson(json.decode(data));
