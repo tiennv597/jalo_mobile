@@ -110,6 +110,14 @@ const LinearGradient colorPurple = LinearGradient(
   ],
 );
 
+const RadialGradient colorBlue2 = RadialGradient(
+  colors: <Color>[
+    Color(0xFF42A5F5),
+    Color(0xFF1E88E5),
+    Color(0xFF1976D2),
+  ],
+);
+
 screenAwareSize(int size, BuildContext context) {
   double baseHeight = 640.0;
   return size * MediaQuery.of(context).size.height / baseHeight;

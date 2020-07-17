@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:shinro_int2/models/category.dart';
+import 'package:shinro_int2/models/game/info_room.dart';
 
 import 'user_item.dart';
 
 class UserListModal {
-  mainBottomSheet(BuildContext context, List<Category> categories) {
+  mainBottomSheet(BuildContext context, List<Users> users) {
     showModalBottomSheet(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
@@ -17,9 +17,9 @@ class UserListModal {
           return Container(
             height: MediaQuery.of(context).size.height / 2.2,
             child: ListView.builder(
-                itemCount: categories.length,
+                itemCount: users.length,
                 itemBuilder: (context, index) => UserItem(
-                      category: categories[index],
+                      users: users[index],
                     )),
           );
         });

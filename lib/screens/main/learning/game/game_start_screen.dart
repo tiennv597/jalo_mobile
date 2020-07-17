@@ -54,44 +54,44 @@ class StrartGameScreenState extends State<StrartGameScreen> {
         return room;
       });
 // data test
-  List<Category> categories = [
-    Category(
-      Color(0xffFCE183),
-      Color(0xffF68D7F),
-      'Gadgets',
-      'assets/image.jpg',
-    ),
-    Category(
-      Color(0xffF749A2),
-      Color(0xffFF7375),
-      'Clothes',
-      'assets/image.jpg',
-    ),
-    Category(
-      Color(0xff00E9DA),
-      Color(0xff5189EA),
-      'Fashion',
-      'assets/image.jpg',
-    ),
-    Category(
-      Color(0xffAF2D68),
-      Color(0xff632376),
-      'Home',
-      'assets/image.jpg',
-    ),
-    Category(
-      Color(0xff36E892),
-      Color(0xff33B2B9),
-      'Beauty',
-      'assets/image.jpg',
-    ),
-    Category(
-      Color(0xffF123C4),
-      Color(0xff668CEA),
-      'Appliances',
-      'assets/image.jpg',
-    ),
-  ];
+  List<Users> users = new List<Users>();
+    // Category(
+    //   Color(0xffFCE183),
+    //   Color(0xffF68D7F),
+    //   'Gadgets',
+    //   'assets/image.jpg',
+    // ),
+    // Category(
+    //   Color(0xffF749A2),
+    //   Color(0xffFF7375),
+    //   'Clothes',
+    //   'assets/image.jpg',
+    // ),
+    // Category(
+    //   Color(0xff00E9DA),
+    //   Color(0xff5189EA),
+    //   'Fashion',
+    //   'assets/image.jpg',
+    // ),
+    // Category(
+    //   Color(0xffAF2D68),
+    //   Color(0xff632376),
+    //   'Home',
+    //   'assets/image.jpg',
+    // ),
+    // Category(
+    //   Color(0xff36E892),
+    //   Color(0xff33B2B9),
+    //   'Beauty',
+    //   'assets/image.jpg',
+    // ),
+    // Category(
+    //   Color(0xffF123C4),
+    //   Color(0xff668CEA),
+    //   'Appliances',
+    //   'assets/image.jpg',
+    // ),
+  
   @override
   void initState() {
     super.initState();
@@ -202,6 +202,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
 
       setState(() {
         idRoom = room.idRoom;
+        users=room.users;
         if (room.idOwner == widget.infoRoom.users[0].id) {
           setState(() {
             owner = true;
@@ -367,9 +368,9 @@ class StrartGameScreenState extends State<StrartGameScreen> {
                               //list user in room
                               child: ListView.builder(
                                   scrollDirection: Axis.horizontal,
-                                  itemCount: categories.length,
+                                  itemCount: users.length,
                                   itemBuilder: (_, index) => UserItem(
-                                        category: categories[index],
+                                        users: users[index],
                                       ))),
                           Container(
                             height: 30,
@@ -580,7 +581,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
   void _signOut() {}
 
   void _showListUser() {
-    userListModal.mainBottomSheet(context, categories);
+    userListModal.mainBottomSheet(context, users);
   }
 
   @override

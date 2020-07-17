@@ -1,10 +1,11 @@
-import 'package:shinro_int2/models/category.dart';
 import 'package:flutter/material.dart';
+import 'package:shinro_int2/models/game/info_room.dart';
+import 'package:shinro_int2/constant/app_colors.dart' as COLORS;
 
 class UserItem extends StatelessWidget {
-  final Category category;
+  final Users users;
 
-  const UserItem({Key key, this.category}) : super(key: key);
+  const UserItem({Key key, this.users}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,12 +25,15 @@ class UserItem extends StatelessWidget {
                   width: 40,
                   decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      gradient: RadialGradient(
-                        colors: [category.begin, category.end],
-                      )),
+                      gradient: COLORS.colorBlue2
+                      ),
                   child: Center(
-                    child: Image.asset(category.image),
+                    child: Image.asset('assets/gokaku.png'),
                   ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(users.fullName),
                 )
               ],
             ),
