@@ -2,11 +2,13 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shinro_int2/models/category.dart';
-import 'package:shinro_int2/models/game/room.dart';
 import 'package:shinro_int2/models/message/message.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 import 'package:shinro_int2/constant/network_constant.dart' as NETWORK_CONSTANT;
+import 'package:shinro_int2/constant/shared_preferences.dart'
+    as SHARED_PREFERNCES;
 import 'package:shinro_int2/constant/app_colors.dart' as COLORS;
 import 'components/message_list_item.dart';
 import 'components/user_item.dart';
@@ -18,6 +20,7 @@ import 'game_quiz_screen.dart';
 class StrartGameScreen extends StatefulWidget {
   final InfoRoom infoRoom;
 
+  //StrartGameScreen({Key key, @required this.infoRoom}) : super(key: key);
   StrartGameScreen(this.infoRoom);
   @override
   StrartGameScreenState createState() {
@@ -43,6 +46,12 @@ class StrartGameScreenState extends State<StrartGameScreen> {
   bool allReady = true; //check user ready?
   int userReady = 1; // count user
   int userInRoom = 1; // clients in room
+
+  //
+  Future<InfoRoom> getFutureInfoRoom() async =>
+      await Future.delayed(Duration(seconds: 1), () {
+        return widget.infoRoom;
+      });
 
 // data test
   List<Category> categories = [
@@ -84,12 +93,11 @@ class StrartGameScreenState extends State<StrartGameScreen> {
     ),
   ];
   @override
-  void initState() {
+  Future<void> initState() async {
     super.initState();
     _focus.addListener(_onFocusChange);
     _controller = ScrollController();
     _controller.addListener(_scrollListener);
-
     switch (widget.infoRoom.type) {
       case 'Chinese Word':
         {
@@ -119,7 +127,17 @@ class StrartGameScreenState extends State<StrartGameScreen> {
     });
     //judgment create room or join room
     if (widget.infoRoom.id == '') {
-      socket.emit(NETWORK_CONSTANT.creat_room);
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String userId = prefs.getString(SHARED_PREFERNCES.user_id);
+      String fullName = prefs.getString(SHARED_PREFERNCES.fullName);
+      socket.emit(NETWORK_CONSTANT.creat_room, {
+        userId,
+        fullName,
+        widget.infoRoom.level,
+        widget.infoRoom.type,
+        widget.infoRoom.quantity,
+        widget.infoRoom.time
+      });
     } else {
       setState(() {
         idRoom = widget.infoRoom.id;
@@ -162,13 +180,13 @@ class StrartGameScreenState extends State<StrartGameScreen> {
       }
     });
 
-    socket.on(NETWORK_CONSTANT.joined_room, (data) {
-      print(data);
-      setState(() {
-        userInRoom++;
-        allReady = false;
-      });
-    });
+    // socket.on(NETWORK_CONSTANT.joined_room, (data) {
+    //   print(data);
+    //   setState(() {
+    //     userInRoom++;
+    //     allReady = false;
+    //   });
+    // });
     socket.on(NETWORK_CONSTANT.leave, (data) {
       setState(() {
         userInRoom--;
@@ -180,14 +198,14 @@ class StrartGameScreenState extends State<StrartGameScreen> {
       });
     });
 
-    socket.on(NETWORK_CONSTANT.server_send_room, (data) {
-      Room room = Room.fromJson(json.decode(data));
-      print(data);
-      setState(() {
-        idRoom = room.idRoom;
-        owner = room.owner;
-      });
-    });
+    // socket.on(NETWORK_CONSTANT.server_send_room, (data) {
+    //   Room room = Room.fromJson(json.decode(data));
+    //   print(data);
+    //   setState(() {
+    //     idRoom = room.idRoom;
+    //     owner = room.owner;
+    //   });
+    // });
     socket.on(NETWORK_CONSTANT.server_send_message, (data) {
       // Parsing JSON to Jobject
       Message message = Message.fromJson(json.decode(data));
@@ -244,134 +262,150 @@ class StrartGameScreenState extends State<StrartGameScreen> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIOverlays([]);
-    return new Scaffold(
-        backgroundColor: Colors.white,
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(40.0), // here the desired height
-          child: new AppBar(
-            iconTheme: IconThemeData(
-              color: Colors.black, //change your color here
-            ),
-            title: Text(
-              "Solo 122",
-              style: TextStyle(color: Colors.black),
-            ),
-            backgroundColor: Colors.white,
-            elevation: 0,
-            actions: <Widget>[
-              new IconButton(
-                  icon: new Icon(Icons.exit_to_app), onPressed: _signOut)
-            ],
-          ),
-        ),
-        floatingActionButton: Visibility(
-          visible: _visibility,
-          child: Stack(
-            children: <Widget>[
-              Positioned(
-                bottom: 112.0,
-                right: 8.0,
-                child: FloatingActionButton(
-                  backgroundColor: COLORS.cyan700,
-                  heroTag: 'save',
-                  onPressed: () {
-                    // What you want to do
-                  },
-                  child: Icon(Icons.group_add),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5.0),
+    return FutureBuilder(
+        future: getFutureInfoRoom(),
+        builder: (context, snapshot) {
+          InfoRoom infoRoom = new InfoRoom();
+          infoRoom = snapshot.data;
+
+          if (!snapshot.hasData) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          } else {
+            return Scaffold(
+                backgroundColor: Colors.white,
+                appBar: PreferredSize(
+                  preferredSize:
+                      Size.fromHeight(40.0), // here the desired height
+                  child: new AppBar(
+                    iconTheme: IconThemeData(
+                      color: Colors.black, //change your color here
+                    ),
+                    title: Text(
+                      "Solo 122",
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    backgroundColor: Colors.white,
+                    elevation: 0,
+                    actions: <Widget>[
+                      new IconButton(
+                          icon: new Icon(Icons.exit_to_app),
+                          onPressed: _signOut)
+                    ],
                   ),
                 ),
-              ),
-              Positioned(
-                bottom: 42,
-                right: 8.0,
-                child: owner
-                    ? FloatingActionButton(
-                        backgroundColor: COLORS.cyan700,
-                        heroTag: 'strart',
-                        onPressed: allReady ? _strart : null,
-                        child: Icon(
-                          Icons.arrow_right,
-                          size: 54,
-                        ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5.0),
-                        ),
-                      )
-                    : FloatingActionButton(
-                        backgroundColor: COLORS.cyan700,
-                        heroTag: 'ready',
-                        onPressed: _ready,
-                        child: ready
-                            ? Icon(
-                                Icons.cancel,
-                                size: 40,
-                              )
-                            : Icon(
-                                Icons.touch_app,
-                                size: 40,
-                              ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5.0),
+                floatingActionButton: Visibility(
+                  visible: _visibility,
+                  child: Stack(
+                    children: <Widget>[
+                      Positioned(
+                        bottom: 112.0,
+                        right: 8.0,
+                        child: FloatingActionButton(
+                          backgroundColor: COLORS.cyan700,
+                          heroTag: 'save',
+                          onPressed: () {
+                            // What you want to do
+                          },
+                          child: Icon(Icons.group_add),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5.0),
+                          ),
                         ),
                       ),
-              ),
-            ],
-          ),
-        ),
-        body: new Container(
-          child: new Column(
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  Container(
-                      margin: EdgeInsets.all(8.0),
-                      height: 30,
-                      width: MediaQuery.of(context).size.width / 3,
-                      //list user in room
-                      child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: categories.length,
-                          itemBuilder: (_, index) => UserItem(
-                                category: categories[index],
-                              ))),
-                  Container(
-                    height: 30,
-                    width: 70,
-                    //button show list user in room
-                    child: RaisedButton.icon(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30.0),
-                            side: BorderSide(color: Colors.white)),
-                        icon: Icon(Icons.account_circle),
-                        label: Text(userInRoom.toString()),
-                        onPressed: _showListUser),
-                  ),
-                ],
-              ),
-              _buildRoomInfo(),
-              Flexible(
-                child: Container(
-                  // list message
-                  child: ListView.builder(
-                    padding: EdgeInsets.all(8.0),
-                    reverse: true,
-                    itemBuilder: (_, int index) => _messages[index],
-                    itemCount: _messages.length,
+                      Positioned(
+                        bottom: 42,
+                        right: 8.0,
+                        child: owner
+                            ? FloatingActionButton(
+                                backgroundColor: COLORS.cyan700,
+                                heroTag: 'strart',
+                                onPressed: allReady ? _strart : null,
+                                child: Icon(
+                                  Icons.arrow_right,
+                                  size: 54,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5.0),
+                                ),
+                              )
+                            : FloatingActionButton(
+                                backgroundColor: COLORS.cyan700,
+                                heroTag: 'ready',
+                                onPressed: _ready,
+                                child: ready
+                                    ? Icon(
+                                        Icons.cancel,
+                                        size: 40,
+                                      )
+                                    : Icon(
+                                        Icons.touch_app,
+                                        size: 40,
+                                      ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5.0),
+                                ),
+                              ),
+                      ),
+                    ],
                   ),
                 ),
-              ),
-              new Divider(height: 1.0),
-              new Container(
-                decoration:
-                    new BoxDecoration(color: Theme.of(context).cardColor),
-                child: _buildTextComposer(),
-              ),
-            ],
-          ),
-        ));
+                body: new Container(
+                  child: new Column(
+                    children: <Widget>[
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: <Widget>[
+                          Container(
+                              margin: EdgeInsets.all(8.0),
+                              height: 30,
+                              width: MediaQuery.of(context).size.width / 3,
+                              //list user in room
+                              child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: categories.length,
+                                  itemBuilder: (_, index) => UserItem(
+                                        category: categories[index],
+                                      ))),
+                          Container(
+                            height: 30,
+                            width: 70,
+                            //button show list user in room
+                            child: RaisedButton.icon(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30.0),
+                                    side: BorderSide(color: Colors.white)),
+                                icon: Icon(Icons.account_circle),
+                                label: Text(userInRoom.toString()),
+                                onPressed: _showListUser),
+                          ),
+                        ],
+                      ),
+                      _buildRoomInfo(),
+                      Flexible(
+                        child: Container(
+                          // list message
+                          child: ListView.builder(
+                            padding: EdgeInsets.all(8.0),
+                            reverse: true,
+                            itemBuilder: (_, int index) => _messages[index],
+                            itemCount: _messages.length,
+                          ),
+                        ),
+                      ),
+                      new Divider(height: 1.0),
+                      new Container(
+                        decoration: new BoxDecoration(
+                            color: Theme.of(context).cardColor),
+                        child: _buildTextComposer(),
+                      ),
+                    ],
+                  ),
+                ));
+          }
+        });
+    ;
   }
 
   CupertinoButton getIOSSendButton() {

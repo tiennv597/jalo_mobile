@@ -78,14 +78,15 @@ class _GameRoomPageState extends State<GameRoomPage>
       id,
       password,
     });
-
-    // Navigator.of(context).pushReplacement(
-    //     MaterialPageRoute(builder: (_) => StrartGameScreen(infoRoom)));
   }
 
   void _createRoomByName() {
-    InfoRoom infoRoom = new InfoRoom(id, password, level, type, quantity, time);
-    //socket.emit('join-room', {_tfRoomController.text, "tien2"});
+    InfoRoom infoRoom = new InfoRoom();
+    infoRoom.id='';
+    infoRoom.level = level;
+    infoRoom.type = type;
+    infoRoom.quantity = quantity;
+    infoRoom.time = time;
     Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (_) => StrartGameScreen(infoRoom)));
   }

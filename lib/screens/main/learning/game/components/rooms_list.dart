@@ -34,11 +34,11 @@ class RoomsListState extends State<RoomsList> {
 
   void _strartGameScreen(String id) {
     // socket.emit(SOCKET_CONSTANT.join_room,
-    //     {_tfRoomController.text, _tfPasswordController});
-    InfoRoom infoRoom = InfoRoom(id, '', '', widget.type, '', '');
-
-    Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) => StrartGameScreen(infoRoom)));
+    InfoRoom infoRoom = InfoRoom();
+    infoRoom.id = id;
+    infoRoom.type = widget.type;
+    Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (_) => StrartGameScreen(infoRoom)));
   }
 
   @override
@@ -112,7 +112,10 @@ class RoomsListState extends State<RoomsList> {
                                   padding: const EdgeInsets.all(8.0),
                                   child: Row(
                                     children: <Widget>[
-                                      Icon(Icons.account_circle,color: Colors.white,),
+                                      Icon(
+                                        Icons.account_circle,
+                                        color: Colors.white,
+                                      ),
                                       Text(
                                         "15",
                                         style: TextStyle(color: Colors.white),
