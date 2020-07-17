@@ -1,10 +1,9 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shinro_int2/constant/app_properties.dart';
-import 'package:shinro_int2/screens/main/main_screen.dart';
-
 import 'package:shinro_int2/constant/shared_preferences.dart'
     as SHARED_PREFERNCES;
 import 'package:flutter/material.dart';
+import 'package:shinro_int2/screens/main/profile/auth/login/login_page.dart';
 
 import 'change_country.dart';
 import 'change_language_screen.dart';
@@ -115,7 +114,7 @@ class SettingsPage extends StatelessWidget {
                                 prefs.remove(SHARED_PREFERNCES.token);
                                 prefs.setBool(SHARED_PREFERNCES.logined, false);
                                 Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (_) => MainPage()));
+                                    builder: (_) => LoginPage()));
                               }),
                         ],
                       ),

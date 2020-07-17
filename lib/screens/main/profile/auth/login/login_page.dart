@@ -8,6 +8,7 @@ import 'package:shinro_int2/models/user/user_model.dart';
 import 'package:shinro_int2/network/api_service.dart';
 import 'package:shinro_int2/constant/shared_preferences.dart'
     as SHARED_PREFERNCES;
+import 'package:shinro_int2/constant/network_constant.dart' as NETWORK_CONSTANT;
 import 'package:shinro_int2/screens/main/main_screen.dart';
 
 import '../register_page.dart';
@@ -25,7 +26,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
-    _userController.text = "222223frr@gmail.com";
+    _userController.text = "222s223frr@gmail.com";
     _passController.text = "12345678";
   }
 
@@ -345,8 +346,8 @@ class _LoginPageState extends State<LoginPage> {
       //   }).catchError((onError) {
       //     print("error" + onError.toString());
       //   });
-      prefs.setString(
-          SHARED_PREFERNCES.token, it.headers.value('authorization'));
+      prefs.setString(SHARED_PREFERNCES.token,
+          NETWORK_CONSTANT.bearer + ' ' + it.headers.value('authorization'));
       Navigator.of(context)
           .pushReplacement(MaterialPageRoute(builder: (_) => MainPage()));
       // } else {}

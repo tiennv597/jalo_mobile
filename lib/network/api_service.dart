@@ -1,4 +1,5 @@
 import 'package:shinro_int2/models/grammar/example_model.dart';
+import 'package:shinro_int2/models/user/resources.dart';
 import 'package:shinro_int2/models/user/user_model.dart';
 import 'package:shinro_int2/models/user/user_token.dart';
 import 'package:dio/dio.dart';
@@ -35,6 +36,6 @@ abstract class ApiService {
       @Field("email") String email,
       @Field("password") String password);
   //get login user
-  @GET("/secret")
-  Future<Response<Map<String, dynamic>>> secret(@Header("Authorization") String jwt);
+  @GET("/users/secret")
+  Future<Resources> secret(@Header("Authorization") String jwt);
 }

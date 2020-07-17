@@ -96,7 +96,7 @@ class _ApiService implements ApiService {
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final Response<Map<String, dynamic>> _result = await _dio.request(
-        '/login-api',
+        '/users/secret',
         queryParameters: queryParameters,
         options: RequestOptions(
             method: 'GET',
@@ -104,7 +104,7 @@ class _ApiService implements ApiService {
             extra: _extra,
             baseUrl: baseUrl),
         data: _data);
-    //final value = User.fromJson(_result.data);
-    return _result;
+    final value = Resources.fromJson(_result.data);
+    return value;
   }
 }

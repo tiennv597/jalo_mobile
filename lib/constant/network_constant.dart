@@ -7,6 +7,7 @@ const String default_ns = '/';
 const String china_word_ns = '/china_word_ns';
 const String vocabulary_ns = '/vocabulary_ns';
 const String grammar_ns = '/grammar_ns';
+const String bearer = 'Bearer';
 
 //default evenst of socket io
 
