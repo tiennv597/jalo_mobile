@@ -38,11 +38,10 @@ class _GameRoomPageState extends State<GameRoomPage>
   // List vc = [];
   // List gr = [];
   ListRooms rooms;
-    Future<ListRooms> getFutureRooms() async =>
+  Future<ListRooms> getFutureRooms() async =>
       await Future.delayed(Duration(seconds: 1), () {
         return rooms;
       });
-
 
   @override
   void initState() {
@@ -65,18 +64,8 @@ class _GameRoomPageState extends State<GameRoomPage>
       print(data);
     });
     socket.on(NETWORK_CONSTANT.server_send_rooms, (data) {
-      print(data);
-
-      //List<dynamic> tags = jsonDecode(data.toString());
-      //List<InfoRoom> tags = tagsJson != null ? List.from(tagsJson) : null;
-
-      //print(rooms.roomsCw[0].idRoom);
-
       setState(() {
         rooms = ListRooms.fromJson(json.decode(data));
-        //   cw = rooms;
-        //   // vc = rooms.idRoomVc;
-        //   // gr = rooms.idRoomGr;
       });
     });
     socket.emit(NETWORK_CONSTANT.client_get_rooms);

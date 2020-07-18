@@ -3,6 +3,11 @@ import 'package:shinro_int2/models/game/info_room.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 import 'package:shinro_int2/constant/app_colors.dart' as COLORS;
 import 'package:shinro_int2/models/game/rooms.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shinro_int2/constant/shared_preferences.dart'
+    as SHARED_PREFERNCES;
+import 'package:shinro_int2/models/game/info_user.dart';
+
 import '../game_start_screen.dart';
 
 class RoomsList extends StatefulWidget {
@@ -21,24 +26,20 @@ class RoomsListState extends State<RoomsList> {
     super.initState();
   }
 
-// check info room
-  // void _checkInfoRoom() {
-  //   // socket.emit(SOCKET_CONSTANT.join_room,
-  //   //     {_tfRoomController.text, _tfPasswordController});
-
-  //   widget.socket.emit(SOCKET_CONSTANT.check_info_room, {});
-
-  //   // Navigator.of(context).pushReplacement(
-  //   //     MaterialPageRoute(builder: (_) => StrartGameScreen(infoRoom)));
-  // }
-
-  void _strartGameScreen(String id) {
-    // socket.emit(SOCKET_CONSTANT.join_room,
+  void _strartGameScreen(
+      String id, String userId, String fullName, String type, String password) {
     InfoRoom infoRoom = InfoRoom();
+    User user = new User();
+    List<User> users = new List<User>();
     infoRoom.idRoom = id;
-    infoRoom.type = widget.type;
-    Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (_) => StrartGameScreen(infoRoom)));
+    user.id = userId;
+    user.fullName = fullName;
+    users.insert(0, user);
+    infoRoom.users = users;
+    infoRoom.type = type;
+    infoRoom.password = password;
+    Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (_) => StrartGameScreen(infoRoom)));
   }
 
   @override
@@ -55,8 +56,18 @@ class RoomsListState extends State<RoomsList> {
               itemBuilder: (BuildContext context, int index) => new ClipRRect(
                 borderRadius: BorderRadius.all(Radius.circular(5.0)),
                 child: InkWell(
-                  onTap: () {
-                    _strartGameScreen(widget.rooms[0].idRoom);
+                  onTap: () async {
+                    SharedPreferences prefs =
+                        await SharedPreferences.getInstance();
+                    String userId = prefs.getString(SHARED_PREFERNCES.user_id);
+                    String fullName =
+                        prefs.getString(SHARED_PREFERNCES.fullName);
+                    _strartGameScreen(
+                        widget.rooms[index].idRoom,
+                        userId,
+                        fullName,
+                        widget.rooms[index].type,
+                        widget.rooms[index].password);
                   },
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -81,7 +92,7 @@ class RoomsListState extends State<RoomsList> {
                                   child: CircleAvatar(
                                       backgroundColor: COLORS.tiColor52,
                                       child: Text(
-                                        widget.rooms[0].nameNoom,
+                                        widget.rooms[index].idRoom,
                                         style: TextStyle(color: Colors.white),
                                       )),
                                 ),
@@ -101,7 +112,7 @@ class RoomsListState extends State<RoomsList> {
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
-                                    "N5",
+                                    widget.rooms[index].level,
                                     style: TextStyle(color: Colors.white),
                                   ),
                                 ),

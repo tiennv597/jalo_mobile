@@ -96,9 +96,9 @@ class StrartGameScreenState extends State<StrartGameScreen> {
         widget.infoRoom.time
       });
     } else {
-      setState(() {
-        idRoom = widget.infoRoom.idRoom;
-      });
+      // setState(() {
+      //   idRoom = widget.infoRoom.idRoom;
+      // });
       socket.emit(NETWORK_CONSTANT.join_room, {
         widget.infoRoom.idRoom,
         widget.infoRoom.password,
@@ -140,7 +140,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
     });
 
     socket.on(NETWORK_CONSTANT.joined_room, (data) {
-      print(data);
+      room = InfoRoom.fromJson(json.decode(data));
       setState(() {
         userInRoom++;
         allReady = false;
@@ -169,6 +169,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
         }
       });
     });
+    
     socket.on(NETWORK_CONSTANT.server_send_message, (data) {
       // Parsing JSON to Jobject
       Message message = Message.fromJson(json.decode(data));
@@ -203,11 +204,6 @@ class StrartGameScreenState extends State<StrartGameScreen> {
       _visibilityBtn = !_visibilityBtn;
     });
   }
-
-  // void _getdRoom() {
-  //   socket.emit(NETWORK_CONSTANT.creat_room, {widget.infoRoom});
-  //   print("object");
-  // }
 
   void _strart() {
     socket.emit(NETWORK_CONSTANT.start_game, idRoom);
@@ -470,14 +466,14 @@ class StrartGameScreenState extends State<StrartGameScreen> {
                   Padding(
                     padding: const EdgeInsets.only(top: 4, bottom: 4),
                     child: Text(
-                      'Phòng: ',
+                      'Phòng: ' + room.idRoom,
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 4, bottom: 4),
                     child: Text(
-                      'Số câu: ',
+                      'Số câu: ' + room.quantity,
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
