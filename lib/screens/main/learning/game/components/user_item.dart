@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:shinro_int2/models/game/info_room.dart';
 import 'package:shinro_int2/constant/app_colors.dart' as COLORS;
-
+import 'package:shinro_int2/models/game/info_user.dart';
 class UserItem extends StatelessWidget {
-  final Users users;
+  final User users;
 
   const UserItem({Key key, this.users}) : super(key: key);
 

@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:socket_io_client/socket_io_client.dart';
+import 'package:shinro_int2/models/game/rooms.dart';
 
 import 'rooms_list.dart';
 
 class TabView extends StatelessWidget {
   final TabController tabController;
   final Socket socket;
-  final List cw;
-  final List vc;
-  final List gr;
+  final List<RoomsCw> cw;
+  final List<RoomsCw> vc;
+  final List<RoomsCw> gr;
   TabView({Key key, this.tabController, this.cw, this.vc, this.gr, this.socket})
       : super(key: key);
 

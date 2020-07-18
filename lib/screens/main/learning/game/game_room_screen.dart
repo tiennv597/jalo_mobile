@@ -1,15 +1,16 @@
-import 'dart:convert';
 import 'package:flutter/services.dart';
+import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shinro_int2/constant/app_colors.dart' as COLORS;
 import 'package:shinro_int2/constant/network_constant.dart' as NETWORK_CONSTANT;
-import 'package:shinro_int2/models/game/rooms.dart';
 import 'package:shinro_int2/utils/custom_background.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'components/room_tab_view.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 import 'package:shinro_int2/models/game/info_room.dart';
+import 'package:shinro_int2/models/game/rooms.dart';
+import 'package:shinro_int2/models/game/info_user.dart';
 import 'package:shinro_int2/constant/shared_preferences.dart'
     as SHARED_PREFERNCES;
 
@@ -33,9 +34,15 @@ class _GameRoomPageState extends State<GameRoomPage>
   String type = 'Chinese Word';
   String quantity = '10';
   String time = '10';
-  List cw = [];
-  List vc = [];
-  List gr = [];
+  // List cw = [];
+  // List vc = [];
+  // List gr = [];
+  ListRooms rooms;
+    Future<ListRooms> getFutureRooms() async =>
+      await Future.delayed(Duration(seconds: 1), () {
+        return rooms;
+      });
+
 
   @override
   void initState() {
@@ -58,13 +65,18 @@ class _GameRoomPageState extends State<GameRoomPage>
       print(data);
     });
     socket.on(NETWORK_CONSTANT.server_send_rooms, (data) {
-      //InfoRoom rooms = InfoRoom.fromJson(json.decode(data));
-      print(data.toString());
+      print(data);
+
+      //List<dynamic> tags = jsonDecode(data.toString());
+      //List<InfoRoom> tags = tagsJson != null ? List.from(tagsJson) : null;
+
+      //print(rooms.roomsCw[0].idRoom);
+
       setState(() {
-        //rooms = data;
-        // cw = rooms.idRoomCw;
-        // vc = rooms.idRoomVc;
-        // gr = rooms.idRoomGr;
+        rooms = ListRooms.fromJson(json.decode(data));
+        //   cw = rooms;
+        //   // vc = rooms.idRoomVc;
+        //   // gr = rooms.idRoomGr;
       });
     });
     socket.emit(NETWORK_CONSTANT.client_get_rooms);
@@ -84,8 +96,8 @@ class _GameRoomPageState extends State<GameRoomPage>
     String userId = prefs.getString(SHARED_PREFERNCES.user_id);
     String fullName = prefs.getString(SHARED_PREFERNCES.fullName);
     InfoRoom infoRoom = new InfoRoom();
-    Users user = new Users();
-    List<Users> users = new List<Users>();
+    User user = new User();
+    List<User> users = new List<User>();
     user.id = userId;
     user.fullName = fullName;
     users.insert(0, user);
@@ -457,13 +469,26 @@ class _GameRoomPageState extends State<GameRoomPage>
                       ),
                     ),
                   ),
-                  body: TabView(
-                    tabController: tabController,
-                    cw: cw, // list rooms chinese word
-                    vc: vc, // list rooms vocabulary
-                    gr: gr, // list rooms grammar
-                    socket: socket, //sockets
-                  ),
+                  body: FutureBuilder(
+                      future: getFutureRooms(),
+                      builder: (context, snapshot) {
+                        // InfoRoom room = new InfoRoom();
+                        // room=snapshot.data;
+                        //print(room);
+                        if (!snapshot.hasData) {
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        } else {
+                          return TabView(
+                            tabController: tabController,
+                            cw: rooms.roomsCw, // list rooms chinese word
+                            vc: rooms.roomsCw, // list rooms vocabulary
+                            gr: rooms.roomsCw, // list rooms grammar
+                            socket: socket, //sockets
+                          );
+                        }
+                      }),
                 ),
               ),
               SizedBox(

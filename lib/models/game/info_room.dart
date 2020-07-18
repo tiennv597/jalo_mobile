@@ -1,3 +1,5 @@
+
+import 'package:shinro_int2/models/game/info_user.dart';
 class InfoRoom {
   String idRoom='';
   String idOwner;
@@ -7,7 +9,7 @@ class InfoRoom {
   String quantity;
   String time="10";
   String type;
-  List<Users> users;
+  List<User> users;
 
   InfoRoom(
       {this.idRoom,
@@ -30,9 +32,9 @@ class InfoRoom {
     time = json['time'];
     type = json['type'];
     if (json['users'] != null) {
-      users = new List<Users>();
+      users = new List<User>();
       json['users'].forEach((v) {
-        users.add(new Users.fromJson(v));
+        users.add(new User.fromJson(v));
       });
     }
   }
@@ -54,27 +56,27 @@ class InfoRoom {
   }
 }
 
-class Users {
-  String id;
-  String fullName;
-  String gender;
-  String profileUrl;
+// class Users {
+//   String id;
+//   String fullName;
+//   String gender;
+//   String profileUrl;
 
-  Users({this.id, this.fullName, this.gender, this.profileUrl});
+//   Users({this.id, this.fullName, this.gender, this.profileUrl});
 
-  Users.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    fullName = json['fullName'];
-    gender = json['gender'];
-    profileUrl = json['profileUrl'];
-  }
+//   Users.fromJson(Map<String, dynamic> json) {
+//     id = json['id'];
+//     fullName = json['fullName'];
+//     gender = json['gender'];
+//     profileUrl = json['profileUrl'];
+//   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['fullName'] = this.fullName;
-    data['gender'] = this.gender;
-    data['profileUrl'] = this.profileUrl;
-    return data;
-  }
-}
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = new Map<String, dynamic>();
+//     data['id'] = this.id;
+//     data['fullName'] = this.fullName;
+//     data['gender'] = this.gender;
+//     data['profileUrl'] = this.profileUrl;
+//     return data;
+//   }
+// }

@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:shinro_int2/models/game/info_room.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 import 'package:shinro_int2/constant/app_colors.dart' as COLORS;
-
+import 'package:shinro_int2/models/game/rooms.dart';
 import '../game_start_screen.dart';
 
 class RoomsList extends StatefulWidget {
-  final List rooms;
+  final List<RoomsCw> rooms;
   final String type;
   final Socket socket;
   RoomsList({this.rooms, this.type, this.socket});
@@ -56,7 +56,7 @@ class RoomsListState extends State<RoomsList> {
                 borderRadius: BorderRadius.all(Radius.circular(5.0)),
                 child: InkWell(
                   onTap: () {
-                    _strartGameScreen(widget.rooms[index]);
+                    _strartGameScreen(widget.rooms[0].idRoom);
                   },
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -81,7 +81,7 @@ class RoomsListState extends State<RoomsList> {
                                   child: CircleAvatar(
                                       backgroundColor: COLORS.tiColor52,
                                       child: Text(
-                                        widget.rooms[index],
+                                        widget.rooms[0].nameNoom,
                                         style: TextStyle(color: Colors.white),
                                       )),
                                 ),

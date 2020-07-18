@@ -8,6 +8,7 @@ import 'package:shinro_int2/constant/network_constant.dart' as NETWORK_CONSTANT;
 import 'package:shinro_int2/constant/app_colors.dart' as COLORS;
 import 'components/message_list_item.dart';
 import 'components/user_item.dart';
+import 'package:shinro_int2/models/game/info_user.dart';
 import 'package:shinro_int2/models/game/info_room.dart';
 import 'components/user_list_modal.dart';
 import 'game_quiz_screen.dart';
@@ -44,7 +45,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
 
   InfoRoom room;
 
-  List<Users> users = new List<Users>();
+  List<User> users = new List<User>();
   Future<InfoRoom> getFutureInfoRoom() async =>
       await Future.delayed(Duration(seconds: 1), () {
         return room;
@@ -172,7 +173,8 @@ class StrartGameScreenState extends State<StrartGameScreen> {
       // Parsing JSON to Jobject
       Message message = Message.fromJson(json.decode(data));
       ChatMessage chatMessage = new ChatMessage(
-        text: message.message,
+        message: message.message,
+        fulName: message.name,
       );
       //add message to list
       setState(() {
@@ -468,21 +470,21 @@ class StrartGameScreenState extends State<StrartGameScreen> {
                   Padding(
                     padding: const EdgeInsets.only(top: 4, bottom: 4),
                     child: Text(
-                      'Phòng: ' ,
+                      'Phòng: ',
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 4, bottom: 4),
                     child: Text(
-                      'Số câu: ' ,
+                      'Số câu: ',
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 4, bottom: 4),
                     child: Text(
-                      'Thời gian: ' + "11"+ ' giây/ câu',
+                      'Thời gian: ' + "11" + ' giây/ câu',
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
@@ -526,7 +528,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
   void _textMessageSubmitted(String value) {
     //send massage
     socket.emit(NETWORK_CONSTANT.client_send_message,
-        {idRoom, "tien2", _textEditingController.text});
+        {room.idRoom, widget.infoRoom.users[0].fullName, value});
     //remove focus
     FocusScope.of(context).requestFocus(new FocusNode());
 
