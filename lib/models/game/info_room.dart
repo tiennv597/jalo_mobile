@@ -1,11 +1,11 @@
 class InfoRoom {
-  String idRoom;
+  String idRoom='';
   String idOwner;
   String nameNoom;
   String password;
   String level;
   String quantity;
-  String time;
+  String time="10";
   String type;
   List<Users> users;
 

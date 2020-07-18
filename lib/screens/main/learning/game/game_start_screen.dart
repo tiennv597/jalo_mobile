@@ -2,19 +2,13 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:shinro_int2/models/category.dart';
-import 'package:shinro_int2/models/game/info_user.dart';
 import 'package:shinro_int2/models/message/message.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 import 'package:shinro_int2/constant/network_constant.dart' as NETWORK_CONSTANT;
-import 'package:shinro_int2/constant/shared_preferences.dart'
-    as SHARED_PREFERNCES;
 import 'package:shinro_int2/constant/app_colors.dart' as COLORS;
 import 'components/message_list_item.dart';
 import 'components/user_item.dart';
 import 'package:shinro_int2/models/game/info_room.dart';
-
 import 'components/user_list_modal.dart';
 import 'game_quiz_screen.dart';
 
@@ -49,49 +43,13 @@ class StrartGameScreenState extends State<StrartGameScreen> {
   int userInRoom = 1; // clients in room
 
   InfoRoom room;
+
+  List<Users> users = new List<Users>();
   Future<InfoRoom> getFutureInfoRoom() async =>
       await Future.delayed(Duration(seconds: 1), () {
         return room;
       });
-// data test
-  List<Users> users = new List<Users>();
-    // Category(
-    //   Color(0xffFCE183),
-    //   Color(0xffF68D7F),
-    //   'Gadgets',
-    //   'assets/image.jpg',
-    // ),
-    // Category(
-    //   Color(0xffF749A2),
-    //   Color(0xffFF7375),
-    //   'Clothes',
-    //   'assets/image.jpg',
-    // ),
-    // Category(
-    //   Color(0xff00E9DA),
-    //   Color(0xff5189EA),
-    //   'Fashion',
-    //   'assets/image.jpg',
-    // ),
-    // Category(
-    //   Color(0xffAF2D68),
-    //   Color(0xff632376),
-    //   'Home',
-    //   'assets/image.jpg',
-    // ),
-    // Category(
-    //   Color(0xff36E892),
-    //   Color(0xff33B2B9),
-    //   'Beauty',
-    //   'assets/image.jpg',
-    // ),
-    // Category(
-    //   Color(0xffF123C4),
-    //   Color(0xff668CEA),
-    //   'Appliances',
-    //   'assets/image.jpg',
-    // ),
-  
+
   @override
   void initState() {
     super.initState();
@@ -143,6 +101,8 @@ class StrartGameScreenState extends State<StrartGameScreen> {
       socket.emit(NETWORK_CONSTANT.join_room, {
         widget.infoRoom.idRoom,
         widget.infoRoom.password,
+        widget.infoRoom.users[0].id,
+        widget.infoRoom.users[0].fullName
       });
     }
 
@@ -197,12 +157,10 @@ class StrartGameScreenState extends State<StrartGameScreen> {
     });
 
     socket.on(NETWORK_CONSTANT.server_send_room, (data) {
-      room = InfoRoom.fromJson(json.decode(data));
       print(data);
-
       setState(() {
-        idRoom = room.idRoom;
-        users=room.users;
+        room = InfoRoom.fromJson(json.decode(data));
+        users = room.users;
         if (room.idOwner == widget.infoRoom.users[0].id) {
           setState(() {
             owner = true;
@@ -269,9 +227,9 @@ class StrartGameScreenState extends State<StrartGameScreen> {
     return FutureBuilder(
         future: getFutureInfoRoom(),
         builder: (context, snapshot) {
-          InfoRoom infoRoom = new InfoRoom();
-          infoRoom = snapshot.data;
-
+          // InfoRoom room = new InfoRoom();
+          // room=snapshot.data;
+          //print(room);
           if (!snapshot.hasData) {
             return Center(
               child: CircularProgressIndicator(),
@@ -409,7 +367,6 @@ class StrartGameScreenState extends State<StrartGameScreen> {
                 ));
           }
         });
-    ;
   }
 
   CupertinoButton getIOSSendButton() {
@@ -511,21 +468,21 @@ class StrartGameScreenState extends State<StrartGameScreen> {
                   Padding(
                     padding: const EdgeInsets.only(top: 4, bottom: 4),
                     child: Text(
-                      'Phòng: ' + idRoom,
+                      'Phòng: ' ,
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 4, bottom: 4),
                     child: Text(
-                      'Số câu: ' + widget.infoRoom.quantity,
+                      'Số câu: ' ,
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 4, bottom: 4),
                     child: Text(
-                      'Thời gian: ' + widget.infoRoom.time + ' giây/ câu',
+                      'Thời gian: ' + "11"+ ' giây/ câu',
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
@@ -540,7 +497,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
             children: <Widget>[
               Container(
                 child: Text(
-                  widget.infoRoom.type + ': ' + widget.infoRoom.level,
+                  room.type + ': ' + room.level,
                   style: TextStyle(color: Colors.white, fontSize: 16),
                 ),
               ),

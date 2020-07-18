@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shinro_int2/constant/app_colors.dart' as COLORS;
 import 'package:shinro_int2/constant/network_constant.dart' as NETWORK_CONSTANT;
-import 'package:shinro_int2/models/chat/user_model.dart';
 import 'package:shinro_int2/models/game/rooms.dart';
 import 'package:shinro_int2/utils/custom_background.dart';
 import 'package:flutter/material.dart';
@@ -59,13 +58,13 @@ class _GameRoomPageState extends State<GameRoomPage>
       print(data);
     });
     socket.on(NETWORK_CONSTANT.server_send_rooms, (data) {
-      Rooms rooms = Rooms.fromJson(json.decode(data));
+      //InfoRoom rooms = InfoRoom.fromJson(json.decode(data));
+      print(data.toString());
       setState(() {
         //rooms = data;
-        cw = rooms.idRoomCw;
-        vc = rooms.idRoomVc;
-        gr = rooms.idRoomGr;
-        print(cw);
+        // cw = rooms.idRoomCw;
+        // vc = rooms.idRoomVc;
+        // gr = rooms.idRoomGr;
       });
     });
     socket.emit(NETWORK_CONSTANT.client_get_rooms);
@@ -74,10 +73,6 @@ class _GameRoomPageState extends State<GameRoomPage>
   }
 
   void _strartGameScreen() {
-    // socket.emit(NETWORK_CONSTANT.join_room,
-    //     {_tfRoomController.text, _tfPasswordController});
-    // InfoRoom infoRoom =
-    //     InfoRoom(id, _tfPasswordController.text, level, type, quantity, time);
     socket.emit(NETWORK_CONSTANT.check_info_room, {
       id,
       password,
