@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shinro_int2/models/game/info_rooms.dart';
 import 'package:shinro_int2/models/message/message.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 import 'package:shinro_int2/constant/network_constant.dart' as NETWORK_CONSTANT;
@@ -11,6 +12,7 @@ import 'components/user_item.dart';
 import 'package:shinro_int2/models/game/info_user.dart';
 import 'package:shinro_int2/models/game/info_room.dart';
 import 'components/user_list_modal.dart';
+import 'package:shinro_int2/models/game/info.dart';
 import 'game_quiz_screen.dart';
 
 class StrartGameScreen extends StatefulWidget {
@@ -42,9 +44,10 @@ class StrartGameScreenState extends State<StrartGameScreen> {
   bool allReady = true; //check user ready?
   int userReady = 1; // count user
   int userInRoom = 1; // clients in room
-  InfoRoom room;
+  //InfoRoom room;
+  InfoRooms room;
   List<User> users = new List<User>();
-  Future<InfoRoom> getFutureInfoRoom() async =>
+  Future<InfoRooms> getFutureInfoRoom() async =>
       await Future.delayed(Duration(seconds: 1), () {
         return room;
       });
@@ -137,8 +140,15 @@ class StrartGameScreenState extends State<StrartGameScreen> {
     });
 
     socket.on(NETWORK_CONSTANT.joined_room, (data) {
-      room = InfoRoom.fromJson(json.decode(data));
+      InfoRooms roomAndAllUser = InfoRooms.fromJson(json.decode(data));
+      //Info info = new Info();
+      //info = roomAndAllUser.info;
+      //List <User> users =roomAndAllUser.allUser;
+      print(roomAndAllUser.allUser);
       setState(() {
+        room=roomAndAllUser;
+        users = roomAndAllUser.allUser;
+        //room.info = info;
         userInRoom++;
         allReady = false;
       });
@@ -157,8 +167,8 @@ class StrartGameScreenState extends State<StrartGameScreen> {
     socket.on(NETWORK_CONSTANT.server_send_room, (data) {
       print(data);
       setState(() {
-        room = InfoRoom.fromJson(json.decode(data));
-        users.add(room.users);
+        room = InfoRooms.fromJson(json.decode(data));
+        users = room.allUser;
         if (room.info.idOwner == widget.infoRoom.users.id) {
           setState(() {
             owner = true;
@@ -222,9 +232,6 @@ class StrartGameScreenState extends State<StrartGameScreen> {
     return FutureBuilder(
         future: getFutureInfoRoom(),
         builder: (context, snapshot) {
-          // InfoRoom room = new InfoRoom();
-          // room=snapshot.data;
-          //print(room);
           if (!snapshot.hasData) {
             return Center(
               child: CircularProgressIndicator(),
@@ -314,17 +321,19 @@ class StrartGameScreenState extends State<StrartGameScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: <Widget>[
-                          Container(
-                              margin: EdgeInsets.all(8.0),
-                              height: 30,
-                              width: MediaQuery.of(context).size.width / 3,
-                              //list user in room
-                              child: ListView.builder(
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: users.length,
-                                  itemBuilder: (_, index) => UserItem(
-                                        users: users[index],
-                                      ))),
+                          Flexible(
+                            child: Container(
+                                margin: EdgeInsets.all(8.0),
+                                height: 30,
+                                width: MediaQuery.of(context).size.width / 3,
+                                //list user in room
+                                child: ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: users.length,
+                                    itemBuilder: (_, index) => UserItem(
+                                          users: users[index],
+                                        ))),
+                          ),
                           Container(
                             height: 30,
                             width: 70,
@@ -488,7 +497,6 @@ class StrartGameScreenState extends State<StrartGameScreen> {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
-//        mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               Container(
                 child: Text(
@@ -519,7 +527,6 @@ class StrartGameScreenState extends State<StrartGameScreen> {
   }
 
   void _textMessageSubmitted(String value) {
-    //send massage
     socket.emit(NETWORK_CONSTANT.client_send_message,
         {room.info.idRoom, widget.infoRoom.users.fullName, value});
     //remove focus

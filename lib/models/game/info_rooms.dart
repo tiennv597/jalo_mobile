@@ -1,23 +1,29 @@
-import 'package:shinro_int2/models/game/info_room.dart';
+import 'package:shinro_int2/models/game/info.dart';
+import 'package:shinro_int2/models/game/info_user.dart';
 
-class Rooms {
-  List<InfoRoom> infoRoom;
+class InfoRooms {
+  Info info;
+  List<User> allUser;
 
-  Rooms({this.infoRoom});
+  InfoRooms({this.info, this.allUser});
 
-  Rooms.fromJson(Map<String, dynamic> json) {
-    if (json['InfoRoom'] != null) {
-      infoRoom = new List<InfoRoom>();
-      json['InfoRoom'].forEach((v) {
-        infoRoom.add(new InfoRoom.fromJson(v));
+  InfoRooms.fromJson(Map<String, dynamic> json) {
+    info = json['info'] != null ? new Info.fromJson(json['info']) : null;
+    if (json['all_user'] != null) {
+      allUser = new List<User>();
+      json['all_user'].forEach((v) {
+        allUser.add(new User.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.infoRoom != null) {
-      data['InfoRoom'] = this.infoRoom.map((v) => v.toJson()).toList();
+    if (this.info != null) {
+      data['info'] = this.info.toJson();
+    }
+    if (this.allUser != null) {
+      data['all_user'] = this.allUser.map((v) => v.toJson()).toList();
     }
     return data;
   }
