@@ -12,7 +12,6 @@ import 'components/user_item.dart';
 import 'package:shinro_int2/models/game/info_user.dart';
 import 'package:shinro_int2/models/game/info_room.dart';
 import 'components/user_list_modal.dart';
-import 'package:shinro_int2/models/game/info.dart';
 import 'game_quiz_screen.dart';
 
 class StrartGameScreen extends StatefulWidget {
@@ -30,7 +29,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
   final TextEditingController _textEditingController =
       new TextEditingController(); //text filde send messga
   String nsp = ''; // name space
-  String idRoom = ''; //id room current
+  //String idRoom = ''; //id room current
   bool _isComposingMessage = false; //on or off button send
   bool _visibilityBtn = false; //Hide button send
   bool _visibility = true; // Hide or show [send icon, ...]
@@ -114,7 +113,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
       Navigator.of(context).push(MaterialPageRoute(
           builder: (_) => GameQuizPage(
                 socket: socket,
-                idRoom: idRoom,
+                idRoom: room.info.idRoom,
                 owner: owner,
                 infoRoom: widget.infoRoom,
               )));
@@ -141,14 +140,9 @@ class StrartGameScreenState extends State<StrartGameScreen> {
 
     socket.on(NETWORK_CONSTANT.joined_room, (data) {
       InfoRooms roomAndAllUser = InfoRooms.fromJson(json.decode(data));
-      //Info info = new Info();
-      //info = roomAndAllUser.info;
-      //List <User> users =roomAndAllUser.allUser;
-      print(roomAndAllUser.allUser);
       setState(() {
-        room=roomAndAllUser;
+        room = roomAndAllUser;
         users = roomAndAllUser.allUser;
-        //room.info = info;
         userInRoom++;
         allReady = false;
       });
@@ -213,7 +207,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
   }
 
   void _strart() {
-    socket.emit(NETWORK_CONSTANT.start_game, idRoom);
+    socket.emit(NETWORK_CONSTANT.start_game, room.info.idRoom);
   }
 
   void _ready() {
@@ -221,7 +215,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
       ready = !ready;
     });
     socket.emit(NETWORK_CONSTANT.ready, {
-      idRoom,
+      room.info.idRoom,
       ready,
     });
   }
@@ -547,6 +541,6 @@ class StrartGameScreenState extends State<StrartGameScreen> {
   void dispose() {
     super.dispose();
     print("close");
-    socket.emit(NETWORK_CONSTANT.leave, idRoom);
+    socket.emit(NETWORK_CONSTANT.leave, room.info.idRoom);
   }
 }
