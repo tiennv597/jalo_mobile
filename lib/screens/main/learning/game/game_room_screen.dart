@@ -11,6 +11,7 @@ import 'package:socket_io_client/socket_io_client.dart';
 import 'package:shinro_int2/models/game/info_room.dart';
 import 'package:shinro_int2/models/game/rooms.dart';
 import 'package:shinro_int2/models/game/info_user.dart';
+import 'package:shinro_int2/models/game/info.dart';
 import 'package:shinro_int2/constant/shared_preferences.dart'
     as SHARED_PREFERNCES;
 
@@ -86,16 +87,18 @@ class _GameRoomPageState extends State<GameRoomPage>
     String fullName = prefs.getString(SHARED_PREFERNCES.fullName);
     InfoRoom infoRoom = new InfoRoom();
     User user = new User();
-    List<User> users = new List<User>();
+    Info info = new Info();
+    //List<User> users = new List<User>();
     user.id = userId;
     user.fullName = fullName;
-    users.insert(0, user);
-    infoRoom.idRoom = '';
-    infoRoom.level = level;
-    infoRoom.type = type;
-    infoRoom.quantity = quantity;
-    infoRoom.time = time;
-    infoRoom.users = users;
+    //users.insert(0, user);
+    info.idRoom = '';
+    info.level = level;
+    info.type = type;
+    info.quantity = quantity;
+    info.time = time;
+    infoRoom.users = user;
+    infoRoom.info = info;
     Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (_) => StrartGameScreen(infoRoom)));
   }

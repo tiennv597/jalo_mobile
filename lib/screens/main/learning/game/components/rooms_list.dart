@@ -7,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shinro_int2/constant/shared_preferences.dart'
     as SHARED_PREFERNCES;
 import 'package:shinro_int2/models/game/info_user.dart';
-
+import 'package:shinro_int2/models/game/info.dart';
 import '../game_start_screen.dart';
 
 class RoomsList extends StatefulWidget {
@@ -30,14 +30,14 @@ class RoomsListState extends State<RoomsList> {
       String id, String userId, String fullName, String type, String password) {
     InfoRoom infoRoom = InfoRoom();
     User user = new User();
-    List<User> users = new List<User>();
-    infoRoom.idRoom = id;
+    Info info = new Info();
     user.id = userId;
     user.fullName = fullName;
-    users.insert(0, user);
-    infoRoom.users = users;
-    infoRoom.type = type;
-    infoRoom.password = password;
+    infoRoom.users = user;
+    info.idRoom = id;
+    info.type = type;
+    info.password = password;
+    infoRoom.info = info;
     Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (_) => StrartGameScreen(infoRoom)));
   }
@@ -63,11 +63,11 @@ class RoomsListState extends State<RoomsList> {
                     String fullName =
                         prefs.getString(SHARED_PREFERNCES.fullName);
                     _strartGameScreen(
-                        widget.rooms[index].idRoom,
+                        widget.rooms[index].info.idRoom,
                         userId,
                         fullName,
-                        widget.rooms[index].type,
-                        widget.rooms[index].password);
+                        widget.rooms[index].info.type,
+                        widget.rooms[index].info.password);
                   },
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -92,7 +92,7 @@ class RoomsListState extends State<RoomsList> {
                                   child: CircleAvatar(
                                       backgroundColor: COLORS.tiColor52,
                                       child: Text(
-                                        widget.rooms[index].idRoom,
+                                        widget.rooms[index].info.idRoom,
                                         style: TextStyle(color: Colors.white),
                                       )),
                                 ),
@@ -112,7 +112,7 @@ class RoomsListState extends State<RoomsList> {
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
-                                    widget.rooms[index].level,
+                                    widget.rooms[index].info.level,
                                     style: TextStyle(color: Colors.white),
                                   ),
                                 ),

@@ -42,9 +42,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
   bool allReady = true; //check user ready?
   int userReady = 1; // count user
   int userInRoom = 1; // clients in room
-
   InfoRoom room;
-
   List<User> users = new List<User>();
   Future<InfoRoom> getFutureInfoRoom() async =>
       await Future.delayed(Duration(seconds: 1), () {
@@ -57,8 +55,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
     _focus.addListener(_onFocusChange);
     _controller = ScrollController();
     _controller.addListener(_scrollListener);
-
-    switch (widget.infoRoom.type) {
+    switch (widget.infoRoom.info.type) {
       case 'Chinese Word':
         {
           nsp = NETWORK_CONSTANT.china_word_ns;
@@ -86,24 +83,24 @@ class StrartGameScreenState extends State<StrartGameScreen> {
       'extraHeaders': {'foo': 'bar'} // optional
     });
     //judgment create room or join room
-    if (widget.infoRoom.idRoom == '') {
+    if (widget.infoRoom.info.idRoom == '') {
       socket.emit(NETWORK_CONSTANT.creat_room, {
-        widget.infoRoom.users[0].id,
-        widget.infoRoom.users[0].fullName,
-        widget.infoRoom.level,
-        widget.infoRoom.type,
-        widget.infoRoom.quantity,
-        widget.infoRoom.time
+        widget.infoRoom.users.id,
+        widget.infoRoom.users.fullName,
+        widget.infoRoom.info.level,
+        widget.infoRoom.info.type,
+        widget.infoRoom.info.quantity,
+        widget.infoRoom.info.time
       });
     } else {
       // setState(() {
       //   idRoom = widget.infoRoom.idRoom;
       // });
       socket.emit(NETWORK_CONSTANT.join_room, {
-        widget.infoRoom.idRoom,
-        widget.infoRoom.password,
-        widget.infoRoom.users[0].id,
-        widget.infoRoom.users[0].fullName
+        widget.infoRoom.info.idRoom,
+        widget.infoRoom.info.password,
+        widget.infoRoom.users.id,
+        widget.infoRoom.users.fullName
       });
     }
 
@@ -161,15 +158,15 @@ class StrartGameScreenState extends State<StrartGameScreen> {
       print(data);
       setState(() {
         room = InfoRoom.fromJson(json.decode(data));
-        users = room.users;
-        if (room.idOwner == widget.infoRoom.users[0].id) {
+        users.add(room.users);
+        if (room.info.idOwner == widget.infoRoom.users.id) {
           setState(() {
             owner = true;
           });
         }
       });
     });
-    
+
     socket.on(NETWORK_CONSTANT.server_send_message, (data) {
       // Parsing JSON to Jobject
       Message message = Message.fromJson(json.decode(data));
@@ -466,14 +463,14 @@ class StrartGameScreenState extends State<StrartGameScreen> {
                   Padding(
                     padding: const EdgeInsets.only(top: 4, bottom: 4),
                     child: Text(
-                      'Phòng: ' + room.idRoom,
+                      'Phòng: ' + room.info.idRoom,
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 4, bottom: 4),
                     child: Text(
-                      'Số câu: ' + room.quantity,
+                      'Số câu: ' + room.info.quantity,
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
@@ -495,7 +492,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
             children: <Widget>[
               Container(
                 child: Text(
-                  room.type + ': ' + room.level,
+                  room.info.type + ': ' + room.info.level,
                   style: TextStyle(color: Colors.white, fontSize: 16),
                 ),
               ),
@@ -524,7 +521,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
   void _textMessageSubmitted(String value) {
     //send massage
     socket.emit(NETWORK_CONSTANT.client_send_message,
-        {room.idRoom, widget.infoRoom.users[0].fullName, value});
+        {room.info.idRoom, widget.infoRoom.users.fullName, value});
     //remove focus
     FocusScope.of(context).requestFocus(new FocusNode());
 

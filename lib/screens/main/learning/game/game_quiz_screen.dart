@@ -84,7 +84,7 @@ class GameQuizPageState extends State<GameQuizPage> {
     random = shuffle([0, 1, 2, 3]);
     if (widget.owner) {
       widget.socket.emit(NETWORK_CONSTANT.get_quizzes,
-          {widget.idRoom, widget.infoRoom.level, "goi"});
+          {widget.idRoom, widget.infoRoom.info.level, "goi"});
     } else {}
 
     widget.socket.on(NETWORK_CONSTANT.send_quizzes, (data) {
