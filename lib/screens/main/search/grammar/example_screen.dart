@@ -85,9 +85,13 @@ class _ExamplePageState extends State<ExamplePage> {
               },
               onItemFound: (Example example, int index) {
                 return ListTile(
-                  title: Text(example.sId),
-                  isThreeLine: true,
+                  leading: CircleAvatar(
+                    child: new Text((index + 1).toString()),
+                  ),
+                  title: Text(example.vi),
                   subtitle: Text(example.sentence),
+                  trailing: Icon(Icons.more_vert),
+                  isThreeLine: true,
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => DetailPage(example: example)));
