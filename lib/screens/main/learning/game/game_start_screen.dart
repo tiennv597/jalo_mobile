@@ -8,7 +8,7 @@ import 'package:socket_io_client/socket_io_client.dart';
 import 'package:shinro_int2/constant/network_constant.dart' as NETWORK_CONSTANT;
 import 'package:shinro_int2/constant/app_colors.dart' as COLORS;
 import 'components/message_list_item.dart';
-import 'components/user_item.dart';
+import 'components/user_item_avata.dart';
 import 'package:shinro_int2/models/game/info_user.dart';
 import 'package:shinro_int2/models/game/info_room.dart';
 import 'components/user_list_modal.dart';
@@ -95,9 +95,6 @@ class StrartGameScreenState extends State<StrartGameScreen> {
         widget.infoRoom.info.time
       });
     } else {
-      // setState(() {
-      //   idRoom = widget.infoRoom.idRoom;
-      // });
       socket.emit(NETWORK_CONSTANT.join_room, {
         widget.infoRoom.info.idRoom,
         widget.infoRoom.info.password,
@@ -324,7 +321,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
                                 child: ListView.builder(
                                     scrollDirection: Axis.horizontal,
                                     itemCount: users.length,
-                                    itemBuilder: (_, index) => UserItem(
+                                    itemBuilder: (_, index) => UserItemAvata(
                                           users: users[index],
                                         ))),
                           ),

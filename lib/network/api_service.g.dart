@@ -28,7 +28,7 @@ class _ApiService implements ApiService {
             method: 'GET',
             headers: <String, dynamic>{},
             extra: _extra,
-            baseUrl: baseUrl),
+            baseUrl: 'https://shinrojp-server.herokuapp.com/'),//test
         data: _data);
     var value = _result.data
         .map((dynamic i) => Example.fromJson(i as Map<String, dynamic>))
