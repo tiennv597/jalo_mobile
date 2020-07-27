@@ -23,3 +23,8 @@ test2@gmail.com
 
 rrrrrrrhgdh@gmail.com
 pass: 12345678
+
+
+      
+keytool -exportcert -alias androiddebugkey -keystore "C:\Users\tienn\.android\debug.keystore" | "C:\OpenSSL\bin\openssl" sha1 -binary |"C:\OpenSSL\bin\openssl" base64
+      

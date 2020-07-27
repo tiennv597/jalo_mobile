@@ -10,7 +10,9 @@ import 'package:shinro_int2/constant/shared_preferences.dart'
     as SHARED_PREFERNCES;
 import 'package:shinro_int2/constant/network_constant.dart' as NETWORK_CONSTANT;
 import 'package:shinro_int2/screens/main/main_screen.dart';
-
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert' as JSON;
 import '../register_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -19,9 +21,38 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  bool isLoggedIn = false;
+  Map userProfile;
   bool _rememberMe = false;
   TextEditingController _userController = new TextEditingController();
   TextEditingController _passController = new TextEditingController();
+  final facebookLogin = FacebookLogin();
+
+  _loginWithFB() async {
+    final result = await facebookLogin.logIn(['email']);
+
+    switch (result.status) {
+      case FacebookLoginStatus.loggedIn:
+        final token = result.accessToken.token;
+        print(token);
+        final graphResponse = await http.get(
+            'https://graph.facebook.com/v2.12/me?fields=name,picture,email&access_token=${token}');
+        final profile = JSON.jsonDecode(graphResponse.body);
+        print(profile);
+        setState(() {
+          userProfile = profile;
+          isLoggedIn = true;
+        });
+        break;
+
+      case FacebookLoginStatus.cancelledByUser:
+        setState(() => isLoggedIn = false);
+        break;
+      case FacebookLoginStatus.error:
+        setState(() => isLoggedIn = false);
+        break;
+    }
+  }
 
   @override
   void initState() {
@@ -219,7 +250,7 @@ class _LoginPageState extends State<LoginPage> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           _buildSocialBtn(
-            () => print('Login with Facebook'),
+            _loginWithFB,
             AssetImage(
               'assets/icons/facebook.jpg',
             ),
