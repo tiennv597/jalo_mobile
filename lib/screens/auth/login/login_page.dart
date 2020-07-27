@@ -43,6 +43,27 @@ class _LoginPageState extends State<LoginPage> {
           userProfile = profile;
           isLoggedIn = true;
         });
+        final api = Provider.of<ApiService>(context, listen: false);
+        api.authFacebook(token).then((it) async {
+          print(it.headers.value('authorization'));
+          final user = User.fromJson(it.data);
+          print(it.data);
+          print(user);
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          prefs.setBool(SHARED_PREFERNCES.logined, true);
+          prefs.setString(SHARED_PREFERNCES.user_id, user.sId);
+          prefs.setString(
+              SHARED_PREFERNCES.fullName, user.firstName + " " + user.lastName);
+          prefs.setString(
+              SHARED_PREFERNCES.token,
+              NETWORK_CONSTANT.bearer +
+                  ' ' +
+                  it.headers.value('authorization'));
+          Navigator.of(context)
+              .pushReplacement(MaterialPageRoute(builder: (_) => MainPage()));
+        }).catchError((onError) {
+          print("error" + onError.toString());
+        });
         break;
 
       case FacebookLoginStatus.cancelledByUser:

@@ -28,7 +28,7 @@ class _ApiService implements ApiService {
             method: 'GET',
             headers: <String, dynamic>{},
             extra: _extra,
-            baseUrl: 'https://shinrojp-server.herokuapp.com/'),//test
+            baseUrl: 'https://shinrojp-server.herokuapp.com/'), //test
         data: _data);
     var value = _result.data
         .map((dynamic i) => Example.fromJson(i as Map<String, dynamic>))
@@ -106,5 +106,26 @@ class _ApiService implements ApiService {
         data: _data);
     final value = Resources.fromJson(_result.data);
     return value;
+  }
+
+  @override
+  authFacebook(accessToken) async {
+    ArgumentError.checkNotNull(accessToken, 'accessToken');
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = {'access_token': accessToken};
+    _data.removeWhere((k, v) => v == null);
+    final Response<Map<String, dynamic>> _result = await _dio.request(
+        '/users/auth/facebook',
+        queryParameters: queryParameters,
+        options: RequestOptions(
+            method: 'POST',
+            headers: <String, dynamic>{},
+            extra: _extra,
+            contentType: 'application/json',
+            baseUrl: baseUrl),
+        data: _data);
+    //final value = Response<Map<String, dynamic>>.fromJson(_result.data);
+    return _result;
   }
 }

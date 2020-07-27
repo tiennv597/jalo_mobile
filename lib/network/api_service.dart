@@ -37,4 +37,9 @@ abstract class ApiService {
   //get login user
   @GET("/users/secret")
   Future<Resources> secret(@Header("Authorization") String jwt);
+  //auth with Facebook
+    @FormUrlEncoded()
+  @POST("/users/auth/facebook")
+  Future<Response<Map<String, dynamic>>> authFacebook(
+      @Field("access_token") String accessToken);
 }
