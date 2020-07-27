@@ -24,21 +24,23 @@ class _LoginPageState extends State<LoginPage> {
   bool isLoggedIn = false;
   Map userProfile;
   bool _rememberMe = false;
+  //loading when login
+  bool loading;
   TextEditingController _userController = new TextEditingController();
   TextEditingController _passController = new TextEditingController();
   final facebookLogin = FacebookLogin();
 
   _loginWithFB() async {
     final result = await facebookLogin.logIn(['email']);
-
+    setState(() {
+      loading = true;
+    });
     switch (result.status) {
       case FacebookLoginStatus.loggedIn:
         final token = result.accessToken.token;
-        print(token);
         final graphResponse = await http.get(
             'https://graph.facebook.com/v2.12/me?fields=name,picture,email&access_token=${token}');
         final profile = JSON.jsonDecode(graphResponse.body);
-        print(profile);
         setState(() {
           userProfile = profile;
           isLoggedIn = true;
@@ -47,8 +49,6 @@ class _LoginPageState extends State<LoginPage> {
         api.authFacebook(token).then((it) async {
           print(it.headers.value('authorization'));
           final user = User.fromJson(it.data);
-          print(it.data);
-          print(user);
           SharedPreferences prefs = await SharedPreferences.getInstance();
           prefs.setBool(SHARED_PREFERNCES.logined, true);
           prefs.setString(SHARED_PREFERNCES.user_id, user.sId);
@@ -65,21 +65,24 @@ class _LoginPageState extends State<LoginPage> {
           print("error" + onError.toString());
         });
         break;
-
       case FacebookLoginStatus.cancelledByUser:
         setState(() => isLoggedIn = false);
         break;
       case FacebookLoginStatus.error:
         setState(() => isLoggedIn = false);
+        print(result.errorMessage);
         break;
     }
   }
 
+// loading when login
+  Future _loading() async => await Future.delayed(Duration(seconds: 1), () {
+        return loading;
+      });
+
   @override
   void initState() {
     super.initState();
-    _userController.text = "222s223frr@gmail.com";
-    _passController.text = "12345678";
   }
 
   Widget _buildEmailTF() {
@@ -320,64 +323,74 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        iconTheme: IconThemeData(
-          color: Colors.black,
-        ),
-        brightness: Brightness.light,
-        backgroundColor: Colors.white,
-        title: Text(
-          'Sign in',
-          style: TextStyle(
-            color: darkGrey,
-            fontFamily: 'OpenSans',
-          ),
-        ),
-        elevation: 0,
-      ),
-      backgroundColor: Colors.white,
-      body: AnnotatedRegion<SystemUiOverlayStyle>(
-        value: SystemUiOverlayStyle.light,
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
-          child: Stack(
-            children: <Widget>[
-              Container(
-                height: double.infinity,
-                width: double.infinity,
-              ),
-              Container(
-                height: double.infinity,
-                child: SingleChildScrollView(
-                  physics: AlwaysScrollableScrollPhysics(),
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 40.0,
+    return FutureBuilder(
+        future: _loading(),
+        builder: (context, snapshot) {
+          if (snapshot.data == true) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          } else {
+            return Scaffold(
+              appBar: AppBar(
+                iconTheme: IconThemeData(
+                  color: Colors.black,
+                ),
+                brightness: Brightness.light,
+                backgroundColor: Colors.white,
+                title: Text(
+                  'Sign in',
+                  style: TextStyle(
+                    color: darkGrey,
+                    fontFamily: 'OpenSans',
                   ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                ),
+                elevation: 0,
+              ),
+              backgroundColor: Colors.white,
+              body: AnnotatedRegion<SystemUiOverlayStyle>(
+                value: SystemUiOverlayStyle.light,
+                child: GestureDetector(
+                  onTap: () => FocusScope.of(context).unfocus(),
+                  child: Stack(
                     children: <Widget>[
-                      SizedBox(height: 8.0),
-                      _buildEmailTF(),
-                      SizedBox(
-                        height: 8.0,
+                      Container(
+                        height: double.infinity,
+                        width: double.infinity,
                       ),
-                      _buildPasswordTF(),
-                      _buildForgotPasswordBtn(),
-                      _buildRememberMeCheckbox(),
-                      _buildLoginBtn(),
-                      _buildSignInWithText(),
-                      _buildSocialBtnRow(),
-                      _buildSignupBtn(),
+                      Container(
+                        height: double.infinity,
+                        child: SingleChildScrollView(
+                          physics: AlwaysScrollableScrollPhysics(),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 40.0,
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              SizedBox(height: 8.0),
+                              _buildEmailTF(),
+                              SizedBox(
+                                height: 8.0,
+                              ),
+                              _buildPasswordTF(),
+                              _buildForgotPasswordBtn(),
+                              _buildRememberMeCheckbox(),
+                              _buildLoginBtn(),
+                              _buildSignInWithText(),
+                              _buildSocialBtnRow(),
+                              _buildSignupBtn(),
+                            ],
+                          ),
+                        ),
+                      )
                     ],
                   ),
                 ),
-              )
-            ],
-          ),
-        ),
-      ),
-    );
+              ),
+            );
+          }
+        });
   }
 
   void loginCheck() {
@@ -386,23 +399,14 @@ class _LoginPageState extends State<LoginPage> {
       print(it.headers.value('authorization'));
       final user = User.fromJson(it.data);
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      // if (it.token.toString() != null && it.success == true) {
-      //   api.checkToken(it.token.toString()).then((it) async {
-      //     if (it.success) {
       prefs.setBool(SHARED_PREFERNCES.logined, true);
       prefs.setString(SHARED_PREFERNCES.user_id, user.sId);
       prefs.setString(
           SHARED_PREFERNCES.fullName, user.firstName + " " + user.lastName);
-
-      //     }
-      //   }).catchError((onError) {
-      //     print("error" + onError.toString());
-      //   });
       prefs.setString(SHARED_PREFERNCES.token,
           NETWORK_CONSTANT.bearer + ' ' + it.headers.value('authorization'));
       Navigator.of(context)
           .pushReplacement(MaterialPageRoute(builder: (_) => MainPage()));
-      // } else {}
     }).catchError((onError) {
       print("error" + onError.toString());
     });

@@ -1,3 +1,4 @@
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shinro_int2/constant/app_properties.dart';
 import 'package:shinro_int2/constant/shared_preferences.dart'
@@ -11,6 +12,7 @@ import 'legal_about_screen.dart';
 import 'notifications_settings_screen.dart';
 
 class SettingsPage extends StatelessWidget {
+  final facebookLogin = FacebookLogin();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -112,7 +114,7 @@ class SettingsPage extends StatelessWidget {
                                     await SharedPreferences.getInstance();
                                 prefs.remove(SHARED_PREFERNCES.token);
                                 prefs.setBool(SHARED_PREFERNCES.logined, false);
-                                //
+                                facebookLogin.logOut();
                                 Navigator.pushAndRemoveUntil(
                                   context,
                                   MaterialPageRoute(

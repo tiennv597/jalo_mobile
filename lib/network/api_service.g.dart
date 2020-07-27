@@ -53,7 +53,6 @@ class _ApiService implements ApiService {
             contentType: 'application/json',
             baseUrl: baseUrl),
         data: _data);
-    //final value = User.fromJson(_result.data);
     return _result;
   }
 
