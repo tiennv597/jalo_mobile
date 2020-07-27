@@ -12,3 +12,5 @@ const String logined = 'logined';
 const String fullName = 'fullName';
 //user id
 const String user_id = 'user_id';
+//user avatar
+const String userAvatar = 'userAvatar';

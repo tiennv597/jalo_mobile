@@ -18,14 +18,15 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   bool logined;
+  String userAvatar;
 
   @override
   void setState(fn) {
     if (mounted) {
       super.setState(fn);
     }
+  
   }
-
   Widget infoUser() {
     return FutureBuilder(
         future: checkLogin(),
@@ -35,33 +36,33 @@ class _ProfilePageState extends State<ProfilePage> {
             return Column(
               children: <Widget>[
                 Padding(
-                  padding: const EdgeInsets.only(left: 8,right: 8),
+                  padding: const EdgeInsets.only(left: 8, right: 8),
                   child: Row(
                     children: <Widget>[
                       CircleAvatar(
                         radius: 32,
                         backgroundColor: Colors.blue,
-                        backgroundImage: NetworkImage(
-                            'https://images.pexels.com/photos/340152/pexels-photo-340152.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'),
+                        backgroundImage: NetworkImage(userAvatar),
                       ),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Padding(
-                            padding: const EdgeInsets.only(top: 0,bottom: 0,left: 8),
+                            padding: const EdgeInsets.only(
+                                top: 0, bottom: 0, left: 8),
                             child: Text(
                               user.displayName,
-                              style:
-                                  TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(top: 0,bottom: 0,left: 8),
+                            padding: const EdgeInsets.only(
+                                top: 0, bottom: 0, left: 8),
                             child: Text(
                               "id: 1232316",
-                              style:
-                                  TextStyle(fontSize: 16),
+                              style: TextStyle(fontSize: 16),
                             ),
                           ),
                         ],
@@ -251,6 +252,7 @@ class _ProfilePageState extends State<ProfilePage> {
     User user = new User();
     if (logined == true && logined != null) {
       user.displayName = prefs.getString(SHARED_PREFERNCES.fullName);
+      userAvatar = prefs.getString(SHARED_PREFERNCES.userAvatar);
       return user;
     } else {
       return null;

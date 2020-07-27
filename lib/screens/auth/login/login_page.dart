@@ -54,6 +54,8 @@ class _LoginPageState extends State<LoginPage> {
           prefs.setString(SHARED_PREFERNCES.user_id, user.sId);
           prefs.setString(
               SHARED_PREFERNCES.fullName, user.firstName + " " + user.lastName);
+          prefs.setString(SHARED_PREFERNCES.userAvatar,
+              userProfile["picture"]["data"]["url"]);
           prefs.setString(
               SHARED_PREFERNCES.token,
               NETWORK_CONSTANT.bearer +
