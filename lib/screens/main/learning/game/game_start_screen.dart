@@ -113,6 +113,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
                 idRoom: room.info.idRoom,
                 owner: owner,
                 infoRoom: widget.infoRoom,
+                users: users,
               )));
     });
 

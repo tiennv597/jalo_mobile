@@ -3,12 +3,14 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shinro_int2/models/category.dart';
+
 import 'package:shinro_int2/models/game/info_room.dart';
+import 'package:shinro_int2/models/game/info_user.dart';
 import 'package:shinro_int2/models/question/answers_model.dart';
 import 'package:shinro_int2/models/question/question_model.dart';
 
 import 'package:socket_io_client/socket_io_client.dart';
-import 'package:shinro_int2/constant/network_constant.dart' as NETWORK_CONSTANT;
+//import 'package:shinro_int2/constant/network_constant.dart' as NETWORK_CONSTANT;
 
 import 'components/user_rank_item.dart';
 import 'game_result_screen.dart';
@@ -19,8 +21,10 @@ class GameQuizPage extends StatefulWidget {
   final String idRoom;
   final bool owner;
   final InfoRoom infoRoom;
+  final List<User> users;
 
-  GameQuizPage({this.socket, this.idRoom, this.owner, this.infoRoom});
+  GameQuizPage(
+      {this.socket, this.idRoom, this.owner, this.infoRoom, this.users});
 
   @override
   GameQuizPageState createState() {
@@ -30,7 +34,7 @@ class GameQuizPage extends StatefulWidget {
 
 class GameQuizPageState extends State<GameQuizPage> {
   //var mydata;
-  // Socket socket;
+  Socket socket;
   // GameQuizPageState(this.socket,this.mydata);
   Color colortoshow = Colors.indigoAccent;
   Color right = Colors.green;
@@ -82,25 +86,25 @@ class GameQuizPageState extends State<GameQuizPage> {
   @override
   void initState() {
     random = shuffle([0, 1, 2, 3]);
-    if (widget.owner) {
-      widget.socket.emit(NETWORK_CONSTANT.get_quizzes,
-          {widget.idRoom, widget.infoRoom.info.level, "goi"});
-    } else {}
-
-    widget.socket.on(NETWORK_CONSTANT.send_quizzes, (data) {
-      // Parsing JSON to Jobject
-      var list = data
-          .map((dynamic i) => Question.fromJson(i as Map<String, dynamic>))
-          .toList();
-      for (var item in list) {
-        Question question = new Question();
-        question = item;
-        questions.add(question);
-        print(question.content);
-      }
-
-      totalQuestion = questions.length - 1;
-    });
+    // if (widget.owner) {
+    //   widget.socket.emit(NETWORK_CONSTANT.get_quizzes,
+    //       {widget.idRoom, widget.infoRoom.info.level, "goi"});
+    // } else {}
+    totalQuestion = questionList.length - 1;
+    // socket.on(NETWORK_CONSTANT.send_quizzes, (data) {
+    //   // Parsing JSON to Jobject
+    //   var list = data
+    //       .map((dynamic i) => Question.fromJson(i as Map<String, dynamic>))
+    //       .toList();
+    //   for (var item in list) {
+    //     Question question = new Question();
+    //     question = item;
+    //     questions.add(question);
+    //     print(question.content);
+    //   }
+    //   questions = questionList; // data test
+    //   totalQuestion = questions.length - 1;
+    // });
 
     starttimer();
 
@@ -210,7 +214,7 @@ class GameQuizPageState extends State<GameQuizPage> {
           color: btncolor[k],
           splashColor: Colors.indigo[700],
           highlightColor: Colors.indigo[700],
-          height: screenHeight/10,
+          height: screenHeight / 10,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
         ),
@@ -220,7 +224,7 @@ class GameQuizPageState extends State<GameQuizPage> {
 
   Future<List<Question>> getFutureQuestion() async =>
       await Future.delayed(Duration(seconds: 1), () {
-        return questions;
+        return questionList;
       });
   @override
   Widget build(BuildContext context) {
@@ -258,15 +262,15 @@ class GameQuizPageState extends State<GameQuizPage> {
                   Positioned(
                     top: 0,
                     child: Container(
-                      height: screenHeight/8,
+                      height: screenHeight / 8,
                       width: screenWidth / 2,
                       // list message
                       child: ListView.builder(
                         //reverse: true,
                         itemBuilder: (context, int index) => UserRankItem(
-                          category: categories[index],
+                          user: widget.users[index],
                         ),
-                        itemCount: categories.length,
+                        itemCount: widget.users.length,
                       ),
                     ),
                   ),
