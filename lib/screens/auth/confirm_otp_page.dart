@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pin_code_text_field/pin_code_text_field.dart';
 
-import '../../../intro_screen.dart';
+import '../intro_screen.dart';
+
+
 
 class ConfirmOtpPage extends StatefulWidget {
   @override

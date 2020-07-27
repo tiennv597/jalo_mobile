@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:shinro_int2/screens/main/main_screen.dart';
 import 'package:shinro_int2/constant/shared_preferences.dart'
     as SHARED_PREFERNCES;
-import 'package:shinro_int2/screens/main/profile/auth/login/login_page.dart';
+import 'package:shinro_int2/screens/auth/login/login_page.dart';
 
 import 'intro_screen.dart';
 

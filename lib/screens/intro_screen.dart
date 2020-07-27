@@ -1,6 +1,6 @@
 import 'package:shinro_int2/constant/app_properties.dart';
 import 'package:flutter/material.dart';
-import 'package:shinro_int2/screens/main/profile/auth/login/login_page.dart';
+import 'package:shinro_int2/screens/auth/login/login_page.dart';
 
 class IntroPage extends StatefulWidget {
   @override

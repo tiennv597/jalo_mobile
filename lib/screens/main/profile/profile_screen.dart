@@ -8,7 +8,7 @@ import 'package:shinro_int2/constant/shared_preferences.dart'
     as SHARED_PREFERNCES;
 import 'package:shinro_int2/constant/app_colors.dart' as COLORS;
 
-import 'auth/login/login_page.dart';
+import 'package:shinro_int2/screens/auth/login/login_page.dart';
 import 'settings/settings_screen.dart';
 
 class ProfilePage extends StatefulWidget {
