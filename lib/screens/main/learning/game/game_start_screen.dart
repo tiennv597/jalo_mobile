@@ -225,8 +225,11 @@ class StrartGameScreenState extends State<StrartGameScreen> {
         future: getFutureInfoRoom(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return Center(
-              child: CircularProgressIndicator(),
+            return Scaffold(
+              backgroundColor: Colors.white,
+              body: Center(
+                child: CircularProgressIndicator(),
+              ),
             );
           } else {
             return Scaffold(

@@ -329,8 +329,11 @@ class _LoginPageState extends State<LoginPage> {
         future: _loading(),
         builder: (context, snapshot) {
           if (snapshot.data == true) {
-            return Center(
-              child: CircularProgressIndicator(),
+            return Scaffold(
+              backgroundColor: Colors.white,
+              body: Center(
+                child: CircularProgressIndicator(),
+              ),
             );
           } else {
             return Scaffold(

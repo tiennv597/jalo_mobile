@@ -25,8 +25,8 @@ class _ProfilePageState extends State<ProfilePage> {
     if (mounted) {
       super.setState(fn);
     }
-  
   }
+
   Widget infoUser() {
     return FutureBuilder(
         future: checkLogin(),
