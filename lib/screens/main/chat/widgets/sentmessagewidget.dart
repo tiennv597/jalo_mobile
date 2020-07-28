@@ -17,7 +17,7 @@ class SentMessageWidget extends StatelessWidget {
         children: <Widget>[
           Text(
             "${messages[i]['time']}",
-            style: Theme.of(context).textTheme.body2.apply(color: Colors.grey),
+            style: Theme.of(context).textTheme.bodyText2.apply(color: Colors.grey),
           ),
           SizedBox(width: 15),
           Container(
@@ -34,7 +34,7 @@ class SentMessageWidget extends StatelessWidget {
             ),
             child: Text(
               "${messages[i]['message']}",
-              style: Theme.of(context).textTheme.body2.apply(
+              style: Theme.of(context).textTheme.bodyText2.apply(
                     color: Colors.white,
                   ),
             ),

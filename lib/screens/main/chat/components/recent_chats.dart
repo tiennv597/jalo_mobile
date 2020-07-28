@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shinro_int2/models/chat/message_model.dart';
-import 'package:shinro_int2/screens/main/chat/chat_screen.dart';
+
+import '../chat_screen.dart';
+
 
 class RecentChats extends StatelessWidget {
   @override
@@ -18,7 +20,7 @@ class RecentChats extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (_) => ChatScreen(
-                      user: chat.sender,
+                      //user: chat.sender,
                     ),
                   ),
                 ),

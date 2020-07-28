@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'chat_tab.dart';
-import 'components/favorite_contacts.dart';
 
 class ChatTab extends StatelessWidget {
   final TabController tabController;

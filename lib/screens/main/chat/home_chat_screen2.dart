@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shinro_int2/screens/main/chat/chat_tab_home.dart';
-import 'package:shinro_int2/screens/main/chat/global.dart';
-
-import 'chat.dart';
 
 class HomeChatScreen extends StatefulWidget {
   @override

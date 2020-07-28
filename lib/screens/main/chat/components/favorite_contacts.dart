@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shinro_int2/models/chat/message_model.dart';
-import 'package:shinro_int2/screens/main/chat/chat_screen.dart';
+
+import '../chat_screen.dart';
+
 
 
 class FavoriteContacts extends StatelessWidget {
@@ -46,7 +48,7 @@ class FavoriteContacts extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (_) => ChatScreen(
-                        user: favorites[index],
+                        //user: favorites[index],
                       ),
                     ),
                   ),

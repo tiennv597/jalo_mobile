@@ -11,6 +11,7 @@ class ReceivedMessagesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var body12 = Theme.of(context).textTheme.bodyText2;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 7.0),
       child: Row(
@@ -39,7 +40,7 @@ class ReceivedMessagesWidget extends StatelessWidget {
                 ),
                 child: Text(
                   "${messages[i]['message']}",
-                  style: Theme.of(context).textTheme.body1.apply(
+                  style: body12.apply(
                         color: Colors.black87,
                       ),
                 ),
@@ -49,7 +50,7 @@ class ReceivedMessagesWidget extends StatelessWidget {
           SizedBox(width: 15),
           Text(
             "${messages[i]['time']}",
-            style: Theme.of(context).textTheme.body2.apply(color: Colors.grey),
+            style: Theme.of(context).textTheme.bodyText2.apply(color: Colors.grey),
           ),
         ],
       ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shinro_int2/screens/main/chat/global.dart';
 
-import 'chat.dart';
+import 'chat_screen.dart';
 import 'components/favorite_contacts.dart';
 
 class Chat extends StatefulWidget {
@@ -101,18 +101,18 @@ class _ChatScreenState extends State<Chat> {
                 ),
                 title: Text(
                   "${friendsList[i]['username']}",
-                  style: Theme.of(context).textTheme.title,
+                  style: Theme.of(context).textTheme.headline6,
                 ),
                 subtitle: Text(
                   "${friendsList[i]['lastMsg']}",
                   style: !friendsList[i]['seen']
                       ? Theme.of(context)
                           .textTheme
-                          .subtitle
+                          .subtitle2
                           .apply(color: Colors.black87)
                       : Theme.of(context)
                           .textTheme
-                          .subtitle
+                          .subtitle2
                           .apply(color: Colors.black54),
                 ),
                 trailing: Container(
