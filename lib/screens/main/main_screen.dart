@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'chat/home_chat_screen.dart';
+import 'package:shinro_int2/screens/main/chat/home_chat_screen2.dart';
 import 'learning/learing_screen.dart';
 import 'notification/notifications_screen.dart';
 import 'profile/profile_screen.dart';
@@ -200,7 +200,7 @@ class _MainPageState extends State<MainPage>
         ),
       ),
       LearingPage(tabController: tabControllerRank),
-      ChatHomeScreen(),
+      HomeChatScreen(),
       // NotificationsSreen(),
       ProfilePage()
     ];

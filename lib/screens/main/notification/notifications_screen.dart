@@ -56,70 +56,42 @@ class NotificationsSreen extends StatelessWidget {
                                   child: Padding(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 16.0),
-                                    child: RichText(
-                                      text: TextSpan(
-                                          style: TextStyle(
-                                            fontFamily: 'Montserrat',
-                                            color: Colors.black,
-                                          ),
-                                          children: [
-                                            TextSpan(
-                                                text: 'Sai Sankar Ram',
-                                                style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                )),
-                                            TextSpan(
-                                              text: ' Requested for ',
-                                            ),
-                                            TextSpan(
-                                              text: '\$45.25',
+                                    child: Column(
+                                      children: <Widget>[
+                                        RichText(
+                                          text: TextSpan(
                                               style: TextStyle(
-                                                fontWeight: FontWeight.bold,
+                                                //fontFamily: 'Montserrat',
+                                                color: Colors.black,
                                               ),
-                                            )
-                                          ]),
+                                              children: [
+                                                TextSpan(
+                                                    text: 'Sai Sankar Ram',
+                                                    style: TextStyle(
+                                                      fontWeight: FontWeight.bold,
+                                                    )),
+                                                TextSpan(
+                                                  text: ' Requested for ',
+                                                ),
+                                                TextSpan(
+                                                  text: 'Hướng dẫn cách để tăng khả năng tập chung',
+                                                )
+                                              ]),
+                                        ),
+                                        Row(
+                                          children: <Widget>[
+                                            Padding(
+                                              padding: const EdgeInsets.only(top: 4),
+                                              child: Text("4 minutes ago"),
+                                            ),
+                                          ],
+                                        )
+                                      ],
                                     ),
                                   ),
                                 )
                               ],
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Row(
-                                  children: <Widget>[
-                                    Icon(
-                                      Icons.check_circle,
-                                      size: 14,
-                                      color: Colors.blue[700],
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 8.0),
-                                      child: Text('Pay',
-                                          style:
-                                              TextStyle(color: Colors.blue[700])),
-                                    )
-                                  ],
-                                ),
-                                Row(
-                                  children: <Widget>[
-                                    Icon(
-                                      Icons.cancel,
-                                      size: 14,
-                                      color: Color(0xffF94D4D),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 8.0),
-                                      child: Text('Decline',
-                                          style: TextStyle(
-                                              color: Color(0xffF94D4D))),
-                                    )
-                                  ],
-                                ),
-                              ],
-                            )
                           ],
                         ),
                       ),
@@ -140,74 +112,46 @@ class NotificationsSreen extends StatelessWidget {
                                   ),
                                   maxRadius: 24,
                                 ),
-                                Flexible(
+                               Flexible(
                                   child: Padding(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 16.0),
-                                    child: RichText(
-                                      text: TextSpan(
-                                          style: TextStyle(
-                                            fontFamily: 'Montserrat',
-                                            color: Colors.black,
-                                          ),
-                                          children: [
-                                            TextSpan(
-                                                text: 'Sai Sankar Ram',
-                                                style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                )),
-                                            TextSpan(
-                                              text: ' Send You ',
-                                            ),
-                                            TextSpan(
-                                              text: '\$45.25',
+                                    child: Column(
+                                      children: <Widget>[
+                                        RichText(
+                                          text: TextSpan(
                                               style: TextStyle(
-                                                fontWeight: FontWeight.bold,
+                                                //fontFamily: 'Montserrat',
+                                                color: Colors.black,
                                               ),
-                                            )
-                                          ]),
+                                              children: [
+                                                TextSpan(
+                                                    text: 'Sai Sankar Ram',
+                                                    style: TextStyle(
+                                                      fontWeight: FontWeight.bold,
+                                                    )),
+                                                TextSpan(
+                                                  text: ' Requested for ',
+                                                ),
+                                                TextSpan(
+                                                  text: 'Hướng dẫn cách để tăng khả năng tập chung',
+                                                )
+                                              ]),
+                                        ),
+                                        Row(
+                                          children: <Widget>[
+                                            Padding(
+                                              padding: const EdgeInsets.only(top: 4),
+                                              child: Text("4 minutes ago"),
+                                            ),
+                                          ],
+                                        )
+                                      ],
                                     ),
                                   ),
                                 )
                               ],
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Row(
-                                  children: <Widget>[
-                                    Icon(
-                                      Icons.check_circle,
-                                      size: 14,
-                                      color: Colors.blue[700],
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 8.0),
-                                      child: Text('Accept',
-                                          style:
-                                              TextStyle(color: Colors.blue[700])),
-                                    )
-                                  ],
-                                ),
-                                Row(
-                                  children: <Widget>[
-                                    Icon(
-                                      Icons.cancel,
-                                      size: 14,
-                                      color: Color(0xffF94D4D),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 8.0),
-                                      child: Text('Decline',
-                                          style: TextStyle(
-                                              color: Color(0xffF94D4D))),
-                                    )
-                                  ],
-                                ),
-                              ],
-                            )
                           ],
                         ),
                       ),
@@ -254,13 +198,13 @@ class NotificationsSreen extends StatelessWidget {
                                 Flexible(
                                   child: Column(children: [
                                     Text(
-                                        'Boat Rockerz 350 On-Ear Bluetooth Headphones',
+                                        'title 1',
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 10)),
                                     SizedBox(height:4.0),
                                     Text(
-                                        'Your package has been delivered. Thanks for shopping!',
+                                        'content 1',
                                         style: TextStyle(
                                             color: Colors.grey, fontSize: 10))
                                   ]),
@@ -332,13 +276,13 @@ class NotificationsSreen extends StatelessWidget {
                                 Flexible(
                                   child: Column(children: [
                                     Text(
-                                        'Boat Rockerz 440 On-Ear Bluetooth Headphones',
+                                        'title2',
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 10)),
                                     SizedBox(height:4.0),
                                     Text(
-                                        'Your package has been dispatched. You can keep track of your product.',
+                                        'content 2',
                                         style: TextStyle(
                                             color: Colors.grey, fontSize: 10))
                                   ]),
