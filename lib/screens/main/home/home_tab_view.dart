@@ -52,7 +52,6 @@ class HomeTabView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TabBarView(
-        //physics: NeverScrollableScrollPhysics(),
         controller: tabController,
         children: <Widget>[
           Column(children: <Widget>[Flexible(child: HomeScreen())]),

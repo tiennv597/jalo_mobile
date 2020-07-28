@@ -35,6 +35,7 @@ class _MainPageState extends State<MainPage>
   Widget build(BuildContext context) {
     Widget tabBar = TabBar(
       isScrollable: true,
+      indicatorColor: Colors.black,
       unselectedLabelColor: Colors.grey,
       indicatorSize: TabBarIndicatorSize.tab,
       labelColor: Colors.black,
@@ -184,7 +185,7 @@ class _MainPageState extends State<MainPage>
         iconSize: 28,
         currentIndex: _selectedIndex,
         unselectedItemColor: Colors.grey,
-        fixedColor: COLORS.cyan700,
+        fixedColor: Colors.black,
         onTap: _onItemTapped,
       ),
       body: _widgetOptions[_selectedIndex],

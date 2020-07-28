@@ -77,7 +77,7 @@ class _SplashScreenState extends State<SplashScreen>
       Navigator.of(context)
           .pushReplacement(MaterialPageRoute(builder: (_) => IntroPage()));
       prefs.setBool(
-          SHARED_PREFERNCES.first_launch, true); //set true login one time
+          SHARED_PREFERNCES.first_launch, false); //set true login one time
     }
   }
 

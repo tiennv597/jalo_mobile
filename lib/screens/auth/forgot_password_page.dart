@@ -3,9 +3,7 @@ import 'package:shinro_int2/constant/app_properties.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:country_code_picker/country_code_picker.dart';
-
-
-import 'confirm_otp_page.dart';
+import 'package:shinro_int2/screens/auth/login/login_page.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
   @override
@@ -73,7 +71,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
       bottom: 40,
       child: InkWell(
         onTap: () {
-          Navigator.of(context).push(MaterialPageRoute(builder:(_)=>ConfirmOtpPage()));
+          Navigator.of(context).push(MaterialPageRoute(builder:(_)=>LoginPage()));
         },
         child: Container(
           width: MediaQuery.of(context).size.width / 2,

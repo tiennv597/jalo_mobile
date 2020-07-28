@@ -39,7 +39,7 @@ class _LoginPageState extends State<LoginPage> {
       case FacebookLoginStatus.loggedIn:
         final token = result.accessToken.token;
         final graphResponse = await http.get(
-            'https://graph.facebook.com/v2.12/me?fields=name,picture,email&access_token=${token}');
+            'https://graph.facebook.com/v2.12/me?fields=name,picture,email&access_token=$token');
         final profile = JSON.jsonDecode(graphResponse.body);
         setState(() {
           userProfile = profile;
@@ -99,23 +99,19 @@ class _LoginPageState extends State<LoginPage> {
         Container(
           alignment: Alignment.centerLeft,
           decoration: kBoxDecorationStyle,
-          height: 48.0,
+          height: 36.0,
           child: TextField(
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(
-              color: Colors.black,
+              color: Colors.white,
               fontFamily: 'OpenSans',
             ),
             controller: _userController,
             decoration: InputDecoration(
               border: InputBorder.none,
-              contentPadding: EdgeInsets.only(top: 15.0),
-              prefixIcon: Icon(
-                Icons.email,
-                color: Colors.grey,
-              ),
+              contentPadding: EdgeInsets.only(left: 8, top: -8),
               hintText: 'Enter your Email',
-              hintStyle: kHintTextStyle,
+              //hintStyle: kHintTextStyle,
             ),
           ),
         ),
@@ -135,23 +131,23 @@ class _LoginPageState extends State<LoginPage> {
         Container(
           alignment: Alignment.centerLeft,
           decoration: kBoxDecorationStyle,
-          height: 48.0,
+          height: 36.0,
           child: TextField(
             obscureText: true,
             style: TextStyle(
-              color: Colors.black,
+              color: Colors.white,
               fontFamily: 'OpenSans',
             ),
             controller: _passController,
             decoration: InputDecoration(
               border: InputBorder.none,
-              contentPadding: EdgeInsets.only(top: 15.0),
-              prefixIcon: Icon(
-                Icons.lock,
-                color: Colors.grey,
-              ),
+              contentPadding: EdgeInsets.only(left: 8, top: -8.0),
+              // prefixIcon: Icon(
+              //   Icons.lock,
+              //   color: Colors.grey,
+              // ),
               hintText: 'Enter your Password',
-              hintStyle: kHintTextStyle,
+              //hintStyle: kHintTextStyle,
             ),
           ),
         ),
@@ -173,36 +169,36 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _buildRememberMeCheckbox() {
-    return Container(
-      height: 16.0,
-      child: Row(
-        children: <Widget>[
-          Theme(
-            data: ThemeData(unselectedWidgetColor: Colors.grey),
-            child: Checkbox(
-              value: _rememberMe,
-              checkColor: Colors.blue,
-              activeColor: Colors.white,
-              onChanged: (value) {
-                setState(() {
-                  _rememberMe = value;
-                });
-              },
-            ),
-          ),
-          Text(
-            'Remember me',
-            style: kLabelStyle,
-          ),
-        ],
-      ),
-    );
-  }
+  // Widget _buildRememberMeCheckbox() {
+  //   return Container(
+  //     height: 16.0,
+  //     child: Row(
+  //       children: <Widget>[
+  //         Theme(
+  //           data: ThemeData(unselectedWidgetColor: Colors.grey),
+  //           child: Checkbox(
+  //             value: _rememberMe,
+  //             checkColor: Colors.blue,
+  //             activeColor: Colors.white,
+  //             onChanged: (value) {
+  //               setState(() {
+  //                 _rememberMe = value;
+  //               });
+  //             },
+  //           ),
+  //         ),
+  //         Text(
+  //           'Remember me',
+  //           style: kLabelStyle,
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   Widget _buildLoginBtn() {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 25.0),
+      padding: EdgeInsets.symmetric(vertical: 8.0),
       width: double.infinity,
       child: RaisedButton(
         elevation: 5.0,
@@ -373,14 +369,12 @@ class _LoginPageState extends State<LoginPage> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
-                              SizedBox(height: 8.0),
                               _buildEmailTF(),
                               SizedBox(
                                 height: 8.0,
                               ),
                               _buildPasswordTF(),
                               _buildForgotPasswordBtn(),
-                              _buildRememberMeCheckbox(),
                               _buildLoginBtn(),
                               _buildSignInWithText(),
                               _buildSocialBtnRow(),

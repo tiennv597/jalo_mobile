@@ -118,6 +118,16 @@ const RadialGradient colorBlue2 = RadialGradient(
   ],
 );
 
+const LinearGradient colorBrIntro = LinearGradient(
+  begin: Alignment.topRight,
+  end: Alignment.bottomLeft,
+  colors: <Color>[
+    Color(0xFFFFA726),
+    Color(0xFFFB8C00),
+    Color(0xFFF57C00),
+  ],
+);
+
 screenAwareSize(int size, BuildContext context) {
   double baseHeight = 640.0;
   return size * MediaQuery.of(context).size.height / baseHeight;

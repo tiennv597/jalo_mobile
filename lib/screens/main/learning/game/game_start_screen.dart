@@ -16,8 +16,6 @@ import 'game_quiz_screen.dart';
 
 class StrartGameScreen extends StatefulWidget {
   final InfoRoom infoRoom;
-
-  //StrartGameScreen({Key key, @required this.infoRoom}) : super(key: key);
   StrartGameScreen(this.infoRoom);
   @override
   StrartGameScreenState createState() {

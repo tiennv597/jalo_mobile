@@ -1,6 +1,7 @@
 import 'package:shinro_int2/constant/app_properties.dart';
 import 'package:flutter/material.dart';
 import 'package:shinro_int2/screens/auth/login/login_page.dart';
+import 'package:shinro_int2/constant/app_colors.dart' as COLORS;
 
 class IntroPage extends StatefulWidget {
   @override
@@ -15,10 +16,10 @@ class _IntroPageState extends State<IntroPage> {
   Widget build(BuildContext context) {
     return Material(
       child: Container(
-//      width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
-            color: Colors.grey[100],
-            image: DecorationImage(image: AssetImage('assets/background.png'))),
+          gradient:
+              RadialGradient(colors: [ COLORS.tiColor11,Colors.white]),
+        ),
         child: Stack(
           children: <Widget>[
             PageView(
@@ -42,20 +43,30 @@ class _IntroPageState extends State<IntroPage> {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 32),
-                      child: Text(
-                        'Learng Any Thing Online',
-                        textAlign: TextAlign.right,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 16),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          'Learng Any Thing Online',
+                          textAlign: TextAlign.right,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                              color: Colors.black),
+                        ),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 32, vertical: 16.0),
-                      child: Text(
-                        'Quiz Game.',
-                        textAlign: TextAlign.right,
-                        style: TextStyle(color: Colors.grey, fontSize: 12.0),
+                      child: Column(
+                        children: <Widget>[
+                          Text(
+                            "The opportunity to study japanese in the way that best suits your needs. Don't waste your time!",
+                            textAlign: TextAlign.center,
+                            style:
+                                TextStyle(color: Colors.black, fontSize: 12.0),
+                          ),
+                        ],
                       ),
                     ),
                   ],
@@ -74,19 +85,66 @@ class _IntroPageState extends State<IntroPage> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 32),
                       child: Text(
-                        'Learng to anywhere ',
+                        'Test Yourself',
                         textAlign: TextAlign.right,
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 16),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            color: Colors.black),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 32, vertical: 16.0),
                       child: Text(
-                        'We will ship to anywhere in the world, With 30 day 100% money back policy.',
-                        textAlign: TextAlign.right,
-                        style: TextStyle(color: Colors.grey, fontSize: 12.0),
+                        'Train using different test and game that improve your japanese skills.',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: Colors.black, fontSize: 12.0),
+                      ),
+                    ),
+                  ],
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: <Widget>[
+                    Center(
+                      child: Image.asset(
+                        'assets/vector3.png',
+                        height: 200,
+                        width: 200,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 32),
+                      child: Column(
+                        children: <Widget>[
+                          Text(
+                            'Japanese Language',
+                            textAlign: TextAlign.right,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: Colors.black),
+                          ),
+                          Text(
+                            'Proficiency Test',
+                            textAlign: TextAlign.right,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: Colors.black),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 32, vertical: 16.0),
+                      child: Text(
+                        'Mock test of real tests based on the structure of JLPT, TOP-J, NAT-TEST, J-TEST exams. Accompanied by a clear explanation and simple.',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: Colors.black, fontSize: 12.0),
                       ),
                     ),
                   ],
@@ -105,19 +163,21 @@ class _IntroPageState extends State<IntroPage> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 32),
                       child: Text(
-                        'On-time delivery',
+                        "Les't Start",
                         textAlign: TextAlign.right,
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 16),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            color: Colors.white),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 32, vertical: 16.0),
                       child: Text(
-                        'You can track your product with our powerful tracking service.',
-                        textAlign: TextAlign.right,
-                        style: TextStyle(color: Colors.grey, fontSize: 12.0),
+                        'Make a habit of learning Japanese! 10 minutes a day, challenging 21 days!.',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: Colors.white, fontSize: 12.0),
                       ),
                     ),
                   ],
@@ -139,8 +199,9 @@ class _IntroPageState extends State<IntroPage> {
                           width: 12,
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              border: Border.all(color: Colors.black, width: 2),
-                              color: pageIndex == 0 ? blueTypeOne : Colors.white),
+                              border: Border.all(color: Colors.black, width: 1),
+                              color:
+                                  pageIndex == 0 ? Colors.grey : Colors.white),
                         ),
                         Container(
                           margin: EdgeInsets.all(8.0),
@@ -148,8 +209,9 @@ class _IntroPageState extends State<IntroPage> {
                           width: 12,
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              border: Border.all(color: Colors.black, width: 2),
-                              color: pageIndex == 1 ? blueTypeOne : Colors.white),
+                              border: Border.all(color: Colors.black, width: 1),
+                              color:
+                                  pageIndex == 1 ? Colors.grey : Colors.white),
                         ),
                         Container(
                           margin: EdgeInsets.all(8.0),
@@ -157,8 +219,19 @@ class _IntroPageState extends State<IntroPage> {
                           width: 12,
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              border: Border.all(color: Colors.black, width: 2),
-                              color: pageIndex == 2 ? blueTypeOne : Colors.white),
+                              border: Border.all(color: Colors.black, width: 1),
+                              color:
+                                  pageIndex == 2 ? Colors.grey : Colors.white),
+                        ),
+                        Container(
+                          margin: EdgeInsets.all(8.0),
+                          height: 12,
+                          width: 12,
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(color: Colors.black, width: 1),
+                              color:
+                                  pageIndex == 3 ? Colors.grey : Colors.white),
                         )
                       ],
                     ),
@@ -166,7 +239,7 @@ class _IntroPageState extends State<IntroPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
                         Opacity(
-                          opacity: pageIndex != 2 ? 1.0 : 0.0,
+                          opacity: pageIndex != 3 ? 1.0 : 0.0,
                           child: FlatButton(
                             splashColor: Colors.transparent,
                             child: Text(
@@ -183,7 +256,7 @@ class _IntroPageState extends State<IntroPage> {
                             },
                           ),
                         ),
-                        pageIndex != 2
+                        pageIndex != 3
                             ? FlatButton(
                                 splashColor: Colors.transparent,
                                 child: Text(
@@ -194,7 +267,7 @@ class _IntroPageState extends State<IntroPage> {
                                       fontSize: 16),
                                 ),
                                 onPressed: () {
-                                  if (!(controller.page == 2.0))
+                                  if (!(controller.page == 3.0))
                                     controller.nextPage(
                                         duration: Duration(milliseconds: 200),
                                         curve: Curves.linear);
