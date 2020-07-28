@@ -4,7 +4,7 @@ import 'package:shinro_int2/constant/app_properties.dart';
 import 'package:shinro_int2/constant/shared_preferences.dart'
     as SHARED_PREFERNCES;
 import 'package:flutter/material.dart';
-import 'package:shinro_int2/screens/auth/login/login_page.dart';
+import 'package:shinro_int2/screens/main/main_screen.dart';
 import 'change_country.dart';
 import 'change_language_screen.dart';
 import 'change_password_screen.dart';
@@ -118,7 +118,7 @@ class SettingsPage extends StatelessWidget {
                                 Navigator.pushAndRemoveUntil(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => LoginPage()),
+                                      builder: (context) => MainPage()),
                                   (Route<dynamic> route) => false,
                                 );
                               }),
@@ -130,6 +130,4 @@ class SettingsPage extends StatelessWidget {
       ),
     );
   }
-
-  // Future<dynamic> logOut() async {}
 }

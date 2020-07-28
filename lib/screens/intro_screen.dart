@@ -1,7 +1,6 @@
-import 'package:shinro_int2/constant/app_properties.dart';
 import 'package:flutter/material.dart';
-import 'package:shinro_int2/screens/auth/login/login_page.dart';
 import 'package:shinro_int2/constant/app_colors.dart' as COLORS;
+import 'package:shinro_int2/screens/main/main_screen.dart';
 
 class IntroPage extends StatefulWidget {
   @override
@@ -252,7 +251,7 @@ class _IntroPageState extends State<IntroPage> {
                             onPressed: () {
                               Navigator.of(context).pushReplacement(
                                   MaterialPageRoute(
-                                      builder: (context) => LoginPage()));
+                                      builder: (context) => MainPage()));
                             },
                           ),
                         ),
@@ -285,7 +284,7 @@ class _IntroPageState extends State<IntroPage> {
                                 onPressed: () {
                                   Navigator.of(context).pushReplacement(
                                       MaterialPageRoute(
-                                          builder: (context) => LoginPage()));
+                                          builder: (context) => MainPage()));
                                 },
                               )
                       ],

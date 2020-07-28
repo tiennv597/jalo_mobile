@@ -6,8 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:shinro_int2/screens/main/main_screen.dart';
 import 'package:shinro_int2/constant/shared_preferences.dart'
     as SHARED_PREFERNCES;
-import 'package:shinro_int2/screens/auth/login/login_page.dart';
-
 import 'intro_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -61,17 +59,17 @@ class _SplashScreenState extends State<SplashScreen>
                 .pushReplacement(MaterialPageRoute(builder: (_) => MainPage()));
           } else {
             Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (_) => LoginPage()));
+                MaterialPageRoute(builder: (_) => MainPage()));
           }
         }).catchError((onError) {
           print("error" + onError.toString());
           Navigator.of(context)
-              .pushReplacement(MaterialPageRoute(builder: (_) => LoginPage()));
+              .pushReplacement(MaterialPageRoute(builder: (_) => MainPage()));
         });
       } else {
         prefs.setBool(SHARED_PREFERNCES.logined, false);
         Navigator.of(context)
-            .pushReplacement(MaterialPageRoute(builder: (_) => LoginPage()));
+            .pushReplacement(MaterialPageRoute(builder: (_) => MainPage()));
       }
     } else {
       Navigator.of(context)

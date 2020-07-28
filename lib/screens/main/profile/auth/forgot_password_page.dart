@@ -3,7 +3,9 @@ import 'package:shinro_int2/constant/app_properties.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:country_code_picker/country_code_picker.dart';
-import 'package:shinro_int2/screens/auth/login/login_page.dart';
+
+import 'login/login_page.dart';
+
 
 class ForgotPasswordPage extends StatefulWidget {
   @override

@@ -1,4 +1,3 @@
-import 'package:shinro_int2/constant/app_colors.dart' as COLORS;
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'chat/home_chat_screen.dart';
@@ -21,7 +20,7 @@ class _MainPageState extends State<MainPage>
   TabController tabControllerSearch;
   TabController bottomTabController;
   int _selectedIndex = 0;
-
+  int _counter = 2;
   @override
   void initState() {
     super.initState();
@@ -96,6 +95,60 @@ class _MainPageState extends State<MainPage>
       });
     }
 
+    // void _incrementCounter() {
+    //   setState(() {
+    //     _counter++;
+    //   });
+    // }
+
+    void _openNotification() {
+      Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => NotificationsSreen()));
+
+    }
+
+    Widget _buildNotifIcon() {
+      return GestureDetector(
+        onTap: _openNotification,
+        child: Padding(
+          padding: const EdgeInsets.only(right: 16),
+          child: Stack(
+            children: [
+              Icon(
+                Icons.notifications_none,
+                color: Colors.grey,
+                size: 30,
+              ),
+              Container(
+                width: 30,
+                height: 30,
+                alignment: Alignment.topLeft,
+                margin: EdgeInsets.only(top: 5),
+                child: Container(
+                  width: 16,
+                  height: 16,
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.red,
+                      border: Border.all(color: Colors.white, width: 1)),
+                  child: Padding(
+                    padding: const EdgeInsets.all(0.0),
+                    child: Center(
+                      child: Text(
+                        _counter.toString(),
+                        style: TextStyle(fontSize: 10, color: Colors.white),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
     List<Widget> _widgetOptions = <Widget>[
       DefaultTabController(
         length: 3,
@@ -105,13 +158,16 @@ class _MainPageState extends State<MainPage>
             backgroundColor: Colors.white,
             elevation: 0.0,
             bottom: PreferredSize(
-              preferredSize: Size.fromHeight(-20),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Container(
-                  height: 32,
-                  child: tabBar,
-                ),
+              preferredSize: Size.fromHeight(-16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Container(
+                    height: 32,
+                    child: tabBar,
+                  ),
+                  _buildNotifIcon()
+                ],
               ),
             ),
           ),
@@ -120,7 +176,6 @@ class _MainPageState extends State<MainPage>
           ),
         ),
       ),
-      // ExamplePage(),
       DefaultTabController(
         length: 1,
         child: Scaffold(
@@ -146,7 +201,7 @@ class _MainPageState extends State<MainPage>
       ),
       LearingPage(tabController: tabControllerRank),
       ChatHomeScreen(),
-      NotificationsSreen(),
+      // NotificationsSreen(),
       ProfilePage()
     ];
     return Scaffold(
@@ -173,10 +228,10 @@ class _MainPageState extends State<MainPage>
             icon: Icon(Icons.message),
             title: Text('Message'),
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.notifications),
-            title: Text('Profile'),
-          ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.notifications),
+          //   title: Text('Profile'),
+          // ),
           BottomNavigationBarItem(
             icon: Icon(Icons.menu),
             title: Text('menu'),

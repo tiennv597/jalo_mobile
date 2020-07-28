@@ -23,7 +23,6 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   bool isLoggedIn = false;
   Map userProfile;
-  bool _rememberMe = false;
   //loading when login
   bool loading;
   TextEditingController _userController = new TextEditingController();
