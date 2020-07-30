@@ -50,6 +50,15 @@ class _ExamplePageState extends State<ExamplePage> {
         _dismissKeyboard(context);
       },
       child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back, color: Colors.black),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+          title: Text("Sample", style: TextStyle(color: Colors.black)),
+         // centerTitle: true,
+        ),
         backgroundColor: Colors.white,
         body: Padding(
           padding: const EdgeInsets.only(left: 8, right: 8),
