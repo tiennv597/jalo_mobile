@@ -13,40 +13,40 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Container(
-            height: 64,
-            padding: EdgeInsets.only(right: 20, left: 20, bottom: 8),
-            child: Row(
-              children: <Widget>[
-                Expanded(
-                  child: Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(50),
-                        color: Colors.grey[200]),
-                    child: TextField(
-                      decoration: InputDecoration(
-                        prefixIcon: Icon(
-                          Icons.search,
-                          color: Colors.grey,
-                        ),
-                        border: InputBorder.none,
-                        hintStyle: TextStyle(color: Colors.grey),
-                        hintText: "Search",
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  width: 20,
-                ),
-                Icon(
-                  Icons.camera_alt,
-                  color: Colors.grey[800],
-                  size: 30,
-                )
-              ],
-            ),
-          ),
+          // Container(
+          //   height: 64,
+          //   padding: EdgeInsets.only(right: 20, left: 20, bottom: 8),
+          //   child: Row(
+          //     children: <Widget>[
+          //       Expanded(
+          //         child: Container(
+          //           decoration: BoxDecoration(
+          //               borderRadius: BorderRadius.circular(50),
+          //               color: Colors.grey[200]),
+          //           child: TextField(
+          //             decoration: InputDecoration(
+          //               prefixIcon: Icon(
+          //                 Icons.search,
+          //                 color: Colors.grey,
+          //               ),
+          //               border: InputBorder.none,
+          //               hintStyle: TextStyle(color: Colors.grey),
+          //               hintText: "Search",
+          //             ),
+          //           ),
+          //         ),
+          //       ),
+          //       SizedBox(
+          //         width: 20,
+          //       ),
+          //       Icon(
+          //         Icons.camera_alt,
+          //         color: Colors.grey[800],
+          //         size: 30,
+          //       )
+          //     ],
+          //   ),
+          // ),
           Expanded(
             child: SingleChildScrollView(
               scrollDirection: Axis.vertical,

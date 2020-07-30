@@ -6,6 +6,7 @@ import 'package:shinro_int2/constant/shared_preferences.dart'
     as SHARED_PREFERNCES;
 import 'package:shinro_int2/constant/app_colors.dart' as COLORS;
 import 'package:shinro_int2/screens/main/learning/game/components/rank_type_tab.dart';
+import 'package:shinro_int2/screens/main/search/grammar/example_screen.dart';
 
 import 'game/game_room_screen.dart';
 
@@ -58,7 +59,6 @@ class _LearingPageState extends State<LearingPage>
         width: withS,
         height: heightS,
         decoration: BoxDecoration(
-          
           gradient: lgColor,
           borderRadius: BorderRadius.circular(8.0),
         ),
@@ -81,155 +81,203 @@ class _LearingPageState extends State<LearingPage>
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: NestedScrollView(
-        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          return <Widget>[
-            SliverToBoxAdapter(
-              child: Column(
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 18),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(
-                          'Learing',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0.0,
+        actions: <Widget>[
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => ExamplePage()));
+            },
+            child: Padding(
+              padding: const EdgeInsets.only(right: 16,left: 16,top: 8,bottom: 8),
+              child: Container(
+                width: MediaQuery.of(context).size.width * 90 / 100,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.grey[200]),
+                child: Row(
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Icon(
+                            Icons.search,
+                            color: Colors.grey,
                           ),
-                        ),
-                        FlatButton(
-                          child: Text('View All'),
-                          onPressed: () {},
-                        ),
-                      ],
                     ),
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(left: 8, right: 8),
-                        child: Column(
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  right: 8, bottom: 8, left: 8),
-                              child: _buildTypeBtn('Competition',
-                                  'assets/ninja.png', COLORS.colorOrange),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: _buildTypeBtn('JLPT', 'assets/benkyou.png',
-                                  COLORS.colorBlue),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 8, right: 8),
-                        child: Column(
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  right: 8, bottom: 8, left: 8),
-                              child: _buildTypeBtn('Practice',
-                                  'assets/gokaku.png', COLORS.colorGreen),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: _buildTypeBtn('Competition',
-                                  'assets/good.png', COLORS.colorPurple),
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 18),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(
-                          'Rank',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        FlatButton(
-                          child: Text('View All'),
-                          onPressed: () {},
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+                    Align(
+                        child: Text(
+                      "Search (Grammar, mẫu câu,...)",
+                      style: TextStyle(color: Colors.grey),
+                    )),
+                  ],
+                ),
               ),
             ),
-            SliverPadding(
-              padding: const EdgeInsets.all(0),
-              sliver: SliverAppBar(
-                expandedHeight: 10,
-                pinned: true,
-                floating: true,
-                primary: true,
-                //disable AppBar shadow when no content is scrolled under it
-                elevation: 0.0,
-                backgroundColor: Colors.white,
-                //forceElevated: innerBoxIsScrolled,
-                bottom: PreferredSize(
-                  preferredSize: new Size(200.0, 32.0),
-                  child: Container(
-                    height: 30,
-                    child: TabBar(
-                      unselectedLabelColor: COLORS.cyan600,
-                      indicatorSize: TabBarIndicatorSize.label,
-                      indicator: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50),
-                          color: COLORS.cyan600),
-                      tabs: <Widget>[
-                        Tab(
-                          child: Container(
-                            height: 30,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(50),
-                                border: Border.all(
-                                    color: COLORS.cyan600, width: 1)),
-                            child: Align(
-                              alignment: Alignment.center,
-                              child: Text("Competition"),
+          ),
+          // IconButton(
+          //     icon: Icon(
+          //       Icons.search,
+          //       color: Colors.black,
+          //     ),
+          //     onPressed: () {
+          //       Navigator.of(context).push(
+          //           MaterialPageRoute(builder: (context) => ExamplePage()));
+          //     })
+        ],
+      ),
+      body: SafeArea(
+        child: NestedScrollView(
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            return <Widget>[
+              SliverToBoxAdapter(
+                child: Column(
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 18),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            'Learing',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
-                        ),
-                        Tab(
-                          child: Container(
-                            height: 30,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(50),
-                                border: Border.all(
-                                    color: COLORS.cyan600, width: 1)),
-                            child: Align(
-                              alignment: Alignment.center,
-                              child: Text("JLPT"),
-                            ),
+                          FlatButton(
+                            child: Text('View All'),
+                            onPressed: () {},
+                          ),
+                        ],
+                      ),
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8, right: 8),
+                          child: Column(
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    right: 8, bottom: 8, left: 8),
+                                child: _buildTypeBtn('Competition',
+                                    'assets/ninja.png', COLORS.colorOrange),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: _buildTypeBtn('JLPT',
+                                    'assets/benkyou.png', COLORS.colorBlue),
+                              ),
+                            ],
                           ),
                         ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8, right: 8),
+                          child: Column(
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    right: 8, bottom: 8, left: 8),
+                                child: _buildTypeBtn('Practice',
+                                    'assets/gokaku.png', COLORS.colorGreen),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: _buildTypeBtn('Competition',
+                                    'assets/good.png', COLORS.colorPurple),
+                              ),
+                            ],
+                          ),
+                        )
                       ],
-                      controller: widget.tabController,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 18),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            'Rank',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          FlatButton(
+                            child: Text('View All'),
+                            onPressed: () {},
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SliverPadding(
+                padding: const EdgeInsets.all(0),
+                sliver: SliverAppBar(
+                  expandedHeight: 10,
+                  pinned: true,
+                  floating: true,
+                  primary: true,
+                  //disable AppBar shadow when no content is scrolled under it
+                  elevation: 0.0,
+                  backgroundColor: Colors.white,
+                  //forceElevated: innerBoxIsScrolled,
+                  bottom: PreferredSize(
+                    preferredSize: new Size(200.0, 32.0),
+                    child: Container(
+                      height: 30,
+                      child: TabBar(
+                        unselectedLabelColor: COLORS.cyan600,
+                        indicatorSize: TabBarIndicatorSize.label,
+                        indicator: BoxDecoration(
+                            borderRadius: BorderRadius.circular(50),
+                            color: COLORS.cyan600),
+                        tabs: <Widget>[
+                          Tab(
+                            child: Container(
+                              height: 30,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50),
+                                  border: Border.all(
+                                      color: COLORS.cyan600, width: 1)),
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Text("Competition"),
+                              ),
+                            ),
+                          ),
+                          Tab(
+                            child: Container(
+                              height: 30,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50),
+                                  border: Border.all(
+                                      color: COLORS.cyan600, width: 1)),
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Text("JLPT"),
+                              ),
+                            ),
+                          ),
+                        ],
+                        controller: widget.tabController,
+                      ),
                     ),
                   ),
                 ),
-              ),
-            )
-          ];
-        },
-        body: RankTypeTab(
-          tabController: widget.tabController,
+              )
+            ];
+          },
+          body: RankTypeTab(
+            tabController: widget.tabController,
+          ),
         ),
       ),
     );

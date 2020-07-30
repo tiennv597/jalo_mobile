@@ -19,7 +19,7 @@ class _MainPageState extends State<MainPage>
   TabController tabControllerRank;
   TabController tabControllerSearch;
   TabController bottomTabController;
-  int _selectedIndex = 0;
+  int _selectedIndex = 2;
   int _counter = 2;
   @override
   void initState() {
@@ -102,10 +102,8 @@ class _MainPageState extends State<MainPage>
     // }
 
     void _openNotification() {
-      Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => NotificationsSreen()));
-
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => NotificationsSreen()));
     }
 
     Widget _buildNotifIcon() {
@@ -158,7 +156,7 @@ class _MainPageState extends State<MainPage>
             backgroundColor: Colors.white,
             elevation: 0.0,
             bottom: PreferredSize(
-              preferredSize: Size.fromHeight(-16),
+              preferredSize: Size.fromHeight(-20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
@@ -166,7 +164,11 @@ class _MainPageState extends State<MainPage>
                     height: 32,
                     child: tabBar,
                   ),
-                  _buildNotifIcon()
+                  //_buildNotifIcon()
+                  Padding(
+                    padding: const EdgeInsets.only(right: 16),
+                    child: Icon(Icons.search),
+                  ),
                 ],
               ),
             ),
@@ -176,32 +178,33 @@ class _MainPageState extends State<MainPage>
           ),
         ),
       ),
-      DefaultTabController(
-        length: 1,
-        child: Scaffold(
-          backgroundColor: Colors.white,
-          appBar: AppBar(
-            backgroundColor: Colors.white,
-            elevation: 0.0,
-            bottom: PreferredSize(
-              preferredSize: Size.fromHeight(-20),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Container(
-                  height: 32,
-                  child: tabBarSearch,
-                ),
-              ),
-            ),
-          ),
-          body: TabSearchView(
-            tabController: tabControllerSearch,
-          ),
-        ),
-      ),
-      LearingPage(tabController: tabControllerRank),
+      // DefaultTabController(
+      //   length: 1,
+      //   child: Scaffold(
+      //     backgroundColor: Colors.white,
+      //     appBar: AppBar(
+      //       backgroundColor: Colors.white,
+      //       elevation: 0.0,
+      //       bottom: PreferredSize(
+      //         preferredSize: Size.fromHeight(-20),
+      //         child: Align(
+      //           alignment: Alignment.centerLeft,
+      //           child: Container(
+      //             height: 32,
+      //             child: tabBarSearch,
+      //           ),
+      //         ),
+      //       ),
+      //     ),
+      //     body: TabSearchView(
+      //       tabController: tabControllerSearch,
+      //     ),
+      //   ),
+      // ),
       HomeChatScreen(),
-      // NotificationsSreen(),
+      LearingPage(tabController: tabControllerRank),
+
+      NotificationsSreen(),
       ProfilePage()
     ];
     return Scaffold(
@@ -213,25 +216,26 @@ class _MainPageState extends State<MainPage>
         type: BottomNavigationBarType.fixed,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.public),
             title: Text('Home'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.translate),
-            title: Text('Grammar'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.import_contacts),
-            title: Text('Game'),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.message),
             title: Text('Message'),
           ),
           // BottomNavigationBarItem(
-          //   icon: Icon(Icons.notifications),
-          //   title: Text('Profile'),
+          //   icon: Icon(Icons.translate),
+          //   title: Text('Grammar'),
           // ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.import_contacts),
+            title: Text('Game'),
+          ),
+
+          BottomNavigationBarItem(
+            icon: Icon(Icons.notifications),
+            title: Text('Profile'),
+          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.menu),
             title: Text('menu'),

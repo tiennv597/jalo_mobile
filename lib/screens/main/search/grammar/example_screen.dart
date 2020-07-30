@@ -50,6 +50,7 @@ class _ExamplePageState extends State<ExamplePage> {
         _dismissKeyboard(context);
       },
       child: Scaffold(
+        backgroundColor: Colors.white,
         body: Padding(
           padding: const EdgeInsets.only(left: 8, right: 8),
           child: SafeArea(
