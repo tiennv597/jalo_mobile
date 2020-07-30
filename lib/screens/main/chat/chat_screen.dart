@@ -25,20 +25,16 @@ class _ChatScreenState extends State<ChatScreen> {
             MyCircleAvatar(
               imgUrl: friendsList[0]['imgUrl'],
             ),
-            SizedBox(width: 15),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
                   "Cybdom Tech",
-                  style: TextStyle(color: Colors.grey),
+                  style: TextStyle(color: Colors.grey, fontSize: 16),
                   overflow: TextOverflow.clip,
                 ),
-                Text(
-                  "Online",
-                  style:TextStyle(color: myGreen)
-                )
+                Text("Online", style: TextStyle(color: myGreen, fontSize: 16))
               ],
             )
           ],
@@ -109,12 +105,12 @@ class _ChatScreenState extends State<ChatScreen> {
                                 onPressed: () {},
                               ),
                               GestureDetector(
-                                onTap:() {
+                                onTap: () {
                                   print("object");
                                   setState(() {
-                                     _showBottom = true;
+                                    _showBottom = true;
                                   });
-                                } ,
+                                },
                                 child: Icon(Icons.attach_file),
                               )
                             ],
@@ -128,7 +124,7 @@ class _ChatScreenState extends State<ChatScreen> {
                             color: myGreen, shape: BoxShape.circle),
                         child: InkWell(
                           child: Icon(
-                            Icons.keyboard_voice,
+                            Icons.send,
                             color: Colors.white,
                           ),
                           onLongPress: () {},

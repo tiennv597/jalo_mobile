@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:shinro_int2/screens/main/chat/home_chat_screen2.dart';
+import 'package:shinro_int2/screens/main/chat/global.dart';
+import 'package:shinro_int2/screens/main/chat/home_chat_screen.dart';
 import 'learning/learing_screen.dart';
 import 'notification/notifications_screen.dart';
 import 'profile/profile_screen.dart';
-import 'search/tab_view_search.dart';
 import 'home/home_tab_view.dart';
 
 class MainPage extends StatefulWidget {
@@ -70,25 +70,25 @@ class _MainPageState extends State<MainPage>
       ],
       controller: tabControllerHome,
     );
-    Widget tabBarSearch = TabBar(
-      isScrollable: true,
-      unselectedLabelColor: Colors.grey,
-      indicatorSize: TabBarIndicatorSize.tab,
-      labelColor: Colors.black,
-      labelStyle: TextStyle(fontWeight: FontWeight.bold),
-      tabs: <Widget>[
-        Tab(
-          child: Container(
-            height: 32,
-            child: Align(
-              alignment: Alignment.center,
-              child: Text("EXample"),
-            ),
-          ),
-        ),
-      ],
-      controller: tabControllerSearch,
-    );
+    // Widget tabBarSearch = TabBar(
+    //   isScrollable: true,
+    //   unselectedLabelColor: Colors.grey,
+    //   indicatorSize: TabBarIndicatorSize.tab,
+    //   labelColor: Colors.black,
+    //   labelStyle: TextStyle(fontWeight: FontWeight.bold),
+    //   tabs: <Widget>[
+    //     Tab(
+    //       child: Container(
+    //         height: 32,
+    //         child: Align(
+    //           alignment: Alignment.center,
+    //           child: Text("EXample"),
+    //         ),
+    //       ),
+    //     ),
+    //   ],
+    //   controller: tabControllerSearch,
+    // );
     void _onItemTapped(int index) {
       setState(() {
         _selectedIndex = index;
@@ -231,7 +231,6 @@ class _MainPageState extends State<MainPage>
             icon: Icon(Icons.import_contacts),
             title: Text('Game'),
           ),
-
           BottomNavigationBarItem(
             icon: Icon(Icons.notifications),
             title: Text('Profile'),
@@ -244,7 +243,7 @@ class _MainPageState extends State<MainPage>
         iconSize: 28,
         currentIndex: _selectedIndex,
         unselectedItemColor: Colors.grey,
-        fixedColor: Colors.black,
+        fixedColor: myGreen,
         onTap: _onItemTapped,
       ),
       body: _widgetOptions[_selectedIndex],

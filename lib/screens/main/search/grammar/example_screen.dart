@@ -57,7 +57,6 @@ class _ExamplePageState extends State<ExamplePage> {
             onPressed: () => Navigator.of(context).pop(),
           ),
           title: Text("Sample", style: TextStyle(color: Colors.black)),
-         // centerTitle: true,
         ),
         backgroundColor: Colors.white,
         body: Padding(

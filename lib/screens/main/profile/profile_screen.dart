@@ -1,8 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:shinro_int2/constant/app_properties.dart';
 import 'package:shinro_int2/models/user/user_model.dart';
+import 'package:shinro_int2/screens/main/chat/global.dart';
 import 'package:shinro_int2/screens/main/profile/auth/login/login_page.dart';
-
 import 'package:shinro_int2/screens/main/profile/faq/faq_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:shinro_int2/constant/shared_preferences.dart'
@@ -152,13 +151,21 @@ class _ProfilePageState extends State<ProfilePage> {
               ],
             );
           } else {
-            return RaisedButton(
-              child: Text("Sign in"),
-              onPressed: goToLoginPage,
-              color: COLORS.cyan700,
-              textColor: COLORS.white,
-              padding: EdgeInsets.fromLTRB(8, 8, 8, 8),
-              splashColor: Colors.grey,
+            return Column(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text("Guest mode"),
+                ),
+                RaisedButton(
+                  child: Text("Sign in"),
+                  onPressed: goToLoginPage,
+                  color: myGreen,
+                  textColor: COLORS.white,
+                  padding: EdgeInsets.fromLTRB(8, 8, 8, 8),
+                  splashColor: Colors.grey,
+                ),
+              ],
             );
           }
         });
@@ -203,13 +210,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 ListTile(
                   title: Text('Settings'),
                   subtitle: Text('Privacy and logout'),
-                  leading: Image.asset(
-                    'assets/icons/settings_icon.png',
-                    fit: BoxFit.scaleDown,
-                    width: 30,
-                    height: 30,
-                  ),
-                  trailing: Icon(Icons.chevron_right, color: yellow),
+                  leading: Icon(Icons.settings_applications,size: 36,),
+                  trailing: Icon(Icons.chevron_right, color: myGreen),
                   onTap: () => Navigator.of(context)
                       .push(MaterialPageRoute(builder: (_) => SettingsPage())),
                 ),
@@ -217,18 +219,18 @@ class _ProfilePageState extends State<ProfilePage> {
                 ListTile(
                   title: Text('Help & Support'),
                   subtitle: Text('Help center and legal support'),
-                  leading: Image.asset('assets/icons/support.png'),
+                  leading: Icon(Icons.email,size: 32,),
                   trailing: Icon(
                     Icons.chevron_right,
-                    color: yellow,
+                    color: myGreen,
                   ),
                 ),
                 Divider(),
                 ListTile(
                   title: Text('FAQ'),
                   subtitle: Text('Questions and Answer'),
-                  leading: Image.asset('assets/icons/faq.png'),
-                  trailing: Icon(Icons.chevron_right, color: yellow),
+                  leading: Icon(Icons.question_answer,size: 32,),
+                  trailing: Icon(Icons.chevron_right, color: myGreen),
                   onTap: () => Navigator.of(context)
                       .push(MaterialPageRoute(builder: (_) => FaqPage())),
                 ),

@@ -110,7 +110,6 @@ class _LoginPageState extends State<LoginPage> {
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(left: 8, top: -8),
               hintText: 'Enter your Email',
-              //hintStyle: kHintTextStyle,
             ),
           ),
         ),
