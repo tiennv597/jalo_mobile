@@ -27,7 +27,7 @@ class _RegisterPageState extends State<RegisterPage> {
       children: <Widget>[
         Text(
           'First & Last Name',
-          style: kLabelStyle,
+           style: TextStyle(color: Colors.black),
         ),
         SizedBox(height: 8.0),
         Container(
@@ -63,7 +63,7 @@ class _RegisterPageState extends State<RegisterPage> {
       children: <Widget>[
         Text(
           'Email',
-          style: kLabelStyle,
+         style: TextStyle(color: Colors.black),
         ),
         SizedBox(height: 8.0),
         Container(
@@ -99,7 +99,7 @@ class _RegisterPageState extends State<RegisterPage> {
       children: <Widget>[
         Text(
           'Password',
-          style: kLabelStyle,
+          style: TextStyle(color: Colors.black),
         ),
         SizedBox(height: 8.0),
         Container(
@@ -135,7 +135,7 @@ class _RegisterPageState extends State<RegisterPage> {
       children: <Widget>[
         Text(
           'RePassword',
-          style: kLabelStyle,
+         style: TextStyle(color: Colors.black),
         ),
         SizedBox(height: 8.0),
         Container(
@@ -173,7 +173,7 @@ class _RegisterPageState extends State<RegisterPage> {
         padding: EdgeInsets.only(right: 0.0),
         child: Text(
           'Forgot Password?',
-          style: kLabelStyle,
+          style: TextStyle(color: Colors.black),
         ),
       ),
     );
@@ -244,7 +244,7 @@ class _RegisterPageState extends State<RegisterPage> {
         backgroundColor: Colors.transparent,
         title: Text(
           'Sign up',
-          style: TextStyle(color: Colors.grey, fontFamily: 'OpenSans'),
+          style: TextStyle(color: Colors.black, fontFamily: 'OpenSans'),
         ),
         elevation: 0,
       ),

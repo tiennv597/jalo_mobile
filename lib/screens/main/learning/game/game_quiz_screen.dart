@@ -51,26 +51,6 @@ class GameQuizPageState extends State<GameQuizPage> {
   List random = new List();
   Question question;
   //data test
-  List<Category> categories = [
-    Category(
-      Color(0xffF749A2),
-      Color(0xffFF7375),
-      'Clothes',
-      'assets/image.jpg',
-    ),
-    Category(
-      Color(0xff00E9DA),
-      Color(0xff5189EA),
-      'Fashion',
-      'assets/image.jpg',
-    ),
-    Category(
-      Color(0xffAF2D68),
-      Color(0xff632376),
-      'Home',
-      'assets/image.jpg',
-    )
-  ];
 
   Map<String, Color> btncolor = {
     "a": Colors.indigoAccent,
@@ -273,8 +253,17 @@ class GameQuizPageState extends State<GameQuizPage> {
                       ),
                     ),
                   ),
-                  Positioned(top: 88, left: 8, child: Text("Câu hỏi: 1/15")),
-                  Positioned(top: 88, right: 8, child: Text("Score:0000")),
+                  Positioned(
+                      top: 88,
+                      left: 10,
+                      child: Text("Câu hỏi: " +
+                          (current + 1).toString() +
+                          "/" +
+                          (totalQuestion + 1).toString())),
+                  Positioned(
+                      top: 88,
+                      right: 12,
+                      child: Text("Score:" + marks.toString())),
                   Positioned(
                     top: 110,
                     left: 8,
@@ -289,13 +278,6 @@ class GameQuizPageState extends State<GameQuizPage> {
                           child: TextUnderline(
                               text: questions[current].content,
                               underline: questions[current].underline),
-                          // Text(
-                          //   questions[current].content.toString(),
-                          //   style: TextStyle(
-                          //     fontSize: 16.0,
-                          //     fontFamily: "Quando",
-                          //   ),
-                          // ),
                         ),
                       ),
                     ),
@@ -315,7 +297,6 @@ class GameQuizPageState extends State<GameQuizPage> {
                           style: TextStyle(
                             fontSize: 36.0,
                             fontWeight: FontWeight.w700,
-                            fontFamily: 'Times New Roman',
                           ),
                         ),
                       ),
