@@ -1,6 +1,4 @@
 
-
-import 'package:shinro_int2/constant/app_properties.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +20,7 @@ class _LegalAboutPageState extends State<LegalAboutPage> {
         backgroundColor: Colors.transparent,
         title: Text(
           'Settings',
-          style: TextStyle(color: darkGrey),
+          style: TextStyle(color: Colors.grey),
         ),
         elevation: 0,
       ),

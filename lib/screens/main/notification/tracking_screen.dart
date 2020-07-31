@@ -1,4 +1,4 @@
-import 'package:shinro_int2/constant/app_properties.dart';
+import 'package:shinro_int2/constant/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -47,7 +47,7 @@ class _TrackingPageState extends State<TrackingPage> {
               title: Text(
                 'Shipped',
                 style: TextStyle(
-                  color: darkGrey,
+                  color: Colors.grey,
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
                 ),

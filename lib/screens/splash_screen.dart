@@ -1,6 +1,6 @@
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:shinro_int2/constant/app_properties.dart';
+import 'package:shinro_int2/constant/constant.dart';
 import 'package:shinro_int2/network/api_service.dart';
 import 'package:flutter/material.dart';
 import 'package:shinro_int2/screens/main/main_screen.dart';

@@ -244,7 +244,7 @@ class _RegisterPageState extends State<RegisterPage> {
         backgroundColor: Colors.transparent,
         title: Text(
           'Sign up',
-          style: TextStyle(color: darkGrey, fontFamily: 'OpenSans'),
+          style: TextStyle(color: Colors.grey, fontFamily: 'OpenSans'),
         ),
         elevation: 0,
       ),

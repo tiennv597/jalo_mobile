@@ -1,4 +1,4 @@
-import 'package:shinro_int2/constant/app_properties.dart';
+import 'package:shinro_int2/constant/constant.dart';
 import 'package:flutter/material.dart';
 import 'tracking_screen.dart';
 
@@ -17,7 +17,7 @@ class NotificationsSreen extends StatelessWidget {
                 title: Text(
                   'Notification',
                   style: TextStyle(
-                    color: darkGrey,
+                    color: Colors.grey,
                     fontFamily: 'OpenSans',
                   ),
                 ),

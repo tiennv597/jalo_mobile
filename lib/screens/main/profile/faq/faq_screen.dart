@@ -1,4 +1,4 @@
-import 'package:shinro_int2/constant/app_properties.dart';
+import 'package:shinro_int2/constant/constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -47,7 +47,7 @@ class _FaqPageState extends State<FaqPage> {
         backgroundColor: Colors.transparent,
         title: Text(
           'Settings',
-          style: TextStyle(color: darkGrey),
+          style: TextStyle(color: Colors.grey),
         ),
         elevation: 0,
       ),

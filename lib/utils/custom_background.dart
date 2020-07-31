@@ -1,5 +1,5 @@
 import 'dart:ui' as ui;
-import 'package:shinro_int2/constant/app_properties.dart';
+import 'package:shinro_int2/constant/constant.dart';
 import 'package:flutter/material.dart';
 
 class AuthBackground extends CustomPainter {

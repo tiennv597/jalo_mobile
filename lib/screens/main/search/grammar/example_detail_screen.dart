@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shinro_int2/models/grammar/example_model.dart';
-import 'package:shinro_int2/constant/app_properties.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shinro_int2/models/grammar/grammar_model.dart';
 
@@ -54,7 +53,7 @@ class _DetailPageState extends State<DetailPage> {
         backgroundColor: Colors.transparent,
         title: Text(
           'Example',
-          style: TextStyle(color: darkGrey),
+          style: TextStyle(color: Colors.grey),
         ),
         elevation: 0,
       ),

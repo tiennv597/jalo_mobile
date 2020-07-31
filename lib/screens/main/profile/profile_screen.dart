@@ -40,7 +40,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       CircleAvatar(
                         radius: 32,
                         backgroundColor: Colors.blue,
-                        backgroundImage: NetworkImage(userAvatar),
+                        backgroundImage: NetworkImage("userAvatar"),
                       ),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.start,

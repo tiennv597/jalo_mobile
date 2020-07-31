@@ -340,7 +340,7 @@ class _LoginPageState extends State<LoginPage> {
                 title: Text(
                   'Sign in',
                   style: TextStyle(
-                    color: darkGrey,
+                    color: Colors.grey,
                     fontFamily: 'OpenSans',
                   ),
                 ),

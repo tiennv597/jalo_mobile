@@ -3,12 +3,11 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shinro_int2/models/category.dart';
-
 import 'package:shinro_int2/models/game/info_room.dart';
 import 'package:shinro_int2/models/game/info_user.dart';
 import 'package:shinro_int2/models/question/answers_model.dart';
-import 'package:shinro_int2/models/question/question_model.dart';
-
+import 'package:shinro_int2/models/question/question.dart';
+import 'package:shinro_int2/widgets/widgets.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 //import 'package:shinro_int2/constant/network_constant.dart' as NETWORK_CONSTANT;
 
@@ -287,13 +286,16 @@ class GameQuizPageState extends State<GameQuizPage> {
                           borderRadius: BorderRadius.all(Radius.circular(10))),
                       child: Container(
                         child: Center(
-                          child: Text(
-                            questions[current].content.toString(),
-                            style: TextStyle(
-                              fontSize: 16.0,
-                              fontFamily: "Quando",
-                            ),
-                          ),
+                          child: TextUnderline(
+                              text: questions[current].content,
+                              underline: questions[current].underline),
+                          // Text(
+                          //   questions[current].content.toString(),
+                          //   style: TextStyle(
+                          //     fontSize: 16.0,
+                          //     fontFamily: "Quando",
+                          //   ),
+                          // ),
                         ),
                       ),
                     ),

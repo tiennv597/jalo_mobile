@@ -1,4 +1,4 @@
-import 'package:shinro_int2/constant/app_properties.dart';
+import 'package:shinro_int2/constant/constant.dart';
 import 'package:flutter/material.dart';
 
 class InfoUserItem extends StatefulWidget {
@@ -65,7 +65,7 @@ class _InfoUserItemPageState extends State<InfoUserItem> {
                                   textAlign: TextAlign.right,
                                   style: TextStyle(
                                     fontSize: 18,
-                                    color: darkGrey,
+                                    color: Colors.grey,
                                   ),
                                 ),
                               ),
@@ -76,7 +76,7 @@ class _InfoUserItemPageState extends State<InfoUserItem> {
                                   textAlign: TextAlign.right,
                                   style: TextStyle(
                                     fontSize: 18,
-                                    color: darkGrey,
+                                    color: Colors.grey,
                                   ),
                                 ),
                               ),
@@ -101,7 +101,7 @@ class _InfoUserItemPageState extends State<InfoUserItem> {
                                     'なし',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
-                                        color: darkGrey,
+                                        color: Colors.grey,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 18.0),
                                   ),
@@ -110,7 +110,7 @@ class _InfoUserItemPageState extends State<InfoUserItem> {
                                   'なし',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                      color: darkGrey, fontSize: 16.0),
+                                      color: Colors.grey, fontSize: 16.0),
                                 )
                               ],
                             ),
@@ -122,7 +122,7 @@ class _InfoUserItemPageState extends State<InfoUserItem> {
                                     'なし',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
-                                        color: darkGrey,
+                                        color: Colors.grey,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 18.0),
                                   ),
@@ -131,7 +131,7 @@ class _InfoUserItemPageState extends State<InfoUserItem> {
                                   'なし',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                      color: darkGrey, fontSize: 16.0),
+                                      color: Colors.grey, fontSize: 16.0),
                                 )
                               ],
                             ),
