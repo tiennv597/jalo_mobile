@@ -50,14 +50,14 @@ class _ExamplePageState extends State<ExamplePage> {
         _dismissKeyboard(context);
       },
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back, color: Colors.black),
-            onPressed: () => Navigator.of(context).pop(),
-          ),
-          title: Text("Sample", style: TextStyle(color: Colors.black)),
-        ),
+        // appBar: AppBar(
+        //   backgroundColor: Colors.white,
+        //   leading: IconButton(
+        //     icon: Icon(Icons.arrow_back, color: Colors.black),
+        //     onPressed: () => Navigator.of(context).pop(),
+        //   ),
+        //   title: Text("Sample", style: TextStyle(color: Colors.black)),
+        // ),
         backgroundColor: Colors.white,
         body: Padding(
           padding: const EdgeInsets.only(left: 8, right: 8),
@@ -66,12 +66,13 @@ class _ExamplePageState extends State<ExamplePage> {
               searchBarPadding: EdgeInsets.symmetric(horizontal: 0),
               headerPadding: EdgeInsets.symmetric(horizontal: 0),
               // listPadding: EdgeInsets.symmetric(horizontal: 8),
+              hintText: "Tìm kiếm (Mẫu câu theo ngữ pháp)",
               onSearch: _getExample,
               searchBarController: _searchBarController,
               minimumChars: 1, //Minimum number of chars to start querying
-              placeHolder: Text("placeholder"),
-              cancellationWidget: Text("cancel"),
-              emptyWidget: Text("empty"),
+              placeHolder: Text("Chưa tìm kiếm"),
+              cancellationWidget: Text("Hủy"),
+              emptyWidget: Text("Không tìm thấy mẫu câu phù hợp"),
               header: Row(
                 children: <Widget>[
                   // RaisedButton(
@@ -93,18 +94,58 @@ class _ExamplePageState extends State<ExamplePage> {
                 print("Cancelled triggered");
               },
               onItemFound: (Example example, int index) {
-                return ListTile(
-                  leading: CircleAvatar(
-                    child: new Text((index + 1).toString()),
-                  ),
-                  title: Text(example.vi),
-                  subtitle: Text(example.sentence),
-                  trailing: Icon(Icons.more_vert),
-                  isThreeLine: true,
+                return GestureDetector(
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => DetailPage(example: example)));
                   },
+                  child: Container(
+                    margin: const EdgeInsets.only(bottom: 4.0),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    padding: const EdgeInsets.all(4.0),
+                    child: Row(
+                      children: <Widget>[
+                        Container(
+                          width: 30.0,
+                          height: 30.0,
+                          decoration: new BoxDecoration(
+                            color: Colors.blue,
+                            shape: BoxShape.circle,
+                          ),
+                          child: Center(
+                              child: Text(
+                            (index + 1).toString(),
+                            style: TextStyle(color: Colors.white),
+                          )),
+                        ),
+                        Column(
+                          children: <Widget>[
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.82,
+                              child: Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: Text(
+                                  example.vi,
+                                  textAlign: TextAlign.justify,
+                                ),
+                              ),
+                            ),
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.82,
+                              child: Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: Text(example.sentence,
+                                    textAlign: TextAlign.justify),
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
                 );
               },
             ),

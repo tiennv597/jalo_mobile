@@ -10,6 +10,7 @@ class DetailPage extends StatefulWidget {
   // In the constructor, require a Example.
   const DetailPage({Key key, @required this.example}) : super(key: key);
 
+
   @override
   State createState() {
     return _DetailPageState();
@@ -19,7 +20,7 @@ class DetailPage extends StatefulWidget {
 class _DetailPageState extends State<DetailPage> {
   List<Panel> panels = [];
   List<PanelGrammar> panelsGrammar = [];
-
+  double fontSize=16;
   @override
   void initState() {
     List<Grammar> grammars = widget.example.grammar;
@@ -34,7 +35,7 @@ class _DetailPageState extends State<DetailPage> {
       Panel('Đáp án', widget.example.sentence, false),
     );
     panelsGrammar.add(
-      PanelGrammar('Đáp án', grammar.grammarId, grammar.level, grammar.content,
+      PanelGrammar('Ngữ pháp', grammar.grammarId, grammar.level, grammar.content,
           grammar.mean, grammar.use, grammar.note, false),
     );
 
@@ -81,7 +82,7 @@ class _DetailPageState extends State<DetailPage> {
                             style: TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.grey[600]),
+                                color: Colors.black),
                           ),
                           children: [
                             Container(
@@ -89,7 +90,7 @@ class _DetailPageState extends State<DetailPage> {
                                 color: Colors.white,
                                 child: Text(panel.content,
                                     style: TextStyle(
-                                        color: Colors.grey, fontSize: 12)))
+                                        color: Colors.black, fontSize: fontSize)))
                           ]))
                   .toList(),
               ...panelsGrammar
@@ -99,7 +100,7 @@ class _DetailPageState extends State<DetailPage> {
                             style: TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.grey[600]),
+                                color: Colors.black),
                           ),
                           children: [
                             Container(
@@ -107,31 +108,31 @@ class _DetailPageState extends State<DetailPage> {
                                 color: Colors.white,
                                 child: Text(panel.level,
                                     style: TextStyle(
-                                        color: Colors.grey, fontSize: 12))),
+                                        color: Colors.black, fontSize: fontSize))),
                             Container(
                                 padding: EdgeInsets.all(16.0),
                                 color: Colors.white,
                                 child: Text(panel.content,
                                     style: TextStyle(
-                                        color: Colors.grey, fontSize: 12))),
+                                        color: Colors.black, fontSize: fontSize))),
                             Container(
                                 padding: EdgeInsets.all(16.0),
                                 color: Colors.white,
                                 child: Text(panel.mean,
                                     style: TextStyle(
-                                        color: Colors.grey, fontSize: 12))),
+                                        color: Colors.black, fontSize: fontSize))),
                             Container(
                                 padding: EdgeInsets.all(16.0),
                                 color: Colors.white,
                                 child: Text(panel.use,
                                     style: TextStyle(
-                                        color: Colors.grey, fontSize: 12))),
+                                        color: Colors.black, fontSize: fontSize))),
                             Container(
                                 padding: EdgeInsets.all(16.0),
                                 color: Colors.white,
                                 child: Text(panel.note,
                                     style: TextStyle(
-                                        color: Colors.grey, fontSize: 12)))
+                                        color: Colors.black, fontSize: fontSize)))
                           ]))
                   .toList(),
             ],

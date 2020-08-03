@@ -42,8 +42,8 @@ class _LearingPageState extends State<LearingPage>
   }
 
   Widget _buildTypeBtn(String title, String urlImage, LinearGradient lgColor) {
-    var withS = MediaQuery.of(context).size.width / 2.5;
-    var heightS = MediaQuery.of(context).size.height / 8;
+    var withS = MediaQuery.of(context).size.width / 1.5;
+    var heightS = MediaQuery.of(context).size.height / 5;
     return RaisedButton(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(18.0),
@@ -73,6 +73,12 @@ class _LearingPageState extends State<LearingPage>
                     image: new DecorationImage(
                         fit: BoxFit.fill, image: ExactAssetImage(urlImage)))),
             Text(title),
+            Align(
+              alignment: Alignment.topRight,
+              child: Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Text("Play Now ",style: TextStyle(fontSize: 20),),
+              )),
           ],
         ),
       ),
@@ -140,17 +146,20 @@ class _LearingPageState extends State<LearingPage>
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          Text(
-                            'Learing',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              'Game',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
-                          FlatButton(
-                            child: Text('View All'),
-                            onPressed: () {},
-                          ),
+                          // FlatButton(
+                          //   child: Text('View All'),
+                          //   onPressed: () {},
+                          // ),
                         ],
                       ),
                     ),
@@ -166,118 +175,121 @@ class _LearingPageState extends State<LearingPage>
                                 padding: const EdgeInsets.only(
                                     right: 8, bottom: 8, left: 8),
                                 child: _buildTypeBtn('Competition',
-                                    'assets/ninja.png', COLORS.colorOrange),
+                                    'assets/ninja.png', COLORS.colorGreen),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: _buildTypeBtn('JLPT',
-                                    'assets/benkyou.png', COLORS.colorBlue),
-                              ),
+                              // Padding(
+                              //   padding: const EdgeInsets.all(8.0),
+                              //   child: _buildTypeBtn('JLPT',
+                              //       'assets/benkyou.png', COLORS.colorBlue),
+                              // ),
                             ],
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 8, right: 8),
-                          child: Column(
-                            children: <Widget>[
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    right: 8, bottom: 8, left: 8),
-                                child: _buildTypeBtn('Practice',
-                                    'assets/gokaku.png', COLORS.colorGreen),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: _buildTypeBtn('Competition',
-                                    'assets/good.png', COLORS.colorPurple),
-                              ),
-                            ],
-                          ),
-                        )
+                        // Padding(
+                        //   padding: const EdgeInsets.only(left: 8, right: 8),
+                        //   child: Column(
+                        //     children: <Widget>[
+                        //       Padding(
+                        //         padding: const EdgeInsets.only(
+                        //             right: 8, bottom: 8, left: 8),
+                        //         child: _buildTypeBtn('Practice',
+                        //             'assets/gokaku.png', COLORS.colorGreen),
+                        //       ),
+                        //       Padding(
+                        //         padding: const EdgeInsets.all(8.0),
+                        //         child: _buildTypeBtn('Competition',
+                        //             'assets/good.png', COLORS.colorPurple),
+                        //       ),
+                        //     ],
+                        //   ),
+                        // )
                       ],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 18),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Text(
-                            'Rank',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          FlatButton(
-                            child: Text('View All'),
-                            onPressed: () {},
-                          ),
-                        ],
-                      ),
-                    ),
+                    // Padding(
+                    //   padding: const EdgeInsets.symmetric(horizontal: 18),
+                    //   child: Row(
+                    //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //     children: <Widget>[
+                    //       Text(
+                    //         'Rank',
+                    //         style: TextStyle(
+                    //           fontSize: 18,
+                    //           fontWeight: FontWeight.bold,
+                    //         ),
+                    //       ),
+                    //       FlatButton(
+                    //         child: Text('View All'),
+                    //         onPressed: () {},
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
-              SliverPadding(
-                padding: const EdgeInsets.all(0),
-                sliver: SliverAppBar(
-                  expandedHeight: 10,
-                  pinned: true,
-                  floating: true,
-                  primary: true,
-                  //disable AppBar shadow when no content is scrolled under it
-                  elevation: 0.0,
-                  backgroundColor: Colors.white,
-                  //forceElevated: innerBoxIsScrolled,
-                  bottom: PreferredSize(
-                    preferredSize: new Size(200.0, 32.0),
-                    child: Container(
-                      height: 30,
-                      child: TabBar(
-                        unselectedLabelColor: COLORS.cyan600,
-                        indicatorSize: TabBarIndicatorSize.label,
-                        indicator: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50),
-                            color: COLORS.cyan600),
-                        tabs: <Widget>[
-                          Tab(
-                            child: Container(
-                              height: 30,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(50),
-                                  border: Border.all(
-                                      color: COLORS.cyan600, width: 1)),
-                              child: Align(
-                                alignment: Alignment.center,
-                                child: Text("Competition"),
-                              ),
-                            ),
-                          ),
-                          Tab(
-                            child: Container(
-                              height: 30,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(50),
-                                  border: Border.all(
-                                      color: COLORS.cyan600, width: 1)),
-                              child: Align(
-                                alignment: Alignment.center,
-                                child: Text("JLPT"),
-                              ),
-                            ),
-                          ),
-                        ],
-                        controller: widget.tabController,
-                      ),
-                    ),
-                  ),
-                ),
-              )
+              // SliverPadding(
+              //   padding: const EdgeInsets.all(0),
+              //   sliver: SliverAppBar(
+              //     expandedHeight: 10,
+              //     pinned: true,
+              //     floating: true,
+              //     primary: true,
+              //     //disable AppBar shadow when no content is scrolled under it
+              //     elevation: 0.0,
+              //     backgroundColor: Colors.white,
+              //     //forceElevated: innerBoxIsScrolled,
+              //     bottom: PreferredSize(
+              //       preferredSize: new Size(200.0, 32.0),
+              //       child: Container(
+              //         height: 30,
+              //         child: TabBar(
+              //           unselectedLabelColor: COLORS.cyan600,
+              //           indicatorSize: TabBarIndicatorSize.label,
+              //           indicator: BoxDecoration(
+              //               borderRadius: BorderRadius.circular(50),
+              //               color: COLORS.cyan600),
+              //           tabs: <Widget>[
+              //             Tab(
+              //               child: Container(
+              //                 height: 30,
+              //                 decoration: BoxDecoration(
+              //                     borderRadius: BorderRadius.circular(50),
+              //                     border: Border.all(
+              //                         color: COLORS.cyan600, width: 1)),
+              //                 child: Align(
+              //                   alignment: Alignment.center,
+              //                   child: Text("Competition"),
+              //                 ),
+              //               ),
+              //             ),
+              //             Tab(
+              //               child: Container(
+              //                 height: 30,
+              //                 decoration: BoxDecoration(
+              //                     borderRadius: BorderRadius.circular(50),
+              //                     border: Border.all(
+              //                         color: COLORS.cyan600, width: 1)),
+              //                 child: Align(
+              //                   alignment: Alignment.center,
+              //                   child: Text("JLPT"),
+              //                 ),
+              //               ),
+              //             ),
+              //           ],
+              //           controller: widget.tabController,
+              //         ),
+              //       ),
+              //     ),
+              //   ),
+              // )
             ];
           },
-          body: RankTypeTab(
-            tabController: widget.tabController,
+           body: Text(
+           ""
           ),
+          // body: RankTypeTab(
+          //   tabController: widget.tabController,
+          // ),
         ),
       ),
     );

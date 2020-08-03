@@ -54,7 +54,7 @@ class HomeTabView extends StatelessWidget {
     return TabBarView(
         controller: tabController,
         children: <Widget>[
-          Column(children: <Widget>[Flexible(child: HomeScreen())]),
+          //Column(children: <Widget>[Flexible(child: HomeScreen())]),
           Column(children: <Widget>[
             SizedBox(
               height: 16.0,

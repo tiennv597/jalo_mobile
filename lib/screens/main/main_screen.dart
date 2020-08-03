@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:shinro_int2/models/grammar/example_model.dart';
 import 'package:shinro_int2/screens/main/chat/global.dart';
 import 'package:shinro_int2/screens/main/chat/home_chat_screen.dart';
+import 'package:shinro_int2/screens/main/search/grammar/example_screen.dart';
+import 'package:shinro_int2/screens/main/search/tab_view_search.dart';
 import 'learning/learing_screen.dart';
 import 'notification/notifications_screen.dart';
 import 'profile/profile_screen.dart';
@@ -19,12 +22,12 @@ class _MainPageState extends State<MainPage>
   TabController tabControllerRank;
   TabController tabControllerSearch;
   TabController bottomTabController;
-  int _selectedIndex = 2;
+  int _selectedIndex = 0;
   int _counter = 2;
   @override
   void initState() {
     super.initState();
-    tabControllerHome = TabController(length: 3, vsync: this);
+    tabControllerHome = TabController(length: 2, vsync: this);
     tabControllerSearch = TabController(length: 1, vsync: this);
     tabControllerRank = TabController(length: 2, vsync: this);
     bottomTabController = TabController(length: 6, vsync: this);
@@ -40,15 +43,15 @@ class _MainPageState extends State<MainPage>
       labelColor: Colors.black,
       labelStyle: TextStyle(fontWeight: FontWeight.bold),
       tabs: <Widget>[
-        Tab(
-          child: Container(
-            height: 32,
-            child: Align(
-              alignment: Alignment.center,
-              child: Text("Home"),
-            ),
-          ),
-        ),
+        // Tab(
+        //   child: Container(
+        //     height: 32,
+        //     child: Align(
+        //       alignment: Alignment.center,
+        //       child: Text("Home"),
+        //     ),
+        //   ),
+        // ),
         Tab(
           child: Container(
             height: 32,
@@ -70,25 +73,25 @@ class _MainPageState extends State<MainPage>
       ],
       controller: tabControllerHome,
     );
-    // Widget tabBarSearch = TabBar(
-    //   isScrollable: true,
-    //   unselectedLabelColor: Colors.grey,
-    //   indicatorSize: TabBarIndicatorSize.tab,
-    //   labelColor: Colors.black,
-    //   labelStyle: TextStyle(fontWeight: FontWeight.bold),
-    //   tabs: <Widget>[
-    //     Tab(
-    //       child: Container(
-    //         height: 32,
-    //         child: Align(
-    //           alignment: Alignment.center,
-    //           child: Text("EXample"),
-    //         ),
-    //       ),
-    //     ),
-    //   ],
-    //   controller: tabControllerSearch,
-    // );
+    Widget tabBarSearch = TabBar(
+      isScrollable: true,
+      unselectedLabelColor: Colors.grey,
+      indicatorSize: TabBarIndicatorSize.tab,
+      labelColor: Colors.black,
+      labelStyle: TextStyle(fontWeight: FontWeight.bold),
+      tabs: <Widget>[
+        Tab(
+          child: Container(
+            height: 32,
+            child: Align(
+              alignment: Alignment.center,
+              child: Text("EXample"),
+            ),
+          ),
+        ),
+      ],
+      controller: tabControllerSearch,
+    );
     void _onItemTapped(int index) {
       setState(() {
         _selectedIndex = index;
@@ -149,7 +152,7 @@ class _MainPageState extends State<MainPage>
 
     List<Widget> _widgetOptions = <Widget>[
       DefaultTabController(
-        length: 3,
+        length: 2,
         child: Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
@@ -201,10 +204,10 @@ class _MainPageState extends State<MainPage>
       //     ),
       //   ),
       // ),
-      HomeChatScreen(),
+      ExamplePage(),
       LearingPage(tabController: tabControllerRank),
 
-      NotificationsSreen(),
+      // NotificationsSreen(),
       ProfilePage()
     ];
     return Scaffold(
@@ -219,22 +222,22 @@ class _MainPageState extends State<MainPage>
             icon: Icon(Icons.public),
             title: Text('Home'),
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.message),
-            title: Text('Message'),
-          ),
           // BottomNavigationBarItem(
-          //   icon: Icon(Icons.translate),
-          //   title: Text('Grammar'),
+          //   icon: Icon(Icons.message),
+          //   title: Text('Message'),
           // ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            title: Text('Grammar'),
+          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.import_contacts),
             title: Text('Game'),
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.notifications),
-            title: Text('Profile'),
-          ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.notifications),
+          //   title: Text('Profile'),
+          // ),
           BottomNavigationBarItem(
             icon: Icon(Icons.menu),
             title: Text('menu'),
