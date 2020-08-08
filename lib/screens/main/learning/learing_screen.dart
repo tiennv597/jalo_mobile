@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shinro_int2/constant/shared_preferences.dart'
     as SHARED_PREFERNCES;
 import 'package:shinro_int2/constant/app_colors.dart' as COLORS;
-import 'package:shinro_int2/screens/main/learning/game/components/rank_type_tab.dart';
+
 import 'package:shinro_int2/screens/main/search/grammar/example_screen.dart';
 
 import 'game/game_room_screen.dart';

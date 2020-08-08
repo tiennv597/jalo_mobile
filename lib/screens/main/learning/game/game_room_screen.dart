@@ -88,10 +88,8 @@ class _GameRoomPageState extends State<GameRoomPage>
     InfoRoom infoRoom = new InfoRoom();
     User user = new User();
     Info info = new Info();
-    //List<User> users = new List<User>();
     user.id = userId;
     user.fullName = fullName;
-    //users.insert(0, user);
     info.idRoom = '';
     info.level = level;
     info.type = type;

@@ -2,8 +2,11 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:shinro_int2/models/game/info_rooms.dart';
 import 'package:shinro_int2/models/message/message.dart';
+import 'package:shinro_int2/models/question/questions.dart';
+import 'package:shinro_int2/network/api_service.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 import 'package:shinro_int2/constant/network_constant.dart' as NETWORK_CONSTANT;
 import 'package:shinro_int2/constant/app_colors.dart' as COLORS;
@@ -41,6 +44,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
   bool allReady = true; //check user ready?
   int userReady = 1; // count user
   int userInRoom = 1; // clients in room
+  Questions questionList;
   //InfoRoom room;
   InfoRooms room;
   List<User> users = new List<User>();
@@ -52,6 +56,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
   @override
   void initState() {
     super.initState();
+    questionList = new Questions();
     _focus.addListener(_onFocusChange);
     _controller = ScrollController();
     _controller.addListener(_scrollListener);
@@ -104,15 +109,18 @@ class StrartGameScreenState extends State<StrartGameScreen> {
     socket.on(NETWORK_CONSTANT.connect, (_) {
       print('connect');
     });
-    socket.on(NETWORK_CONSTANT.start_game, (_) {
+    socket.on(NETWORK_CONSTANT.start_game, (data) {
+      print(data);
+      questionList = Questions.fromJson(data);
+      print(questionList);
       Navigator.of(context).push(MaterialPageRoute(
           builder: (_) => GameQuizPage(
-                socket: socket,
-                idRoom: room.info.idRoom,
-                owner: owner,
-                infoRoom: widget.infoRoom,
-                users: users,
-              )));
+              socket: socket,
+              idRoom: room.info.idRoom,
+              owner: owner,
+              infoRoom: widget.infoRoom,
+              users: users,
+              questionList: questionList)));
     });
 
     socket.on(NETWORK_CONSTANT.ready, (data) {
@@ -203,7 +211,12 @@ class StrartGameScreenState extends State<StrartGameScreen> {
   }
 
   void _strart() {
-    socket.emit(NETWORK_CONSTANT.start_game, room.info.idRoom);
+    socket.emit(NETWORK_CONSTANT.start_game, {
+      room.info.idRoom,
+      room.info.quantity,
+      room.info.type,
+      room.info.level,
+    });
   }
 
   void _ready() {

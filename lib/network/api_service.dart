@@ -21,11 +21,13 @@ abstract class ApiService {
   //get search example grammar
   @GET("/search")
   Future<List<Example>> getExample(@Query("key_search") String keySearch);
+
   //post login user
   @FormUrlEncoded()
   @POST("/users/signin")
   Future<Response<Map<String, dynamic>>> signIn(
       @Field("email") String email, @Field("password") String password);
+
   //signup user
   @FormUrlEncoded()
   @POST("/users/signup")
@@ -34,12 +36,23 @@ abstract class ApiService {
       @Field("lastName") String lastName,
       @Field("email") String email,
       @Field("password") String password);
+
   //get login user
   @GET("/users/secret")
   Future<Resources> secret(@Header("Authorization") String jwt);
+
   //auth with Facebook
-    @FormUrlEncoded()
+  @FormUrlEncoded()
   @POST("/users/auth/facebook")
   Future<Response<Map<String, dynamic>>> authFacebook(
       @Field("access_token") String accessToken);
+
+  //get question by quanity
+  @FormUrlEncoded()
+  @GET("/question/getbyquantity")
+  Future<Response<Map<String, dynamic>>> getQuestionByQuantity(
+      @Field("level") String level,
+      @Field("type") String type,
+      @Field("subType") String subType,
+      @Field("quantity") String quantity);
 }

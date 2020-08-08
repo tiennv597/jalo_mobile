@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:shinro_int2/models/grammar/example_model.dart';
 import 'package:shinro_int2/screens/main/chat/global.dart';
-import 'package:shinro_int2/screens/main/chat/home_chat_screen.dart';
 import 'package:shinro_int2/screens/main/search/grammar/example_screen.dart';
-import 'package:shinro_int2/screens/main/search/tab_view_search.dart';
 import 'learning/learing_screen.dart';
 import 'notification/notifications_screen.dart';
 import 'profile/profile_screen.dart';

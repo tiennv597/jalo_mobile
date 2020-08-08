@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../components/category_card.dart';
 import 'explore_screen.dart';
 import 'hot_screen.dart';
-import 'home_screen.dart';
+
 
 class HomeTabView extends StatelessWidget {
   final List<Category> categories = [

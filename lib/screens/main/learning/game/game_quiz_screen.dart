@@ -2,11 +2,11 @@ import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:shinro_int2/models/category.dart';
+import 'package:provider/provider.dart';
 import 'package:shinro_int2/models/game/info_room.dart';
 import 'package:shinro_int2/models/game/info_user.dart';
-import 'package:shinro_int2/models/question/answers_model.dart';
-import 'package:shinro_int2/models/question/question.dart';
+import 'package:shinro_int2/models/question/questions.dart';
+import 'package:shinro_int2/network/api_service.dart';
 import 'package:shinro_int2/widgets/widgets.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 //import 'package:shinro_int2/constant/network_constant.dart' as NETWORK_CONSTANT;
@@ -21,9 +21,14 @@ class GameQuizPage extends StatefulWidget {
   final bool owner;
   final InfoRoom infoRoom;
   final List<User> users;
-
+  final Questions questionList;
   GameQuizPage(
-      {this.socket, this.idRoom, this.owner, this.infoRoom, this.users});
+      {this.socket,
+      this.idRoom,
+      this.owner,
+      this.infoRoom,
+      this.users,
+      this.questionList});
 
   @override
   GameQuizPageState createState() {
@@ -47,9 +52,8 @@ class GameQuizPageState extends State<GameQuizPage> {
   int timer = 30;
   String showtimer = "30";
 
-  List<Question> questions = new List<Question>();
-  List random = new List();
-  Question question;
+  List random;
+  //Question question;
   //data test
 
   Map<String, Color> btncolor = {
@@ -64,12 +68,15 @@ class GameQuizPageState extends State<GameQuizPage> {
   // overriding the initstate function to start timer as this screen is created
   @override
   void initState() {
+    random = new List();
     random = shuffle([0, 1, 2, 3]);
+
+    // get question
     // if (widget.owner) {
     //   widget.socket.emit(NETWORK_CONSTANT.get_quizzes,
     //       {widget.idRoom, widget.infoRoom.info.level, "goi"});
     // } else {}
-    totalQuestion = questionList.length - 1;
+    //totalQuestion = questionList.questions.length - 1;
     // socket.on(NETWORK_CONSTANT.send_quizzes, (data) {
     //   // Parsing JSON to Jobject
     //   var list = data
@@ -88,7 +95,6 @@ class GameQuizPageState extends State<GameQuizPage> {
     starttimer();
 
     super.initState();
-    print(random);
   }
 
   // overriding the setstate function to be called only if mounted
@@ -112,6 +118,8 @@ class GameQuizPageState extends State<GameQuizPage> {
     }
     return items;
   }
+
+  // void getQuestions() async {}
 
   void starttimer() async {
     const onesec = Duration(seconds: 1);
@@ -169,7 +177,7 @@ class GameQuizPageState extends State<GameQuizPage> {
     Timer(Duration(seconds: 1), nextquestion);
   }
 
-  Widget choiceButton(String k, Answers answers) {
+  Widget choiceButton(String k, Answer answers) {
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
     return Container(
@@ -201,10 +209,14 @@ class GameQuizPageState extends State<GameQuizPage> {
     );
   }
 
-  Future<List<Question>> getFutureQuestion() async =>
+  Future<Questions> getFutureQuestion() async =>
       await Future.delayed(Duration(seconds: 1), () {
-        return questionList;
+        if (widget.questionList.questions != null) {
+          totalQuestion = widget.questionList.questions.length - 1;
+        }
+        return (widget.questionList);
       });
+
   @override
   Widget build(BuildContext context) {
     var screenHeight = MediaQuery.of(context).size.height;
@@ -212,15 +224,18 @@ class GameQuizPageState extends State<GameQuizPage> {
     SystemChrome.setPreferredOrientations(
         [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]);
     SystemChrome.setEnabledSystemUIOverlays([]);
+
     return FutureBuilder(
         future: getFutureQuestion(),
         builder: (context, snapshot) {
-          List<Question> questions = new List<Question>();
-          questions = snapshot.data;
-          print(questions);
+          // Questions data = new Questions();
+          // data = snapshot.data;
           if (!snapshot.hasData) {
-            return Center(
-              child: CircularProgressIndicator(),
+            return Scaffold(
+              backgroundColor: Colors.white,
+              body: Center(
+                child: CircularProgressIndicator(),
+              ),
             );
           } else {
             return Scaffold(
@@ -276,8 +291,10 @@ class GameQuizPageState extends State<GameQuizPage> {
                       child: Container(
                         child: Center(
                           child: TextUnderline(
-                              text: questions[current].content,
-                              underline: questions[current].underline),
+                              text: snapshot.data.questions[current].question
+                                  .toString(),
+                              underline:
+                                  snapshot.data.questions[current].underline),
                         ),
                       ),
                     ),
@@ -307,14 +324,14 @@ class GameQuizPageState extends State<GameQuizPage> {
                     left: -4,
                     child: Column(
                       children: <Widget>[
-                        choiceButton(
-                            "a", questions[current].answers[random[0]]),
-                        choiceButton(
-                            "b", questions[current].answers[random[1]]),
-                        choiceButton(
-                            "c", questions[current].answers[random[2]]),
-                        choiceButton(
-                            "d", questions[current].answers[random[3]]),
+                        choiceButton("a",
+                            snapshot.data.questions[current].answer[random[0]]),
+                        choiceButton("b",
+                            snapshot.data.questions[current].answer[random[1]]),
+                        choiceButton("c",
+                            snapshot.data.questions[current].answer[random[2]]),
+                        choiceButton("d",
+                            snapshot.data.questions[current].answer[random[3]]),
                       ],
                     ),
                   ),

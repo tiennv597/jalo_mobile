@@ -127,4 +127,31 @@ class _ApiService implements ApiService {
     //final value = Response<Map<String, dynamic>>.fromJson(_result.data);
     return _result;
   }
+
+  @override
+  getQuestionByQuantity(level, type, subType, quantity) async {
+    ArgumentError.checkNotNull(level, 'level');
+    ArgumentError.checkNotNull(type, 'type');
+    ArgumentError.checkNotNull(subType, 'subType');
+    ArgumentError.checkNotNull(quantity, 'quantity');
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = {
+      'level': level,
+      'type': type,
+      'subType': subType,
+      'quantity': quantity
+    };
+    final Response<Map<String, dynamic>> _result = await _dio.request(
+        '/question/getbyquantity',
+        queryParameters: queryParameters,
+        options: RequestOptions(
+            method: 'GET',
+            headers: <String, dynamic>{},
+            extra: _extra,
+            contentType: 'application/json',
+            baseUrl: baseUrl),
+        data: _data);
+    return _result;
+  }
 }
