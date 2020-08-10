@@ -32,7 +32,7 @@ class _GameRoomPageState extends State<GameRoomPage>
   String id = '';
   String password = '';
   String level = 'N5';
-  String type = 'Chinese Word';
+  String type = 'Hán tự';
   String quantity = '10';
   String time = '10';
   // List cw = [];
@@ -294,7 +294,7 @@ class _GameRoomPageState extends State<GameRoomPage>
                             type = newValue;
                           });
                         },
-                        items: <String>['Chinese Word', 'Vocabulary', 'Grammar']
+                        items: <String>['Hán tự', 'Từ vựng', 'Ngữ pháp']
                             .map<DropdownMenuItem<String>>((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
@@ -395,7 +395,7 @@ class _GameRoomPageState extends State<GameRoomPage>
             height: 32,
             child: Align(
               alignment: Alignment.center,
-              child: Text("漢字"),
+              child: Text("Hán tự"),
             ),
           ),
         ),
@@ -404,7 +404,7 @@ class _GameRoomPageState extends State<GameRoomPage>
             height: 32,
             child: Align(
               alignment: Alignment.center,
-              child: Text("語彙"),
+              child: Text("Từ vựng"),
             ),
           ),
         ),
@@ -413,7 +413,7 @@ class _GameRoomPageState extends State<GameRoomPage>
             height: 32,
             child: Align(
               alignment: Alignment.center,
-              child: Text("文法"),
+              child: Text("Ngữ pháp"),
             ),
           ),
         ),

@@ -2,15 +2,13 @@ import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
 import 'package:shinro_int2/models/game/info_room.dart';
 import 'package:shinro_int2/models/game/info_user.dart';
 import 'package:shinro_int2/models/question/questions.dart';
-import 'package:shinro_int2/network/api_service.dart';
 import 'package:shinro_int2/widgets/widgets.dart';
 import 'package:socket_io_client/socket_io_client.dart';
-//import 'package:shinro_int2/constant/network_constant.dart' as NETWORK_CONSTANT;
-
+import 'package:shinro_int2/constant/network_constant.dart' as NETWORK_CONSTANT;
+import 'package:quiver/async.dart';
 import 'components/user_rank_item.dart';
 import 'game_result_screen.dart';
 
@@ -22,13 +20,15 @@ class GameQuizPage extends StatefulWidget {
   final InfoRoom infoRoom;
   final List<User> users;
   final Questions questionList;
+  final int userInRoom;
   GameQuizPage(
       {this.socket,
       this.idRoom,
       this.owner,
       this.infoRoom,
       this.users,
-      this.questionList});
+      this.questionList,
+      this.userInRoom});
 
   @override
   GameQuizPageState createState() {
@@ -38,7 +38,7 @@ class GameQuizPage extends StatefulWidget {
 
 class GameQuizPageState extends State<GameQuizPage> {
   //var mydata;
-  Socket socket;
+  // Socket socket;
   // GameQuizPageState(this.socket,this.mydata);
   Color colortoshow = Colors.indigoAccent;
   Color right = Colors.green;
@@ -49,19 +49,20 @@ class GameQuizPageState extends State<GameQuizPage> {
   int j = 1;
   int current = 0; //current question
   int totalQuestion = 0; //total of questions
-  int timer = 30;
-  String showtimer = "30";
-
+  int timer;
+  int selectedQuantity = 0;
+  String showtimer;
+  CountdownTimer countDownTimer;
   List random;
-  //Question question;
-  //data test
-
+  int actual;
+  var countdown;
   Map<String, Color> btncolor = {
     "a": Colors.indigoAccent,
     "b": Colors.indigoAccent,
     "c": Colors.indigoAccent,
     "d": Colors.indigoAccent,
   };
+// Creating a new timer element.
 
   bool canceltimer = false;
 
@@ -70,31 +71,31 @@ class GameQuizPageState extends State<GameQuizPage> {
   void initState() {
     random = new List();
     random = shuffle([0, 1, 2, 3]);
-
-    // get question
-    // if (widget.owner) {
-    //   widget.socket.emit(NETWORK_CONSTANT.get_quizzes,
-    //       {widget.idRoom, widget.infoRoom.info.level, "goi"});
-    // } else {}
-    //totalQuestion = questionList.questions.length - 1;
-    // socket.on(NETWORK_CONSTANT.send_quizzes, (data) {
-    //   // Parsing JSON to Jobject
-    //   var list = data
-    //       .map((dynamic i) => Question.fromJson(i as Map<String, dynamic>))
-    //       .toList();
-    //   for (var item in list) {
-    //     Question question = new Question();
-    //     question = item;
-    //     questions.add(question);
-    //     print(question.content);
-    //   }
-    //   questions = questionList; // data test
-    //   totalQuestion = questions.length - 1;
-    // });
-
-    starttimer();
+    //starttimer();
+    startTimer();
+    widget.socket.on(NETWORK_CONSTANT.check_answer, (data) {
+      selectedQuantity++;
+      if (selectedQuantity == widget.userInRoom) {
+        widget.socket.emit(NETWORK_CONSTANT.next_question, {widget.idRoom});
+        selectedQuantity = 0;
+      }
+      print(data.toString());
+    });
+    widget.socket.on(NETWORK_CONSTANT.next_question, (_) {
+      setState(() {
+        // canceltimer = true;
+        //starttimer();
+        restartTimer();
+      });
+      Timer(Duration(seconds: 1), nextquestion);
+    });
 
     super.initState();
+  }
+
+  void restartTimer() {
+    countDownTimer.cancel();
+    startTimer();
   }
 
   // overriding the setstate function to be called only if mounted
@@ -103,6 +104,11 @@ class GameQuizPageState extends State<GameQuizPage> {
     if (mounted) {
       super.setState(fn);
     }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
 // shuffle list
@@ -119,28 +125,73 @@ class GameQuizPageState extends State<GameQuizPage> {
     return items;
   }
 
-  // void getQuestions() async {}
+  // void starttimer() async {
+  //   timer = int.parse(widget.infoRoom.info.time);
+  //   const onesec = Duration(seconds: 1);
+  //   Timer.periodic(onesec, (Timer t) {
+  //     setState(() {
+  //       if (timer < 1) {
+  //         //checkAnswer("", false);
+  //         // timer = int.parse(widget.infoRoom.info.time);
+  //         t.cancel();
+  //         checkQuestion();
+  //       } else if (canceltimer == true) {
+  //         t.cancel();
+  //       } else {
+  //         timer = timer - 1;
+  //       }
+  //       showtimer = timer.toString();
+  //     });
 
-  void starttimer() async {
-    const onesec = Duration(seconds: 1);
-    Timer.periodic(onesec, (Timer t) {
+  //     // setState(() {
+  //     //   if (timer < 1) {
+  //     //     checkQuestion();
+  //     //     t.cancel();
+  //     //     // nextquestion();
+  //     //   } else if (canceltimer == true) {
+  //     //     // t.cancel();
+  //     //   } else {
+  //     //
+  //     //   }
+  //     //   showtimer = timer.toString();
+  //     // });
+  //   });
+  // }
+
+  void startTimer() {
+    countDownTimer = new CountdownTimer(
+      new Duration(minutes: 5),
+      new Duration(seconds: 1),
+    );
+
+    countdown = countDownTimer.listen(null);
+    countdown.onData((duration) {
       setState(() {
-        if (timer < 1) {
-          t.cancel();
-          nextquestion();
-        } else if (canceltimer == true) {
-          t.cancel();
-        } else {
-          timer = timer - 1;
+        actual = 10 - duration.elapsed.inSeconds;
+        if (actual < 1) {
+          checkQuestion();
         }
-        showtimer = timer.toString();
       });
+    });
+
+    countdown.onDone(() {
+      countdown.cancel();
     });
   }
 
+  void checkQuestion() {
+    // send status marks to server
+    widget.socket.emit(NETWORK_CONSTANT.check_answer, {
+      widget.idRoom,
+      widget.infoRoom.users.id,
+      widget.infoRoom.users.fullName,
+      marks
+    });
+    // selectedQuantity++;
+  }
+
   void nextquestion() {
-    canceltimer = false;
-    timer = 30;
+    // checkQuestion();
     setState(() {
       if (current < totalQuestion) {
         current++;
@@ -154,11 +205,10 @@ class GameQuizPageState extends State<GameQuizPage> {
       btncolor["c"] = Colors.indigoAccent;
       btncolor["d"] = Colors.indigoAccent;
     });
-    starttimer();
   }
 
   void checkAnswer(String k, bool result) {
-    // so nake sure that this is now corrected
+    // check seleced answer quantity
     if (result) {
       marks = marks + 5;
       // changing the color variable to be green
@@ -170,11 +220,21 @@ class GameQuizPageState extends State<GameQuizPage> {
     setState(() {
       // applying the changed color to the particular button that was selected
       btncolor[k] = colortoshow;
-      canceltimer = true;
+      //canceltimer = true;
     });
-
+    checkQuestion();
+    //
+    // if (selectedQuantity == widget.userInRoom) {
+    //   widget.socket.emit(NETWORK_CONSTANT.next_question, {widget.idRoom});
+    //   setState(() {
+    //     // applying the changed color to the particular button that was selected
+    //     selectedQuantity = 0;
+    //     //canceltimer = true;
+    //   });
+    // }
     // changed timer duration to 1 second
-    Timer(Duration(seconds: 1), nextquestion);
+    //Timer(Duration(seconds: 1), nextquestion);
+    // nextquestion();
   }
 
   Widget choiceButton(String k, Answer answers) {
@@ -228,9 +288,9 @@ class GameQuizPageState extends State<GameQuizPage> {
     return FutureBuilder(
         future: getFutureQuestion(),
         builder: (context, snapshot) {
-          // Questions data = new Questions();
-          // data = snapshot.data;
           if (!snapshot.hasData) {
+            timer = int.parse(widget.infoRoom.info.time);
+            showtimer = widget.infoRoom.info.time;
             return Scaffold(
               backgroundColor: Colors.white,
               body: Center(
@@ -310,7 +370,7 @@ class GameQuizPageState extends State<GameQuizPage> {
                           borderRadius: BorderRadius.all(Radius.circular(40))),
                       child: Center(
                         child: Text(
-                          showtimer,
+                          actual.toString(),
                           style: TextStyle(
                             fontSize: 36.0,
                             fontWeight: FontWeight.w700,

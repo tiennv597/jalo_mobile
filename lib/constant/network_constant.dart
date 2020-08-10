@@ -43,6 +43,8 @@ const String get_client_in_room = 'get_client_in_room';
 const String send_client_in_room = 'send_client_in_room';
 const String get_quizzes = 'get_quizzes';
 const String send_quizzes = 'send_quizzes';
+const String check_answer = 'check_answer';
+const String next_question = 'next_question';
 
 //event test
 

@@ -2,11 +2,9 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
 import 'package:shinro_int2/models/game/info_rooms.dart';
 import 'package:shinro_int2/models/message/message.dart';
 import 'package:shinro_int2/models/question/questions.dart';
-import 'package:shinro_int2/network/api_service.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 import 'package:shinro_int2/constant/network_constant.dart' as NETWORK_CONSTANT;
 import 'package:shinro_int2/constant/app_colors.dart' as COLORS;
@@ -52,7 +50,6 @@ class StrartGameScreenState extends State<StrartGameScreen> {
       await Future.delayed(Duration(seconds: 1), () {
         return room;
       });
-
   @override
   void initState() {
     super.initState();
@@ -61,18 +58,18 @@ class StrartGameScreenState extends State<StrartGameScreen> {
     _controller = ScrollController();
     _controller.addListener(_scrollListener);
     switch (widget.infoRoom.info.type) {
-      case 'Chinese Word':
+      case 'Hán tự':
         {
           nsp = NETWORK_CONSTANT.china_word_ns;
         }
         break;
 
-      case 'Vocabulary':
+      case 'Từ vựng':
         {
           nsp = NETWORK_CONSTANT.vocabulary_ns;
         }
         break;
-      case 'Grammar':
+      case 'Ngữ pháp':
         {
           nsp = NETWORK_CONSTANT.grammar_ns;
         }
@@ -120,7 +117,8 @@ class StrartGameScreenState extends State<StrartGameScreen> {
               owner: owner,
               infoRoom: widget.infoRoom,
               users: users,
-              questionList: questionList)));
+              questionList: questionList,
+              userInRoom:userInRoom)));
     });
 
     socket.on(NETWORK_CONSTANT.ready, (data) {
@@ -492,7 +490,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
                   Padding(
                     padding: const EdgeInsets.only(top: 4, bottom: 4),
                     child: Text(
-                      'Thời gian: ' + "11" + ' giây/ câu',
+                      'Thời gian: ' + room.info.time + ' giây/ câu',
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
