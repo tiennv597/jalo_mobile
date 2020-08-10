@@ -72,7 +72,8 @@ class GameQuizPageState extends State<GameQuizPage> {
     random = new List();
     random = shuffle([0, 1, 2, 3]);
     //starttimer();
-    startTimer();
+    getFutureQuestion();
+
     widget.socket.on(NETWORK_CONSTANT.check_answer, (data) {
       selectedQuantity++;
       if (selectedQuantity == widget.userInRoom) {
@@ -108,6 +109,7 @@ class GameQuizPageState extends State<GameQuizPage> {
 
   @override
   void dispose() {
+    countDownTimer.cancel();
     super.dispose();
   }
 
@@ -124,39 +126,6 @@ class GameQuizPageState extends State<GameQuizPage> {
     }
     return items;
   }
-
-  // void starttimer() async {
-  //   timer = int.parse(widget.infoRoom.info.time);
-  //   const onesec = Duration(seconds: 1);
-  //   Timer.periodic(onesec, (Timer t) {
-  //     setState(() {
-  //       if (timer < 1) {
-  //         //checkAnswer("", false);
-  //         // timer = int.parse(widget.infoRoom.info.time);
-  //         t.cancel();
-  //         checkQuestion();
-  //       } else if (canceltimer == true) {
-  //         t.cancel();
-  //       } else {
-  //         timer = timer - 1;
-  //       }
-  //       showtimer = timer.toString();
-  //     });
-
-  //     // setState(() {
-  //     //   if (timer < 1) {
-  //     //     checkQuestion();
-  //     //     t.cancel();
-  //     //     // nextquestion();
-  //     //   } else if (canceltimer == true) {
-  //     //     // t.cancel();
-  //     //   } else {
-  //     //
-  //     //   }
-  //     //   showtimer = timer.toString();
-  //     // });
-  //   });
-  // }
 
   void startTimer() {
     countDownTimer = new CountdownTimer(
@@ -223,18 +192,6 @@ class GameQuizPageState extends State<GameQuizPage> {
       //canceltimer = true;
     });
     checkQuestion();
-    //
-    // if (selectedQuantity == widget.userInRoom) {
-    //   widget.socket.emit(NETWORK_CONSTANT.next_question, {widget.idRoom});
-    //   setState(() {
-    //     // applying the changed color to the particular button that was selected
-    //     selectedQuantity = 0;
-    //     //canceltimer = true;
-    //   });
-    // }
-    // changed timer duration to 1 second
-    //Timer(Duration(seconds: 1), nextquestion);
-    // nextquestion();
   }
 
   Widget choiceButton(String k, Answer answers) {
@@ -288,9 +245,8 @@ class GameQuizPageState extends State<GameQuizPage> {
     return FutureBuilder(
         future: getFutureQuestion(),
         builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            timer = int.parse(widget.infoRoom.info.time);
-            showtimer = widget.infoRoom.info.time;
+          if (!snapshot.hasData || snapshot.data == null) {
+            startTimer();
             return Scaffold(
               backgroundColor: Colors.white,
               body: Center(
