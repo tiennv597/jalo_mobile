@@ -47,7 +47,7 @@ class _GameRoomPageState extends State<GameRoomPage>
   @override
   void initState() {
     SystemChrome.setEnabledSystemUIOverlays([]);
-    tabController = TabController(length: 3, vsync: this);
+    tabController = TabController(length: 1, vsync: this);
     _tfRoomController = new TextEditingController();
     _tfPasswordController = new TextEditingController();
     //Creating the socket
@@ -334,34 +334,34 @@ class _GameRoomPageState extends State<GameRoomPage>
               alignment: FractionalOffset.bottomCenter,
               child: Row(
                 children: <Widget>[
+                  // Padding(
+                  //   padding: const EdgeInsets.all(8.0),
+                  //   child: RaisedButton(
+                  //     child: Text("Search"),
+                  //     onPressed: () async {
+                  //       final String currentTeam =
+                  //           await _showSearchDialog(context);
+                  //       print("Current team name is $currentTeam");
+                  //     },
+                  //     color: COLORS.tiColor52,
+                  //     textColor: Colors.white,
+                  //     padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                  //     splashColor: Colors.grey,
+                  //   ),
+                  // ),
+                  // Padding(
+                  //   padding: const EdgeInsets.all(8.0),
+                  //   child: RaisedButton(
+                  //     child: Text("Play Now"),
+                  //     onPressed: _getRoom,
+                  //     color: COLORS.tiColor52,
+                  //     textColor: Colors.white,
+                  //     padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                  //     splashColor: Colors.grey,
+                  //   ),
+                  // ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: RaisedButton(
-                      child: Text("Search"),
-                      onPressed: () async {
-                        final String currentTeam =
-                            await _showSearchDialog(context);
-                        print("Current team name is $currentTeam");
-                      },
-                      color: COLORS.tiColor52,
-                      textColor: Colors.white,
-                      padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                      splashColor: Colors.grey,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: RaisedButton(
-                      child: Text("Play Now"),
-                      onPressed: _getRoom,
-                      color: COLORS.tiColor52,
-                      textColor: Colors.white,
-                      padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                      splashColor: Colors.grey,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(32),
                     child: RaisedButton(
                       child: Text("Create"),
                       onPressed: () async {
@@ -395,28 +395,28 @@ class _GameRoomPageState extends State<GameRoomPage>
             height: 32,
             child: Align(
               alignment: Alignment.center,
-              child: Text("Hán tự"),
+              child: Text("Chọn Phòng"),
             ),
           ),
         ),
-        Tab(
-          child: Container(
-            height: 32,
-            child: Align(
-              alignment: Alignment.center,
-              child: Text("Từ vựng"),
-            ),
-          ),
-        ),
-        Tab(
-          child: Container(
-            height: 32,
-            child: Align(
-              alignment: Alignment.center,
-              child: Text("Ngữ pháp"),
-            ),
-          ),
-        ),
+        // Tab(
+        //   child: Container(
+        //     height: 32,
+        //     child: Align(
+        //       alignment: Alignment.center,
+        //       child: Text("Từ vựng"),
+        //     ),
+        //   ),
+        // ),
+        // Tab(
+        //   child: Container(
+        //     height: 32,
+        //     child: Align(
+        //       alignment: Alignment.center,
+        //       child: Text("Ngữ pháp"),
+        //     ),
+        //   ),
+        // ),
       ],
       controller: tabController,
     );
@@ -443,7 +443,7 @@ class _GameRoomPageState extends State<GameRoomPage>
           child: Stack(
             children: <Widget>[
               DefaultTabController(
-                length: 3,
+                length: 1,
                 child: Scaffold(
                   backgroundColor: Colors.white,
                   appBar: AppBar(

@@ -251,7 +251,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
                       color: Colors.black, //change your color here
                     ),
                     title: Text(
-                      "Solo 122",
+                      widget.infoRoom.users.fullName,
                       style: TextStyle(color: Colors.black),
                     ),
                     backgroundColor: Colors.white,
@@ -267,21 +267,21 @@ class StrartGameScreenState extends State<StrartGameScreen> {
                   visible: _visibility,
                   child: Stack(
                     children: <Widget>[
-                      Positioned(
-                        bottom: 112.0,
-                        right: 8.0,
-                        child: FloatingActionButton(
-                          backgroundColor: COLORS.cyan700,
-                          heroTag: 'save',
-                          onPressed: () {
-                            // What you want to do
-                          },
-                          child: Icon(Icons.group_add),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5.0),
-                          ),
-                        ),
-                      ),
+                      // Positioned(
+                      //   bottom: 112.0,
+                      //   right: 8.0,
+                      //   child: FloatingActionButton(
+                      //     backgroundColor: COLORS.cyan700,
+                      //     heroTag: 'save',
+                      //     onPressed: () {
+                      //       // What you want to do
+                      //     },
+                      //     child: Icon(Icons.group_add),
+                      //     shape: RoundedRectangleBorder(
+                      //       borderRadius: BorderRadius.circular(5.0),
+                      //     ),
+                      //   ),
+                      // ),
                       Positioned(
                         bottom: 42,
                         right: 8.0,

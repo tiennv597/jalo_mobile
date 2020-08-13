@@ -102,7 +102,7 @@ class RoomsListState extends State<RoomsList> {
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
-                                    "Solo 1222",
+                                    widget.rooms[index].info.type,
                                     style: TextStyle(color: Colors.white),
                                   ),
                                 ),
@@ -128,7 +128,7 @@ class RoomsListState extends State<RoomsList> {
                                         color: Colors.white,
                                       ),
                                       Text(
-                                        "15",
+                                        "1",
                                         style: TextStyle(color: Colors.white),
                                       ),
                                     ],

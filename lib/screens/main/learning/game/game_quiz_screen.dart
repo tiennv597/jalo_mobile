@@ -1,15 +1,18 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shinro_int2/models/game/info_room.dart';
 import 'package:shinro_int2/models/game/info_user.dart';
+import 'package:shinro_int2/models/game/status.dart';
 import 'package:shinro_int2/models/question/questions.dart';
 import 'package:shinro_int2/widgets/widgets.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 import 'package:shinro_int2/constant/network_constant.dart' as NETWORK_CONSTANT;
 import 'package:quiver/async.dart';
-import 'components/user_rank_item.dart';
+//import 'components/user_rank_item.dart';
+import 'package:shinro_int2/constant/app_colors.dart' as COLORS;
 import 'game_result_screen.dart';
 
 class GameQuizPage extends StatefulWidget {
@@ -56,12 +59,16 @@ class GameQuizPageState extends State<GameQuizPage> {
   List random;
   int actual;
   var countdown;
+  var keys;
+//var val = myMap[keys[idx]]
+
   Map<String, Color> btncolor = {
     "a": Colors.indigoAccent,
     "b": Colors.indigoAccent,
     "c": Colors.indigoAccent,
     "d": Colors.indigoAccent,
   };
+  Map<String, Status> statusAll;
 // Creating a new timer element.
 
   bool canceltimer = false;
@@ -70,17 +77,31 @@ class GameQuizPageState extends State<GameQuizPage> {
   @override
   void initState() {
     random = new List();
+    statusAll = new Map();
     random = shuffle([0, 1, 2, 3]);
     //starttimer();
     getFutureQuestion();
-
+    for (var i = 0; i < widget.users.length; i++) {
+      Status status = new Status();
+      status.userId = (widget.users[i].id);
+      status.userName = (widget.users[i].fullName);
+      status.marks = 0;
+      statusAll.putIfAbsent(widget.users[i].id, () => status);
+    }
+    keys = statusAll.keys.toList();
     widget.socket.on(NETWORK_CONSTANT.check_answer, (data) {
       selectedQuantity++;
       if (selectedQuantity == widget.userInRoom) {
         widget.socket.emit(NETWORK_CONSTANT.next_question, {widget.idRoom});
         selectedQuantity = 0;
       }
-      print(data.toString());
+      Status status = Status.fromJson(json.decode(data));
+      setState(() {
+        statusAll.update(status.userId, (v) {
+          return status;
+        });
+        statusAll = statusAll;
+      });
     });
     widget.socket.on(NETWORK_CONSTANT.next_question, (_) {
       setState(() {
@@ -277,10 +298,47 @@ class GameQuizPageState extends State<GameQuizPage> {
                       // list message
                       child: ListView.builder(
                         //reverse: true,
-                        itemBuilder: (context, int index) => UserRankItem(
-                          user: widget.users[index],
+                        itemBuilder: (context, int index) => GestureDetector(
+                          onTap: () {
+                            print("object");
+                          },
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 0.0),
+                            child: Card(
+                              child: ClipRRect(
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: <Widget>[
+                                    Container(
+                                      height: 20,
+                                      width: 20,
+                                      decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          gradient: COLORS.colorBlue2),
+                                      child: CircleAvatar(
+                                        child: new Text(
+                                            statusAll[keys[index]].userName[0]),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child:
+                                          Text(statusAll[keys[index]].userName),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(statusAll[keys[index]]
+                                          .marks
+                                          .toString()),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
-                        itemCount: widget.users.length,
+                        itemCount: statusAll.length,
                       ),
                     ),
                   ),

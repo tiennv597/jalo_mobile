@@ -36,28 +36,28 @@ class TabView extends StatelessWidget {
               ],
             ),
           ),
-          Column(children: <Widget>[
-            SizedBox(
-              height: 16.0,
-            ),
-            Flexible(
-                child: RoomsList(
-              rooms: cw,
-              type: "Vocabulary",
-              socket: socket,
-            ))
-          ]),
-          Column(children: <Widget>[
-            SizedBox(
-              height: 16.0,
-            ),
-            Flexible(
-                child: RoomsList(
-              rooms: cw,
-              type: "Grammar",
-              socket: socket,
-            ))
-          ]),
+          // Column(children: <Widget>[
+          //   SizedBox(
+          //     height: 16.0,
+          //   ),
+          //   Flexible(
+          //       child: RoomsList(
+          //     rooms: cw,
+          //     type: "Vocabulary",
+          //     socket: socket,
+          //   ))
+          // ]),
+          // Column(children: <Widget>[
+          //   SizedBox(
+          //     height: 16.0,
+          //   ),
+          //   Flexible(
+          //       child: RoomsList(
+          //     rooms: cw,
+          //     type: "Grammar",
+          //     socket: socket,
+          //   ))
+          // ]),
         ]);
   }
 }

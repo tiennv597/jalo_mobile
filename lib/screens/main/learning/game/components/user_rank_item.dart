@@ -1,11 +1,19 @@
 import 'package:shinro_int2/constant/app_colors.dart' as COLORS;
 import 'package:flutter/material.dart';
-import 'package:shinro_int2/models/game/info_user.dart';
+import 'package:shinro_int2/models/game/status.dart';
 
-class UserRankItem extends StatelessWidget {
-  final User user;
+class UserRankItem extends StatefulWidget {
+  final Status status;
+  UserRankItem(this.status);
+  @override
+  UserRankItemState createState() {
+    return new UserRankItemState();
+  }
+}
 
-  const UserRankItem({Key key, this.user}) : super(key: key);
+class UserRankItemState extends State<UserRankItem> {
+
+  //const UserRankItem({Key key, this.status}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,12 +34,16 @@ class UserRankItem extends StatelessWidget {
                   decoration: BoxDecoration(
                       shape: BoxShape.circle, gradient: COLORS.colorBlue2),
                   child: CircleAvatar(
-                    child: new Text(user.fullName[0]),
+                    child: new Text(widget.status.userName[0]),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(user.fullName),
+                  child: Text(widget.status.userName),
+                ),
+                 Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(widget.status.marks.toString()),
                 )
               ],
             ),

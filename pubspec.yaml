@@ -41,6 +41,9 @@ dependencies:
   fluttertoast: ^4.0.0
   socket_io_client: ^0.9.10
   flutter_facebook_login: ^3.0.0
+  flutter_bloc: ^6.0.1
+  bloc: ^6.0.1
+  
 
 dev_dependencies:
   flutter_test:
