@@ -34,7 +34,7 @@ class _GameRoomPageState extends State<GameRoomPage>
   String level = 'N5';
   String type = 'Hán tự';
   String quantity = '10';
-  String time = '10';
+  String time = '5';
   // List cw = [];
   // List vc = [];
   // List gr = [];

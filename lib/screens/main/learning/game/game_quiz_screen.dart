@@ -197,7 +197,7 @@ class GameQuizPageState extends State<GameQuizPage> {
   void checkAnswer(String k, bool result) {
     // check seleced answer quantity
     if (result) {
-      marks = marks + 5 * timer;
+      marks = marks + 10 * actual * 97;
       // changing the color variable to be green
       colortoshow = right;
     } else {
