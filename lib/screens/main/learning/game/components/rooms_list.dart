@@ -26,8 +26,8 @@ class RoomsListState extends State<RoomsList> {
     super.initState();
   }
 
-  void _strartGameScreen(
-      String id, String userId, String fullName, String type, String password) {
+  void _strartGameScreen(String id, String userId, String fullName, String type,
+      String password, String time) {
     InfoRoom infoRoom = InfoRoom();
     User user = new User();
     Info info = new Info();
@@ -36,6 +36,7 @@ class RoomsListState extends State<RoomsList> {
     infoRoom.users = user;
     info.idRoom = id;
     info.type = type;
+    info.time = time;
     info.password = password;
     infoRoom.info = info;
     Navigator.of(context).pushReplacement(
@@ -67,7 +68,8 @@ class RoomsListState extends State<RoomsList> {
                         userId,
                         fullName,
                         widget.rooms[index].info.type,
-                        widget.rooms[index].info.password);
+                        widget.rooms[index].info.password,
+                        widget.rooms[index].info.time);
                   },
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),

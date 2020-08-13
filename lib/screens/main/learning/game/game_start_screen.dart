@@ -118,7 +118,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
               infoRoom: widget.infoRoom,
               users: users,
               questionList: questionList,
-              userInRoom:userInRoom)));
+              userInRoom: userInRoom)));
     });
 
     socket.on(NETWORK_CONSTANT.ready, (data) {
@@ -490,7 +490,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
                   Padding(
                     padding: const EdgeInsets.only(top: 4, bottom: 4),
                     child: Text(
-                      'Thời gian: ' + room.info.time + ' giây/ câu',
+                      'Thời gian: ' + widget.infoRoom.info.time + ' giây/ câu',
                       style: TextStyle(color: Colors.white),
                     ),
                   ),

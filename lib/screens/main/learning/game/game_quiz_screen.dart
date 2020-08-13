@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:collection';
 import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/material.dart';
@@ -70,25 +69,19 @@ class GameQuizPageState extends State<GameQuizPage> {
     "d": Colors.indigoAccent,
   };
   Map<String, dynamic> statusAll;
-// Creating a new timer element.
-
-  //bool canceltimer = false;
-
   // overriding the initstate function to start timer as this screen is created
   @override
   void initState() {
     random = new List();
     statusAll = new Map();
-    //sortedMapRank = new Map();
     random = shuffle([0, 1, 2, 3]);
-    //starttimer();
+    timer = int.parse(widget.infoRoom.info.time);
     getFutureQuestion();
     for (var i = 0; i < widget.users.length; i++) {
       Status status = new Status();
       status.userId = (widget.users[i].id);
       status.userName = (widget.users[i].fullName);
       status.marks = 0;
-      //sortedMapRank.putIfAbsent(widget.users[i].id, () => status);
       statusAll.putIfAbsent(widget.users[i].id, () => status);
     }
     sortedKeys = statusAll.keys.toList();
@@ -106,20 +99,10 @@ class GameQuizPageState extends State<GameQuizPage> {
         sortedKeys = statusAll.keys.toList(growable: true)
           ..sort(
               (k1, k2) => statusAll[k1].marks.compareTo(statusAll[k2].marks));
-        //statusAll = statusAll;
-        print(sortedKeys);
-        LinkedHashMap sortedMapRank = new LinkedHashMap.fromIterable(sortedKeys,
-            key: (k) => k, value: (k) => statusAll[k]);
-        // for (var key in sortedKeys) {
-        //   statusAll[key] = sortedMapRank[key];
-        // }
-        //print(statusAll);
       });
     });
     widget.socket.on(NETWORK_CONSTANT.next_question, (_) {
       setState(() {
-        // canceltimer = true;
-        //starttimer();
         restartTimer();
       });
       Timer(Duration(seconds: 1), nextquestion);
@@ -165,13 +148,13 @@ class GameQuizPageState extends State<GameQuizPage> {
   void startTimer() {
     countDownTimer = new CountdownTimer(
       new Duration(minutes: 5),
-      new Duration(seconds: 1),
+      new Duration(milliseconds: 1000),
     );
 
     countdown = countDownTimer.listen(null);
     countdown.onData((duration) {
       setState(() {
-        actual = 10 - duration.elapsed.inSeconds;
+        actual = timer - duration.elapsed.inSeconds;
         if (actual < 1) {
           checkQuestion();
         }
@@ -214,7 +197,7 @@ class GameQuizPageState extends State<GameQuizPage> {
   void checkAnswer(String k, bool result) {
     // check seleced answer quantity
     if (result) {
-      marks = marks + 5;
+      marks = marks + 5 * timer;
       // changing the color variable to be green
       colortoshow = right;
     } else {
