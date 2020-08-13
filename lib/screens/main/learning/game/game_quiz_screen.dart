@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:collection';
 import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/material.dart';
@@ -59,7 +60,7 @@ class GameQuizPageState extends State<GameQuizPage> {
   List random;
   int actual;
   var countdown;
-  var keys;
+  var sortedKeys;
 //var val = myMap[keys[idx]]
 
   Map<String, Color> btncolor = {
@@ -68,16 +69,17 @@ class GameQuizPageState extends State<GameQuizPage> {
     "c": Colors.indigoAccent,
     "d": Colors.indigoAccent,
   };
-  Map<String, Status> statusAll;
+  Map<String, dynamic> statusAll;
 // Creating a new timer element.
 
-  bool canceltimer = false;
+  //bool canceltimer = false;
 
   // overriding the initstate function to start timer as this screen is created
   @override
   void initState() {
     random = new List();
     statusAll = new Map();
+    //sortedMapRank = new Map();
     random = shuffle([0, 1, 2, 3]);
     //starttimer();
     getFutureQuestion();
@@ -86,9 +88,10 @@ class GameQuizPageState extends State<GameQuizPage> {
       status.userId = (widget.users[i].id);
       status.userName = (widget.users[i].fullName);
       status.marks = 0;
+      //sortedMapRank.putIfAbsent(widget.users[i].id, () => status);
       statusAll.putIfAbsent(widget.users[i].id, () => status);
     }
-    keys = statusAll.keys.toList();
+    sortedKeys = statusAll.keys.toList();
     widget.socket.on(NETWORK_CONSTANT.check_answer, (data) {
       selectedQuantity++;
       if (selectedQuantity == widget.userInRoom) {
@@ -100,7 +103,17 @@ class GameQuizPageState extends State<GameQuizPage> {
         statusAll.update(status.userId, (v) {
           return status;
         });
-        statusAll = statusAll;
+        sortedKeys = statusAll.keys.toList(growable: true)
+          ..sort(
+              (k1, k2) => statusAll[k1].marks.compareTo(statusAll[k2].marks));
+        //statusAll = statusAll;
+        print(sortedKeys);
+        LinkedHashMap sortedMapRank = new LinkedHashMap.fromIterable(sortedKeys,
+            key: (k) => k, value: (k) => statusAll[k]);
+        // for (var key in sortedKeys) {
+        //   statusAll[key] = sortedMapRank[key];
+        // }
+        //print(statusAll);
       });
     });
     widget.socket.on(NETWORK_CONSTANT.next_question, (_) {
@@ -124,6 +137,7 @@ class GameQuizPageState extends State<GameQuizPage> {
   @override
   void setState(fn) {
     if (mounted) {
+      //countDownTimer.cancel();
       super.setState(fn);
     }
   }
@@ -317,18 +331,21 @@ class GameQuizPageState extends State<GameQuizPage> {
                                           shape: BoxShape.circle,
                                           gradient: COLORS.colorBlue2),
                                       child: CircleAvatar(
-                                        child: new Text(
-                                            statusAll[keys[index]].userName[0]),
+                                        child: new Text(statusAll[sortedKeys[
+                                                statusAll.length - 1 - index]]
+                                            .userName[0]),
                                       ),
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.all(8.0),
-                                      child:
-                                          Text(statusAll[keys[index]].userName),
+                                      child: Text(statusAll[sortedKeys[
+                                              statusAll.length - 1 - index]]
+                                          .userName),
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.all(8.0),
-                                      child: Text(statusAll[keys[index]]
+                                      child: Text(statusAll[sortedKeys[
+                                              statusAll.length - 1 - index]]
                                           .marks
                                           .toString()),
                                     )
