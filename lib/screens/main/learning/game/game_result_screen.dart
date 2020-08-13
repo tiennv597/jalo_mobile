@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:shinro_int2/constant/app_colors.dart' as COLORS;
 
 class ResultPage extends StatefulWidget {
-  final int marks;
-  ResultPage({Key key, @required this.marks}) : super(key: key);
+  final marks;
+  final sortedKeys;
+  final Map<String, dynamic> statusAll;
+  ResultPage({Key key, @required this.sortedKeys, this.statusAll, this.marks})
+      : super(key: key);
   @override
-  _ResultPageState createState() => _ResultPageState(marks);
+  _ResultPageState createState() =>
+      _ResultPageState(sortedKeys, statusAll, marks);
 }
 
 class _ResultPageState extends State<ResultPage> {
@@ -31,9 +36,11 @@ class _ResultPageState extends State<ResultPage> {
     }
     super.initState();
   }
-
-  int marks;
-  _ResultPageState(this.marks);
+  
+  var marks;
+  var sortedKeys;
+  final Map<String, dynamic> statusAll;
+  _ResultPageState(this.sortedKeys, this.statusAll, this.marks);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,7 +53,7 @@ class _ResultPageState extends State<ResultPage> {
       body: Column(
         children: <Widget>[
           Expanded(
-            flex: 8,
+            flex: 5,
             child: Material(
               elevation: 10.0,
               child: Container(
@@ -54,8 +61,8 @@ class _ResultPageState extends State<ResultPage> {
                   children: <Widget>[
                     Material(
                       child: Container(
-                        width: 300.0,
-                        height: 300.0,
+                        width: 200.0,
+                        height: 200.0,
                         child: ClipRect(
                           child: Image(
                             image: AssetImage(
@@ -107,6 +114,55 @@ class _ResultPageState extends State<ResultPage> {
                   splashColor: Colors.indigoAccent,
                 )
               ],
+            ),
+          ),
+          Expanded(
+            flex: 4,
+            child: ListView.builder(
+              itemBuilder: (context, int index) => GestureDetector(
+                onTap: () {
+                  print("object");
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Card(
+                    child: ClipRRect(
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              height: 20,
+                              width: 20,
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  gradient: COLORS.colorBlue2),
+                              child: CircleAvatar(
+                                child: new Text((index + 1).toString()),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(statusAll[
+                                    sortedKeys[statusAll.length - 1 - index]]
+                                .userName),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(statusAll[
+                                    sortedKeys[statusAll.length - 1 - index]]
+                                .marks
+                                .toString()),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              itemCount: statusAll.length,
             ),
           )
         ],

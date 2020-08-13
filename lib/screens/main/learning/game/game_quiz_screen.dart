@@ -184,7 +184,11 @@ class GameQuizPageState extends State<GameQuizPage> {
         current++;
       } else {
         Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => ResultPage(marks: marks),
+          builder: (context) => ResultPage(
+            sortedKeys: sortedKeys,
+            statusAll: statusAll,
+            marks: marks,
+          ),
         ));
       }
       btncolor["a"] = Colors.indigoAccent;

@@ -44,7 +44,7 @@ class UserRankItemState extends State<UserRankItem> {
                  Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(widget.status.marks.toString()),
-                )
+                ),
               ],
             ),
           ),
