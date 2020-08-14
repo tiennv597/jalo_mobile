@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shinro_int2/models/game/info.dart';
 import 'package:shinro_int2/models/game/info_rooms.dart';
 import 'package:shinro_int2/models/message/message.dart';
 import 'package:shinro_int2/models/question/questions.dart';
@@ -45,6 +46,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
   Questions questionList;
   //InfoRoom room;
   InfoRooms room;
+  Info info;
   List<User> users = new List<User>();
   Future<InfoRooms> getFutureInfoRoom() async =>
       await Future.delayed(Duration(seconds: 1), () {
@@ -54,6 +56,9 @@ class StrartGameScreenState extends State<StrartGameScreen> {
   void initState() {
     super.initState();
     questionList = new Questions();
+    info = new Info();
+    info = widget.infoRoom.info;
+    //info.idRoom = room.info.idRoom;
     _focus.addListener(_onFocusChange);
     _controller = ScrollController();
     _controller.addListener(_scrollListener);
@@ -106,10 +111,10 @@ class StrartGameScreenState extends State<StrartGameScreen> {
     socket.on(NETWORK_CONSTANT.connect, (_) {
       print('connect');
     });
+
     socket.on(NETWORK_CONSTANT.start_game, (data) {
-      print(data);
       questionList = Questions.fromJson(data);
-      print(questionList);
+      widget.infoRoom.info = info;
       Navigator.of(context).push(MaterialPageRoute(
           builder: (_) => GameQuizPage(
               socket: socket,
@@ -121,6 +126,15 @@ class StrartGameScreenState extends State<StrartGameScreen> {
               userInRoom: userInRoom)));
     });
 
+    socket.on(NETWORK_CONSTANT.update_room, (data) {
+      //Info newinfo = new Info();
+      // newinfo = Info.fromJson(data);
+      InfoRooms roomAndAllUser = InfoRooms.fromJson(json.decode(data));
+      print(roomAndAllUser.info);
+      setState(() {
+        info = roomAndAllUser.info;
+      });
+    });
     socket.on(NETWORK_CONSTANT.ready, (data) {
       if (data) {
         setState(() {
@@ -161,10 +175,10 @@ class StrartGameScreenState extends State<StrartGameScreen> {
     });
 
     socket.on(NETWORK_CONSTANT.server_send_room, (data) {
-      print(data);
       setState(() {
         room = InfoRooms.fromJson(json.decode(data));
         users = room.allUser;
+        info.idRoom = room.info.idRoom;
         if (room.info.idOwner == widget.infoRoom.users.id) {
           setState(() {
             owner = true;
@@ -210,10 +224,10 @@ class StrartGameScreenState extends State<StrartGameScreen> {
 
   void _strart() {
     socket.emit(NETWORK_CONSTANT.start_game, {
-      room.info.idRoom,
-      room.info.quantity,
-      room.info.type,
-      room.info.level,
+      info.idRoom,
+      info.quantity,
+      info.type,
+      info.level,
     });
   }
 
@@ -480,21 +494,21 @@ class StrartGameScreenState extends State<StrartGameScreen> {
                   Padding(
                     padding: const EdgeInsets.only(top: 4, bottom: 4),
                     child: Text(
-                      'Phòng: ' + room.info.idRoom,
+                      'Phòng: ' + info.idRoom,
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 4, bottom: 4),
                     child: Text(
-                      'Số câu: ' + room.info.quantity,
+                      'Số câu: ' + info.quantity,
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 4, bottom: 4),
                     child: Text(
-                      'Thời gian: ' + widget.infoRoom.info.time + ' giây/ câu',
+                      'Thời gian: ' + info.time + ' giây/ câu',
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
@@ -508,22 +522,28 @@ class StrartGameScreenState extends State<StrartGameScreen> {
             children: <Widget>[
               Container(
                 child: Text(
-                  room.info.type + ': ' + room.info.level,
+                  info.type + ': ' + info.level,
                   style: TextStyle(color: Colors.white, fontSize: 16),
                 ),
               ),
-              Container(
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(Radius.circular(24))),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    'Setting',
-                    style: TextStyle(
-                        color: COLORS.tiColor41, fontWeight: FontWeight.bold),
+              GestureDetector(
+                onTap: () async {
+                  // final String currentTeam =
+                  await _showCreateDialog(context);
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(24))),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 16.0, vertical: 8.0),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      'Setting',
+                      style: TextStyle(
+                          color: COLORS.tiColor41, fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ),
               )
@@ -531,6 +551,180 @@ class StrartGameScreenState extends State<StrartGameScreen> {
           ),
         ],
       ),
+    );
+  }
+
+  //dialog creatr room
+  Future<String> _showCreateDialog(BuildContext context) async {
+    return showDialog<String>(
+      context: context,
+      barrierDismissible:
+          false, // dialog is dismissible with a tap on the barrier
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Create Room'),
+          content: StatefulBuilder(
+              builder: (BuildContext context, StateSetter setState) {
+            return Container(
+              height: 300,
+              width: 300,
+              child: new Column(
+                children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      Container(
+                        width: 120,
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 8, right: 32),
+                          child: Text("Level : "),
+                        ),
+                      ),
+                      DropdownButton<String>(
+                        dropdownColor: Colors.white,
+                        value: info.level,
+                        icon: Icon(Icons.arrow_downward),
+                        iconSize: 16,
+                        elevation: 16,
+                        style: TextStyle(color: Colors.deepPurple),
+                        underline: Container(
+                          height: 1,
+                          color: Colors.deepPurpleAccent,
+                        ),
+                        onChanged: (String newValue) {
+                          setState(() {
+                            info.level = newValue;
+                          });
+                        },
+                        items: <String>['N5', 'N4', 'N3', 'N2', 'N1']
+                            .map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Container(
+                        width: 120,
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 8),
+                          child: Text("Quantity : "),
+                        ),
+                      ),
+                      DropdownButton<String>(
+                        dropdownColor: Colors.white,
+                        value: info.quantity,
+                        icon: Icon(Icons.arrow_downward),
+                        iconSize: 16,
+                        elevation: 16,
+                        style: TextStyle(color: Colors.deepPurple),
+                        underline: Container(
+                          height: 1,
+                          color: Colors.deepPurpleAccent,
+                        ),
+                        onChanged: (String newValue) {
+                          setState(() {
+                            info.quantity = newValue;
+                          });
+                        },
+                        items: <String>['5', '10', '15', '20', '25']
+                            .map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Container(
+                        width: 120,
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 8, right: 32),
+                          child: Text("Time : "),
+                        ),
+                      ),
+                      DropdownButton<String>(
+                        dropdownColor: Colors.white,
+                        value: info.time,
+                        icon: Icon(Icons.arrow_downward),
+                        iconSize: 16,
+                        elevation: 16,
+                        style: TextStyle(color: Colors.deepPurple),
+                        underline: Container(
+                          height: 1,
+                          color: Colors.deepPurpleAccent,
+                        ),
+                        onChanged: (String newValue) {
+                          setState(() {
+                            info.time = newValue;
+                          });
+                        },
+                        items: <String>['5', '10', '15', '20', '25']
+                            .map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Container(
+                        width: 120,
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 8, right: 32),
+                          child: Text("Type : "),
+                        ),
+                      ),
+                      DropdownButton<String>(
+                        dropdownColor: Colors.white,
+                        value: info.type,
+                        icon: Icon(Icons.arrow_downward),
+                        iconSize: 16,
+                        elevation: 16,
+                        style: TextStyle(color: Colors.deepPurple),
+                        underline: Container(
+                          height: 1,
+                          color: Colors.deepPurpleAccent,
+                        ),
+                        onChanged: (String newValue) {
+                          setState(() {
+                            info.type = newValue;
+                          });
+                        },
+                        items: <String>['Hán tự', 'Từ vựng', 'Ngữ pháp']
+                            .map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            );
+          }),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            FlatButton(child: Text('Ok'), onPressed: _updateInfoRoom),
+          ],
+        );
+      },
     );
   }
 
@@ -549,6 +743,12 @@ class StrartGameScreenState extends State<StrartGameScreen> {
 
   void _showListUser() {
     userListModal.mainBottomSheet(context, users);
+  }
+
+  void _updateInfoRoom() {
+    socket.emit(NETWORK_CONSTANT.update_room,
+        {room.info.idRoom, info.level, info.type, info.quantity, info.time});
+    Navigator.of(context).pop();
   }
 
   @override

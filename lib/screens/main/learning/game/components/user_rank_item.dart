@@ -13,8 +13,6 @@ class UserRankItem extends StatefulWidget {
 
 class UserRankItemState extends State<UserRankItem> {
 
-  //const UserRankItem({Key key, this.status}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
