@@ -36,7 +36,7 @@ class _ResultPageState extends State<ResultPage> {
     }
     super.initState();
   }
-  
+
   var marks;
   var sortedKeys;
   final Map<String, dynamic> statusAll;

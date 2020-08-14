@@ -338,17 +338,21 @@ class StrartGameScreenState extends State<StrartGameScreen> {
                                           users: users[index],
                                         ))),
                           ),
-                          Container(
-                            height: 30,
-                            width: 70,
-                            //button show list user in room
-                            child: RaisedButton.icon(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30.0),
-                                    side: BorderSide(color: Colors.white)),
-                                icon: Icon(Icons.account_circle),
-                                label: Text(userInRoom.toString()),
-                                onPressed: _showListUser),
+                          Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Container(
+                              height: 30,
+                              width: 70,
+                              //button show list user in room
+                              child: RaisedButton.icon(
+                                  color: Colors.white,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(30.0),
+                                      side: BorderSide(color: Colors.white)),
+                                  icon: Icon(Icons.account_circle),
+                                  label: Text(userInRoom.toString()),
+                                  onPressed: _showListUser),
+                            ),
                           ),
                         ],
                       ),
