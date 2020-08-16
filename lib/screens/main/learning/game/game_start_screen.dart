@@ -754,7 +754,6 @@ class StrartGameScreenState extends State<StrartGameScreen> {
   @override
   void dispose() {
     super.dispose();
-    print("close");
-    socket.emit(NETWORK_CONSTANT.leave, room.info.idRoom);
+    socket.emit(NETWORK_CONSTANT.leave, {room.info.idRoom, userInRoom});
   }
 }

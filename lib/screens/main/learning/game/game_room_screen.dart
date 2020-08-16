@@ -383,6 +383,8 @@ class _GameRoomPageState extends State<GameRoomPage>
 
   @override
   Widget build(BuildContext context) {
+    var screenHeight = MediaQuery.of(context).size.height;
+   // var screenWidth = MediaQuery.of(context).size.width;
     Widget tabBar = TabBar(
       isScrollable: true,
       unselectedLabelColor: Colors.grey,
@@ -470,12 +472,15 @@ class _GameRoomPageState extends State<GameRoomPage>
                             child: CircularProgressIndicator(),
                           );
                         } else {
-                          return TabView(
-                            tabController: tabController,
-                            cw: rooms.roomsCw, // list rooms chinese word
-                            vc: rooms.roomsCw, // list rooms vocabulary
-                            gr: rooms.roomsCw, // list rooms grammar
-                            socket: socket, //sockets
+                          return Container(
+                            height: screenHeight*75/100,
+                            child: TabView(
+                              tabController: tabController,
+                              cw: rooms.roomsCw, // list rooms chinese word
+                              vc: rooms.roomsCw, // list rooms vocabulary
+                              gr: rooms.roomsCw, // list rooms grammar
+                              socket: socket, //sockets
+                            ),
                           );
                         }
                       }),

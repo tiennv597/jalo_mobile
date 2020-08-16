@@ -1,9 +1,9 @@
 import 'package:shinro_int2/models/category.dart';
 import 'package:flutter/material.dart';
+import 'package:shinro_int2/screens/main/news/homepage.dart';
 import '../components/category_card.dart';
 import 'explore_screen.dart';
 import 'hot_screen.dart';
-
 
 class HomeTabView extends StatelessWidget {
   final List<Category> categories = [
@@ -51,37 +51,36 @@ class HomeTabView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TabBarView(
-        controller: tabController,
-        children: <Widget>[
-          //Column(children: <Widget>[Flexible(child: HomeScreen())]),
-          Column(children: <Widget>[
-            SizedBox(
-              height: 16.0,
-            ),
-            Flexible(child: HotScreen())
-          ]),
-          Container(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Container(
-                    margin: EdgeInsets.all(8.0),
-                    height: MediaQuery.of(context).size.height / 9,
-                    width: MediaQuery.of(context).size.width,
-                    child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: categories.length,
-                        itemBuilder: (_, index) => CategoryCard(
-                              category: categories[index],
-                            ))),
-                SizedBox(
-                  height: 16.0,
-                ),
-                Flexible(child: ExploreScreen()),
-              ],
-            ),
-          ),
-        ]);
+    return TabBarView(controller: tabController, children: <Widget>[
+      //Column(children: <Widget>[Flexible(child: HomeScreen())]),
+      Column(children: <Widget>[
+        SizedBox(
+          height: 16.0,
+        ),
+        Flexible(child: NewsHomePage())
+      ]),
+      Flexible(child: NewsHomePage())
+      // Container(
+      //   child: Column(
+      //     mainAxisSize: MainAxisSize.min,
+      //     children: <Widget>[
+      //       Container(
+      //           margin: EdgeInsets.all(8.0),
+      //           height: MediaQuery.of(context).size.height / 9,
+      //           width: MediaQuery.of(context).size.width,
+      //           child: ListView.builder(
+      //               scrollDirection: Axis.horizontal,
+      //               itemCount: categories.length,
+      //               itemBuilder: (_, index) => CategoryCard(
+      //                     category: categories[index],
+      //                   ))),
+      //       SizedBox(
+      //         height: 16.0,
+      //       ),
+      //       Flexible(child: ExploreScreen()),
+      //     ],
+      //   ),
+      // ),
+    ]);
   }
 }

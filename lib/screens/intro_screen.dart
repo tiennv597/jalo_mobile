@@ -16,8 +16,7 @@ class _IntroPageState extends State<IntroPage> {
     return Material(
       child: Container(
         decoration: BoxDecoration(
-          gradient:
-              RadialGradient(colors: [ COLORS.tiColor11,Colors.white]),
+          gradient: RadialGradient(colors: [COLORS.tiColor11, Colors.white]),
         ),
         child: Stack(
           children: <Widget>[
@@ -154,9 +153,9 @@ class _IntroPageState extends State<IntroPage> {
                   children: <Widget>[
                     Center(
                       child: Image.asset(
-                        'assets/vector3.png',
-                        height: 200,
-                        width: 200,
+                        'assets/vector4.png',
+                        height: 300,
+                        width: 300,
                       ),
                     ),
                     Padding(
@@ -167,7 +166,7 @@ class _IntroPageState extends State<IntroPage> {
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
-                            color: Colors.white),
+                            color: Colors.black),
                       ),
                     ),
                     Padding(
@@ -176,7 +175,7 @@ class _IntroPageState extends State<IntroPage> {
                       child: Text(
                         'Make a habit of learning Japanese! 10 minutes a day, challenging 21 days!.',
                         textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.white, fontSize: 12.0),
+                        style: TextStyle(color: Colors.black, fontSize: 12.0),
                       ),
                     ),
                   ],

@@ -51,7 +51,7 @@ class RoomsListState extends State<RoomsList> {
           child: Container(
             padding: EdgeInsets.only(top: 16.0, right: 16.0, left: 16.0),
             child: ListView.builder(
-              physics: NeverScrollableScrollPhysics(),
+              //physics: NeverScrollableScrollPhysics(),
               padding: EdgeInsets.zero,
               itemCount: widget.rooms.length,
               itemBuilder: (BuildContext context, int index) => new ClipRRect(
