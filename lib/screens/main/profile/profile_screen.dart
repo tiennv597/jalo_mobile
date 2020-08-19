@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:shinro_int2/constant/shared_preferences.dart'
     as SHARED_PREFERNCES;
 import 'package:shinro_int2/constant/app_colors.dart' as COLORS;
+import 'package:shinro_int2/screens/main/profile/settings/friends_screen.dart';
 import 'settings/settings_screen.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -40,7 +41,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       CircleAvatar(
                         radius: 32,
                         backgroundColor: Colors.blue,
-                        backgroundImage: NetworkImage("userAvatar"),
+                        backgroundImage: NetworkImage(userAvatar),
                       ),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -83,7 +84,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            "Japanese",
+                            "Tiếng nhật",
                             style: TextStyle(color: Colors.grey),
                           ),
                         ],
@@ -102,7 +103,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            "Rank",
+                            "Xếp hạng",
                             style: TextStyle(color: Colors.grey),
                           ),
                         ],
@@ -121,7 +122,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            "Level",
+                            "Cấp độ",
                             style: TextStyle(color: Colors.grey),
                           ),
                         ],
@@ -140,7 +141,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            "Friends",
+                            "Bạn bè",
                             style: TextStyle(color: Colors.grey),
                           ),
                         ],
@@ -208,9 +209,23 @@ class _ProfilePageState extends State<ProfilePage> {
                               ),
                             ))),
                 ListTile(
+                  title: Text('Bạn bè'),
+                  subtitle: Text('Danh sách bạn bè & tìm kiếm'),
+                  leading: Icon(
+                    Icons.people,
+                    size: 36,
+                  ),
+                  trailing: Icon(Icons.chevron_right, color: myGreen),
+                  onTap: () => Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (_) => FriendsScreen())),
+                ),
+                ListTile(
                   title: Text('Settings'),
                   subtitle: Text('Privacy and logout'),
-                  leading: Icon(Icons.settings_applications,size: 36,),
+                  leading: Icon(
+                    Icons.settings_applications,
+                    size: 36,
+                  ),
                   trailing: Icon(Icons.chevron_right, color: myGreen),
                   onTap: () => Navigator.of(context)
                       .push(MaterialPageRoute(builder: (_) => SettingsPage())),
@@ -219,7 +234,10 @@ class _ProfilePageState extends State<ProfilePage> {
                 ListTile(
                   title: Text('Help & Support'),
                   subtitle: Text('Help center and legal support'),
-                  leading: Icon(Icons.email,size: 32,),
+                  leading: Icon(
+                    Icons.email,
+                    size: 32,
+                  ),
                   trailing: Icon(
                     Icons.chevron_right,
                     color: myGreen,
@@ -229,7 +247,10 @@ class _ProfilePageState extends State<ProfilePage> {
                 ListTile(
                   title: Text('FAQ'),
                   subtitle: Text('Questions and Answer'),
-                  leading: Icon(Icons.question_answer,size: 32,),
+                  leading: Icon(
+                    Icons.question_answer,
+                    size: 32,
+                  ),
                   trailing: Icon(Icons.chevron_right, color: myGreen),
                   onTap: () => Navigator.of(context)
                       .push(MaterialPageRoute(builder: (_) => FaqPage())),

@@ -20,7 +20,7 @@ class _NewsHomePageState extends State<NewsHomePage> {
 
   void getNews() async {
     News news = News();
-   // await news.getNews();
+    // await news.getNews();
     newslist = articleList;
     setState(() {
       _loading = false;
@@ -39,7 +39,7 @@ class _NewsHomePageState extends State<NewsHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     // appBar: MyAppBar(),
+      // appBar: MyAppBar(),
       body: SafeArea(
         child: _loading
             ? Center(
