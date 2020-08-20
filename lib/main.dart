@@ -3,8 +3,11 @@ import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:shinro_int2/screens/splash_screen.dart';
 import 'network/api_service.dart';
+import 'package:get/get.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(GetMaterialApp(
+      home: MyApp(),
+    ));
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.

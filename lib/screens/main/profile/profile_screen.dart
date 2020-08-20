@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shinro_int2/models/user/user_model.dart';
 import 'package:shinro_int2/screens/main/chat/global.dart';
@@ -41,7 +42,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       CircleAvatar(
                         radius: 32,
                         backgroundColor: Colors.blue,
-                        backgroundImage: NetworkImage(userAvatar),
+                        backgroundImage: NetworkImage("userAvatar"),
                       ),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -216,8 +217,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     size: 36,
                   ),
                   trailing: Icon(Icons.chevron_right, color: myGreen),
-                  onTap: () => Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (_) => FriendsScreen())),
+                  onTap: () => Get.to(FriendsScreen()),
                 ),
                 ListTile(
                   title: Text('Settings'),
@@ -227,8 +227,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     size: 36,
                   ),
                   trailing: Icon(Icons.chevron_right, color: myGreen),
-                  onTap: () => Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (_) => SettingsPage())),
+                  onTap: () => Get.to(SettingsPage()),
                 ),
                 Divider(),
                 ListTile(

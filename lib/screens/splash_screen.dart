@@ -58,8 +58,8 @@ class _SplashScreenState extends State<SplashScreen>
             Navigator.of(context)
                 .pushReplacement(MaterialPageRoute(builder: (_) => MainPage()));
           } else {
-            Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (_) => MainPage()));
+            Navigator.of(context)
+                .pushReplacement(MaterialPageRoute(builder: (_) => MainPage()));
           }
         }).catchError((onError) {
           print("error" + onError.toString());
