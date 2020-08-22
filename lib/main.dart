@@ -6,6 +6,7 @@ import 'network/api_service.dart';
 import 'package:get/get.dart';
 
 void main() => runApp(GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       home: MyApp(),
     ));
 
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
       create: (context) => ApiService.create(),
       child: MaterialApp(
         title: 'Japanese Love Me',
-        debugShowCheckedModeBanner: false,
+      //  debugShowCheckedModeBanner: false,
         theme: ThemeData(
           brightness: Brightness.light,
           canvasColor: Colors.transparent,

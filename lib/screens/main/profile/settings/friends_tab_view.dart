@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shinro_int2/screens/main/news/homepage.dart';
+import 'package:shinro_int2/screens/main/profile/settings/suggestions_tab.dart';
 
 class FriendsTabView extends StatelessWidget {
   final TabController tabController;
@@ -9,14 +9,13 @@ class FriendsTabView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TabBarView(controller: tabController, children: <Widget>[
-      //Column(children: <Widget>[Flexible(child: HomeScreen())]),
       Column(children: <Widget>[
         SizedBox(
           height: 16.0,
         ),
-        Flexible(child: NewsHomePage())
+        Flexible(child: SuggestionsScreen())
       ]),
-      Flexible(child: NewsHomePage())
+      Flexible(child: SuggestionsScreen())
     ]);
   }
 }
