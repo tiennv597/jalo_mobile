@@ -22,4 +22,9 @@ abstract class UserService {
       @Field("type") String type,
       @Field("subType") String subType,
       @Field("quantity") String quantity);
+
+  @POST("/users/search")
+  Future<List<User>> search(
+    @Field("key") String key,
+  );
 }

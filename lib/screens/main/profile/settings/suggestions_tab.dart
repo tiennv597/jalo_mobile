@@ -87,7 +87,7 @@ class SuggestionsScreen extends StatelessWidget {
                                 padding: const EdgeInsets.only(
                                     top: 0, bottom: 0, left: 8),
                                 child: Text(
-                                  'Entry ${users[index].firstName}',
+                                  '${users[index].firstName} ${users[index].lastName}',
                                   style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold),
@@ -179,7 +179,7 @@ class SuggestionsScreen extends StatelessWidget {
                                 padding: const EdgeInsets.only(
                                     top: 0, bottom: 0, left: 8),
                                 child: Text(
-                                  'Entry ${users[index].firstName}',
+                                  '${users[index].firstName} ${users[index].lastName}',
                                   style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold),

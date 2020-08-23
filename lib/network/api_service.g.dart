@@ -41,7 +41,7 @@ class _ApiService implements ApiService {
     ArgumentError.checkNotNull(email, 'email');
     ArgumentError.checkNotNull(password, 'password');
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};  
     final _data = {'email': email, 'password': password};
     final Response<Map<String, dynamic>> _result = await _dio.request(
         '/users/signin',
