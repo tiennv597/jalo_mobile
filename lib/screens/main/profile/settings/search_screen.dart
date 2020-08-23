@@ -1,6 +1,4 @@
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
-import 'package:shinro_int2/constant/shared_preferences.dart'
-    as SHARED_PREFERNCES;
 import 'package:flutter/material.dart';
 
 class SearchScreen extends StatefulWidget {
