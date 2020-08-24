@@ -143,69 +143,42 @@ class _SearchScreenState extends State<SearchScreen> {
                                   backgroundColor: Colors.blue,
                                   backgroundImage: NetworkImage("userAvatar"),
                                 ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 0, bottom: 0, left: 8),
-                                      child: Text(
-                                        '${users[index].firstName} ${users[index].lastName}',
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 4, bottom: 4, left: 8),
-                                      child: Text(
-                                        "id: 1232316",
-                                        style: TextStyle(fontSize: 13),
-                                      ),
-                                    ),
-                                    Row(
-                                      children: [
-                                        Container(
-                                          height: 32,
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              2.7,
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
-                                                top: 0, bottom: 0, left: 8),
-                                            child: RaisedButton(
-                                              color: Colors.blue,
-                                              onPressed: () {},
-                                              child: const Text('Đồng ý',
-                                                  style:
-                                                      TextStyle(fontSize: 14)),
-                                            ),
-                                          ),
+                                Container(
+                                  width: MediaQuery.of(context).size.width*0.65,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            top: 0, bottom: 0, left: 8),
+                                        child: Text(
+                                          '${users[index].firstName} ${users[index].lastName}',
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold),
                                         ),
-                                        Container(
-                                          height: 32,
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              2.7,
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
-                                                top: 0, bottom: 0, left: 8),
-                                            child: RaisedButton(
-                                              onPressed: () {},
-                                              child: const Text('Xóa',
-                                                  style:
-                                                      TextStyle(fontSize: 14)),
-                                            ),
-                                          ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            top: 4, bottom: 4, left: 8),
+                                        child: Text(
+                                          "id: ${users[index].gender}",
+                                          style: TextStyle(fontSize: 13),
                                         ),
-                                      ],
-                                    ),
-                                  ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          
+                                        
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
+                                Container(
+                                  child: Icon(Icons.person_add),
+                                )
                               ],
                             ),
                           );

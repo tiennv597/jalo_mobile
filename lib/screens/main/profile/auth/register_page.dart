@@ -1,4 +1,5 @@
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shinro_int2/constant/app_properties.dart';
@@ -8,6 +9,7 @@ import 'package:shinro_int2/network/api_service.dart';
 import 'package:shinro_int2/constant/shared_preferences.dart'
     as SHARED_PREFERNCES;
 import 'package:shinro_int2/screens/main/main_screen.dart';
+import 'package:shinro_int2/screens/main/profile/controller/user_controller.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -20,6 +22,7 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController _emailController = new TextEditingController();
   TextEditingController _passwordController = new TextEditingController();
   TextEditingController _rePasswordController = new TextEditingController();
+  final UserController c = Get.put(UserController());
 
   Widget _buildNameUserTF() {
     return Column(
@@ -27,7 +30,7 @@ class _RegisterPageState extends State<RegisterPage> {
       children: <Widget>[
         Text(
           'First & Last Name',
-           style: TextStyle(color: Colors.black),
+          style: TextStyle(color: Colors.black),
         ),
         SizedBox(height: 8.0),
         Container(
@@ -63,7 +66,7 @@ class _RegisterPageState extends State<RegisterPage> {
       children: <Widget>[
         Text(
           'Email',
-         style: TextStyle(color: Colors.black),
+          style: TextStyle(color: Colors.black),
         ),
         SizedBox(height: 8.0),
         Container(
@@ -135,7 +138,7 @@ class _RegisterPageState extends State<RegisterPage> {
       children: <Widget>[
         Text(
           'RePassword',
-         style: TextStyle(color: Colors.black),
+          style: TextStyle(color: Colors.black),
         ),
         SizedBox(height: 8.0),
         Container(
@@ -185,7 +188,8 @@ class _RegisterPageState extends State<RegisterPage> {
       width: double.infinity,
       child: RaisedButton(
         elevation: 5.0,
-        onPressed: signUp,
+        onPressed: c.signUp(_nameController.text, _emailController.text,
+            _passwordController.text),
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),

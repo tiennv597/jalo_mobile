@@ -37,39 +37,16 @@ class _UserService implements UserService {
     return value;
   }
 
-  // @override
-  // search(key) async {
-  //   ArgumentError.checkNotNull(key, 'key');
-  //   const _extra = <String, dynamic>{};
-  //   final queryParameters = <String, dynamic>{};
-  //   final _data = {
-  //     'key': key,
-  //   };
-  //   final Response<List<dynamic>> _result = await _dio.request('/users/search',
-  //       queryParameters: queryParameters,
-  //       options: RequestOptions(
-  //           method: 'POST',
-  //           headers: <String, dynamic>{},
-  //           extra: _extra,
-  //           contentType: 'application/json',
-  //           baseUrl: baseUrl),
-  //       data: _data);
-  //   var value = _result.data
-  //       .map((dynamic i) => User.fromJson(i as Map<String, dynamic>))
-  //       .toList();
-  //   return value;
-  // }
-
   @override
   search(key) async {
     ArgumentError.checkNotNull(key, 'key');
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _data = {'key': key};
+    final queryParameters = <String, dynamic>{'key': key};
+    final _data = {};
     final Response<List<dynamic>> _result = await _dio.request('/users/search',
         queryParameters: queryParameters,
         options: RequestOptions(
-            method: 'POST',
+            method: 'GET',
             headers: <String, dynamic>{},
             extra: _extra,
             contentType: 'application/json',

@@ -97,7 +97,7 @@ class SuggestionsScreen extends StatelessWidget {
                                 padding: const EdgeInsets.only(
                                     top: 4, bottom: 4, left: 8),
                                 child: Text(
-                                  "id: 1232316",
+                                  "id: ${users[index].gender}",
                                   style: TextStyle(fontSize: 13),
                                 ),
                               ),

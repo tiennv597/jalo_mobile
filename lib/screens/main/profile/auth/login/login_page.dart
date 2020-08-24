@@ -1,4 +1,5 @@
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shinro_int2/constant/app_properties.dart';
@@ -12,6 +13,7 @@ import 'package:shinro_int2/constant/network_constant.dart' as NETWORK_CONSTANT;
 import 'package:shinro_int2/screens/main/main_screen.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:http/http.dart' as http;
+import 'package:shinro_int2/screens/main/profile/controller/user_controller.dart';
 import 'dart:convert' as JSON;
 import '../register_page.dart';
 
@@ -28,7 +30,7 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController _userController = new TextEditingController();
   TextEditingController _passController = new TextEditingController();
   final facebookLogin = FacebookLogin();
-
+  final UserController c = Get.put(UserController());
   _loginWithFB() async {
     final result = await facebookLogin.logIn(['email']);
     setState(() {
@@ -44,27 +46,28 @@ class _LoginPageState extends State<LoginPage> {
           userProfile = profile;
           isLoggedIn = true;
         });
-        final api = Provider.of<ApiService>(context, listen: false);
-        api.authFacebook(token).then((it) async {
-          print(it.headers.value('authorization'));
-          final user = User.fromJson(it.data);
-          SharedPreferences prefs = await SharedPreferences.getInstance();
-          prefs.setBool(SHARED_PREFERNCES.logined, true);
-          prefs.setString(SHARED_PREFERNCES.user_id, user.sId);
-          prefs.setString(
-              SHARED_PREFERNCES.fullName, user.firstName + " " + user.lastName);
-          prefs.setString(SHARED_PREFERNCES.userAvatar,
-              userProfile["picture"]["data"]["url"]);
-          prefs.setString(
-              SHARED_PREFERNCES.token,
-              NETWORK_CONSTANT.bearer +
-                  ' ' +
-                  it.headers.value('authorization'));
-          Navigator.of(context)
-              .pushReplacement(MaterialPageRoute(builder: (_) => MainPage()));
-        }).catchError((onError) {
-          print("error" + onError.toString());
-        });
+        // final api = Provider.of<ApiService>(context, listen: false);
+        // api.authFacebook(token).then((it) async {
+        //   print(it.headers.value('authorization'));
+        //   final user = User.fromJson(it.data);
+        //   SharedPreferences prefs = await SharedPreferences.getInstance();
+        //   prefs.setBool(SHARED_PREFERNCES.logined, true);
+        //   prefs.setString(SHARED_PREFERNCES.user_id, user.sId);
+        //   prefs.setString(
+        //       SHARED_PREFERNCES.fullName, user.firstName + " " + user.lastName);
+        //   prefs.setString(SHARED_PREFERNCES.userAvatar,
+        //       userProfile["picture"]["data"]["url"]);
+        //   prefs.setString(
+        //       SHARED_PREFERNCES.token,
+        //       NETWORK_CONSTANT.bearer +
+        //           ' ' +
+        //           it.headers.value('authorization'));
+        //   Navigator.of(context)
+        //       .pushReplacement(MaterialPageRoute(builder: (_) => MainPage()));
+        // }).catchError((onError) {
+        //   print("error" + onError.toString());
+        // });
+        c.authFacebook(token);
         break;
       case FacebookLoginStatus.cancelledByUser:
         setState(() => isLoggedIn = false);
@@ -102,7 +105,7 @@ class _LoginPageState extends State<LoginPage> {
           child: TextField(
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(
-              color: Colors.white,
+              color: Colors.black,
               fontFamily: 'OpenSans',
             ),
             controller: _userController,
@@ -133,7 +136,7 @@ class _LoginPageState extends State<LoginPage> {
           child: TextField(
             obscureText: true,
             style: TextStyle(
-              color: Colors.white,
+              color: Colors.black,
               fontFamily: 'OpenSans',
             ),
             controller: _passController,
@@ -200,7 +203,7 @@ class _LoginPageState extends State<LoginPage> {
       width: double.infinity,
       child: RaisedButton(
         elevation: 5.0,
-        onPressed: loginCheck,
+        onPressed: c.signIn(_userController.text, _passController.text),
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),
@@ -395,6 +398,7 @@ class _LoginPageState extends State<LoginPage> {
     api.signIn(_userController.text, _passController.text).then((it) async {
       print(it.headers.value('authorization'));
       final user = User.fromJson(it.data);
+      //c.updateUser(user);
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setBool(SHARED_PREFERNCES.logined, true);
       prefs.setString(SHARED_PREFERNCES.user_id, user.sId);

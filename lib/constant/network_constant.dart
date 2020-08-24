@@ -46,6 +46,7 @@ const String send_quizzes = 'send_quizzes';
 const String check_answer = 'check_answer';
 const String next_question = 'next_question';
 const String update_room = 'update_room';
+const String add_friends = 'add_friends';
 
 //event test
 

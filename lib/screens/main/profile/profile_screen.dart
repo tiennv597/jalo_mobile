@@ -19,7 +19,7 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   bool logined;
   String userAvatar;
-
+  // LoginController c = Get.find();
   @override
   void setState(fn) {
     if (mounted) {
@@ -61,7 +61,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             padding: const EdgeInsets.only(
                                 top: 0, bottom: 0, left: 8),
                             child: Text(
-                              "id: 1232316",
+                              "id: ",
                               style: TextStyle(fontSize: 16),
                             ),
                           ),
@@ -161,7 +161,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 RaisedButton(
                   child: Text("Sign in"),
-                  onPressed: goToLoginPage,
+                  onPressed: () {
+                    Get.to(LoginPage());
+                  },
                   color: myGreen,
                   textColor: COLORS.white,
                   padding: EdgeInsets.fromLTRB(8, 8, 8, 8),
@@ -261,10 +263,6 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
       ),
     );
-  }
-
-  void goToLoginPage() {
-    Navigator.of(context).push(MaterialPageRoute(builder: (_) => LoginPage()));
   }
 
   Future<User> checkLogin() async {

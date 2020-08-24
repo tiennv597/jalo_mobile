@@ -1,4 +1,5 @@
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shinro_int2/constant/app_colors.dart' as COLORS;
@@ -97,8 +98,9 @@ class _GameRoomPageState extends State<GameRoomPage>
     info.time = time;
     infoRoom.users = user;
     infoRoom.info = info;
-    Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) => StrartGameScreen(infoRoom)));
+    Get.to(StrartGameScreen(infoRoom));
+    // Navigator.of(context).pushReplacement(
+    //     MaterialPageRoute(builder: (_) => StrartGameScreen(infoRoom)));
   }
 
   void _getRoom() {
@@ -384,7 +386,7 @@ class _GameRoomPageState extends State<GameRoomPage>
   @override
   Widget build(BuildContext context) {
     var screenHeight = MediaQuery.of(context).size.height;
-   // var screenWidth = MediaQuery.of(context).size.width;
+    // var screenWidth = MediaQuery.of(context).size.width;
     Widget tabBar = TabBar(
       isScrollable: true,
       unselectedLabelColor: Colors.grey,
@@ -473,7 +475,7 @@ class _GameRoomPageState extends State<GameRoomPage>
                           );
                         } else {
                           return Container(
-                            height: screenHeight*75/100,
+                            height: screenHeight * 75 / 100,
                             child: TabView(
                               tabController: tabController,
                               cw: rooms.roomsCw, // list rooms chinese word
