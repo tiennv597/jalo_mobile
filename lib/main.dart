@@ -1,9 +1,7 @@
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:shinro_int2/screens/splash_screen.dart';
 import 'package:shinro_int2/socket/user_socket.dart';
-import 'network/api_service.dart';
 import 'package:get/get.dart';
 
 void main() => runApp(GetMaterialApp(
@@ -13,11 +11,8 @@ void main() => runApp(GetMaterialApp(
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
-  //final UserSocket socket = new UserSocket();
-
   @override
   Widget build(BuildContext context) {
-    //socket.onListenSocketEvent();
     return MaterialApp(
       title: 'Japanese Love Me',
       //  debugShowCheckedModeBanner: false,

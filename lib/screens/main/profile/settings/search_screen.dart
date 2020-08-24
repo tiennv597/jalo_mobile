@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shinro_int2/models/user/user_model.dart';
 import 'package:shinro_int2/screens/main/profile/controller/user_controller.dart';
+import 'package:shinro_int2/socket/user_socket.dart';
 
 class SearchScreen extends StatefulWidget {
   @override
@@ -10,6 +12,7 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   UserController c = new UserController();
   TextEditingController _searchQueryController;
+  UserSocket s = Get.find();
   bool _isSearching = false;
   String searchQuery = "";
   void initState() {
@@ -144,10 +147,12 @@ class _SearchScreenState extends State<SearchScreen> {
                                   backgroundImage: NetworkImage("userAvatar"),
                                 ),
                                 Container(
-                                  width: MediaQuery.of(context).size.width*0.65,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.65,
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: <Widget>[
                                       Padding(
                                         padding: const EdgeInsets.only(
@@ -168,15 +173,15 @@ class _SearchScreenState extends State<SearchScreen> {
                                         ),
                                       ),
                                       Row(
-                                        children: [
-                                          
-                                        
-                                        ],
+                                        children: [],
                                       ),
                                     ],
                                   ),
                                 ),
-                                Container(
+                                GestureDetector(
+                                  onTap: () {
+                                    s.addFriendsEvent();
+                                  },
                                   child: Icon(Icons.person_add),
                                 )
                               ],

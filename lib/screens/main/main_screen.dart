@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:get/get.dart';
 import 'package:shinro_int2/screens/main/chat/global.dart';
+import 'package:shinro_int2/screens/main/profile/controller/user_controller.dart';
 import 'package:shinro_int2/screens/main/search/grammar/example_screen.dart';
+import 'package:shinro_int2/socket/user_socket.dart';
 import 'learning/learing_screen.dart';
 import 'notification/notifications_screen.dart';
 import 'profile/profile_screen.dart';
@@ -19,6 +22,8 @@ class _MainPageState extends State<MainPage>
   TabController tabControllerRank;
   TabController tabControllerSearch;
   TabController bottomTabController;
+  UserSocket socket = Get.put(UserSocket());
+  UserController c = Get.put(UserController());
   int _selectedIndex = 0;
   int _counter = 2;
   @override
@@ -32,6 +37,9 @@ class _MainPageState extends State<MainPage>
 
   @override
   Widget build(BuildContext context) {
+    if (c.userG != null) {
+      socket.onListenSocketEvent();
+    }
     Widget tabBar = TabBar(
       isScrollable: true,
       indicatorColor: Colors.black,

@@ -14,7 +14,7 @@ import 'package:shinro_int2/screens/main/main_screen.dart';
 class UserController extends GetxController {
   final List<String> entries = <String>['A', 'B', 'C'];
   final List<int> colorCodes = <int>[600, 500, 100];
-  User user;
+  User userG;
   Map userProfile;
   final userService =
       UserService(Dio(BaseOptions(contentType: "application/json")));
@@ -46,6 +46,7 @@ class UserController extends GetxController {
           SHARED_PREFERNCES.fullName, user.firstName + " " + user.lastName);
       prefs.setString(SHARED_PREFERNCES.token,
           NETWORK_CONSTANT.bearer + ' ' + it.headers.value('authorization'));
+          userG=user;
       Get.to(MainPage());
     }).catchError((onError) {
       print("error" + onError.toString());
@@ -94,6 +95,6 @@ class UserController extends GetxController {
   }
 
   updateUser(User u) {
-    user = u;
+    userG = u;
   }
 }
