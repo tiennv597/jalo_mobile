@@ -1,10 +1,10 @@
 import 'package:flappy_search_bar/flappy_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
-import 'package:shinro_int2/network/api_service.dart';
+import 'package:get/get.dart';
 import 'package:shinro_int2/models/grammar/example_model.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:shinro_int2/screens/main/search/controller/grammar_controller.dart';
 
 import 'example_detail_screen.dart';
 
@@ -17,22 +17,7 @@ class _ExamplePageState extends State<ExamplePage> {
   final SearchBarController<Example> _searchBarController =
       SearchBarController();
   bool isReplay = false;
-
-  Future<List<Example>> _getExample(String text) async {
-    //await Future.delayed(Duration(seconds: text.length == 4 ? 10 : 1));
-    await Future.delayed(Duration(seconds: 0));
-    final api = Provider.of<ApiService>(context, listen: false);
-    api.getExample(text).then((it) {
-      it.forEach((f) {
-        print("test" + f.sId);
-      });
-    }).catchError((onError) {
-      print("error" + onError.toString());
-    });
-
-    return api.getExample(text);
-  }
-
+  GrammarController c = Get.put(GrammarController());
   _dismissKeyboard(BuildContext context) {
     FocusScope.of(context).requestFocus(new FocusNode());
   }
@@ -50,14 +35,6 @@ class _ExamplePageState extends State<ExamplePage> {
         _dismissKeyboard(context);
       },
       child: Scaffold(
-        // appBar: AppBar(
-        //   backgroundColor: Colors.white,
-        //   leading: IconButton(
-        //     icon: Icon(Icons.arrow_back, color: Colors.black),
-        //     onPressed: () => Navigator.of(context).pop(),
-        //   ),
-        //   title: Text("Sample", style: TextStyle(color: Colors.black)),
-        // ),
         backgroundColor: Colors.white,
         body: Padding(
           padding: const EdgeInsets.only(left: 8, right: 8),
@@ -67,28 +44,14 @@ class _ExamplePageState extends State<ExamplePage> {
               headerPadding: EdgeInsets.symmetric(horizontal: 0),
               // listPadding: EdgeInsets.symmetric(horizontal: 8),
               hintText: "Tìm kiếm (Mẫu câu theo ngữ pháp)",
-              onSearch: _getExample,
+              onSearch: c.getExample,
               searchBarController: _searchBarController,
               minimumChars: 1, //Minimum number of chars to start querying
               placeHolder: Text("Chưa tìm kiếm"),
               cancellationWidget: Text("Hủy"),
               emptyWidget: Text("Không tìm thấy mẫu câu phù hợp"),
               header: Row(
-                children: <Widget>[
-                  // RaisedButton(
-                  //   child: Text("Desort"),
-                  //   onPressed: () {
-                  //     _searchBarController.removeSort();
-                  //   },
-                  // ),
-                  // RaisedButton(
-                  //   child: Text("Replay"),
-                  //   onPressed: () {
-                  //     isReplay = !isReplay;
-                  //     _searchBarController.replayLastSearch();
-                  //   },
-                  // ),
-                ],
+                children: <Widget>[],
               ),
               onCancelled: () {
                 print("Cancelled triggered");
