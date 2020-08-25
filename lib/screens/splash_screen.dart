@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shinro_int2/constant/constant.dart';
@@ -7,6 +8,7 @@ import 'package:shinro_int2/screens/main/main_screen.dart';
 import 'package:shinro_int2/constant/shared_preferences.dart'
     as SHARED_PREFERNCES;
 import 'intro_screen.dart';
+import 'main/profile/controller/user_controller.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -18,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen>
   Animation<double> opacity;
   AnimationController controller;
   bool firstLaunch = false;
-
+  UserController c = Get.put(UserController());
   @override
   void initState() {
     super.initState();
@@ -75,11 +77,12 @@ class _SplashScreenState extends State<SplashScreen>
       Navigator.of(context)
           .pushReplacement(MaterialPageRoute(builder: (_) => IntroPage()));
       prefs.setBool(
-          SHARED_PREFERNCES.first_launch, false); //set true login one time
+          SHARED_PREFERNCES.first_launch, true); //set true login one time
     }
   }
 
   Widget build(BuildContext context) {
+    if (c.userG == null) {}
     return Container(
       decoration: BoxDecoration(
           image: DecorationImage(
@@ -87,18 +90,18 @@ class _SplashScreenState extends State<SplashScreen>
       child: Container(
         decoration: BoxDecoration(color: transparentWhite),
         child: SafeArea(
-          child: new Scaffold(
+          child: Scaffold(
             body: Column(
               children: <Widget>[
                 Expanded(
                   child: Opacity(
                       opacity: opacity.value,
-                      child: new Image.asset('assets/good.png')),
+                      child: Image.asset('assets/good.png')),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: RichText(
-                    text: TextSpan(
+                    text: const TextSpan(
                         style: TextStyle(color: Colors.black),
                         children: [
                           TextSpan(text: 'Powered by '),

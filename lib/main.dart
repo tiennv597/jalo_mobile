@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.light,
         canvasColor: Colors.transparent,
         primarySwatch: Colors.blue,
-        fontFamily: "Montserrat",
+        fontFamily: 'Montserrat',
       ),
       home: SplashScreen(),
     );

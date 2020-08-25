@@ -30,7 +30,7 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController _userController = new TextEditingController();
   TextEditingController _passController = new TextEditingController();
   final facebookLogin = FacebookLogin();
-  final UserController c = Get.put(UserController());
+  final UserController c = Get.find();
   _loginWithFB() async {
     final result = await facebookLogin.logIn(['email']);
     setState(() {
@@ -199,14 +199,14 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _buildLoginBtn() {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 8.0),
+      padding: const EdgeInsets.symmetric(vertical: 8),
       width: double.infinity,
       child: RaisedButton(
         elevation: 5.0,
         onPressed: c.signIn(_userController.text, _passController.text),
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30.0),
+          borderRadius: BorderRadius.circular(30),
         ),
         color: Colors.white,
         child: Text(

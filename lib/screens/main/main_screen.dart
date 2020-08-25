@@ -23,9 +23,9 @@ class _MainPageState extends State<MainPage>
   TabController tabControllerSearch;
   TabController bottomTabController;
   UserSocket socket = Get.put(UserSocket());
-  UserController c = Get.put(UserController());
+  UserController c = Get.find();
   int _selectedIndex = 0;
-  int _counter = 2;
+  final int _counter = 2;
   @override
   void initState() {
     super.initState();
@@ -37,7 +37,8 @@ class _MainPageState extends State<MainPage>
 
   @override
   Widget build(BuildContext context) {
-    if (c.userG != null) {
+    if (c.userG != null && c.createdSocket == false) {
+      print(c.userG.sId);
       socket.onListenSocketEvent();
     }
     Widget tabBar = TabBar(

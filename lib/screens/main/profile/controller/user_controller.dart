@@ -15,18 +15,19 @@ class UserController extends GetxController {
   final List<String> entries = <String>['A', 'B', 'C'];
   final List<int> colorCodes = <int>[600, 500, 100];
   User userG;
+  bool createdSocket = false;
   Map userProfile;
   final userService =
-      UserService(Dio(BaseOptions(contentType: "application/json")));
+      UserService(Dio(BaseOptions(contentType: 'application/json')));
   final apiService =
-      ApiService(Dio(BaseOptions(contentType: "application/json")));
+      ApiService(Dio(BaseOptions(contentType: 'application/json')));
   Future<List<dynamic>> suggestions() async =>
-      await Future.delayed(Duration(seconds: 1), () {
-        return userService.suggestions("", "", "", "");
+      Future.delayed(const Duration(seconds: 1), () {
+        return userService.suggestions('', '', '', '');
       });
 
   Future<List<dynamic>> search(String text) async {
-    await Future.delayed(Duration(seconds: 0));
+    await Future.delayed(const Duration(seconds: 0));
 
     if (text.length >= 2) {
       return userService.search(text);
@@ -42,11 +43,14 @@ class UserController extends GetxController {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setBool(SHARED_PREFERNCES.logined, true);
       prefs.setString(SHARED_PREFERNCES.user_id, user.sId);
+      prefs.setString(SHARED_PREFERNCES.firstName, user.firstName);
+      prefs.setString(SHARED_PREFERNCES.lastName, user.lastName);
       prefs.setString(
           SHARED_PREFERNCES.fullName, user.firstName + " " + user.lastName);
       prefs.setString(SHARED_PREFERNCES.token,
           NETWORK_CONSTANT.bearer + ' ' + it.headers.value('authorization'));
-          userG=user;
+      userG = user;
+      createdSocket = true;
       Get.to(MainPage());
     }).catchError((onError) {
       print("error" + onError.toString());
@@ -63,16 +67,13 @@ class UserController extends GetxController {
     apiService
         .signUp(firstName, lastName.trim(), email, password)
         .then((it) async {
-      print(it.toString());
       SharedPreferences prefs = await SharedPreferences.getInstance();
       if (it.token.toString() != null && it.success == true) {
         prefs.setString(SHARED_PREFERNCES.token, it.token.toString());
         print(it.token.toString());
         Get.to(MainPage());
       } else {}
-    }).catchError((onError) {
-      print("error" + onError.toString());
-    });
+    }).catchError((onError) {});
   }
 
   authFacebook(String token) {
@@ -89,9 +90,20 @@ class UserController extends GetxController {
       prefs.setString(SHARED_PREFERNCES.token,
           NETWORK_CONSTANT.bearer + ' ' + it.headers.value('authorization'));
       Get.to(MainPage());
-    }).catchError((onError) {
-      print("error" + onError.toString());
-    });
+    }).catchError((onError) {});
+  }
+
+  dynamic getUserFromSP() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool checkValue = prefs.containsKey(SHARED_PREFERNCES.logined);
+    if (checkValue) {
+      String id = prefs.getString(SHARED_PREFERNCES.user_id);
+      String firstName = prefs.getString(SHARED_PREFERNCES.firstName);
+      String lastName = prefs.getString(SHARED_PREFERNCES.lastName);
+      userG.sId = id;
+      userG.lastName = lastName;
+      userG.firstName = firstName;
+    }
   }
 
   updateUser(User u) {
