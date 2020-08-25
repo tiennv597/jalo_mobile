@@ -1,8 +1,8 @@
-import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
-import 'package:shinro_int2/screens/splash_screen.dart';
-import 'package:shinro_int2/socket/user_socket.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:shinro_int2/screens/main/intro/splash_screen.dart';
+
 
 void main() => runApp(GetMaterialApp(
       debugShowCheckedModeBanner: false,

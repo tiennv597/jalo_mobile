@@ -1,20 +1,18 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
-import 'package:shinro_int2/network/api_service.dart';
-import 'package:shinro_int2/network/user_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:shinro_int2/models/user/user_model.dart';
-import 'package:shinro_int2/constant/shared_preferences.dart'
+import '../../../../constant/network_constant.dart' as NETWORK_CONSTANT;
+import '../../../../constant/shared_preferences.dart'
     as SHARED_PREFERNCES;
-import 'package:shinro_int2/constant/network_constant.dart' as NETWORK_CONSTANT;
-import 'package:shinro_int2/screens/main/main_screen.dart';
+import '../../../../models/user/user_model.dart';
+import '../../../../network/api_service.dart';
+import '../../../../network/user_service.dart';
+import '../../main_screen.dart';
 
 class UserController extends GetxController {
   final List<String> entries = <String>['A', 'B', 'C'];
   final List<int> colorCodes = <int>[600, 500, 100];
-  User userG;
+  User userG = User();
   bool createdSocket = false;
   Map userProfile;
   final userService =
