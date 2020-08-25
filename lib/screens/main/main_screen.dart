@@ -38,8 +38,9 @@ class _MainPageState extends State<MainPage>
   @override
   Widget build(BuildContext context) {
     if (c.userG != null && c.createdSocket == false) {
-      print(c.userG.sId);
-      socket.onListenSocketEvent();
+      //print(c.userG.sId);
+      c.createdSocket = true;
+      socket.onListenSocketEvent(c.userG);
     }
     Widget tabBar = TabBar(
       isScrollable: true,

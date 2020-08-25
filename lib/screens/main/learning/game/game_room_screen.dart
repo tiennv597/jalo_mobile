@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shinro_int2/constant/app_colors.dart' as COLORS;
 import 'package:shinro_int2/constant/network_constant.dart' as NETWORK_CONSTANT;
+import 'package:shinro_int2/socket/user_socket.dart';
 import 'package:shinro_int2/utils/custom_background.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
@@ -25,7 +26,8 @@ class GameRoomPage extends StatefulWidget {
 
 class _GameRoomPageState extends State<GameRoomPage>
     with TickerProviderStateMixin<GameRoomPage> {
-  Socket socket;
+  UserSocket userSocket = Get.find();
+
   SwiperController swiperController;
   TabController tabController;
   TextEditingController _tfRoomController;
@@ -52,31 +54,26 @@ class _GameRoomPageState extends State<GameRoomPage>
     _tfRoomController = new TextEditingController();
     _tfPasswordController = new TextEditingController();
     //Creating the socket
-    socket = io(
-        NETWORK_CONSTANT.basURL + NETWORK_CONSTANT.default_ns,
-        <String, dynamic>{
-          'transports': ['websocket'],
-          'extraHeaders': {'foo': 'bar'} // optional
-        });
-    socket.on(NETWORK_CONSTANT.connect, (_) {
+
+    userSocket.socket.on(NETWORK_CONSTANT.connect, (_) {
       print('connect');
-      socket.emit('msg', 'test');
+      userSocket.socket.emit('msg', 'test');
     });
-    socket.on(NETWORK_CONSTANT.result_check_room, (data) {
+    userSocket.socket.on(NETWORK_CONSTANT.result_check_room, (data) {
       print(data);
     });
-    socket.on(NETWORK_CONSTANT.server_send_rooms, (data) {
+    userSocket.socket.on(NETWORK_CONSTANT.server_send_rooms, (data) {
       setState(() {
         rooms = ListRooms.fromJson(json.decode(data));
       });
     });
-    socket.emit(NETWORK_CONSTANT.client_get_rooms);
-    socket.connect();
+    userSocket.socket.emit(NETWORK_CONSTANT.client_get_rooms);
+    //userSocket.socket.connect();
     super.initState();
   }
 
   void _strartGameScreen() {
-    socket.emit(NETWORK_CONSTANT.check_info_room, {
+    userSocket.socket.emit(NETWORK_CONSTANT.check_info_room, {
       id,
       password,
     });
@@ -98,9 +95,8 @@ class _GameRoomPageState extends State<GameRoomPage>
     info.time = time;
     infoRoom.users = user;
     infoRoom.info = info;
-    Get.to(StrartGameScreen(infoRoom));
-    // Navigator.of(context).pushReplacement(
-    //     MaterialPageRoute(builder: (_) => StrartGameScreen(infoRoom)));
+    Get.back();
+    Get.off(StrartGameScreen(infoRoom));
   }
 
   void _getRoom() {
@@ -143,7 +139,12 @@ class _GameRoomPageState extends State<GameRoomPage>
                 Navigator.of(context).pop();
               },
             ),
-            FlatButton(child: Text('Ok'), onPressed: _strartGameScreen),
+            FlatButton(
+                child: Text('Ok'),
+                onPressed: () {
+                  Get.back();
+                  _strartGameScreen();
+                }),
           ],
         );
       },
@@ -314,7 +315,7 @@ class _GameRoomPageState extends State<GameRoomPage>
             FlatButton(
               child: Text('Cancel'),
               onPressed: () {
-                Navigator.of(context).pop();
+                Get.back();
               },
             ),
             FlatButton(child: Text('Ok'), onPressed: _createRoomByName),
@@ -481,7 +482,7 @@ class _GameRoomPageState extends State<GameRoomPage>
                               cw: rooms.roomsCw, // list rooms chinese word
                               vc: rooms.roomsCw, // list rooms vocabulary
                               gr: rooms.roomsCw, // list rooms grammar
-                              socket: socket, //sockets
+                              socket: userSocket.socket, //sockets
                             ),
                           );
                         }

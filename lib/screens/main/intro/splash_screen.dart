@@ -36,46 +36,6 @@ class _SplashScreenState extends State<SplashScreen>
     super.dispose();
   }
 
-  // void navigationPage() async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   //Return bool
-  //   bool checkValue = prefs.containsKey(SHARED_PREFERNCES.first_launch);
-  //   if (checkValue) {
-  //     firstLaunch = prefs.getBool(SHARED_PREFERNCES.first_launch);
-  //   }
-  //   if (firstLaunch) {
-  //     final api = Provider.of<ApiService>(context, listen: false);
-  //     SharedPreferences prefs = await SharedPreferences.getInstance();
-  //     String jwt = prefs.getString(SHARED_PREFERNCES.token);
-  //     print(jwt);
-  //     if (jwt != null) {
-  //       api.secret(jwt).then((it) async {
-  //         if (it.resources) {
-  //           prefs.setBool(SHARED_PREFERNCES.logined, true);
-  //           Navigator.of(context)
-  //               .pushReplacement(MaterialPageRoute(builder: (_) => MainPage()));
-  //         } else {
-  //           Navigator.of(context)
-  //               .pushReplacement(MaterialPageRoute(builder: (_) => MainPage()));
-  //         }
-  //       }).catchError((onError) {
-  //         print("error" + onError.toString());
-  //         Navigator.of(context)
-  //             .pushReplacement(MaterialPageRoute(builder: (_) => MainPage()));
-  //       });
-  //     } else {
-  //       prefs.setBool(SHARED_PREFERNCES.logined, false);
-  //       Navigator.of(context)
-  //           .pushReplacement(MaterialPageRoute(builder: (_) => MainPage()));
-  //     }
-  //   } else {
-  //     Navigator.of(context)
-  //         .pushReplacement(MaterialPageRoute(builder: (_) => IntroPage()));
-  //     prefs.setBool(
-  //         SHARED_PREFERNCES.first_launch, true); //set true login one time
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
     if (userController.userG.sId == null) {
