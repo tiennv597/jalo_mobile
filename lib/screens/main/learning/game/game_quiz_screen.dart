@@ -21,7 +21,7 @@ class GameQuizPage extends StatefulWidget {
   final String idRoom;
   final bool owner;
   final InfoRoom infoRoom;
-  final List<User> users;
+  final List<UserInfo> users;
   final Questions questionList;
   final int userInRoom;
   GameQuizPage(

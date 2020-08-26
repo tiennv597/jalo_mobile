@@ -29,7 +29,7 @@ class RoomsListState extends State<RoomsList> {
   void _strartGameScreen(String id, String userId, String fullName, String type,
       String password, String time) {
     InfoRoom infoRoom = InfoRoom();
-    User user = new User();
+    UserInfo user = new UserInfo();
     Info info = new Info();
     user.id = userId;
     user.fullName = fullName;

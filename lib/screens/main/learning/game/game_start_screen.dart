@@ -2,10 +2,13 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:shinro_int2/models/game/info.dart';
 import 'package:shinro_int2/models/game/info_rooms.dart';
 import 'package:shinro_int2/models/message/message.dart';
 import 'package:shinro_int2/models/question/questions.dart';
+import 'package:shinro_int2/screens/main/learning/game/components/invite_screen.dart';
+import 'package:shinro_int2/socket/user_socket.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 import 'package:shinro_int2/constant/network_constant.dart' as NETWORK_CONSTANT;
 import 'package:shinro_int2/constant/app_colors.dart' as COLORS;
@@ -19,6 +22,7 @@ import 'game_quiz_screen.dart';
 class StrartGameScreen extends StatefulWidget {
   final InfoRoom infoRoom;
   StrartGameScreen(this.infoRoom);
+
   @override
   StrartGameScreenState createState() {
     return new StrartGameScreenState();
@@ -45,9 +49,10 @@ class StrartGameScreenState extends State<StrartGameScreen> {
   int userInRoom = 1; // clients in room
   Questions questionList;
   //InfoRoom room;
+  UserSocket userSocket = Get.find();
   InfoRooms room;
   Info info;
-  List<User> users = new List<User>();
+  List<UserInfo> users = new List<UserInfo>();
   Future<InfoRooms> getFutureInfoRoom() async =>
       await Future.delayed(Duration(seconds: 1), () {
         return room;
@@ -130,9 +135,9 @@ class StrartGameScreenState extends State<StrartGameScreen> {
       //Info newinfo = new Info();
       // newinfo = Info.fromJson(data);
       InfoRooms roomAndAllUser = InfoRooms.fromJson(json.decode(data));
-      print(roomAndAllUser.info);
       setState(() {
         info = roomAndAllUser.info;
+        userSocket.info = info;
       });
     });
     socket.on(NETWORK_CONSTANT.ready, (data) {
@@ -161,8 +166,10 @@ class StrartGameScreenState extends State<StrartGameScreen> {
         users = roomAndAllUser.allUser;
         userInRoom++;
         allReady = false;
+        userSocket.info = room.info;
       });
     });
+
     socket.on(NETWORK_CONSTANT.leave, (data) {
       setState(() {
         userInRoom--;
@@ -179,6 +186,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
         room = InfoRooms.fromJson(json.decode(data));
         users = room.allUser;
         info.idRoom = room.info.idRoom;
+        userSocket.info = room.info;
         if (room.info.idOwner == widget.infoRoom.users.id) {
           setState(() {
             owner = true;
@@ -248,7 +256,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
         future: getFutureInfoRoom(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return Scaffold(
+            return const Scaffold(
               backgroundColor: Colors.white,
               body: Center(
                 child: CircularProgressIndicator(),
@@ -259,9 +267,9 @@ class StrartGameScreenState extends State<StrartGameScreen> {
                 backgroundColor: Colors.white,
                 appBar: PreferredSize(
                   preferredSize:
-                      Size.fromHeight(40.0), // here the desired height
-                  child: new AppBar(
-                    iconTheme: IconThemeData(
+                      const Size.fromHeight(40.0), // here the desired height
+                  child: AppBar(
+                    iconTheme: const IconThemeData(
                       color: Colors.black, //change your color here
                     ),
                     title: Text(
@@ -281,21 +289,21 @@ class StrartGameScreenState extends State<StrartGameScreen> {
                   visible: _visibility,
                   child: Stack(
                     children: <Widget>[
-                      // Positioned(
-                      //   bottom: 112.0,
-                      //   right: 8.0,
-                      //   child: FloatingActionButton(
-                      //     backgroundColor: COLORS.cyan700,
-                      //     heroTag: 'save',
-                      //     onPressed: () {
-                      //       // What you want to do
-                      //     },
-                      //     child: Icon(Icons.group_add),
-                      //     shape: RoundedRectangleBorder(
-                      //       borderRadius: BorderRadius.circular(5.0),
-                      //     ),
-                      //   ),
-                      // ),
+                      Positioned(
+                        bottom: 112.0,
+                        right: 8.0,
+                        child: FloatingActionButton(
+                          backgroundColor: COLORS.cyan700,
+                          heroTag: 'save',
+                          onPressed: () {
+                            Get.to(InviteScreen());
+                          },
+                          child: const Icon(Icons.group_add),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5.0),
+                          ),
+                        ),
+                      ),
                       Positioned(
                         bottom: 42,
                         right: 8.0,

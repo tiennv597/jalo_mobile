@@ -47,8 +47,9 @@ const String check_answer = 'check_answer';
 const String next_question = 'next_question';
 const String update_room = 'update_room';
 const String add_friends = 'add_friends';
-const create_socket_private = 'create_socket_private';
 
+const create_socket_private = 'create_socket_private';
+const invite_into = 'invite_into';
 //event test
 
 const String get_room = 'get_room';

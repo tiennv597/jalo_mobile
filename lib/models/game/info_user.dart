@@ -1,12 +1,12 @@
-class User {
+class UserInfo {
   String id;
   String fullName;
   String gender;
   String profileUrl;
 
-  User({this.id, this.fullName, this.gender, this.profileUrl});
+  UserInfo({this.id, this.fullName, this.gender, this.profileUrl});
 
-  User.fromJson(Map<String, dynamic> json) {
+  UserInfo.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     fullName = json['fullName'];
     gender = json['gender'];

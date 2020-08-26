@@ -3,7 +3,7 @@ import 'package:shinro_int2/models/game/info_user.dart';
 import 'user_item.dart';
 
 class UserListModal {
-  mainBottomSheet(BuildContext context, List<User> users) {
+  mainBottomSheet(BuildContext context, List<UserInfo> users) {
     showModalBottomSheet(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(

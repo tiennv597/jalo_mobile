@@ -3,16 +3,16 @@ import 'package:shinro_int2/models/game/info_user.dart';
 
 class InfoRooms {
   Info info;
-  List<User> allUser;
+  List<UserInfo> allUser;
 
   InfoRooms({this.info, this.allUser});
 
   InfoRooms.fromJson(Map<String, dynamic> json) {
     info = json['info'] != null ? new Info.fromJson(json['info']) : null;
     if (json['all_user'] != null) {
-      allUser = new List<User>();
+      allUser = new List<UserInfo>();
       json['all_user'].forEach((v) {
-        allUser.add(new User.fromJson(v));
+        allUser.add(new UserInfo.fromJson(v));
       });
     }
   }

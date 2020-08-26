@@ -51,7 +51,6 @@ class UserController extends GetxController {
       createdSocket = true;
       Get.to(MainPage());
     }).catchError((onError) {
-      print("error" + onError.toString());
     });
   }
 

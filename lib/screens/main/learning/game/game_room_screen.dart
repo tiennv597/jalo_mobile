@@ -84,7 +84,7 @@ class _GameRoomPageState extends State<GameRoomPage>
     String userId = prefs.getString(SHARED_PREFERNCES.user_id);
     String fullName = prefs.getString(SHARED_PREFERNCES.fullName);
     InfoRoom infoRoom = new InfoRoom();
-    User user = new User();
+    UserInfo user = new UserInfo();
     Info info = new Info();
     user.id = userId;
     user.fullName = fullName;

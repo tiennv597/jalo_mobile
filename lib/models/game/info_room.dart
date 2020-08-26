@@ -3,13 +3,13 @@ import 'package:shinro_int2/models/game/info.dart';
 
 class InfoRoom {
   Info info;
-  User users;
+  UserInfo users;
 
   InfoRoom({this.info, this.users});
 
   InfoRoom.fromJson(Map<String, dynamic> json) {
     info = json['info'] != null ? new Info.fromJson(json['info']) : null;
-    users = json['users'] != null ? new User.fromJson(json['users']) : null;
+    users = json['users'] != null ? new UserInfo.fromJson(json['users']) : null;
   }
 
   Map<String, dynamic> toJson() {

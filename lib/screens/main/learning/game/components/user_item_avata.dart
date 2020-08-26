@@ -3,7 +3,7 @@ import 'package:shinro_int2/constant/app_colors.dart' as COLORS;
 import 'package:shinro_int2/models/game/info_user.dart';
 
 class UserItemAvata extends StatelessWidget {
-  final User users;
+  final UserInfo users;
 
   const UserItemAvata({Key key, this.users}) : super(key: key);
 
