@@ -188,8 +188,10 @@ class _RegisterPageState extends State<RegisterPage> {
       width: double.infinity,
       child: RaisedButton(
         elevation: 5.0,
-        onPressed: c.signUp(_nameController.text, _emailController.text,
-            _passwordController.text),
+        onPressed: () {
+          c.signUp(_nameController.text, _emailController.text,
+              _passwordController.text);
+        },
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),

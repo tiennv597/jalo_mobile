@@ -3,7 +3,7 @@ part of 'user_service.dart';
 class _UserService implements UserService {
   _UserService(this._dio, {this.baseUrl}) {
     ArgumentError.checkNotNull(_dio, '_dio');
-    this.baseUrl ??= 'http://192.168.1.28:3000/';
+    this.baseUrl ??= 'https://jaloserver.herokuapp.com/';
   }
   final Dio _dio;
   String baseUrl;

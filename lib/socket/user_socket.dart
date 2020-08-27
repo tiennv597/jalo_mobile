@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shinro_int2/models/game/info.dart';
 import 'package:shinro_int2/models/game/info_room.dart';
+import 'package:shinro_int2/models/game/info_rooms.dart';
 import 'package:shinro_int2/models/game/info_user.dart';
 import 'package:shinro_int2/models/user/user_model.dart';
 import 'package:shinro_int2/screens/main/learning/game/game_start_screen.dart';
@@ -13,6 +14,7 @@ class UserSocket extends GetxController {
   User inviter;
   User invitee;
   // InfoRoom infoRoom;
+  InfoRooms roomAndAllUser;
   Info info;
 
   onListenSocketEvent(User user) {

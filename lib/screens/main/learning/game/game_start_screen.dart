@@ -54,7 +54,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
   Info info;
   List<UserInfo> users = new List<UserInfo>();
   Future<InfoRooms> getFutureInfoRoom() async =>
-      await Future.delayed(Duration(seconds: 1), () {
+      Future.delayed(const Duration(seconds: 1), () {
         return room;
       });
   @override
@@ -167,6 +167,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
         userInRoom++;
         allReady = false;
         userSocket.info = room.info;
+        userSocket.roomAndAllUser = roomAndAllUser;
       });
     });
 
@@ -267,14 +268,14 @@ class StrartGameScreenState extends State<StrartGameScreen> {
                 backgroundColor: Colors.white,
                 appBar: PreferredSize(
                   preferredSize:
-                      const Size.fromHeight(40.0), // here the desired height
+                      const Size.fromHeight(40), // here the desired height
                   child: AppBar(
                     iconTheme: const IconThemeData(
                       color: Colors.black, //change your color here
                     ),
                     title: Text(
                       widget.infoRoom.users.fullName,
-                      style: TextStyle(color: Colors.black),
+                      style: const TextStyle(color: Colors.black),
                     ),
                     backgroundColor: Colors.white,
                     elevation: 0,
@@ -404,8 +405,8 @@ class StrartGameScreenState extends State<StrartGameScreen> {
   }
 
   CupertinoButton getIOSSendButton() {
-    return new CupertinoButton(
-      child: new Text("S"),
+    return CupertinoButton(
+      child: const Text('S'),
       onPressed: _isComposingMessage
           ? () => _textMessageSubmitted(_textEditingController.text)
           : null,
@@ -442,8 +443,8 @@ class StrartGameScreenState extends State<StrartGameScreen> {
                     });
                   },
                   onSubmitted: _textMessageSubmitted,
-                  decoration:
-                      new InputDecoration.collapsed(hintText: "Send a message"),
+                  decoration: const InputDecoration.collapsed(
+                      hintText: 'Send a message'),
                 ),
               ),
               _visibilityBtn
@@ -479,8 +480,6 @@ class StrartGameScreenState extends State<StrartGameScreen> {
 
   Widget _buildRoomInfo() {
     return Container(
-      height: MediaQuery.of(context).size.width / 3,
-      width: MediaQuery.of(context).size.width - 16,
       decoration: BoxDecoration(
           gradient: LinearGradient(
               colors: [COLORS.cyan300, COLORS.cyan700],

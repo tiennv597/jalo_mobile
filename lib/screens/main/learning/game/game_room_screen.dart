@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shinro_int2/constant/app_colors.dart' as COLORS;
 import 'package:shinro_int2/constant/network_constant.dart' as NETWORK_CONSTANT;
+import 'package:shinro_int2/screens/main/learning/game/controller/game_controller.dart';
 import 'package:shinro_int2/socket/user_socket.dart';
 import 'package:shinro_int2/utils/custom_background.dart';
 import 'package:flutter/material.dart';
@@ -41,6 +42,7 @@ class _GameRoomPageState extends State<GameRoomPage>
   // List cw = [];
   // List vc = [];
   // List gr = [];
+  GameController gameController = Get.put(GameController());
   ListRooms rooms;
   Future<ListRooms> getFutureRooms() async =>
       await Future.delayed(Duration(seconds: 1), () {
@@ -95,8 +97,9 @@ class _GameRoomPageState extends State<GameRoomPage>
     info.time = time;
     infoRoom.users = user;
     infoRoom.info = info;
+    gameController.infoRoom = infoRoom;
     Get.back();
-    Get.off(StrartGameScreen(infoRoom));
+    Get.to(StrartGameScreen(infoRoom));
   }
 
   void _getRoom() {

@@ -203,7 +203,9 @@ class _LoginPageState extends State<LoginPage> {
       width: double.infinity,
       child: RaisedButton(
         elevation: 5.0,
-        onPressed: c.signIn(_userController.text, _passController.text),
+        onPressed: () {
+          c.signIn(_userController.text, _passController.text);
+        },
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30),
