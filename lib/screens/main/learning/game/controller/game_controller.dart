@@ -4,6 +4,7 @@ import 'package:shinro_int2/models/game/info.dart';
 import 'package:shinro_int2/models/game/info_room.dart';
 import 'package:shinro_int2/models/game/info_rooms.dart';
 import 'package:shinro_int2/models/game/info_user.dart';
+import 'package:shinro_int2/models/game/rooms.dart';
 import 'package:shinro_int2/models/user/user_model.dart';
 import 'package:shinro_int2/screens/main/learning/game/game_start_screen.dart';
 import 'package:socket_io_client/socket_io_client.dart';
@@ -14,6 +15,17 @@ class GameController extends GetxController {
   User inviter;
   User invitee;
   InfoRoom infoRoom;
+  ListRooms rooms;
+
+  Future<InfoRoom> getFutureInfoRoom() async {
+    await Future.delayed(const Duration(seconds: 0));
+    return infoRoom;
+  }
+
+  Future<ListRooms> getFutureRooms() async {
+    await Future.delayed(const Duration(seconds: 0));
+    return rooms;
+  }
 
   // onListenSocketEvent(User user) {
   //   socket = io(basURL + default_ns, <String, dynamic>{

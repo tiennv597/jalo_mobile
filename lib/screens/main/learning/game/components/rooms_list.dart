@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shinro_int2/models/game/info_room.dart';
+import 'package:shinro_int2/screens/main/learning/game/controller/game_controller.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 import 'package:shinro_int2/constant/app_colors.dart' as COLORS;
 import 'package:shinro_int2/models/game/rooms.dart';
@@ -22,6 +24,7 @@ class RoomsList extends StatefulWidget {
 }
 
 class RoomsListState extends State<RoomsList> {
+  GameController gameController = Get.find();
   void initState() {
     super.initState();
   }
@@ -39,8 +42,10 @@ class RoomsListState extends State<RoomsList> {
     info.time = time;
     info.password = password;
     infoRoom.info = info;
-    Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) => StrartGameScreen(infoRoom)));
+    // Navigator.of(context).pushReplacement(
+    //     MaterialPageRoute(builder: (_) => StrartGameScreen(infoRoom)));
+    gameController.infoRoom = infoRoom;
+    Get.to(StrartGameScreen(infoRoom));
   }
 
   @override
@@ -64,12 +69,12 @@ class RoomsListState extends State<RoomsList> {
                     String fullName =
                         prefs.getString(SHARED_PREFERNCES.fullName);
                     _strartGameScreen(
-                        widget.rooms[index].info.idRoom,
+                        gameController.rooms.roomsCw[index].info.idRoom,
                         userId,
                         fullName,
-                        widget.rooms[index].info.type,
-                        widget.rooms[index].info.password,
-                        widget.rooms[index].info.time);
+                        gameController.rooms.roomsCw[index].info.type,
+                        gameController.rooms.roomsCw[index].info.password,
+                        gameController.rooms.roomsCw[index].info.time);
                   },
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),

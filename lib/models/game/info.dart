@@ -1,12 +1,12 @@
 class Info {
-  String idRoom;
-  String idOwner;
-  String nameNoom;
-  String password;
-  String level;
-  String quantity;
-  String time;
-  String type;
+  String idRoom = '';
+  String idOwner = '';
+  String nameNoom = '';
+  String password = '';
+  String level = '';
+  String quantity = '';
+  String time = '';
+  String type = '';
 
   Info(
       {this.idRoom,

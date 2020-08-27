@@ -28,7 +28,6 @@ class GameRoomPage extends StatefulWidget {
 class _GameRoomPageState extends State<GameRoomPage>
     with TickerProviderStateMixin<GameRoomPage> {
   UserSocket userSocket = Get.find();
-
   SwiperController swiperController;
   TabController tabController;
   TextEditingController _tfRoomController;
@@ -43,18 +42,12 @@ class _GameRoomPageState extends State<GameRoomPage>
   // List vc = [];
   // List gr = [];
   GameController gameController = Get.put(GameController());
-  ListRooms rooms;
-  Future<ListRooms> getFutureRooms() async =>
-      await Future.delayed(Duration(seconds: 1), () {
-        return rooms;
-      });
-
   @override
   void initState() {
     SystemChrome.setEnabledSystemUIOverlays([]);
     tabController = TabController(length: 1, vsync: this);
-    _tfRoomController = new TextEditingController();
-    _tfPasswordController = new TextEditingController();
+    _tfRoomController = TextEditingController();
+    _tfPasswordController = TextEditingController();
     //Creating the socket
 
     userSocket.socket.on(NETWORK_CONSTANT.connect, (_) {
@@ -66,7 +59,7 @@ class _GameRoomPageState extends State<GameRoomPage>
     });
     userSocket.socket.on(NETWORK_CONSTANT.server_send_rooms, (data) {
       setState(() {
-        rooms = ListRooms.fromJson(json.decode(data));
+        gameController.rooms = ListRooms.fromJson(json.decode(data));
       });
     });
     userSocket.socket.emit(NETWORK_CONSTANT.client_get_rooms);
@@ -113,22 +106,22 @@ class _GameRoomPageState extends State<GameRoomPage>
           false, // dialog is dismissible with a tap on the barrier
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Search Room'),
+          title: const Text('Search Room'),
           content: Container(
             height: 120,
-            child: new Column(
+            child: Column(
               children: <Widget>[
                 TextField(
                   controller: _tfRoomController,
                   autofocus: true,
-                  decoration: new InputDecoration(
+                  decoration: const InputDecoration(
                       labelText: 'Room Name', hintText: 'Enter room name'),
                   onChanged: (value) {},
                 ),
                 TextField(
                   controller: _tfPasswordController,
                   autofocus: true,
-                  decoration: new InputDecoration(
+                  decoration: const InputDecoration(
                       labelText: 'Password', hintText: 'Enter password'),
                   onChanged: (value) {},
                 ),
@@ -468,7 +461,7 @@ class _GameRoomPageState extends State<GameRoomPage>
                     ),
                   ),
                   body: FutureBuilder(
-                      future: getFutureRooms(),
+                      future: gameController.getFutureRooms(),
                       builder: (context, snapshot) {
                         // InfoRoom room = new InfoRoom();
                         // room=snapshot.data;
@@ -482,9 +475,12 @@ class _GameRoomPageState extends State<GameRoomPage>
                             height: screenHeight * 75 / 100,
                             child: TabView(
                               tabController: tabController,
-                              cw: rooms.roomsCw, // list rooms chinese word
-                              vc: rooms.roomsCw, // list rooms vocabulary
-                              gr: rooms.roomsCw, // list rooms grammar
+                              cw: gameController
+                                  .rooms.roomsCw, // list rooms chinese word
+                              vc: gameController
+                                  .rooms.roomsCw, // list rooms vocabulary
+                              gr: gameController
+                                  .rooms.roomsCw, // list rooms grammar
                               socket: userSocket.socket, //sockets
                             ),
                           );

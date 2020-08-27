@@ -8,6 +8,7 @@ import 'package:shinro_int2/models/game/info_rooms.dart';
 import 'package:shinro_int2/models/message/message.dart';
 import 'package:shinro_int2/models/question/questions.dart';
 import 'package:shinro_int2/screens/main/learning/game/components/invite_screen.dart';
+import 'package:shinro_int2/screens/main/learning/game/controller/game_controller.dart';
 import 'package:shinro_int2/socket/user_socket.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 import 'package:shinro_int2/constant/network_constant.dart' as NETWORK_CONSTANT;
@@ -53,10 +54,11 @@ class StrartGameScreenState extends State<StrartGameScreen> {
   InfoRooms room;
   Info info;
   List<UserInfo> users = new List<UserInfo>();
-  Future<InfoRooms> getFutureInfoRoom() async =>
-      Future.delayed(const Duration(seconds: 1), () {
-        return room;
-      });
+  GameController gameController = Get.find();
+  // Future<InfoRooms> getFutureInfoRoom() async =>
+  //     Future.delayed(const Duration(seconds: 1), () {
+  //       return room;
+  //     });
   @override
   void initState() {
     super.initState();
@@ -199,7 +201,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
     socket.on(NETWORK_CONSTANT.server_send_message, (data) {
       // Parsing JSON to Jobject
       Message message = Message.fromJson(json.decode(data));
-      ChatMessage chatMessage = new ChatMessage(
+      ChatMessage chatMessage = ChatMessage(
         message: message.message,
         fulName: message.name,
       );
@@ -254,7 +256,7 @@ class StrartGameScreenState extends State<StrartGameScreen> {
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIOverlays([]);
     return FutureBuilder(
-        future: getFutureInfoRoom(),
+        future: gameController.getFutureInfoRoom(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return const Scaffold(
